@@ -1,0 +1,44 @@
+
+{
+  "compilerOptions": {
+    "module": "es2015",
+    "outDir": "./build",
+    "target": "ES5",
+    "strict": true, //   "jsx": "preserve",
+    "jsx": "react",
+    "allowJs": true,
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": false,
+    "emitDecoratorMetadata": true,
+    "isolatedModules": true,
+    "sourceMap": true,
+    "baseUrl": "./",
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "typeRoots": [
+        "src/types", 
+        "node_modules/@types"],
+    "paths": {
+      "@app/*": 
+        [
+            "./types/*"
+        ]
+    },
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+  },
+  "exclude": [
+    "node_modules", 
+    "config", 
+    "build", 
+    "test"
+]
+}
