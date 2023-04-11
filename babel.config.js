@@ -5,6 +5,17 @@ module.exports = {
     ['taro', {
       framework: 'react',
       ts: false
-    }]
+    }],
+    // ['@babel/preset-env', {
+    //   targets: {
+    //   node: 'current'
+    //   }
+    //   }],
+    //   "@babel/preset-typescript"
+    //   ],
+    //   plugins: [
+    //   ["@babel/plugin-transform-modules-commonjs", {
+    //   "allowTopLevelThis": true
+    //   }],
   ]
 }

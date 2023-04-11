@@ -13,7 +13,7 @@
     "esModuleInterop": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": false,
-    "suppressImplicitAnyIndexErrors": true,
+    // "suppressImplicitAnyIndexErrors": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": false,
     "emitDecoratorMetadata": true,

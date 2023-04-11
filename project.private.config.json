@@ -13,15 +13,39 @@
     "miniprogram": {
       "list": [
         {
-          "name": "component/sign/sign",
-          "pathName": "component/sign/sign",
+          "name": "pages/notice/notice",
+          "pathName": "pages/notice/notice",
+          "query": "user=parent",
+          "scene": null
+        },
+        {
+          "name": "pages/homework/homework",
+          "pathName": "pages/homework/homework",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/message/message",
+          "pathName": "pages/message/message",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/addressList/addressList",
+          "pathName": "pages/addressList/addressList",
+          "query": "user=teacher",
           "scene": null
         },
         {
           "name": "pages/index/index",
           "pathName": "pages/index/index",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/addressList/addressList",
+          "pathName": "pages/addressList/addressList",
+          "query": "user=undefined",
           "scene": null
         }
       ]
