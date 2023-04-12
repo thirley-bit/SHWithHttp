@@ -1,5 +1,6 @@
-import { useState, createContext } from 'react'
-import { View, Text, Button, Navigator, Swiper, SwiperItem, ScrollView, OrderItem, Image, Picker } from '@tarojs/components'
+import { useState,   } from 'react'
+import Taro from '@tarojs/taro'
+import { View,  Swiper, SwiperItem,  Image } from '@tarojs/components'
 import Tabs from '@app/component/tabs/tabs'
 import pic1 from "../../static/banner1.jpg"
 import pic2 from "../../static/banner2.jpg"
@@ -8,8 +9,13 @@ import './index.less'
 
 
 function Index() {
-  const [userTeacher, setUserTeacher] = useState('teacher')
-  const [userParent, setUserParent] = useState('parent')
+  // useEffect()
+  const data = Taro.request({
+    url: "http://localhost:9999/api/user/list",
+    }).then(function (res){
+      console.log(res.data.data)
+      // setTabs(res.data.data)
+  })
   const [tabs, setTabs] = useState([
     {
       id: 0,
@@ -67,7 +73,7 @@ function Index() {
             bannerList.map((item, index) => {
               return <SwiperItem key={index}>
                 <View>
-                  <Image style={'width:100%'} src={item.url} />
+                  <Image style='width:100%' src={item.url} />
                 </View>
               </SwiperItem>
             })

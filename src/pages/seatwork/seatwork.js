@@ -1,7 +1,6 @@
-import { useState, createContext } from 'react'
+import { useState } from 'react'
 import Taro from '@tarojs/taro'
 import { View, Text, Button, Editor, Image } from '@tarojs/components'
-import Tabs from '@app/component/tabs/tabs'
 import img from "../../static/img.jpg"
 import './seatwork.less'
 
@@ -71,8 +70,9 @@ function SeatWork() {
     }
     //发送按钮
     const handleSend = () => {
-        const sendMsg = msg
-        const chooseArr = students.filter(item => item.checked == true)
+        // const sendMsg = msg
+        // const chooseArr = students.filter(item => item.checked == true)
+        // console.log(sendMsg,chooseArr)
       }
     return (
         <View className='main'>
@@ -84,7 +84,7 @@ function SeatWork() {
                         <Image className='img' src={img} />
                         <Text className='imgName'>点击插入图片</Text>
                     </View>
-                    <View className="editorBox">
+                    <View className='editorBox'>
                         <Editor id='contentEditor' className='editor' placeholder='please input...' onReady={() => editorContentReady()} onInput={(e) => handleContentInput(e)}></Editor>
                     </View>
                 </View>
@@ -97,7 +97,7 @@ function SeatWork() {
                         <Image className='img' src={img} />
                         <Text className='imgName'>点击插入图片</Text>
                     </View>
-                    <View className="editorBox">
+                    <View className='editorBox'>
                         <Editor id='processEditor' className='editor' placeholder='please input...' onReady={() => editorProcessReady()} onInput={(e) => handleProcessInput(e)}></Editor>
                     </View>
                 </View>

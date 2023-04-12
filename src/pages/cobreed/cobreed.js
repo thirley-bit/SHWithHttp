@@ -1,6 +1,4 @@
-import { useState, createContext } from 'react'
-import { View, Text, Button, Navigator, Swiper, SwiperItem, ScrollView, OrderItem } from '@tarojs/components'
-import Tabs from '@app/component/tabs/tabs'
+import { View } from '@tarojs/components'
 
 function Cobreed(){
 

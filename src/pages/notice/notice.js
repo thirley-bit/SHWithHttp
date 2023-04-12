@@ -65,12 +65,6 @@ function Notice() {
             pageUrl:'/pages/homework/homework'
         }
     ])
-    const [contentDetail, setContentDetail] = useState(
-        `<div class="div_class" style="line-height: 60px; color: red;">Hello&nbsp;World!?<image src={banner1}/></div>`
-    )
-    const handleClick = (value,index) => {
-        console.log(value,index)
-    }
 
     return (
         <View className='index'>
@@ -91,7 +85,6 @@ function Notice() {
                 })
             }
             </View>
-            
         </View>
     )
 }

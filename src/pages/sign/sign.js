@@ -1,12 +1,13 @@
-import React, { useEffect, useState, useContext } from 'react';
-import Taro, { getSetting, authorize, useRouter } from "@tarojs/taro";
-import { View, Text, Input, Button, Form, CoverView, Map, Switch, Picker, ScrollView } from '@tarojs/components'
+import  {  useState } from 'react';
+import  { useRouter } from "@tarojs/taro";
+import { View, Text, Button, Form,  Picker, ScrollView } from '@tarojs/components'
 import './sign.less'
 
 function Sign(props) {
   const scrollTop = 0;
   const Threshold = 20;
   const router = useRouter()
+  // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useState(router.params.user)
   const [isEdit, setIsEdit] = useState(true)
   const [students, setStudents] = useState([
@@ -382,18 +383,11 @@ function Sign(props) {
   })
   const [time, setTime] = useState('17:50')
 
-  const handleInput = (e) => {
-    console.log(e)
-  }
   const handleChange = () => {
     setIsEdit(!isEdit)
   }
   const formSubmit = (index) => {
     console.log(index)
-  }
-
-  const formReset = (e) => {
-    console.log(e)
   }
 
   const signHandle = (item, id) => {
@@ -402,7 +396,8 @@ function Sign(props) {
       name: '张三',
       status: 1
     })
-    const newStudents = students.map((item, index) => {
+    // eslint-disable-next-line no-shadow
+    const newStudents = students.map((item) => {
       if (item.id === id) {
         const status = 1
         return {
@@ -415,9 +410,7 @@ function Sign(props) {
     })
     setStudents(newStudents)
   }
-  const handleBlur = (e) => {
-    console.log(e)
-  }
+  
   const onTimeChange = (e) => {
     console.log(e.detail.value)
     setTime(e.detail.value)
