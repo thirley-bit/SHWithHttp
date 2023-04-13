@@ -4,7 +4,7 @@ function AddressList() {
  
   return (
     <View className='index'>
-        aaa
+        通讯录
     </View>
   )
 }

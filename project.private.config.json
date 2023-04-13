@@ -37,14 +37,14 @@
           "scene": null
         },
         {
-          "name": "pages/index/index",
-          "pathName": "pages/index/index",
-          "query": "",
+          "name": "pages/addressList/addressList",
+          "pathName": "pages/addressList/addressList",
+          "query": "user=undefined",
           "scene": null
         },
         {
-          "name": "pages/addressList/addressList",
-          "pathName": "pages/addressList/addressList",
+          "name": "pages/signInfo/signInfo",
+          "pathName": "pages/signInfo/signInfo",
           "query": "user=undefined",
           "scene": null
         }

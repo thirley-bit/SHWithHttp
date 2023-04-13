@@ -2,6 +2,7 @@
 // const sum = require('../sum');
 import sum from "src/sum";
 
+// eslint-disable-next-line no-undef
 test('测试sum', () => {
   expect(sum(1,2)).toBe(3);
 });

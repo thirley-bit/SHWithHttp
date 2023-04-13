@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Taro from '@tarojs/taro'
 import { View, Text, Button, Editor, Image } from '@tarojs/components'
-import img from "../../static/img.jpg"
+import img from "../../../../static/img.jpg"
 import './homework.less'
 
 function HomeWork() {

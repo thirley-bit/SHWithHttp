@@ -1,13 +1,14 @@
 export default defineAppConfig({
   pages: [
-    'pages/index/index', //主页
-    'pages/notice/notice', //主页——班级通知
-    'pages/homework/homework', //家庭作业
-    'pages/seatwork/seatwork', //课堂作业
-    'pages/message/message', //活动通知页面
-    'pages/addressList/addressList', //主页——通讯录
-    'pages/signInfo/signInfo', //主页——签到分类入口页面（区分家长和教师身份）
-    'pages/sign/sign', //签到页面
+    // 'pages/index/index', //主页
+    'pages/cobreed/cobreed',
+    'pages/cobreed/notice/notice', //主页——班级通知
+    'pages/cobreed/notice/homework/homework', //家庭作业
+    'pages/cobreed/notice/seatwork/seatwork', //课堂作业
+    'pages/cobreed/notice/message/message', //活动通知页面
+    'pages/cobreed/addressList/addressList', //主页——通讯录
+    'pages/cobreed/signInfo/signInfo', //主页——签到分类入口页面（区分家长和教师身份）
+    'pages/cobreed/sign/sign', //签到页面
 
     'pages/classInfo/classInfo', //班级圈
     // 'pages/cobreed/cobreed', //共育
@@ -21,7 +22,7 @@ export default defineAppConfig({
   tabBar:{
     backgroundColor: '#fff',
     list:[{
-      'pagePath':"pages/index/index",
+      'pagePath':"pages/cobreed/cobreed",
       'text': '共育',
       'iconPath':"static/main.jpg",
       'selectedIconPath':"static/main.jpg"
