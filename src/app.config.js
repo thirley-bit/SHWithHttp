@@ -6,9 +6,12 @@ export default defineAppConfig({
     'pages/cobreed/notice/homework/homework', //家庭作业
     'pages/cobreed/notice/seatwork/seatwork', //课堂作业
     'pages/cobreed/notice/message/message', //活动通知页面
+    'pages/cobreed/notice/message/chooseUser/chooseUser', //活动通知——选择用户页面
+    'pages/cobreed/notice/message/history/history', //活动通知——历史记录页面
     'pages/cobreed/addressList/addressList', //主页——通讯录
     'pages/cobreed/signInfo/signInfo', //主页——签到分类入口页面（区分家长和教师身份）
     'pages/cobreed/sign/sign', //签到页面
+    'pages/cobreed/moreArticle/moreArticle', //推荐更多
 
     'pages/classInfo/classInfo', //班级圈
     // 'pages/cobreed/cobreed', //共育

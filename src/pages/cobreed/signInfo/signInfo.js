@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { View,} from '@tarojs/components'
+import { AtTabBar } from 'taro-ui'
 import Tabs from '@app/component/tabs/tabs'
 
 function SignInfo(){
@@ -27,8 +28,14 @@ function SignInfo(){
   
  
   return (
-    <View className='index'>
+    <View className='tabBar'>
+      {/* <AtTabBar
+        tabList={tabs}
+        onClick={tabClick}
+        current={tabsCur}
+      /> */}
       <Tabs
+        style='marginTop:10rpx'
         tabList={tabs}
         onClick={tabClick}
         current={tabsCur}

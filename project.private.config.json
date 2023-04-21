@@ -13,39 +13,27 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/notice/notice",
-          "pathName": "pages/notice/notice",
-          "query": "user=parent",
-          "scene": null
-        },
-        {
-          "name": "pages/homework/homework",
-          "pathName": "pages/homework/homework",
+          "name": "pages/cobreed/moreArticle/moreArticle",
+          "pathName": "pages/cobreed/moreArticle/moreArticle",
           "query": "",
           "scene": null
         },
         {
-          "name": "pages/message/message",
-          "pathName": "pages/message/message",
+          "name": "pages/cobreed/cobreed",
+          "pathName": "pages/cobreed/cobreed",
           "query": "",
           "scene": null
         },
         {
-          "name": "pages/addressList/addressList",
-          "pathName": "pages/addressList/addressList",
-          "query": "user=teacher",
+          "name": "pages/cobreed/notice/message/message",
+          "pathName": "pages/cobreed/notice/message/message",
+          "query": "",
           "scene": null
         },
         {
-          "name": "pages/addressList/addressList",
-          "pathName": "pages/addressList/addressList",
-          "query": "user=undefined",
-          "scene": null
-        },
-        {
-          "name": "pages/signInfo/signInfo",
-          "pathName": "pages/signInfo/signInfo",
-          "query": "user=undefined",
+          "name": "pages/cobreed/notice/message/chooseUser/chooseUser",
+          "pathName": "pages/cobreed/notice/message/chooseUser/chooseUser",
+          "query": "",
           "scene": null
         }
       ]

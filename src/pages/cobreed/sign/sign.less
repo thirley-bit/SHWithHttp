@@ -1,6 +1,18 @@
 
 .text{
-    margin: 30rpx;
+    margin: 30rpx 0 5rpx 10rpx;
+    .time{
+        width: 96.5%;
+        height: 45rpx;
+        margin: 10rpx 0;
+        padding: 15rpx 0 15rpx 15rpx ;
+        background-color: #d6d1d1d5;
+        border-radius: 10rpx;
+        // vertical-align: middle;
+        .picker{
+
+        }
+    }
 }
 .input{
     border:solid 1rpx #b4afaf;
@@ -8,10 +20,10 @@
 .text-send{
     font-size: 30rpx;
 }
-.scrollView{
+.scroll{
 height: 370rpx;
 }
-.formW{
+.form-width{
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -24,7 +36,7 @@ height: 370rpx;
     padding: 0 10rpx;
     box-sizing: border-box;
     // margin-right: 5rpx;
-    .signButton{
+    .sign-button{
         width: 100%;
         line-height: 1.2;
         padding-top: 20rpx;
@@ -45,4 +57,16 @@ height: 370rpx;
 
 .form.form100 {
     width: 100%
+}
+
+.parent{
+    position: relative;
+    height: 660rpx;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    .text{
+        margin: 30rpx 0;
+    }
 }
