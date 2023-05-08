@@ -1,0 +1,32 @@
+.tab{
+    margin: 2% 0;
+    background-color: #fff;
+    .tab-title{
+        padding: 3% 1% 0 1%;
+        
+    }
+    .content{
+        margin:2% 2%;
+    }
+    .divider{
+            height: 26rpx;
+    }
+}
+.at-icon{
+    display: block;
+}
+
+.img{
+    float: left;
+    margin: 0 10%;
+    text-align: center;
+}
+.video{
+    text-align: center;
+}
+.send-button{
+    position: fixed;
+    width: 98%;
+    bottom: 1%;
+    margin: 1%;
+}

@@ -1,0 +1,72 @@
+
+.text{
+    margin: 30rpx 0 5rpx 10rpx;
+    .time{
+        width: 96.5%;
+        height: 45rpx;
+        margin: 10rpx 0;
+        padding: 15rpx 0 15rpx 15rpx ;
+        background-color: #d6d1d1d5;
+        border-radius: 10rpx;
+        // vertical-align: middle;
+        .picker{
+
+        }
+    }
+}
+.input{
+    border:solid 1rpx #b4afaf;
+}
+.text-send{
+    font-size: 30rpx;
+}
+.scroll{
+height: 370rpx;
+}
+.form-width{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.form{
+    width: 25%;
+    display: inline-block;
+    line-height: 1.2;
+    margin-top: 20rpx;
+    padding: 0 10rpx;
+    box-sizing: border-box;
+    // margin-right: 5rpx;
+    .sign-button{
+        width: 100%;
+        line-height: 1.2;
+        padding-top: 20rpx;
+        padding-bottom: 20rpx;
+        font-size: 28rpx;
+        letter-spacing: 1rpx;
+    }
+
+}
+
+.form.form50 {
+    width: 50%;
+}
+
+.form.form75 {
+    width: 75%;
+}
+
+.form.form100 {
+    width: 100%
+}
+
+.parent{
+    position: relative;
+    height: 660rpx;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    .text{
+        margin: 30rpx 0;
+    }
+}

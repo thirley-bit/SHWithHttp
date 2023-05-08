@@ -1,0 +1,34 @@
+.card{
+    background-color: #fff;
+    padding: 3% 0;
+    .card-item{
+        border: none;
+        border-bottom: 1PX #d6e4ef solid;
+        .at-card__header{
+            display: none;
+        }
+        .card-content{
+            display: inline-block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient:vertical;
+            -webkit-line-clamp: 2;
+        }
+        .card-time{
+            margin-top: 38rpx;
+            color: #999;
+            font-size: 24rpx;
+        }
+        .card-img{
+            display: inline-block;
+            padding: 0 30%;
+            .img{
+                display: inline-block;
+                width: 150rpx;
+                height: 150rpx;
+                border-radius: 10rpx;
+            }
+        }
+    }
+}

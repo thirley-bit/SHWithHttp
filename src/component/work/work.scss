@@ -1,0 +1,63 @@
+page{
+    background-color: #e0e0e0;
+}
+.main{
+    position: relative;
+}
+.add{
+    position: fixed;
+    z-index: 1;
+    top: 75%;
+    right: 5%;
+    .add-icon{
+        display: block;
+        width: 50%;
+        margin: auto;
+    }
+    .add-text{
+        font-size: 24rpx;
+    }
+}
+.content{
+    margin: 20rpx 0;
+    .date{
+        float: left;
+        width: 28%;
+        margin: 0 20rpx;
+        padding: 0 3%;
+        border: 1rpx solid #000;
+        border-radius: 10rpx;
+    }
+    .selector{
+        display: inline-block;
+        width: 25%;
+        padding: 0 3%;
+        border: 1rpx solid #000;
+        border-radius: 10rpx;
+    }
+}
+
+.work-list{
+    position: relative;
+    margin: 20rpx 0;
+    .at-card__content{
+        width: 70%;
+    }
+    .at-card__content-info{
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient:vertical;
+        -webkit-line-clamp: 2;
+    }
+    .tip{
+        position: absolute;
+        bottom: 10%;
+        right: 8%;
+        text-align: right;
+        .tip-text{
+            color: red;
+        }
+    }
+}

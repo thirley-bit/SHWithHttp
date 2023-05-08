@@ -52,7 +52,9 @@ const config = {
       chain.merge({
         resolve: {
           alias: {
-            "@app": path.resolve(__dirname, "../src")
+            "@":path.resolve(__dirname,"../tests"),
+            // "@main":path.resolve(__dirname,"../src")
+            "@app": path.resolve(__dirname, "../src"),
           }
         }
       })

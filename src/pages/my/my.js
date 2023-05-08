@@ -1,5 +1,5 @@
 import { View, Text } from '@tarojs/components'
-import './my.less'
+import './my.scss'
 
 function My(){
   return (
