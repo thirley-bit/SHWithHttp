@@ -7,12 +7,15 @@ export default defineAppConfig({
     'pages/class/homeWork/workDetail/workDetail', //作业详情页面
     'pages/class/message/message', //活动通知页面
     'pages/class/notice/notice', //活动通知页面
+    'pages/class/notice/noticeDetail/noticeDetail',  //活动通知详情页面
     'pages/class/message/chooseUser/chooseUser', //活动通知——选择用户页面
     'pages/class/message/history/history', //活动通知——历史记录页面
     'pages/class/signInfo/signInfo', //主页——签到分类入口页面（区分家长和教师身份）
     'pages/class/sign/sign', //签到页面
     'pages/class/moreArticle/moreArticle', //推荐更多
     'pages/component/article/article',  //文章详情
+    'pages/component/detail/detail', //通知或作业详情
+    'pages/component/publish/publish', //发布页面
 
     'pages/growthFile/growthFile', //班级圈
     'pages/addressList/addressList', //主页——通讯录

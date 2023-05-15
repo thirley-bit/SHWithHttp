@@ -18,17 +18,17 @@ function HomeWork() {
 
   const userData = () => {
     let url = "identity";
-    let data = api[url].data.user;
+    let data = api[url].data.user_code;
     setUser(data);
   };
   const subData = () => {
-    let url = "subject/list";
+    let url = "subject/select";
     let data = api[url].data;
     setSelector(data);
   };
 
   const homeWorkData = () => {
-    let url = "homeWork/list";
+    let url = "subject/list";
     let data = api[url].data;
     setShowWorkData(data);
   };

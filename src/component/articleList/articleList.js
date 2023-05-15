@@ -3,9 +3,7 @@ import { AtCard } from "taro-ui";
 import "./articleList.less";
 
 function ArticleList(props) {
-  console.log(props);
   const { articleList } = props;
-  console.log(articleList);
   const handleClick = () => {
     console.log(111);
   };
@@ -22,12 +20,12 @@ function ArticleList(props) {
               >
                 <View className='at-row at-row--wrap'>
                   <View className='at-col at-col-8 at-col--wrap'>
-                    <View className='card-content'>{item.content}</View>
-                    <View className='card-time'>{item.time}</View>
+                    <View className='card-content'>{item.title}</View>
+                    <View className='card-time'>{item.create_time}</View>
                   </View>
                   <View className='at-col at-col-3'>
                     <View className='card-img'>
-                      <Image className='img' src={item.img} />
+                      <Image className='img' src={item.img_url} />
                     </View>
                   </View>
                 </View>

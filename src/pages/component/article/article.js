@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import { View, Image } from "@tarojs/components";
-// import './articleDetail.less'
+import { useRouter } from '@tarojs/taro';
 import api from "@/api/api";
+import './article.scss'
 
 function ArticleDetail(props) {
   console.log(props);
   const [article, setArticle] = useState({});
+  const router = useRouter()
+  console.log(router)
   useEffect(() => {
     articleData();
   }, []);
 
   const articleData = () => {
-    let url = "articleDetail";
+    let url = "article/detail";
     let data = api[url].data;
     console.log(data);
     setArticle(data);
@@ -21,18 +24,11 @@ function ArticleDetail(props) {
       <View className='at-article'>
         <View className='at-article__h1'>{article.title}</View>
         <View className='at-article__info'>
-          {article.time} &nbsp;&nbsp;&nbsp;{article.author}
+          {article.author} &nbsp;&nbsp;&nbsp; {article.create_time} 
         </View>
         <View className='at-article__content'>
           <View className='at-article__section'>
-            <View className='at-article__h2'>{article.title_02}</View>
-            <View className='at-article__h3'>{article.title_03}</View>
-            <View className='at-article__p'>{article.content}</View>
-            <Image
-              className='at-article__img'
-              src={article.img}
-              mode='widthFix'
-            />
+            <View className='article_content' dangerouslySetInnerHTML={{ __html: article.detail_content }}></View>
           </View>
         </View>
       </View>

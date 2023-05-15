@@ -12,10 +12,12 @@ import pic3 from "../../static/banner3.jpg";
 import "./class.scss";
 
 function Index() {
+  const [user, setUser] = useState('')
   const [tabsCur, setTabsCur] = useState(0);
   const [articleList, setArticleList] = useState([]);
   useEffect(() => {
     // console.log(api)
+    identityData()
     userData();
     articleData();
     // bannerData()
@@ -25,6 +27,11 @@ function Index() {
   //     // setCurrentTab(tabs[tabsCur])
   //   }
   // },[tabsCur])
+  const identityData = () => {
+    let url = "identity"
+    let data = api[url].data
+    setUser(data.user_code)
+  }
 
   const userData = () => {
     // Taro.request({
@@ -51,46 +58,43 @@ function Index() {
     //   console.log(res)
     //   setArticleList(res.data.data)
     // })
-    let url = "article/allList";
+    let url = "article/list";
     let data = api[url].data.slice(0, 6);
     setArticleList(data);
   };
+  console.log(user)
 
   const [tabs, setTabs] = useState([
     {
       id: 0,
       title: "作业",
       code: "homeWork",
-      user: "",
       url: "/pages/class/homeWork/homeWork",
     },
     {
       id: 1,
       title: "通知",
       code: "notice",
-      user: "",
       url: "/pages/class/notice/notice",
     },
     {
       id: 2,
       title: "安全确认",
       code: "sign",
-      user: "",
-      // url: '/pages/sign/sign'
-      url: "/pages/class/signInfo/signInfo",
+      url: "/pages/class/sign/sign"
+      // url:{`/pages/class/sign/sign?user=${user}`}
+      // url: "/pages/class/signInfo/signInfo",
     },
     {
       id: 3,
       title: "私信",
       code: "message",
-      user: "",
       url: "/pages/class/message/message",
     },
     {
       id: 4,
       title: "更多",
       code: "moreModules",
-      user: "",
       url: "/pages/class/moreModules/moreModules",
     },
   ]);
@@ -146,7 +150,7 @@ function Index() {
         </Swiper>
       </View>
       {/* <View className='tabBar'> */}
-      <Tabs tabList={tabs} onClick={tabClick} current={tabsCur}></Tabs>
+      <Tabs user={user} tabList={tabs} onClick={tabClick} current={tabsCur}></Tabs>
       {/* </View> */}
       {/* <Navigator url={`${currentTab.url}?user=${currentTab.user}`} >
         <View className='tabBar'>

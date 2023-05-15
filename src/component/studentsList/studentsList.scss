@@ -1,0 +1,90 @@
+.scroll {
+  height: 370rpx;
+}
+.form-width {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.form {
+  width: 25%;
+  display: inline-block;
+  line-height: 1.2;
+  margin-top: 20rpx;
+  padding: 0 10rpx;
+  box-sizing: border-box;
+  .sign-button {
+    background-color: #aac5f7;
+    border: 1rpx solid #729ff3;
+    &:before{
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: 15rpx solid #4380f1;
+        border-left-color: transparent;
+        border-bottom-color: transparent;
+    }
+    &:after{
+        content: '';
+        width: 5rpx;
+        height: 10rpx;
+        position: absolute;
+        top: 2rpx;
+        right: 4rpx;
+        border: 1rpx solid #fff;
+        border-top-color: transparent;
+        border-left-color: transparent;
+        transform: rotate(45deg);
+    }
+  }
+  .completed-button_completed{
+    background-color: #aac5f7;
+    border: 1rpx solid #729ff3;
+    &:before{
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        border: 15rpx solid #4380f1;
+        border-left-color: transparent;
+        border-bottom-color: transparent;
+    }
+    &:after{
+        content: '';
+        width: 5rpx;
+        height: 10rpx;
+        position: absolute;
+        top: 2rpx;
+        right: 4rpx;
+        border: 1rpx solid #fff;
+        border-top-color: transparent;
+        border-left-color: transparent;
+        transform: rotate(45deg);
+    }
+  }
+}
+
+.form.form50 {
+  width: 50%;
+}
+
+.form.form75 {
+  width: 75%;
+}
+
+.form.form100 {
+  width: 100%;
+}
+
+.parent {
+  position: relative;
+  height: 660rpx;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  .text {
+    margin: 30rpx 0;
+  }
+}

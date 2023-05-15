@@ -6,9 +6,9 @@ import DetailHeader from "@app/component/detailHeader/detailHeader";
 import StudentsList from "@app/component/studentsList/studentsList";
 import api from "@/api/api";
 
-import "./workDetail.scss";
+import "./noticeDetail.scss";
 
-function WorkDetail(props) {
+function NoticeDetail(props) {
   const [studentsData, setStudentsData] = useState([]);
   const [current, setCurrent] = useState(0);
   const [tabList, setTabList] = useState([]);
@@ -22,26 +22,9 @@ function WorkDetail(props) {
   const dataList = () => {
     let url = "students/list";
     let data = api[url].data;
-    let newDelivered = data.filter((item) => item.hasCompleted === 0);
-    let newNoDelivered = data.filter((item) => item.hasCompleted === 1);
     setStudentsData(data);
     // setDelivered(newDelivered);
     // setNoDelivered(newNoDelivered);
-    const tab = [
-      {
-        title: `全部${data.length}`,
-      },
-      {
-        title: `已交${newDelivered.length}`,
-      },
-      {
-        title: `未交${newNoDelivered.length}`,
-      },
-      {
-        title: `家长反馈`,
-      },
-    ];
-    setTabList(tab);
   };
   const router = useRouter();
   const user = router.params.user;
@@ -70,50 +53,8 @@ function WorkDetail(props) {
     <View className='main'>
       {/* 头部详情 */}
       <DetailHeader />
-      {/* 家长反馈 */}
-      <View className='tab'>
-        {user == "parent" ? (
-          <View>
-            <View className='tab-title'>
-              <Text>家长反馈</Text>
-              <AtDivider className='divider' />
-            </View>
-            {/* 家长反馈内容 */}
-            <View className='content'>{data.feedBack}</View>
-            <AtDivider className='divider' />
-            {/* 插入图片和文字 */}
-            <View className='insert'>
-              <View className='img'>
-                <AtIcon value='image'></AtIcon>
-                <Text>添加图片</Text>
-              </View>
-              <View className='video'>
-                <AtIcon value='video'></AtIcon>
-                <Text>添加视频</Text>
-              </View>
-            </View>
-            <AtButton className='send-button' type='primary'>
-              提交反馈
-            </AtButton>
-          </View>
-        ) : (
-          <View>
-            <AtTabs current={current} tabList={tabList} onClick={handleChange}>
-              {tabList.map((item, index) => {
-                return (
-                  <AtTabsPane key={index} current={current} index={index}>
-                    <View className='data'>
-                      <StudentsList showData={studentsData} />
-                    </View>
-                  </AtTabsPane>
-                );
-              })}
-            </AtTabs>
-          </View>
-        )}
-      </View>
     </View>
   );
 }
 
-export default WorkDetail;
+export default NoticeDetail;

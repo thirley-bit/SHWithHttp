@@ -1,48 +1,23 @@
 import { useState, useEffect } from "react";
-import Taro from "@tarojs/taro";
-import {
-  View,
-  Text,
-  Navigator,
-  Image,
-  Editor,
-} from "@tarojs/components";
-import Work from '@app/component/work/work';
-import api from '@/api/api';
+import { View, Text, Navigator, Image, Editor } from "@tarojs/components";
+import Taro, { useRouter } from "@tarojs/taro";
+import { AtButton, AtList, AtListItem } from "taro-ui";
+import DetailHeader from "@app/component/detailHeader/detailHeader";
+import StudentsList from "@app/component/studentsList/studentsList";
+import api from "@/api/api";
+import img from "../../../static/img.jpg"
+import './publish.scss'
 
-import "./notice.scss";
-
-function Notice() {
+function WorkDetail() {
+    
   const [editor, setEditor] = useState("");
-  const [user, setUser] = useState("");
-  const [selector, setSelector] = useState([]); //科目选择项
-  const [showWorkData, setShowWorkData] = useState([]); //通知列表
-  useEffect(() => {
-    userData()
-    subData()
-    noticeData()
-  },[])
-
-  const userData = () => {
-    let url = "identity";
-    let data = api[url].data.user_code;
-    setUser(data);
-  };
-  const subData = () => {
-    let url = "subject/list";
-    let data = api[url].data;
-    setSelector(data);
-  };
-
-  const noticeData = () =>{
-    let url = "notice/list";
-    let data = api[url].data
-    setShowWorkData(data)
-  }
+//   const [user, setUser] = useState("");
+//   const [selector, setSelector] = useState([]); //科目选择项
+//   const [showWorkData, setShowWorkData] = useState([]); //通知列表
   //输入框内容
   const [msg, setMsg] = useState("");
 
-  //输入框
+    //输入框
   const handleInput = (e) => {
     setMsg(e.target.value)
     console.log(e);
@@ -84,8 +59,7 @@ function Notice() {
 
   return (
     <View className='main'>
-      <Work type='发布通知' user={user} selector={selector} showData={showWorkData} />
-      {/* <View className='components-page'>
+      <View className='components-page'>
         <View className='operate-box' onClick={() => addImage()}>
           <Image className='img' src={img} />
           <Text className='img-name'>点击插入图片</Text>
@@ -99,7 +73,7 @@ function Notice() {
             onInput={(e) => handleInput(e)}
           ></Editor>
         </View>
-      </View> */}
+      </View>
       {/* <View className='choose-user'>
         <Navigator url='/pages/class/notice/message/chooseUser/chooseUser'>
         <View>
@@ -107,8 +81,8 @@ function Notice() {
               <AtListItem title='请选择指定用户' note='-标签：一年级一班' arrow='right' />
             </AtList>
         </View>
-        </Navigator>
-        <View className='bottom'>
+        </Navigator> */}
+        {/* <View className='bottom'> */}
           <AtButton
             type='primary'
             className='send-button'
@@ -116,9 +90,10 @@ function Notice() {
           >
           发送
         </AtButton>
-        </View>
-      </View> */}
-    </View>
+        {/* </View> */}
+      </View>
+    // </View>
   );
 }
-export default Notice;
+
+export default WorkDetail;

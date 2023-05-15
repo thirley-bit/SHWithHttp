@@ -2,6 +2,7 @@ import { View, Navigator } from '@tarojs/components'
 import './tabs.less'
 
 function Tabs(props) {
+    console.log(props)
     const handleClick = (current) => {    //触发的点击事件
         console.log(current)
         // const { onClick } = props     //组件中onClick触发的方法,从父组件中传递过来,(传给父组件的方法，必须以on开头)
@@ -9,7 +10,7 @@ function Tabs(props) {
     }
 
     //  根据需要可自定义,也可写死,,先把this.props中的变量解构出来,下面用到的时候,就不用写那么长了
-    const { tabList, current, flexWrap = 'nowrap', maxOneRow = 3 } = props
+    const { user, tabList, current, flexWrap = 'nowrap', maxOneRow = 3 } = props
     return <View className='tabs'>
         <View className='hd' style={`flex-wrap: ${flexWrap};`}>
             {tabList.map((tab, i) => {
@@ -22,7 +23,7 @@ function Tabs(props) {
                   onClick={() => handleClick(i)}
                 >
                     <Navigator
-                      url={`${tab.url}?user=${tab.user}`}
+                      url={`${tab.url}?user=${user}`}
                     >
                         {tab.title}
                     </Navigator>
