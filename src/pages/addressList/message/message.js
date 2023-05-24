@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Taro from "@tarojs/taro";
 import {
   View,
@@ -7,13 +7,26 @@ import {
   Image,
   Editor,
 } from "@tarojs/components";
-import { AtList, AtListItem, AtButton } from "taro-ui";
-
+import { AtSearchBar, AtListItem, AtButton, AtIcon } from "taro-ui";
+import PersonList from '@app/component/personList/personList';
+import api from '@/api/api';
 import img from "../../../static/img.jpg";
 import "./message.scss";
 
+//私信页面
 function Message() {
   const [editor, setEditor] = useState("");
+  const [showData, setShowData] = useState([])
+  useEffect(() => {
+    messageData()
+  })
+
+  const messageData = () => {
+    let url = "message/list"
+    let data = api[url].data
+    setShowData(data)
+  }
+
 
   //输入框内容
   const [msg, setMsg] = useState("");
@@ -59,10 +72,16 @@ function Message() {
   };
 
   return (
-    <View className='index'>
-      <View className='components-page'>
+    <View className='main'>
+      <View className='search'>
+        <AtSearchBar />
+      </View>
+      <View>
+          <PersonList enter='message' showData={showData} />
+      </View>
+
+      {/* <View className='components-page'>
         <View className='operate-box' onClick={() => addImage()}>
-          {/* 插入图片 */}
           <Image className='img' src={img} />
           <Text className='img-name'>点击插入图片</Text>
         </View>
@@ -96,7 +115,7 @@ function Message() {
           发送
         </AtButton>
         </View>
-      </View>
+      </View> */}
     </View>
   );
 }

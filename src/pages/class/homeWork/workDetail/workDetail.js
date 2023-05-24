@@ -3,11 +3,12 @@ import { View, Text } from "@tarojs/components";
 import { useRouter } from "@tarojs/taro";
 import { AtButton, AtDivider, AtIcon, AtTabs, AtTabsPane } from "taro-ui";
 import DetailHeader from "@app/component/detailHeader/detailHeader";
-import StudentsList from "@app/component/studentsList/studentsList";
+import StudentsList from "@app/component/StudentsList/StudentsList";
 import api from "@/api/api";
 
 import "./workDetail.scss";
 
+//作业详情页面
 function WorkDetail(props) {
   const [studentsData, setStudentsData] = useState([]);
   const [current, setCurrent] = useState(0);
@@ -103,7 +104,7 @@ function WorkDetail(props) {
                 return (
                   <AtTabsPane key={index} current={current} index={index}>
                     <View className='data'>
-                      <StudentsList showData={studentsData} />
+                      <StudentsList enter='homework' showData={studentsData} />
                     </View>
                   </AtTabsPane>
                 );

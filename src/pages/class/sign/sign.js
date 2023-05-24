@@ -4,7 +4,7 @@ import { View, Text, Form, Picker, ScrollView } from "@tarojs/components";
 import { AtButton } from "taro-ui";
 import api from "@/api/api";
 
-import StudentsList from "@app/component/studentsList/studentsList";
+import StudentsList from "@app/component/StudentsList/StudentsList";
 import "./sign.scss";
 
 function Sign() {
@@ -21,7 +21,7 @@ function Sign() {
   console.log(user);
 
   const studentsData = () => {
-    let url = "sign/students/list";
+    let url = "students/list";
     let data = api[url].data;
     // Taro.request({
     //   url: "http://localhost:9999/api/user/list",
@@ -218,7 +218,7 @@ function Sign() {
               </Text>
             </View>
           </View>
-          <StudentsList current={0} showData={students} />
+          <StudentsList enter='sign' current={0} showData={students} />
         </View>
       )}
     </View>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-// import Taro from "@tarojs/taro";
+import Taro from "@tarojs/taro";
 
 import {
   AtTabs,
@@ -16,9 +16,9 @@ import {
 import { View, Button, ScrollView, Input } from "@tarojs/components";
 
 import api from "@/api/api";
-import "./chooseUser.scss";
+import "./groupChat.scss";
 
-function ChooseUser() {
+function GroupChat() {
   const scrollTop = 0;
   const Threshold = 20;
   const [current, setCurrent] = useState(0);
@@ -36,41 +36,27 @@ function ChooseUser() {
   const [isOpenedEdit, setIsOpenedEdit] = useState(false);
   const [labelName, setLabelName] = useState(""); //朋友页面添加标签名
   const [labelEdit, setLabelEdit] = useState({}); //群组页面修改标签名
+  console.log(labelEdit)
 
   const tabList = [
     {
-      title: "朋友",
+      title: "新建群聊",
     },
     {
-      title: "群组",
+      title: "群聊",
     },
   ];
 
-  console.log(labelEdit);
-  console.log(showData);
-  console.log(checkedList);
   useEffect(() => {
     studentsData();
     groupData();
   }, []);
   const studentsData = () => {
-    // Taro.request({
-    //   url: "http://localhost:9999/api/user/list",
-    //   }).then((res) => {
-    //     console.log(res.data.data)
-
-    //     let newData = res.data.data.map(item => {
-    //         let label = <View className='label-avatar'><AtAvatar size='small' circle  className='avatar-img' image={item.img} /><View className='label-text'>{item.label}</View></View>
-    //         return {
-    //             ...item,
-    //             label
-    //         }
-    //     })
-    //     setStudents(newData)
-    // })
-    let studentsUrl = "students/list";
-    let data = api[studentsUrl].data;
+    let url = "students/list";
+    let data = api[url].data;
+    console.log(data);
     let newData = data.map((item) => {
+      let value = item.student_name
       let label = (
         <View className='label-avatar'>
           <AtAvatar
@@ -79,11 +65,11 @@ function ChooseUser() {
             className='avatar-img'
             image={item.img}
           />
-          <View className='label-text'>{item.label}</View>
+          <View className='label-text'>{item.student_name}</View>
         </View>
       );
       return {
-        ...item,
+        value,
         label,
       };
     });
@@ -92,27 +78,51 @@ function ChooseUser() {
     //用于数据列表展示
     setShowData(newData);
   };
+  console.log(students)
+
+  const handleNav = (e) => {
+    console.log(e)
+    Taro.navigateTo({
+      url: "/pages/addressList/message/messageDetail/messageDetail",
+    });
+  };
+  //编辑群组
+  const handleEdit = (value) => {
+    setSearchLabelValue("");
+    setLabelEdit(value);
+    // let data = value.studentArr.map((item) => item.value);
+    // setCheckedList(data);
+  };
+  const handleDel = (e) => {
+    console.log(e);
+  };
 
   const groupData = () => {
-    let classUrl = "classGroup/list";
-    let data = api[classUrl].data;
+    let url = "chat/group/list";
+    let data = api[url].data;
     let newGroupData = data.map((item) => {
+      let value = item.group_name
       let label = (
         <View className='label-icon'>
-          <View className='label-text'>{item.label}</View>
-          <AtIcon
-            className='icon'
-            value='edit'
-            size='25'
-            color='#999'
-            onClick={() => handleEdit(item)}
-          ></AtIcon>
+          <View className='label-text'>{item.group_name}</View>
+          <View className='icon'>
+            <View className='icon-message' onClick={() => handleNav(item)}>
+              <AtIcon value='message' size='18' color='#03B615' />
+            </View>
+            <View className='icon-edit' onClick={() => handleEdit(item)}>
+              <AtIcon value='edit' size='18' color='#999' />
+            </View>
+            <View className='icon-trash' onClick={() => handleDel(item)}>
+              <AtIcon value='trash' size='18' color='#f00' />
+            </View>
+          </View>
         </View>
       );
-      let newDesc = item.studentArr.map((jtem) => jtem.label);
-      let desc = newDesc.toString();
+      let desc = item.content
+      // let newDesc = item.studentArr.map((jtem) => jtem.label);
+      // let desc = newDesc.toString();
       return {
-        ...item,
+        value,
         label,
         desc,
       };
@@ -133,9 +143,6 @@ function ChooseUser() {
     setShowData(students);
     setshowLabelData(labelData);
   };
-
-  console.log(searchValue);
-  console.log(searchLabelValue);
 
   //输入搜索内容
   const handleSearch = (e) => {
@@ -177,7 +184,10 @@ function ChooseUser() {
     if (current === 0) {
       //判断搜索条件和数据列表是否匹配，若匹配则更新数据列表
       let newSearchData = students.filter((item) => {
+        console.log(item)
         let value = item.value;
+        console.log(value)
+        console.log(searchValue)
         if (value.search(searchValue) != -1) {
           return { ...item };
         }
@@ -194,6 +204,7 @@ function ChooseUser() {
           return { ...item };
         }
       });
+      console.log(newSearchLabelData)
       //用于搜索后展示数据
       setshowLabelData(newSearchLabelData);
       if (JSON.stringify(labelEdit) != "{}") {
@@ -208,9 +219,11 @@ function ChooseUser() {
       }
     }
   };
+  console.log(showLabelData,"showLabelData")
 
   //选中的人员或标签，current为0时选中人员，current为1时选中标签
   const handleSelect = (value) => {
+    console.log(value)
     //当current为0时，显示为朋友页面
     if (current === 0) {
       setCheckedList(value);
@@ -301,13 +314,7 @@ function ChooseUser() {
     console.log(labelName);
   };
 
-  //编辑群组
-  const handleEdit = (value) => {
-    setSearchLabelValue("");
-    setLabelEdit(value);
-    let data = value.studentArr.map((item) => item.value);
-    setCheckedList(data);
-  };
+  
 
   //点击提交按钮
   const handleSend = () => {
@@ -321,8 +328,10 @@ function ChooseUser() {
   return (
     <View className='content'>
       <AtTabs current={current} tabList={tabList} onClick={handleChange}>
+        {/* 新建群聊 */}
         <AtTabsPane current={current} index={0}>
           <View className='main'>
+            {/* 新建群聊——人员搜索 */}
             <View className='search'>
               <AtSearchBar
                 value={searchValue}
@@ -343,11 +352,13 @@ function ChooseUser() {
                 lowerThreshold={Threshold}
                 upperThreshold={Threshold}
               >
+                {/* 新建群聊——全选按钮 */}
                 <AtCheckbox
                   options={[{ label: "全选", value: "全选", checked: false }]}
                   selectedList={checkedAll}
                   onChange={handleSelectAll}
                 />
+                {/* 新建群聊——人员列表 */}
                 <AtCheckbox
                   options={showData}
                   selectedList={checkedList}
@@ -356,6 +367,7 @@ function ChooseUser() {
               </ScrollView>
             </View>
             <View>
+              {/* modal框，是否保存为群聊 */}
               <AtModal
                 className='modal'
                 isOpened={isOpened}
@@ -386,21 +398,21 @@ function ChooseUser() {
             提交
           </AtButton>
         </AtTabsPane>
+        {/* 群聊 */}
         <AtTabsPane current={current} index={1}>
           <View className='main'>
+            {/* 群聊——搜索 */}
             <View className='search'>
-              {JSON.stringify(labelEdit) === "{}" ? (
-                ""
-              ) : (
+              {JSON.stringify(labelEdit) !== '{}' &&
                 //点击修改按钮时显示标签输入框
                 <View className='label-edit'>
                   <Input
                     className='label-input'
                     type='text'
-                    value={labelEdit.label}
+                    value={labelEdit.group_name}
                   />
                 </View>
-              )}
+              }
               <AtSearchBar
                 value={searchLabelValue}
                 onChange={handleSearch}
@@ -409,7 +421,6 @@ function ChooseUser() {
                 onActionClick={handelSearchConfirm}
               />
             </View>
-
             <View className='person'>
               <ScrollView
                 className='scroll-view'
@@ -420,21 +431,23 @@ function ChooseUser() {
                 lowerThreshold={Threshold}
                 upperThreshold={Threshold}
               >
+                {/* 群聊——全选 */}
                 <AtCheckbox
                   options={[{ label: "全选", value: "全选", checked: false }]}
                   selectedList={checkedLabelAll}
                   onChange={handleSelectAll}
                 />
                 <View>
+                  {/* 群聊列表——如果是修改时 */}
                   <AtCheckbox
                     className='check-box_group'
                     options={
-                      JSON.stringify(labelEdit) === "{}"
+                      JSON.stringify(labelEdit) == "{}"
                         ? showLabelData
                         : showData
                     }
                     selectedList={
-                      JSON.stringify(labelEdit) === "{}"
+                      JSON.stringify(labelEdit) == "{}"
                         ? checkedLabelList
                         : checkedList
                     }
@@ -458,4 +471,4 @@ function ChooseUser() {
     </View>
   );
 }
-export default ChooseUser;
+export default GroupChat;

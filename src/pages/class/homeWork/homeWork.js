@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { View, Navigator } from "@tarojs/components";
 import { AtFab, AtIcon } from "taro-ui";
-import Work from "@app/component/work/work";
+import Work from "@app/component/Work/Work";
 import api from "@/api/api";
 import "./homeWork.scss";
 
+// 作业页面
 function HomeWork() {
   const [user, setUser] = useState("");
   const [selector, setSelector] = useState([]); //科目选择项
@@ -35,7 +36,7 @@ function HomeWork() {
   return (
     <View className='main'>
         <Work
-          type='布置作业'
+          enter='homework'
           user={user}
           selector={selector}
           showData={showWorkData}

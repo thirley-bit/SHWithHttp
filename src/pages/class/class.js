@@ -6,9 +6,6 @@ import api from "@/api/api";
 // import { Button } from 'antd-mobile'
 import ArticleList from "@app/component/articleList/articleList";
 import Tabs from "@app/component/tabs/tabs";
-import pic1 from "../../static/banner1.jpg";
-import pic2 from "../../static/banner2.jpg";
-import pic3 from "../../static/banner3.jpg";
 import "./class.scss";
 
 function Index() {
@@ -89,7 +86,7 @@ function Index() {
       id: 3,
       title: "私信",
       code: "message",
-      url: "/pages/class/message/message",
+      url: "/pages/addressList/message/message",
     },
     {
       id: 4,
@@ -102,17 +99,20 @@ function Index() {
     {
       id: 1,
       title: "banner1",
-      url: pic1,
+      url:'http://123.57.149.51/upload/upload_img/20230518/2b1e874f9b5d6aaba56c322aeeeb7dfa.jpg'
+      // url: pic1,
     },
     {
       id: 2,
       title: "banner2",
-      url: pic2,
+      url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg'
+      // url: pic2,
     },
     {
       id: 3,
       title: "banner3",
-      url: pic3,
+      url:'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg'
+      // url: pic3,
     },
   ]);
 

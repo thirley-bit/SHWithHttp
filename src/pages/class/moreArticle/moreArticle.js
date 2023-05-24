@@ -6,6 +6,7 @@ import { AtTabs, AtTabsPane, AtCard } from "taro-ui";
 import api from "@/api/api";
 import "./moreArticle.scss";
 
+//更多推荐文章页面
 function MoreArticle() {
   const [articleList, setArticleList] = useState([]);
   const [tabList, setTabList] = useState([]);

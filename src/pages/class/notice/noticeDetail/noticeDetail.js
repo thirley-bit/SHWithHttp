@@ -3,7 +3,7 @@ import { View, Text } from "@tarojs/components";
 import { useRouter } from "@tarojs/taro";
 import { AtButton, AtDivider, AtIcon, AtTabs, AtTabsPane } from "taro-ui";
 import DetailHeader from "@app/component/detailHeader/detailHeader";
-import StudentsList from "@app/component/studentsList/studentsList";
+import StudentsList from "@app/component/StudentsList/StudentsList";
 import api from "@/api/api";
 
 import "./noticeDetail.scss";

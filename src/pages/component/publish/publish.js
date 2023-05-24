@@ -3,7 +3,7 @@ import { View, Text, Navigator, Image, Editor } from "@tarojs/components";
 import Taro, { useRouter } from "@tarojs/taro";
 import { AtButton, AtList, AtListItem } from "taro-ui";
 import DetailHeader from "@app/component/detailHeader/detailHeader";
-import StudentsList from "@app/component/studentsList/studentsList";
+import StudentsList from "@app/component/StudentsList/StudentsList";
 import api from "@/api/api";
 import img from "../../../static/img.jpg"
 import './publish.scss'

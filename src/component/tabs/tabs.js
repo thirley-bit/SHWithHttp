@@ -1,5 +1,5 @@
 import { View, Navigator } from '@tarojs/components'
-import './tabs.less'
+import './Tabs.scss'
 
 function Tabs(props) {
     console.log(props)

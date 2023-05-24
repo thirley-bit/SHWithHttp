@@ -30,6 +30,7 @@
             class_code:47687867324325344,
             class_name:一年级一班,
             user_code:0,  //登录身份 0：家长，1：教师
+            student_id:0, //学生序号
             student_name:张三,
             relative:爸爸, //亲属关系  妈妈，爷爷，奶奶，外公，外婆
             avatar:"http://123.57.149.51/upload/upload_img/20230510/1d4b6d8097826b0c33576e68e88f84f5.png",
@@ -550,7 +551,7 @@
 }
 ```
 ##### 布置作业（教师端）
-#### api/v1/subject/feedback/list `POST`
+#### api/v1/subject/publish `POST`
 * request body
 ```json
 {
@@ -608,7 +609,7 @@
 ```
 
 ##### 通知—通知详情
-#### api/v1/subject/detail `GET`
+#### api/v1/notice/detail `GET`
 * request body
 ```json
 {
@@ -694,7 +695,7 @@
 ```
 
 ##### 发布通知（教师端）
-#### api/v1/subject/feedback/list `POST`
+#### api/v1/notice/publish `POST`
 * request body
 ```json
 {
@@ -723,7 +724,7 @@
 
 ### 安全确认
 ##### 签到（家长端）
-#### api/v1/sign `GET`
+#### api/v1/parent/sign `GET`
 * request body
 ```json
 {
@@ -746,7 +747,110 @@
 ```
 
 ##### 签到（教师端）
-#### api/v1/sign `GET`
+#### api/v1/students/list `GET`
+
+
+##### 私密成绩
+#### api/v1/score/list `GET`
+* request body
+```json
+
+```
+
+* response body
+```json
+{
+    code: 1,
+    //data为数组
+    data: [
+        {
+            uuid:134554647687988765445398765,
+            score_id:0, //成绩列表序号
+            hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+            title:语文考试,
+            author:张老师,
+            publish:1, //是否发布成绩(教师端) 0：未发布成绩， 1：未发布成绩
+            test_time:2023-11-23 12:56
+            time:2023-12-12 14:34,
+            avatar:'',
+        },
+    ], 
+    msg: "success"
+}
+```
+##### 发布成绩
+#### api/v1/score/publish `POST`
+* request body
+```json
+{
+    uuid:134554647687988765445398765,
+    score_id:0, //成绩列表序号
+    hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+    title:语文考试,
+    author:张老师,
+    publish:1, //是否发布成绩(教师端) 0：未发布成绩， 1：已发布成绩
+    detail_content:"考试时间：2023-11-23 12:56 ",
+    time:2023-12-12 14:34,
+    avatar:'',
+}
+```
+
+* response body
+```json
+{
+    code: 1,
+    //data为数组
+    data: [
+        {
+            uuid:134554647687988765445398765,
+            score_id:0, //成绩列表序号
+            hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+            title:语文考试,
+            author:张老师,
+            publish:1, //是否发布成绩(教师端) 0：未发布成绩， 1：未发布成绩
+            test_time:2023-11-23 12:56
+            time:2023-12-12 14:34,
+            avatar:'',
+        },
+    ], 
+    msg: "success"
+}
+```
+
+##### 成绩详情
+#### api/v1/score/detail `POST`
+* request body
+```json
+{
+    score_id:0
+}
+```
+
+* response body
+```json
+{
+    code: 1,
+    //data为数组
+    data:{
+            uuid:134554647687988765445398765,
+            score_id:0, //成绩列表序号
+            hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+            title:语文考试,
+            author:张老师,
+            publish:1, //是否发布成绩(教师端) 0：未发布成绩， 1：未发布成绩
+            detail_content:"考试时间：2023-11-23 12:56 ",
+            time:2023-12-12 14:34,
+            avatar:'',
+        },
+    msg: "success"
+}
+```
+
+
+
+### 通讯录页面
+##### 教师人员列表
+#### api/v1/address/teacher/list `GET`
 * request body
 ```json
 {
@@ -759,19 +863,134 @@
     code:1,
     data:[
         {
-            student_id:0,
-            student_name:张三,
-            checked:0, //是否已签到 0：未签到，1：已签到
-        },
-        {
-            student_id:0,
-            student_name:李四,
-            checked:1, //是否已签到 0：未签到，1：已签到
-        }
-    ]
+        uuid:'dffvdvbfgbfgbgfhb',
+        teacher_id:0, //教师序号
+        teacher_name:'张老师',
+        subject: '任教科目：语文',
+        is_class_teacher:true, //是否是班主任
+        is_creator: true, //是否是创建者
+        avatar:''
+      },
+      {
+        uuid:'dffvdvbfgbfgbgfhb',
+        teacher_id:1, //教师序号
+        teacher_name:'张老师',
+        subject: '任教科目：语文',
+        is_class_teacher:false, //是否是班主任
+        is_creator: false, //是否是创建者
+        avatar:''
+      },
+      {
+        uuid:'dffvdvbfgbfgbgfhb',
+        teacher_id:2, //教师序号
+        teacher_name:'张老师',
+        subject: '任教科目：语文',
+        is_class_teacher:false, //是否是班主任
+        is_creator: false, //是否是创建者
+        avatar:''
+      }
+    ],
     msg:"success"
 }
 ```
+##### 家长人员列表（家长端）
+#### api/v1/address/parent/list `GET`
+* request body
+```json
+{
+
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:[
+        {
+        student_id:0,  //学生序号
+        parent_id:0, //家长序号
+        nick_name:"家长03934", //家长昵称
+        relative:'爸爸',
+        avatar:''
+      },
+      {
+        student_id:0,  //学生序号
+        parent_id:0, //家长序号
+        nick_name:"家长03934", //家长昵称
+        relative:'爸爸',
+        avatar:''
+      },
+      {
+        student_id:0,  //学生序号
+        parent_id:0, //家长序号
+        nick_name:"家长03934", //家长昵称
+        relative:'爸爸',
+        avatar:''
+      }
+    ],
+    msg:"success"
+}
+```
+##### 添加家人
+#### api/v1/addressList/addFamily `POST`
+* request body
+```json
+{
+    parent_id:1,
+    phone:"11222233433",
+    class_code: "47687867324325344",
+    class_name: "一年级一班",
+    student_id:0, //学生序号
+    nick_name:"家长03934", //家长昵称
+    relative: "妈妈", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+    avatar:'',
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:{
+        parent_id:1,
+        phone:"11222233433",
+        class_code: "47687867324325344",
+        class_name: "一年级一班",
+        student_id:0, //学生序号
+        nick_name:"家长03934", //家长昵称
+        relative: "妈妈", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+        avatar:'',
+    },    
+    msg:"success"
+}
+```
+
+##### 新建群聊人员列表
+##### 新建群聊群组列表
+#### api/v1/chat/group/list `GET`
+* request body
+```json
+{
+
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:[
+        {
+            uuid:efreferfer,
+            group_id:0, //群聊序号
+            group_name:"一年级一班",
+            //content不确定，后期可能会调整
+            content:"张三、刘毅美画面给、张九都·打过、李四张、小四的地方很精美画面给哈哈哈哈哈哈哈弄好给你"
+        }
+    ],
+    msg:"success"
+}
+```
+
+
 
 ### 私信
 ##### 私信列表
@@ -793,7 +1012,85 @@
             teacher:张老师,
             new:0,  //是否有新消息 0：无新消息，1:有新消息
             message:大富大贵的鬼地方,
+            time:2023-11-15  14:12:34, //可以返回时间戳
+            avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
+            token:fdgdgvfrtgtgfdgf
+        },
+        {
+            uuid:3434353454677,
+            message_id:0, //消息标识
+            teacher:张老师,
+            new:0,  //是否有新消息 0：无新消息，1:有新消息
+            message:大富大贵的鬼地方,
             time:2023-11-15  14:12:34,
+            avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
+            token:fdgdgvfrtgtgfdgf
+        }
+    ],
+    msg:"success"
+}
+```
+
+##### 点击新消息时，新消息标签清除
+#### api/v1/message/updateListById `POST`
+* request body
+```json
+{
+    message_id:0,
+    token:dfddddgvffbggf
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:[
+        {
+            uuid:3434353454677,
+            message_id:0, //消息标识
+            teacher:张老师,
+            new:0,  //是否有新消息 0：无新消息，1:有新消息
+            message:大富大贵的鬼地方,
+            time:2023-11-15  14:12:34, //可以返回时间戳
+            avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
+            token:fdgdgvfrtgtgfdgf
+        },
+        {
+            uuid:3434353454677,
+            message_id:0, //消息标识
+            teacher:张老师,
+            new:0,  //是否有新消息 0：无新消息，1:有新消息
+            message:大富大贵的鬼地方,
+            time:2023-11-15  14:12:34,
+            avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
+            token:fdgdgvfrtgtgfdgf
+        }
+    ],
+    msg:"success"
+}
+```
+
+##### 删除私信
+#### api/v1/message/del `POST`
+* request body
+```json
+{
+    message_id:0,
+    token:dfddddgvffbggf
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:[
+        {
+            uuid:3434353454677,
+            message_id:0, //消息标识
+            teacher:张老师,
+            new:0,  //是否有新消息 0：无新消息，1:有新消息
+            message:大富大贵的鬼地方,
+            time:2023-11-15  14:12:34, //可以返回时间戳
             avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
             token:fdgdgvfrtgtgfdgf
         },
@@ -863,7 +1160,3 @@
     msg:"success"
 }
 ```
-
-### 私密成绩
-##### 成绩列表
-#### api/v1/score/list `GET`

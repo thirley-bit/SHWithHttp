@@ -1,26 +1,42 @@
 export default defineAppConfig({
   pages: [
-    // 'pages/index/index', //主页
-    'pages/class/class',
-    'pages/class/moreModules/moreModules', //主页——班级通知
-    'pages/class/homeWork/homeWork', //家庭作业
+    // 主页
+    'pages/class/class', //主页
+    'pages/class/homeWork/homeWork', //主页——家庭作业
     'pages/class/homeWork/workDetail/workDetail', //作业详情页面
-    'pages/class/message/message', //活动通知页面
-    'pages/class/notice/notice', //活动通知页面
-    'pages/class/notice/noticeDetail/noticeDetail',  //活动通知详情页面
-    'pages/class/message/chooseUser/chooseUser', //活动通知——选择用户页面
-    'pages/class/message/history/history', //活动通知——历史记录页面
+    'pages/class/notice/notice', //主页——通知页面
+    'pages/class/notice/noticeDetail/noticeDetail',  //通知详情页面
+    'pages/class/sign/sign', //主页——签到页面
+    // 'pages/class/message/history/history', //活动通知——历史记录页面
     'pages/class/signInfo/signInfo', //主页——签到分类入口页面（区分家长和教师身份）
-    'pages/class/sign/sign', //签到页面
-    'pages/class/moreArticle/moreArticle', //推荐更多
+    'pages/class/moreArticle/moreArticle', //主页——推荐更多
+    'pages/class/moreModules/moreModules', //主页——更多应用
+    'pages/class/Score/Score', //主页——成绩
+    'pages/class/Score/PublishScore/PublishScore', //主页——成绩发布
+    'pages/class/Score/ScoreTitle/ScoreTitle', //主页——成绩发布
+    'pages/class/Score/ScoreDetail/ScoreDetail', //主页——成绩发布
+    'pages/class/photos/photos', //主页——相册
+    'pages/class/cookBook/cookBook', //主页——校园食谱
+
+
+    //成长档案
+    'pages/growthFile/growthFile', //成长档案
+
+    //通讯录
+    'pages/addressList/addressList', //通讯录
+    'pages/addressList/addFamily/addFamily', //通讯录——添加家人
+    'pages/addressList/groupChat/groupChat', //通讯录——群聊
+    'pages/addressList/message/message', //主页——私信列表页面
+    'pages/addressList/message/messageDetail/messageDetail', //主页——私信详情页面
+    'pages/addressList/check/check', //通讯录——审核
+
+    //个人中心
+    'pages/my/my', // 我的
+
+    //公共页面
     'pages/component/article/article',  //文章详情
     'pages/component/detail/detail', //通知或作业详情
     'pages/component/publish/publish', //发布页面
-
-    'pages/growthFile/growthFile', //班级圈
-    'pages/addressList/addressList', //主页——通讯录
-    // 'pages/class/class', //共育
-    'pages/my/my', // 我的
   ],
   'permission':{
     'scope.userLocation':{
@@ -59,8 +75,8 @@ export default defineAppConfig({
     {
       'pagePath':"pages/my/my",
       'text': '个人中心',
-      'iconPath':"static/my.jpg",
-      'selectedIconPath':"static/my.jpg"
+      'iconPath':"static/main.jpg",
+      'selectedIconPath':"static/main.jpg"
       // 'iconPath':"static/image/my.png",
       // 'selectedIconPath':"static/image/my_h_.png"
     }]

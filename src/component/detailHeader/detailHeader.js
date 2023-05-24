@@ -2,22 +2,28 @@ import { useEffect, useState } from 'react';
 import { View, Text } from "@tarojs/components";
 import { AtAvatar, AtButton, AtDivider, AtIcon } from "taro-ui";
 import api from '@/api/api';
-import "./detailHeader.scss";
+import "./DetailHeader.scss";
 
 function DetailHeader(props) {
-  const { type, user, work_id} = props
+  const { enter, user, id} = props
   const [detailHeaderData,setDetailHeaderData] = useState({})
   // const data = JSON.parse(decodeURIComponent(router.params.data));
 
 
   useEffect(() => {
     detailData()
-
   }, [])
 
   const detailData = () => {
-    console.log(work_id)
-    let url = "subject/detail"
+    console.log(id)
+    let url = ''
+    if(enter == "homework"){
+      url = "subject/detail"
+    }else if(enter == "notice"){
+      url = "notice/detail"
+    }else{
+      url = "score/detail"
+    }
     let data = api[url].data
     setDetailHeaderData(data)
   }
@@ -41,14 +47,15 @@ function DetailHeader(props) {
         <AtDivider className='divider' />
         <View
           className={
-            user == "0" && type == "布置作业" ? "text" : "text100"
+            user == "0" && enter == "homework" ? "text" : "text100"
           }
         >
           <Text>{detailHeaderData.detail_content}</Text>
         </View>
+        {/* 仅存在于家长端的作业部分 */}
         {user == "0" ? (
           <View className='content'>
-            {type == "布置作业" && (
+            {enter == "homework" && (
               <View>
                 {detailHeaderData.hasCompleted == 1 ? (
                   <AtButton className='button' size='small'>
@@ -63,6 +70,7 @@ function DetailHeader(props) {
             )}
           </View>
         ) : (
+          // 存在于教师端的作业和通知部分
           <View className='content'>
             <AtDivider className='divider' />
             <View className='edit'>

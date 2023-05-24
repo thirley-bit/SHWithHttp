@@ -13,33 +13,15 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/class/class",
-          "pathName": "pages/class/class",
+          "name": "pages/addressList/groupChat/groupChat",
+          "pathName": "pages/addressList/groupChat/groupChat",
           "query": "",
           "scene": null
         },
         {
-          "name": "pages/class/homeWork/workDetail/workDetail",
-          "pathName": "pages/class/homeWork/workDetail/workDetail",
-          "query": "data=%257B%2522id%2522%253A1%252C%2522checked%2522%253A0%252C%2522hasNew%2522%253A0%252C%2522hasCompleted%2522%253A0%252C%2522title%2522%253A%2522%25E3%2580%2590%25E8%25AF%25AD%25E6%2596%2587%25E3%2580%2591%25202023.04.25%2520%25EF%25BC%2588%25E5%2591%25A8%25E4%25BA%258C%25EF%25BC%2589%25E8%25AF%25AD%25E6%2596%2587%25E7%25BB%2583%25E4%25B9%25A0%2522%252C%2522author%2522%253A%2522%25E5%25BC%25A0%25E8%2580%2581%25E5%25B8%2588%2522%252C%2522time%2522%253A%25222023-12-12%252014%253A34%2522%252C%2522content%2522%253A%2522%25EF%25BC%2591%25E3%2580%2581%25E5%25AE%258C%25E6%2588%2590%25E8%25AF%25BE%25E5%2590%258E%25E4%25B9%25A0%25E9%25A2%2598%25EF%25BC%2591%25E3%2580%2581%25EF%25BC%2592%25EF%25BC%259B%25EF%25BC%2592%25E3%2580%2581%25E6%258A%2584%25E5%2586%2599%25E8%25AF%25BE%25E5%2590%258E%25E7%25AC%25AC%25E4%25BA%258C%25E8%2587%25AA%25E7%2584%25B6%25E6%25AE%25B5%2522%252C%2522avatar%2522%253A%2522https%253A%252F%252Fimg1.baidu.com%252Fit%252Fu%253D413643897%252C2296924942%2526fm%253D253%2526fmt%253Dauto%2526app%253D138%2526f%253DJPEG%253Fw%253D800%2526h%253D500%2522%257D",
-          "scene": null
-        },
-        {
-          "name": "pages/class/sign/sign",
-          "pathName": "pages/class/sign/sign",
-          "query": "user=teacher",
-          "scene": null
-        },
-        {
-          "name": "pages/component/detail/detail",
-          "pathName": "pages/component/detail/detail",
-          "query": "type=%E5%B8%83%E7%BD%AE%E4%BD%9C%E4%B8%9A&user=0&work_id=0",
-          "scene": null
-        },
-        {
-          "name": "pages/class/homeWork/homeWork",
-          "pathName": "pages/class/homeWork/homeWork",
-          "query": "user=",
+          "name": "pages/class/score/score",
+          "pathName": "pages/class/score/score",
+          "query": "",
           "scene": null
         }
       ]

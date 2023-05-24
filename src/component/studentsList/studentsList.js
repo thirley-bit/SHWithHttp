@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { View, Text, Picker, Form, ScrollView } from "@tarojs/components";
 import { useRouter } from "@tarojs/taro";
 import { AtAvatar, AtButton, AtDivider } from "taro-ui";
-import "./studentsList.scss";
+import "./StudentsList.scss";
 
 function StudentsList(props) {
-  const { showData } = props;
+  console.log(props)
+  const { enter, showData } = props;
   const scrollTop = 0;
   const Threshold = 20;
+  console.log(enter)
 
   const formSubmit = (index) => {
     console.log(index);
@@ -20,6 +22,7 @@ function StudentsList(props) {
     height: "550px",
   };
   const onScroll = () => {};
+  console.log(showData)
 
   return (
     // 详情头部组件
@@ -52,7 +55,7 @@ function StudentsList(props) {
                 key={index}
                 onSubmit={() => formSubmit(item.id)}
               >
-                {item.checked == undefined ? (
+                {enter == 'homework' ? (
                   // 学生是否完成作业
                   <View>
                     {item.hasCompleted == 0 ? (
@@ -61,7 +64,7 @@ function StudentsList(props) {
                         className='completed-button'
                         size='small'
                       >
-                        {name}aaa
+                        {name}
                       </AtButton>
                     ) : (
                       //hasCompleted:1 已完成作业
@@ -83,7 +86,7 @@ function StudentsList(props) {
                         size='small'
                         onClick={() => handleSign(item, item.student_id, index)}
                       >
-                        {name}
+                        {name}fff
                       </AtButton>
                     ) : (
                       //hasCompleted:1 已完成作业
@@ -91,7 +94,7 @@ function StudentsList(props) {
                         className='sign-button_sign'
                         size='small'
                       >
-                        {name}
+                        {name}sss
                       </AtButton>
                     )}
                   </View>

@@ -1,7 +1,7 @@
 import { View, Text } from "@tarojs/components";
 import { useRouter } from "@tarojs/taro";
 import { AtAvatar, AtButton, AtDivider, AtIcon } from "taro-ui";
-import "./detailHeader.scss";
+import "./DetailHeader.scss";
 
 function DetailHeader() {
   const router = useRouter();

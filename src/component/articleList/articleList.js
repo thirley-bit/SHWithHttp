@@ -1,6 +1,6 @@
 import { View, Image, Navigator } from "@tarojs/components";
 import { AtCard } from "taro-ui";
-import "./articleList.less";
+import "./ArticleList.scss";
 
 function ArticleList(props) {
   const { articleList } = props;
