@@ -8,18 +8,16 @@ import "./detail.scss";
 function WorkDetail() {
   const router = useRouter();
   const enter = router.params.enter;
-  const user = router.params.user;
   const id = router.params.id;
-  const publish = router.params.publish;
-  console.log(publish, "pudhscjsd csbch");
+  console.log(enter)
 
   return (
     <View className='main'>
       {/* 头部详情——不含成绩发布和保存页面 */}
-     <DetailHeader enter={enter} user={user} id={id} />
+     <DetailHeader enter={enter}  id={id} />
       {/* 仅存在于作业和成绩部分 */}
       {(enter == "homework" || enter == "score") && (
-        <DetailContent enter={enter} user={user} id={id} />
+        <DetailContent enter={enter}  id={id} />
       )}
     </View>
   );

@@ -1,0 +1,16 @@
+.bottom{
+    position: fixed;
+    width: 100%;
+    bottom: 1%;
+    margin: 0 2%;
+    align-items: center;
+    .button-submit{
+        display: inline-block;
+        width: 47%;
+    }
+    .button-reset{
+        display: inline-block;
+        width: 47%;
+        margin-left: 2%;
+    }
+}

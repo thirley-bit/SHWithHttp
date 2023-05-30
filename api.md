@@ -750,13 +750,12 @@
 #### api/v1/students/list `GET`
 
 
-##### 私密成绩
+##### 私密成绩——成绩列表
 #### api/v1/score/list `GET`
 * request body
 ```json
 
 ```
-
 * response body
 ```json
 {
@@ -769,7 +768,7 @@
             hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
             title:语文考试,
             author:张老师,
-            publish:1, //是否发布成绩(教师端) 0：未发布成绩， 1：未发布成绩
+            publish:1, //是否发布成绩(教师端) 0：未发布成绩， 1：已发布成绩
             test_time:2023-11-23 12:56
             time:2023-12-12 14:34,
             avatar:'',
@@ -778,7 +777,8 @@
     msg: "success"
 }
 ```
-##### 发布成绩
+
+##### 发布成绩——新发布接口
 #### api/v1/score/publish `POST`
 * request body
 ```json
@@ -794,7 +794,41 @@
     avatar:'',
 }
 ```
-
+* response body
+```json
+{
+    code: 1,
+    //data为数组
+    data: [
+        {
+            uuid:134554647687988765445398765,
+            score_id:0, //成绩列表序号
+            hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+            title:语文考试,
+            author:张老师,
+            publish:1, //是否发布成绩(教师端) 0：未发布成绩， 1：未发布成绩
+            test_time:2023-11-23 12:56
+            time:2023-12-12 14:34,
+            avatar:'',
+        },
+    ], 
+    msg: "success"
+}
+```
+##### 发布成绩——快速发布接口(未定)
+#### api/v1/score/quickPublish `POST`
+* request body
+```json
+{
+    score_id:0, //成绩列表序号
+    title:语文考试,
+    author:张老师,
+    publish:1, //是否发布成绩(教师端) 0：未发布成绩， 1：已发布成绩
+    detail_content:"考试时间：2023-11-23 12:56 ",
+    time:2023-12-12 14:34,
+    avatar:'',
+}
+```
 * response body
 ```json
 {
@@ -817,7 +851,7 @@
 }
 ```
 
-##### 成绩详情
+##### 成绩详情(已发布)
 #### api/v1/score/detail `POST`
 * request body
 ```json
@@ -845,9 +879,103 @@
     msg: "success"
 }
 ```
+##### 成绩详情(未发布)——成绩标题和时间
+#### api/v1/score/detail/title `POST`
+* request body
+```json
+{
+    score_id:0
+}
+```
 
+* response body
+```json
+{
+    code: 1,
+    //data为数组
+    data:{
+            uuid:134554647687988765445398765,
+            score_id:0, //成绩列表序号
+            title:语文考试,
+            test_time:2023-12-13
+        },
+    msg: "success"
+}
+```
+##### 成绩详情(未发布)——数据详情
+#### api/v1/score/detail/data `GET`
+* request body
+```json
+{
+    score_id:0
+}
+```
+* response body
+```json
+{
+    code: 1,
+    //data为数组
+    data:[
+            {
+                uuid:121213,
+                score_id:0,
+                score_detail_id:0,
+                number: "202323",
+                name: "小红",
+                Chinese: "88",
+                Math: "99",
+                English: "89",
+        },
+        {
+                uuid:121213,
+                score_id:0,
+                score_detail_id:1,
+                number: "20323",
+                name: "张三",
+                Chinese: "88",
+                Math: "99",
+                English: "89",
+        },
+        {
+                uuid:121213,
+                score_id:0,
+                score_detail_id:2,
+                number: "20232323",
+                name: "李四",
+                Chinese: "88",
+                Math: "99",
+                English: "89",
+        },
+    ],
+    msg: "success"
+}
+```
 
+### 相册
+##### 相册列表
+#### api/v1/photos/list `GET`
+* request body
+```json
+{
 
+}
+```
+*response body
+```json
+{
+    code:1,
+    data:[
+        {
+            uuid:324333546,
+            photo_id:0,
+            photo_name:'午休情况',
+            photo_num:2,
+            photo_url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+        }
+    ],
+    msg:'success'
+}
+```
 ### 通讯录页面
 ##### 教师人员列表
 #### api/v1/address/teacher/list `GET`

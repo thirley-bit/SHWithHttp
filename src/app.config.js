@@ -15,7 +15,10 @@ export default defineAppConfig({
     'pages/class/Score/PublishScore/PublishScore', //主页——成绩发布
     'pages/class/Score/ScoreTitle/ScoreTitle', //主页——成绩发布
     'pages/class/Score/ScoreDetail/ScoreDetail', //主页——成绩发布
-    'pages/class/photos/photos', //主页——相册
+    'pages/class/Photos/Photos', //主页——相册
+    'pages/class/Photos/NewPhotos/NewPhotos', //新建相册
+    'pages/class/Photos/PhotosDetail/PhotosDetail', //相册详情
+    'pages/class/Photos/PublishPhotos/PublishPhotos', //上传照片
     'pages/class/cookBook/cookBook', //主页——校园食谱
 
 
@@ -87,4 +90,7 @@ export default defineAppConfig({
     'navigationBarTitleText': '诚道吉科技有限公司',
     'navigationBarTextStyle': 'black',
   },
+  // usingComponents: {
+  //   "taro-ui": "/node_modules/taro-ui/dist/index.js"
+  // }
 })

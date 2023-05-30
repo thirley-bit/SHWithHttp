@@ -5,11 +5,9 @@ import { AtAvatar, AtButton, AtDivider } from "taro-ui";
 import "./StudentsList.scss";
 
 function StudentsList(props) {
-  console.log(props)
   const { enter, showData } = props;
   const scrollTop = 0;
   const Threshold = 20;
-  console.log(enter)
 
   const formSubmit = (index) => {
     console.log(index);
@@ -22,7 +20,6 @@ function StudentsList(props) {
     height: "550px",
   };
   const onScroll = () => {};
-  console.log(showData)
 
   return (
     // 详情头部组件

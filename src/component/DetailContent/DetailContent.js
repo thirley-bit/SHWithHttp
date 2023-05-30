@@ -3,11 +3,14 @@ import { View, Text } from "@tarojs/components";
 import { AtButton, AtDivider, AtIcon, AtTabs, AtTabsPane } from "taro-ui";
 
 import StudentsList from "@app/component/StudentsList/StudentsList";
+import Table from "@app/component/Table/Table"
 import api from "@/api/api";
+import { connect } from 'react-redux';
 
 //校园食谱页面
 function DetailContent(props) {
   console.log(props);
+  const { dispatch, enter, user, id, scoreTitle, scoreDetailArr } = props
   const [feedBackDetail, setFeedBackDetail] = useState({}); //家长端家长反馈内容
   const [studentsData, setStudentsData] = useState([]);
   const [current, setCurrent] = useState(0);
@@ -16,11 +19,13 @@ function DetailContent(props) {
   const [allList, setAllList] = useState([]); //全部学生列表
   const [delivered, setDelivered] = useState([]); //已交列表
   const [noDelivered, setNoDelivered] = useState([]); //未交列表
-  const { enter, user, id } = props;
 
   useEffect(() => {
     feedBackData();
     studentsList();
+    dispatch({
+      type:'Score/getScoreDetailArr'
+    })
   }, []);
 
   const feedBackData = () => {
@@ -133,7 +138,7 @@ function DetailContent(props) {
             </AtButton>
           </View>
         )}
-        {user == 1 && (
+        {user == "1" && enter == 'homework' && (
           <View>
             {/* 作业页面教师端的反馈详情 */}
             <AtTabs
@@ -148,7 +153,6 @@ function DetailContent(props) {
                       <StudentsList
                         current={current}
                         enter={enter}
-                        user={user}
                         id={id}
                         showData={studentsData}
                       />
@@ -159,8 +163,16 @@ function DetailContent(props) {
             </AtTabs>
           </View>
         )}
+        {
+          user == '1' && enter == 'score' && 
+          <Table columns={scoreTitle} dataSource={scoreDetailArr}></Table>
+        }
       </View>
     </View>
   );
 }
-export default DetailContent;
+export default connect(state => ({
+  user:state.users.user,
+  scoreTitle:state.Score.scoreTitle,
+  scoreDetailArr:state.Score.scoreDetailArr
+}))(DetailContent);

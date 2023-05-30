@@ -6,14 +6,14 @@ import api from "@/api/api";
 
 import StudentsList from "@app/component/StudentsList/StudentsList";
 import "./sign.scss";
+import { connect } from 'react-redux';
 
-function Sign() {
+function Sign(props) {
+  const { user } = props
   const [students, setStudents] = useState([]);
   const [isEdit, setIsEdit] = useState(true);
   const scrollTop = 0;
   const Threshold = 20;
-  const router = useRouter();
-  const user = router.params.user;
 
   useEffect(() => {
     studentsData();
@@ -225,4 +225,6 @@ function Sign() {
   );
 }
 
-export default Sign;
+export default connect(state => ({
+  user:state.users.user
+}))(Sign);

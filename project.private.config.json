@@ -13,14 +13,38 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/addressList/groupChat/groupChat",
-          "pathName": "pages/addressList/groupChat/groupChat",
+          "name": "pages/class/class",
+          "pathName": "pages/class/class",
           "query": "",
           "scene": null
         },
         {
-          "name": "pages/class/score/score",
-          "pathName": "pages/class/score/score",
+          "name": "pages/class/Score/Score",
+          "pathName": "pages/class/Score/Score",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/class/moreModules/moreModules",
+          "pathName": "pages/class/moreModules/moreModules",
+          "query": "user=%5Bobject%20Object%5D",
+          "scene": null
+        },
+        {
+          "name": "pages/class/moreModules/moreModules",
+          "pathName": "pages/class/moreModules/moreModules",
+          "query": "user=%255Bobject%2520Object%255D",
+          "scene": null
+        },
+        {
+          "name": "pages/class/Photos/Photos",
+          "pathName": "pages/class/Photos/Photos",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/class/Photos/NewPhotos/NewPhotos",
+          "pathName": "pages/class/Photos/NewPhotos/NewPhotos",
           "query": "",
           "scene": null
         }

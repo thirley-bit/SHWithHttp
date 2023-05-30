@@ -3,12 +3,13 @@ import { View, Text } from "@tarojs/components";
 import { AtAvatar, AtButton, AtDivider, AtIcon } from "taro-ui";
 import api from '@/api/api';
 import "./DetailHeader.scss";
+import { connect } from 'react-redux';
 
 function DetailHeader(props) {
   const { enter, user, id} = props
   const [detailHeaderData,setDetailHeaderData] = useState({})
   // const data = JSON.parse(decodeURIComponent(router.params.data));
-
+console.log(user)
 
   useEffect(() => {
     detailData()
@@ -100,4 +101,6 @@ function DetailHeader(props) {
   );
 }
 
-export default DetailHeader;
+export default connect(state => ({
+  user:state.users.user
+}))(DetailHeader);

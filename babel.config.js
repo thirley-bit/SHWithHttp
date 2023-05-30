@@ -1,5 +1,7 @@
 // babel-preset-taro 更多选项和默认值：
 // https://github.com/NervJS/taro/blob/next/packages/babel-preset-taro/README.md
+const tail = require("lodash/tail")
+
 module.exports = {
   // export default {
   presets: [
@@ -22,5 +24,14 @@ module.exports = {
       ["@babel/plugin-transform-modules-commonjs", {
       "allowTopLevelThis": true
       }],
-  ]
+  ],
+  // plugins:[
+  //   ["import",{
+  //     libraryName: "taro-ui",
+  //     customName: (name, file) => {
+  //       const path = tail(name.split('-')).join('/');
+  //       return `taro-ui/lib/components/${path}`;
+  //     }
+  //   }]
+  // ]
 }

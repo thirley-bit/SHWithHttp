@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { View, Text, Picker, Navigator } from "@tarojs/components";
 import Taro from "@tarojs/taro";
+import { View, Text, Picker, Navigator } from "@tarojs/components";
 import { AtAvatar, AtButton, AtCard, AtFab, AtIcon } from "taro-ui";
+import { connect } from 'react-redux';
 import "./Work.scss";
 
 function Work(props) {
-  const { enter, user, selector, showData } = props;
+  const { dispatch, enter, user, selector, showData } = props;
   const [time, setTime] = useState("");
   const [selectorChecked, setSelectorChecked] = useState(""); //选中的科目下标
   const onTimeChange = (e) => {
@@ -14,7 +15,6 @@ function Work(props) {
   const onSubChange = (e) => {
     setSelectorChecked(e.detail.value);
   };
-
   const handleCompleted = (e) => {
     console.log(e);
   };
@@ -31,7 +31,7 @@ function Work(props) {
     if(e.publish == 0){
       Taro.navigateTo({url:`/pages/class/Score/PublishScore/PublishScore`})
     }else{
-      Taro.navigateTo({ url:`/pages/component/detail/detail?enter=${enter}&user=${user}&id=${id}&publish=${e.publish}`})
+      Taro.navigateTo({ url:`/pages/component/detail/detail?enter=${enter}&id=${id}`})
     }
   }
   const handleClick = () => {
@@ -166,4 +166,8 @@ function Work(props) {
     </View>
   );
 }
-export default Work;
+// export default Work;
+
+export default connect(state =>({
+  user:state.users.user
+}))(Work)

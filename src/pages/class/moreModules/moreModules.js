@@ -1,10 +1,7 @@
 import Taro from "@tarojs/taro";
 import { useState } from "react";
 import { View, Navigator, CoverImage, Text } from "@tarojs/components";
-import homeWork from "../../../static/image/menu.png";
-import seatWork from "../../../static/image/calendar.png";
-import message from "../../../static/image/love.png";
-import schedule from "../../../static/image/资源 5渗透.png";
+import p2 from "../../../static/main.jpg";
 import "./moreModules.scss";
 
 //更多应用页面
@@ -13,19 +10,19 @@ function Notice() {
     {
       id: 0,
       title: "安全确认",
-      img: homeWork,
+      img: p2,
       pageUrl: "/pages/class/sign/sign",
     },
     {
       id: 1,
       title: "通知",
-      img: seatWork,
+      img: p2,
       pageUrl: "/pages/class/notice/notice",
     },
     {
       id: 2,
       title: "私信",
-      img: schedule,
+      img: p2,
       pageUrl: "/pages/addressList/message/message",
     },
   ];
@@ -33,13 +30,13 @@ function Notice() {
     {
       id: 0,
       title: "作业",
-      img: homeWork,
+      img: p2,
       pageUrl: "/pages/class/homeWork/homeWork",
     },
     {
       id: 1,
       title: "成绩",
-      img: message,
+      img: p2,
       pageUrl: "/pages/class/Score/Score",
     },
   ];
@@ -47,19 +44,19 @@ function Notice() {
     {
         id: 0,
         title: "相册",
-        img: message,
-        pageUrl: "/pages/class/photos/photos",
+        img: p2,
+        pageUrl: "/pages/class/Photos/Photos",
       },
       {
         id: 1,
         title: "校园食谱",
-        img: homeWork,
+        img: p2,
         pageUrl: "/pages/class/cookBook/cookBook",
       },
       {
         id: 2,
         title: "获奖",
-        img: schedule,
+        img: p2,
         pageUrl: "/pages/addressList/message/chooseUser/chooseUser",
       },
   ]

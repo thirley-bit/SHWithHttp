@@ -986,47 +986,11 @@ export default {
     msg:"success"
   },
 
-  // "sign/students/list":{
-  //   code:1,
-  //   data:[
-  //     {
-  //       student_id:0,
-  //       checked:0,  //是否签到 0：未签到，1：已签到
-  //       student_name:'张三放热峰认同感认同感认同感飞人废人'
-  //     },
-  //     {
-  //       student_id:1,
-  //       checked:0,  //是否签到 0：未签到，1：已签到
-  //       student_name:'张三一塌糊涂有'
-  //     },
-  //     {
-  //       student_id:2,
-  //       checked:1,  //是否签到 0：未签到，1：已签到
-  //       student_name:'张三与教育经验'
-  //     },
-  //     {
-  //       student_id:3,
-  //       checked:0,  //是否签到 0：未签到，1：已签到
-  //       student_name:'张三'
-  //     },
-  //     {
-  //       student_id:4,
-  //       checked:1,  //是否签到 0：未签到，1：已签到
-  //       student_name:'张三教育教育教育局拒绝'
-  //     },
-  //     {
-  //       student_id:5,
-  //       checked:0,  //是否签到 0：未签到，1：已签到
-  //       student_name:'张三'
-  //     }
-  //   ],
-  //   msg:"success"
-  // },
 
 
 
 
-
+  //通知
   "notice/list": {
     code: 200,
     content: "success",
@@ -1111,6 +1075,7 @@ export default {
       msg:"success"
   },
 
+  //私密成绩
   "score/list":{
     code:1,
     data:[
@@ -1187,6 +1152,90 @@ export default {
       },
       msg:"success"
   },
+  "score/detail/data":{
+      code: 1,
+      //data为数组
+      data:[
+              {
+                uuid:121213,
+                score_id:0,
+                score_detail_id:0,
+                number: "202323",
+                name: "小红",
+                Chinese: "88",
+                Math: "99",
+                English: "89",
+            },
+            {
+                uuid:121213,
+                score_id:0,
+                score_detail_id:1,
+                number: "20323",
+                name: "张三",
+                Chinese: "88",
+                Math: "99",
+                English: "89",
+            },
+            {
+                uuid:121213,
+                score_id:0,
+                score_detail_id:2,
+                number: "20232323",
+                name: "李四",
+                Chinese: "88",
+                Math: "99",
+                English: "89",
+            },
+          ],
+      msg: "success"
+  },
+
+  //相册
+  "photos/list":{
+    code:1,
+    data:[
+      {
+        uuid:'324333546',
+        photo_id:0,
+        photo_name:'午休情况',
+        photo_num:2,
+        photo_url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+      },
+      {
+        uuid:'324333546',
+        photo_id:1,
+        photo_name:'餐食情况',
+        photo_num:2,
+        photo_url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+      },
+      {
+        uuid:'324333546',
+        photo_id:2,
+        photo_name:'活动情况',
+        photo_num:2,
+        photo_url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+      },
+      {
+        uuid:'324333546',
+        photo_id:3,
+        photo_name:'课堂情况',
+        photo_num:2,
+        photo_url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+      },
+      {
+        uuid:'324333546',
+        photo_id:4,
+        photo_name:'其他情况',
+        photo_num:5,
+        photo_url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+      },
+    ],
+    msg:'success'
+  },
+
+
+
+
 
   //通讯录
   "address/teacher/list":{

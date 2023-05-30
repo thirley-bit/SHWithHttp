@@ -11,19 +11,12 @@ import "./notice.scss";
 
 //通知页面
 function Notice() {
-  const [user, setUser] = useState("");
   const [showWorkData, setShowWorkData] = useState([]); //通知列表
 
   useEffect(() => {
-    userData();
     noticeData()
   },[])
 
-  const userData = () => {
-    let url = "identity";
-    let data = api[url].data.user_code;
-    setUser(data);
-  };
 
 
   const noticeData = () =>{
@@ -34,7 +27,7 @@ function Notice() {
 
   return (
     <View className='main'>
-      <Work enter='notice' user={user}  showData={showWorkData} />
+      <Work enter='notice'   showData={showWorkData} />
       {/* <View className='components-page'>
         <View className='operate-box' onClick={() => addImage()}>
           <Image className='img' src={img} />

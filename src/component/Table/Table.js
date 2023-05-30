@@ -2,14 +2,22 @@ import { useEffect, useState } from "react";
 import { View } from "@tarojs/components";
 import { AtIcon, AtActionSheet, AtActionSheetItem } from 'taro-ui';
 import Taro from '@tarojs/taro';
+import { connect } from 'react-redux';
 import "./Table.scss";
 
 function Table(props) {
-  const { columns, dataSource } = props;
+  console.log(props)
+  const { dispatch, scoreTitle, dataSource } = props;
   const [isOpened, setIsOpened] = useState(false)
+  const [id,setId] = useState('')
+  console.log(scoreTitle,dataSource)
 
   const handleEdit = (e) => {
-    console.log(e)
+    setId(e)
+    dispatch({
+      type:'Score/getScoreDetail',
+      payload:e
+    })
     setIsOpened(true)
   }
   const handleCancel = () => {
@@ -19,21 +27,21 @@ function Table(props) {
     setIsOpened(false)
   }
   const handleSheetEdit = () => {
-    console.log('edit')
-    Taro.navigateTo({url:'/pages/class/Score/ScoreDetail/ScoreDetail'})
+    Taro.navigateTo({url:`/pages/class/Score/ScoreDetail/ScoreDetail?id=${id}`})
   }
   const handleSheetDel = () => {
     console.log('delete')
   }
   const handleSheetInsert = () => {
     console.log('insert')
+    Taro.navigateTo({url:'/pages/class/Score/ScoreDetail/ScoreDetail'})
   }
   return (
     <View className='main'>
       <View className='table-container'>
         <View className='table'>
           <View className='thead table-thead-fix'>              
-            {columns.map((item, index) => {
+            {scoreTitle.map((item, index) => {
               return (
                 <View key={index} className='cell'>
                   {item.title}
@@ -44,10 +52,9 @@ function Table(props) {
           </View>
           <View className='tbody'>
             {dataSource.map((item, index) => {
-              console.log(item)
               return (
                 <View key={index} className='row'>
-                  {columns.map((item2, index2) => {
+                  {scoreTitle.map((item2, index2) => {
                     if (item2.render) {
                       return (
                         <View key={index2} className='cell'>
@@ -67,7 +74,7 @@ function Table(props) {
                       );
                     }
                   })} 
-                  <View className='cell table-cell-fix-right' onClick={() => handleEdit(item)}>
+                  <View className='cell table-cell-fix-right' onClick={() => handleEdit(item.score_detail_id)}>
                     <AtIcon value='edit' size='14' ></AtIcon>
                   </View>
                 </View>
@@ -91,4 +98,6 @@ function Table(props) {
   );
 }
 
-export default Table;
+export default connect(state => ({
+  scoreTitle:state.Score.scoreTitle,
+}))(Table);

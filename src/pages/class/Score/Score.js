@@ -4,30 +4,24 @@ import { useEffect, useState } from 'react'
 import {  View,  } from '@tarojs/components'
 import Work from '@app/component/Work/Work'
 import api from '@/api/api'
+import { connect } from 'react-redux'
 
-function Score() {
-  const [user, setUser] = useState("");
-  const [showData, setShowData] = useState([])
+function Score(props) {
+  const { dispatch, scoreArr } = props
   useEffect(()=>{
-    userData();
-    parentScore()
+    dispatch({
+      type:'Score/getScoreList'
+    })
   },[])
-
-  const userData = () => {
-    let url = "identity";
-    let data = api[url].data.user_code;
-    setUser(data);
-  };
-  
-  const parentScore = () => {
-    let url = 'score/list'
-    let data = api[url].data
-    setShowData(data)
-  }
+ 
   return (
     <View className='main'>
-        <Work enter='score' user={user} showData={showData} />
+        <Work enter='score' showData={scoreArr} />
     </View>
   )
 }
-export default Score
+
+export default connect(state => ({
+  identity:state.users.identity,
+  scoreArr:state.Score.scoreArr
+}))(Score)
