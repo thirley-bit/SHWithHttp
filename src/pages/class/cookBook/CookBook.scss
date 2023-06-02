@@ -1,0 +1,52 @@
+.main{
+    position: relative;
+}
+.tab{
+    .at-tabs__header{
+       background-color: #e0e0e0;
+    }
+    .at-tabs__item--active{
+        background-color: #fff;
+    }
+}
+.at-tabs-pane{
+    background-color: #fff;
+}
+.at-tabs-pane--active{
+    background-color: #fff;
+}
+.recipe{
+    margin: 3%;
+}
+.food-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 2% 0 6% 0;
+    color: #999;
+    font-size: 30rpx;
+    
+}
+.title{
+    width: 25%;
+    display: inline-block;
+    line-height: 1.2;
+    margin-top: 12rpx;
+    padding:  0 10rpx;
+    box-sizing: border-box;
+}
+.title.title50{
+    width: 50%;
+}
+.title.title75{
+    width: 75%;
+}
+.tab-bar{
+    position: fixed;
+    width: 98%;
+    background-color: #999;
+    align-items: center;
+    margin: 0 1%;
+    bottom: 1%;
+    border: solid 1rpx #999;
+}

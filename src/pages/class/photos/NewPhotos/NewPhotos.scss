@@ -7,4 +7,29 @@
 .at-textarea__textarea {
     font-size: 28rpx;
     color: #808080;
+    height: 273rpx;
+}
+.img{
+    margin: 0 3% 4% 3%;
+    width: 150rpx;
+    height: 150rpx;
+}
+.card{
+    .at-list__item::after{
+        border: none;
+    }
+}
+.input {
+    position: relative;
+    padding: 3% 0;
+    color: #333;
+    font-weight: 600;
+    background-color: #FFF;
+    margin-left: 2.5%;
+}
+.send-button{
+    position: fixed;
+    width: 98%;
+    bottom: 1%;
+    margin: 1%;
 }

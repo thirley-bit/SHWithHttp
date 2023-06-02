@@ -51,7 +51,7 @@ function Notice() {
         id: 1,
         title: "校园食谱",
         img: p2,
-        pageUrl: "/pages/class/cookBook/cookBook",
+        pageUrl: "/pages/class/CookBook/CookBook",
       },
       {
         id: 2,

@@ -1,37 +1,64 @@
-import { View } from "@tarojs/components";
+import { View, Image, Input } from "@tarojs/components";
 import { useState } from "react";
-import { AtDivider, AtInput, AtList, AtListItem, AtTextarea } from "taro-ui";
+import Taro from '@tarojs/taro'
+import { AtDivider, AtButton, AtList, AtListItem, AtTextarea } from "taro-ui";
 import "./NewPhotos.scss"
 
 //新建相册页面
 function NewPhotos(props) {
   const { dispatch } = props;
-  const [value, setValue] = useState("午休情况");
-  const handleChange = (e) => {
-    setValue(e);
+  const [inputValue, setInputValue] = useState("");
+  const [areaValue, setAreaValue] = useState("")
+  const [img,setImg] = useState('')
+  const handleInputChange = (e) => {
+    setInputValue(e.detail.value);
   };
-  const handleChoose = () => {
-    console.log(111)
+  const handleAreaChange = (e) => {
+    setAreaValue(e)
   }
+  const handleChoose = () => {
+    Taro.chooseImage({
+      count:1,
+      sizeType:['compressed'],
+      sourceType:['album','camera'],
+      success:(res) => {
+        setImg(res.tempFilePaths[0])
+      }
+    })
+  }
+  const handleSend = () => {
+    console.log('send')
+  }
+  
   return (
     <View className='main'>
       <View className='top'>
-        <AtInput
+        <Input
+          className='input'
           name='value'
           placeholder='请输入相册名称'
-          value={value}
-          onChange={handleChange}
+          value={inputValue}
+          maxlength='20'
+          onInput={handleInputChange}
         />
         <AtTextarea
           name='value'
           placeholder='请输入相册描述'
-          value={value}
-          onChange={handleChange}
+          value={areaValue}
+          onChange={handleAreaChange}
         />
-        <AtList>
+        <AtList className='card'>
             <AtListItem title='封面图' extraText='请选择' arrow='right' onClick={handleChoose} />
+            <Image className='img' src={img} />
         </AtList>
       </View>
+      <AtButton
+        type='primary'
+        className='send-button'
+        onClick={() => handleSend()}
+      >
+        发送
+      </AtButton>
     </View>
   );
 }

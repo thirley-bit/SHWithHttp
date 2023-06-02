@@ -7,7 +7,7 @@ import "./Photos.scss";
 
 //相册页面
 function Photos(props) {
-  const { dispatch,user, photosArr } = props
+  const { dispatch, user, photosArr, photoDetail } = props
   console.log(props)
   useEffect(() => {
     dispatch({
@@ -22,7 +22,11 @@ function Photos(props) {
   }
   const handleClick = (item) => {
     console.log(item)
-    Taro.navigateTo({url:'/pages/class/Photos/PhotosDetail/PhotosDetail'})
+    dispatch({
+      type:"Photos/getPhotoCover",
+      payload:item.photo_id
+    })
+    Taro.navigateTo({url:`/pages/class/Photos/PhotosDetail/PhotosDetail`})
   }
   const handlePublishClick = () => {
     Taro.navigateTo({url:'/pages/class/Photos/PublishPhotos/PublishPhotos'})
@@ -62,5 +66,6 @@ function Photos(props) {
 }
 export default connect(state => ({
   user:state.users.user,
-  photosArr: state.Photos.photosArr
+  photosArr: state.Photos.photosArr,
+  photoDetail:state.Photos.photoDetail
 }))(Photos);

@@ -1,0 +1,42 @@
+.top{
+    width: 100%;
+    height:20%;
+    align-items: center;
+    padding: 1% 2%;
+    .img{
+        width: 96%;
+        height: 300rpx;
+        border-radius: 5%;
+    }
+    .text{
+        font-weight: 600;
+        margin: 1% 0;
+    }
+}
+.list{
+    position: relative;
+    width: 98%;
+    padding: 1%;
+    .detail{
+        margin: 2% auto;
+    }
+    .time{
+        position: relative;
+        font-size: 26rpx;
+        .time-avatar{
+            width: 55rpx;
+            height: 55rpx;
+            margin: 0 2%;
+        }
+        .time-text{
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+        }
+    }
+    .at-grid__flex .content-inner__img {
+        width: 200rpx;
+        height: 200rpx;
+    }
+}

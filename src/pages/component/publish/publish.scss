@@ -10,24 +10,12 @@
     border:solid 1rpx;
     // margin: 10rpx;
     margin: 10rpx auto;
-    .operate-box{
-        margin: 7rpx 10rpx;
-        .img{
-            width:60rpx;
-            height:60rpx; 
-            display:inline-block;
-        }
-        .img-name{
-            display: inline-block;
-        }
-    }
+    
     .editor-box{
         position: relative;
         width:100%;
         min-height: 900rpx;
         max-height: 10000rpx;
-        // min-height:721rpx;
-        // height: 90%;
         background:#fff;
         overflow-y: scroll;
         .editor{
@@ -38,6 +26,11 @@
             }
         }
     }
+}
+.operate-box{
+    width: 14%;
+    background-color: #fff;
+    margin: 10rpx 3%;
 }
 .send-button{
     position: fixed;

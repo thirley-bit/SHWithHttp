@@ -952,7 +952,7 @@
 ```
 
 ### 相册
-##### 相册列表
+##### 相册列表(相册列表页面)
 #### api/v1/photos/list `GET`
 * request body
 ```json
@@ -960,22 +960,208 @@
 
 }
 ```
-*response body
+* response body
 ```json
 {
     code:1,
     data:[
         {
             uuid:324333546,
+            photo_id:0, //相册序号
+            photo_name:'午休情况', //相册名称
+            photo_num:2, 
+            photo_url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg', //相册封面
+        },
+    ],
+    msg:'success'
+}
+```
+##### 相册详情（点击相册列表进入的相册具体内容）
+#### api/v1/photos/detail `GET`
+* request body
+```json
+{
+    photo_id:0
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:[
+        {
+            uuid:'324333546',
+            photo_id:0, //相册序号
+            uploader:'张老师', //照片上传者
+            uploader_avatar:'http://123.57.149.51/upload/upload_img/20230510/1d4b6d8097826b0c33576e68e88f84f5.png',
+            upload_time:'2023-12-22 12:45', //照片上传时间
+            photo_list:[
+                {
+                    uuid:343544545,
+                    url_id:0,
+                    image:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+                },
+            ] //照片列表
+        },
+        ],
+    msg:'success'
+}
+```
+
+##### 新建相册（创建数据传至后台形成新增数据）
+#### api/v1/new/photos `POST`
+* request body
+```json
+{
+    photo_name:'新增相册1',
+    detail:'新增描述新增描述',
+    photo_num:0,
+    photo_url:'http://123.57.149.51/upload/upload_img/20230518/2b1e874f9b5d6aaba56c322aeeeb7dfa.jpg',
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:[
+            {
+            uuid:324333546,
+            photo_id:0, //相册序号
+            photo_name:'午休情况', //相册名称
+            photo_num:2, 
+            photo_url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg', //相册封面
+        },
+        {
+            uuid:324333546,
+            photo_id:1, //相册序号
+            photo_name:'新增相册1',
+            detail:'新增描述新增描述',
+            photo_num:0,
+            photo_url:'http://123.57.149.51/upload/upload_img/20230518/2b1e874f9b5d6aaba56c322aeeeb7dfa.jpg',
+        },
+    ],
+    msg:'success'
+}
+```
+
+##### 上传照片（选择相册上传照片）
+#### api/v1/publish/photos `POST`
+* request body
+```json
+{
+    uuid:'2132323423',
+    photo_id:0,
+    uploader:'小王',
+    uploader_avatar:'',
+    uploade_time:'2012-11-23 23:33',
+    photo_list:[
+        {
+            image:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+        }
+    ]
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:[
+        {
+            uuid:'2132323423',
             photo_id:0,
-            photo_name:'午休情况',
-            photo_num:2,
-            photo_url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+            uploader:'张老师',
+            uploader_avatar:'',
+            uploade_time:'2012-10-23 20:44',
+            photo_list:[
+                {
+                    image:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+                }
+            ]
+        },
+        {
+            uuid:'2132323423',
+            photo_id:0,
+            uploader:'小王',
+            uploader_avatar:'',
+            uploade_time:'2012-11-23 23:33',
+            photo_list:[
+                {
+                    image:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+                }
+            ]
         }
     ],
     msg:'success'
 }
 ```
+
+### 校园食谱页面
+##### 校园食谱列表
+#### api/v1/cook/list `GET`
+* request body
+```json
+{
+
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:[
+        {
+          uuid:'3446557657686868',
+          date:'2023-5-29', //本周周一至周五日期
+          recipe:{
+            vegetable:[
+            {
+              title:'西红柿炒鸡蛋'
+            },
+            {
+              title:'土豆丝'
+            },
+            {
+              title:'红烧豆腐'
+            },
+            {
+              title:'红烧茄子'
+            },
+            {
+              title:'炖白菜'
+            },
+            ],
+            meat:[
+            {
+              title:'红烧肉'
+            },
+            {
+              title:'宫保鸡丁'
+            },
+            {
+              title:'红萝卜炒牛肉'
+            },
+            {
+              title:'烂肉莲白粉丝'
+            },
+            {
+              title:'棒骨萝卜汤'
+            },
+            {
+              title:'鲜肉炒蒜苔'
+            },
+            {
+              title:'鲜肉炒西兰花'
+            },
+            {
+              title:'黄瓜圆子汤'
+            },
+          ]
+        }
+      }
+    ]
+}
+```
+
 ### 通讯录页面
 ##### 教师人员列表
 #### api/v1/address/teacher/list `GET`

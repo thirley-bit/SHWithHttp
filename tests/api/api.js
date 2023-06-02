@@ -1196,15 +1196,17 @@ export default {
     data:[
       {
         uuid:'324333546',
-        photo_id:0,
-        photo_name:'午休情况',
+        photo_id:0, //相册序号
+        photo_name:'午休情况', //相册名称
+        detail:'午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况',//相册描述
         photo_num:2,
-        photo_url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+        photo_url:'http://123.57.149.51/upload/upload_img/20230518/2b1e874f9b5d6aaba56c322aeeeb7dfa.jpg',
       },
       {
         uuid:'324333546',
         photo_id:1,
         photo_name:'餐食情况',
+        detail:'午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况',//相册描述
         photo_num:2,
         photo_url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
       },
@@ -1213,7 +1215,7 @@ export default {
         photo_id:2,
         photo_name:'活动情况',
         photo_num:2,
-        photo_url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+        photo_url:'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
       },
       {
         uuid:'324333546',
@@ -1227,7 +1229,194 @@ export default {
         photo_id:4,
         photo_name:'其他情况',
         photo_num:5,
-        photo_url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+        photo_url:'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+      },
+    ],
+    msg:'success'
+  },
+  "photos/detail":{
+      code:1,
+      data:[
+          {
+              uuid:'324333546',
+              photo_id:0, //相册序号
+              uploader:'张老师', //照片上传者
+              uploader_avatar:'http://123.57.149.51/upload/upload_img/20230510/1d4b6d8097826b0c33576e68e88f84f5.png',
+              upload_time:'2023-12-22 12:45', //照片上传时间
+              photo_list:[
+                  {
+                      uuid:'343544545',
+                      url_id:0,
+                      image:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+                  },
+                  {
+                    uuid:'343544545',
+                    url_id:1,
+                    image:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+                },{
+                  uuid:'343544545',
+                  url_id:0,
+                  image:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+              },
+              {
+                uuid:'343544545',
+                url_id:1,
+                image:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+            },{
+              uuid:'343544545',
+              url_id:0,
+              image:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+          },
+          {
+            uuid:'343544545',
+            url_id:1,
+            image:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+        },{
+          uuid:'343544545',
+          url_id:0,
+          image:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+      },
+      {
+        uuid:'343544545',
+        url_id:1,
+        image:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+    },
+              ] //照片列表
+          },
+          {
+            uuid:'324333546',
+            photo_id:0, //相册序号
+            uploader:'张三家长', //照片上传者
+            uploader_avatar:'http://123.57.149.51/upload/upload_img/20230510/1d4b6d8097826b0c33576e68e88f84f5.png',
+            upload_time:'2023-09-22 13:59', //照片上传时间
+            photo_list:[
+                {
+                    uuid:'343544545',
+                    url_id:0,
+                    image:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+                },
+                {
+                  uuid:'343544545',
+                  url_id:1,
+                  image:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+              },{
+                uuid:'343544545',
+                url_id:0,
+                image:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+            },
+            {
+              uuid:'343544545',
+              url_id:1,
+              image:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+          },{
+            uuid:'343544545',
+            url_id:0,
+            image:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+        },
+        {
+          uuid:'343544545',
+          url_id:1,
+          image:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+      },
+            ] //照片列表
+        },
+          ],
+      msg:'success'
+  },
+  "new/photos":{}, //新建相册
+  "publish/photos":{}, //上传照片
+
+  //校园食谱
+  "cook/list":{
+    code:1,
+    data:[
+      {
+        uuid:'3446557657686868',
+        date:'2023-5-29', //本周周一至周五日期
+        week_day:'星期一',
+        recipe:{
+          vegetable:[
+            {
+              title:'西红柿炒鸡蛋'
+            },
+            {
+              title:'土豆丝'
+            },
+            {
+              title:'红烧豆腐'
+            },
+            {
+              title:'红烧茄子'
+            },
+            {
+              title:'炖白菜'
+            },
+          ],
+          meat:[
+            {
+              title:'红烧肉'
+            },
+            {
+              title:'宫保鸡丁'
+            },
+            {
+              title:'红萝卜炒牛肉'
+            },
+            {
+              title:'烂肉莲白粉丝'
+            },
+            {
+              title:'棒骨萝卜汤'
+            },
+            {
+              title:'鲜肉炒蒜苔'
+            },
+            {
+              title:'鲜肉炒西兰花'
+            },
+            {
+              title:'黄瓜圆子汤'
+            },
+          ]
+        }
+      },
+      {
+        uuid:'3446557657686868',
+        date:'2023-5-30', 
+        week_day:'星期三',
+        recipe:{
+          vegetable:[
+            {
+              title:'土豆丝'
+            },
+          ],
+          meat:[
+            {
+              title:'烂肉莲白粉丝'
+            },
+            {
+              title:'棒骨萝卜汤'
+            },
+          ]
+        }
+      },
+      {
+        uuid:'3446557657686868',
+        date:'2023-5-31', 
+        week_day:'星期二',
+        recipe:{
+          vegetable:[
+            {
+              title:'西红柿炒鸡蛋'
+            },
+            
+          ],
+          meat:[
+            {
+              title:'红烧肉'
+            },
+          ]
+        }
       },
     ],
     msg:'success'

@@ -19,7 +19,7 @@ export default defineAppConfig({
     'pages/class/Photos/NewPhotos/NewPhotos', //新建相册
     'pages/class/Photos/PhotosDetail/PhotosDetail', //相册详情
     'pages/class/Photos/PublishPhotos/PublishPhotos', //上传照片
-    'pages/class/cookBook/cookBook', //主页——校园食谱
+    'pages/class/CookBook/CookBook', //主页——校园食谱
 
 
     //成长档案
@@ -40,6 +40,7 @@ export default defineAppConfig({
     'pages/component/article/article',  //文章详情
     'pages/component/detail/detail', //通知或作业详情
     'pages/component/publish/publish', //发布页面
+    'pages/component/CardList/CardList', //卡片列表页面
   ],
   'permission':{
     'scope.userLocation':{
