@@ -18,10 +18,10 @@ function PhotosDetail(props) {
     <View className='main'>
       <View className='top'>
         <View className='image'>
-          <Image mode='aspectFill' className='img' src={photoCover.photo_url} />
+          <Image mode='aspectFill' className='img' src={photoCover.url} />
         </View>
         <View className='text'>
-          <Text>{photoCover.photo_name}</Text>
+          <Text>{photoCover.name}</Text>
         </View>
       </View>
       <View className='list'>

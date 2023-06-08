@@ -8,7 +8,7 @@ import "./PublishPhotos.scss";
 function PublishPhotos() {
   const [state, setState] = useState({});
   const handleChoose = () => {
-    Taro.navigateTo({ url: "/pages/component/CardList/CardList" });
+    Taro.navigateTo({ url: "/pages/class/Photos/ChoosePhotosAlbum/ChoosePhotosAlbum" });
   };
   const handleChange = (files) => {
     console.log(files);

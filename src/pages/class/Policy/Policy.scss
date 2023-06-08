@@ -1,11 +1,11 @@
 .card{
-    background-color: #fff;
-    // padding: 3% 0;
+    padding: 3% 0;
     .card-item{
+        position: relative;
         border: none;
         border-bottom: 1PX #d6e4ef solid;
-        .at-row--wrap{
-            position: relative;
+        .at-card__header{
+            display: none;
         }
         .card-content{
             display: inline-block;
@@ -14,33 +14,22 @@
             display: -webkit-box;
             -webkit-box-orient:vertical;
             -webkit-line-clamp: 2;
-            margin-top: 4%;
-            color: #999;
-        }
-        .card-num{
-            position: absolute;
-            bottom: 0;
-            color: #999;
         }
         .card-time{
-            margin-top: 38rpx;
+            position: absolute;
+            bottom: 34rpx;
             color: #999;
             font-size: 24rpx;
         }
         .card-img{
             display: inline-block;
-            width: 150rpx;
-            height: 150rpx;
+            padding: 0 30%;
             .img{
                 display: inline-block;
                 width: 150rpx;
                 height: 150rpx;
                 border-radius: 10rpx;
             }
-        }
-        .img1{
-            margin-top:  15rpx;
-            margin-left:  15rpx;
         }
     }
 }

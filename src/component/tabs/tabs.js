@@ -25,7 +25,7 @@ function Tabs(props) {
                     <Navigator
                       url={`${tab.url}?user=${user}`}
                     >
-                        {tab.title}
+                       {tab.title}
                     </Navigator>
                     <View className='underline'></View>
                 </View>

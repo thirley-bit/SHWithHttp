@@ -1,12 +1,10 @@
 import { View } from "@tarojs/components";
 import { useEffect, useState } from "react";
 import { AtTabs, AtTabsPane, AtTabBar } from "taro-ui";
-import "./CookBook.scss";
 import { connect } from "react-redux";
-
+import "./CookBook.scss";
 //校园食谱页面
 function CookBook(props) {
-  console.log(props);
   const { dispatch, cookArr } = props;
   const [tabCurrent, setTabCurrent] = useState(0);
   const [tabBarCurrent, setTabBarCurrent] = useState(0);
@@ -42,7 +40,6 @@ function CookBook(props) {
           onClick={handleTabClick}
         >
           {cookArr.map((item, index) => {
-            console.log(item);
             return (
               <AtTabsPane
                 key={index}
@@ -55,7 +52,6 @@ function CookBook(props) {
                     <View style='font-size:36rpx'>素菜</View>
                     <View className='food-list'>
                       {item.recipe.vegetable.map((it, i) => {
-                        console.log(it);
                         const title = it.title;
                         let className = "title";
                         if (title.length > 7) {
@@ -75,7 +71,6 @@ function CookBook(props) {
                     <View style='font-size:36rpx'>荤菜</View>
                     <View className='food-list'>
                       {item.recipe.meat.map((it, i) => {
-                        console.log(it);
                         const title = it.title;
                         let className = "title";
                         if (title.length > 7) {

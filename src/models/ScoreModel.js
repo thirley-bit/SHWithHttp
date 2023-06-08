@@ -64,6 +64,7 @@ const model = {
           payload: response.data,
         });
       }
+      return response
     },
     *getScoreDetailArr({payload},{call,put}){
       const response = yield call(getScoreDetail, payload);
@@ -73,6 +74,7 @@ const model = {
             payload:response.data
         })
       }
+      return response
     },
     *getScoreDetail({ payload }, { call, put }) {
       const response = yield call(getScoreDetail, payload);
@@ -84,6 +86,7 @@ const model = {
             )[0],
           })
       }
+      return response
     },
   },
 

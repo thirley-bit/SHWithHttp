@@ -44,7 +44,7 @@ function Work(props) {
     <View className='main'>
       <View className='content'>
         {/* 搜索功能仅存在于作用页面 */}
-        {enter == "homework" && (
+        {/* {enter == "homework" && (
           <View>
             <View className='date'>
               <Picker mode='date' onChange={onTimeChange}>
@@ -65,7 +65,7 @@ function Work(props) {
               </Picker>
             </View>
           </View>
-        )}
+        )} */}
         <View className='work'>
           {showData &&
             showData.map((item, index) => {

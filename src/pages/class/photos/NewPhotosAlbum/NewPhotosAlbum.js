@@ -2,10 +2,10 @@ import { View, Image, Input } from "@tarojs/components";
 import { useState } from "react";
 import Taro from '@tarojs/taro'
 import { AtDivider, AtButton, AtList, AtListItem, AtTextarea } from "taro-ui";
-import "./NewPhotos.scss"
+import "./NewPhotosAlbum.scss"
 
 //新建相册页面
-function NewPhotos(props) {
+function NewPhotosAlbum(props) {
   const { dispatch } = props;
   const [inputValue, setInputValue] = useState("");
   const [areaValue, setAreaValue] = useState("")
@@ -62,4 +62,4 @@ function NewPhotos(props) {
     </View>
   );
 }
-export default NewPhotos;
+export default NewPhotosAlbum;

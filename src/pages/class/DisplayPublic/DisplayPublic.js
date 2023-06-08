@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react";
-import { View, Picker } from "@tarojs/components";
-import { AtFab, AtIcon } from "taro-ui";
-import Work from "@app/component/Work/Work";
-import api from "@/api/api";
-import "./HomeWork.scss";
+import { useState, useEffect } from 'react'
+import { View, Picker} from '@tarojs/components'
+import Work from '@app/component/Work/Work';
+import api from '@/api/api';
+import "./DisplayPublic.scss"
 
-// 作业页面
-function HomeWork() {
+function DisplayPublic(){
   const [selector, setSelector] = useState([]); //科目选择项
   const [showWorkData, setShowWorkData] = useState([]); //作业列表
   const [time, setTime] = useState("");
@@ -62,4 +60,4 @@ function HomeWork() {
     </View>
   );
 }
-export default HomeWork;
+export default DisplayPublic

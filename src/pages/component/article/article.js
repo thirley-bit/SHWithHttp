@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { View, Image } from "@tarojs/components";
 import { useRouter } from '@tarojs/taro';
 import api from "@/api/api";
-import './article.scss'
+import './Article.scss'
 
 function ArticleDetail(props) {
   console.log(props);

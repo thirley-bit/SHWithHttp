@@ -25,19 +25,19 @@ const model = {
         id: 0,
         title: "作业",
         code: "homeWork",
-        url: "/pages/class/homeWork/homeWork",
+        url: "/pages/class/HomeWork/HomeWork",
       },
       {
         id: 1,
         title: "通知",
         code: "notice",
-        url: "/pages/class/notice/notice",
+        url: "/pages/class/Notice/Notice",
       },
       {
         id: 2,
         title: "安全确认",
         code: "sign",
-        url: "/pages/class/sign/sign"
+        url: "/pages/class/Sign/Sign"
       },
       {
         id: 3,
@@ -49,40 +49,40 @@ const model = {
         id: 4,
         title: "更多",
         code: "moreModules",
-        url: "/pages/class/moreModules/moreModules",
+        url: "/pages/class/MoreModules/MoreModules",
       }], //tab路由入口
     },
   
     effects: {
         *getIdentity({ payload }, {call,put}){
             const response = yield call(getIdentity,payload)
-            console.log(response)
             if(response.code == 1){
                 yield put({
                     type: 'changeIdentity',
                     payload:response.data
                 })
             }
+            return response
         },
         *getUser({ payload }, {call,put}){
           const response = yield call(getIdentity,payload)
-          console.log(response)
           if(response.code == 1){
               yield put({
                 type:'changeUser',
                 payload:response.data.user_code
               })
           }
+        return response
       },
         *getArticleList({ payload },{ call, put }){
             const response = yield call(getArticleList,payload)
-            console.log(response)
             if(response.code == 1){
                 yield put({
                     type:'changeArticleArr',
                     payload:response.data.slice(0,6)
                 })
             }
+            return response
         }
     },
   

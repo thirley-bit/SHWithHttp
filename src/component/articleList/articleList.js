@@ -1,6 +1,6 @@
 import { View, Image, Navigator } from "@tarojs/components";
 import { AtCard } from "taro-ui";
-import "./ArticleList.scss";
+import "./ArticleList.scss"
 
 function ArticleList(props) {
   const { articleList } = props;
@@ -8,11 +8,11 @@ function ArticleList(props) {
     console.log(111);
   };
   return (
-    <View className='tabs'>
+    <View className='main'>
       {articleList.map((item, index) => {
         return (
           <View key={index} className='card'>
-            <Navigator url='/pages/component/article/article'>
+            <Navigator url='/pages/component/Article/Article'>
               <AtCard
                 key={index}
                 className='card-item'

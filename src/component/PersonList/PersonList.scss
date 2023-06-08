@@ -7,6 +7,12 @@
         .at-card__header{
             display: none;
         }
+        .left{
+            float: left;
+        }
+        .at-atbadge{
+            float: left;
+        }
         
         .card-content{
             display: flex;
@@ -44,6 +50,7 @@
         }
         .card-right{
             flex: 1;
+            padding-top: 3%;
         }
     }
     .card-button{

@@ -369,7 +369,7 @@ function GroupChat() {
             <View>
               {/* modal框，是否保存为群聊 */}
               <AtModal
-                className='modal'
+                className='confirm-modal'
                 isOpened={isOpened}
                 cancelText='忽略'
                 confirmText='存为标签'
@@ -378,10 +378,10 @@ function GroupChat() {
                 onConfirm={handleConfirm}
                 content='存为标签，方便下次直接使用'
               />
-              <AtModal isOpened={isOpenedEdit} closeOnClickOverlay={false}>
+              <AtModal className='edit-modal' isOpened={isOpenedEdit} closeOnClickOverlay={false}>
                 <AtModalContent className='modal-edit'>
                   标签名字：
-                  <Input className='modal-input' onInput={handleInput} />
+                  <Input className='modal-input' maxlength={14} onInput={handleInput} />
                 </AtModalContent>
                 <AtModalAction>
                   <Button onClick={() => handleCloseEdit()}>取消</Button>
@@ -467,7 +467,7 @@ function GroupChat() {
           </AtButton>
         </AtTabsPane>
       </AtTabs>
-      {/* <Button type='primary' className='sendButton' onClick={() => handleSend()}>提交</Button> */}
+      {/* <Button type='primary' className='send-button' onClick={() => handleSend()}>提交</Button> */}
     </View>
   );
 }

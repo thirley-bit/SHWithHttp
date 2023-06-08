@@ -14,6 +14,7 @@ const model = {
                     payload:response.data
                 })
             }
+            return response
         }
     },
     reducers:{

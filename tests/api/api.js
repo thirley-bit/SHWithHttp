@@ -60,7 +60,7 @@ export default {
         type: 1, //接口请求时查找的范围 1:教育，2：安全，3：智慧
         type_id: "0",
         title:
-          "教育教育教育教育教育教育教育教育教育防溺水创意微视频⑨｜丹巴县城区小学校供热通风个体人格认同感认同感认同感沟通过",
+          "认同感认同感认同感沟通过",
         create_time: "2023-11-15  14:12:34",
         img_url:
           "http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg",
@@ -1190,6 +1190,202 @@ export default {
       msg: "success"
   },
 
+  
+  //资料下载
+  "source/list":{
+    code:1,
+    data:[
+      {
+        uuid:'3454465456756',
+        source_id:0, //资料序号
+        name:'SH.rar',
+        type:'rar',
+        loader:'张老师',
+        load_time:'2023-12-11  21:30',
+        url:'http://123.57.149.51/upload/upload_img/20230518/2b1e874f9b5d6aaba56c322aeeeb7dfa.jpg'
+      },
+      {
+        uuid:'3454465456756',
+        source_id:1, //资料序号
+        name:'数学学习笔记.package',
+        type:'package',
+        loader:'张老师',
+        load_time:'2023-12-11  21:30',
+        url:'http://123.57.149.51/upload/upload_img/20230518/2b1e874f9b5d6aaba56c322aeeeb7dfa.jpg'
+      },
+      {
+        uuid:'3454465456756',
+        source_id:2, //资料序号
+        name:'学习笔记.jpg',
+        type:'jpg',
+        loader:'张老师',
+        load_time:'2023-12-11  21:30',
+        url:'http://123.57.149.51/upload/upload_img/20230518/2b1e874f9b5d6aaba56c322aeeeb7dfa.jpg'
+      },
+      {
+        uuid:'3454465456756',
+        source_id:3, //资料序号
+        name:'学习笔记.mp4',
+        type:'mp4',
+        loader:'张老师',
+        load_time:'2023-12-11  21:30',
+        url:'http://123.57.149.51/upload/upload_img/20230518/2b1e874f9b5d6aaba56c322aeeeb7dfa.jpg'
+      },
+      
+    ]
+  },
+  "delete":{
+    code:1,
+    data:[],
+    msg:'success'
+  },
+
+  //参赛通道
+  "channel/list":{
+    code:1,
+    data:[
+      {
+        uuid:234235435,
+        channel_id:0, //参赛通道序号
+        name:'四六级报名官网', //参赛名称
+        url:'http://cet.neea.edu.cn/',  //参赛访问地址
+      },
+      {
+        uuid:234235435,
+        channel_id:1, //参赛通道序号
+        name:'全国青少年科技创新大赛', //参赛名称
+        url:'http://www.chinaaosai.com/about_us.php?id=44',  //参赛访问地址
+      },
+      {
+        uuid:234235435,
+        channel_id:2, //参赛通道序号
+        name:'全国小学生信息技术创新与实践大赛', //参赛名称
+        url:'http://www.chinaaosai.com/about_us.php?id=44',  //参赛访问地址
+      }
+    ],
+    msg:'success'
+  }, 
+
+  //优惠政策
+  "policy/list": {
+    code: 1,
+    count: 55,
+    size: 10,
+    current: 1,
+    data: [
+      {
+        uuid: "134554647687988765445398765",
+        policy_id:0,
+        title:
+          "中职高职优惠政策",
+        create_time: "2023-11-15  14:12:34",
+        img_url:
+          "http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg",
+      },
+      {
+        uuid: "134554647687988765445398765",
+        policy_id: 1, 
+        title:
+          "教育教育教育教育教育教育教育教育教育教育教育防溺水创意微视频⑨｜丹巴县城区小学校供热通风个体人格认同感认同感认同感沟通过",
+        create_time: "2023-11-15  14:12:34",
+        img_url:
+          "http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg",
+      },
+      {
+        uuid: "134554647687988765445398765",
+        policy_id: 2, 
+        title:
+          "安全安全安全安全安全安全安全安全防溺水创意微视频⑨｜丹巴县城区小学校供热通风个体人格认同感认同感认同感沟通过",
+        create_time: "2023-11-15  14:12:34",
+        img_url:
+          "http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg",
+      },
+      {
+        uuid: "134554647687988765445398765",
+        policy_id: 3,
+        title:
+          "安全安全安全安全安全防溺水创意微视频⑨｜丹巴县城区小学校供热通风个体人格认同感认同感认同感沟通过",
+        create_time: "2023-11-15  14:12:34",
+        img_url:
+          "http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg",
+      },
+      {
+        uuid: "134554647687988765445398765",
+        policy_id: 4,
+        title:
+          "智慧智慧智慧智慧智慧防溺水创意微视频⑨｜丹巴县城区小学校供热通风个体人格认同感认同感认同感沟通过",
+        create_time: "2023-11-15  14:12:34",
+        img_url:
+          "http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg",
+      },
+      {
+        uuid: "134554647687988765445398765",
+        policy_id: 5, 
+        title:
+          "智慧智慧智慧智慧智慧防溺水创意微视频⑨｜丹巴县城区小学校供热通风个体人格认同感认同感认同感沟通过",
+        create_time: "2023-11-15  14:12:34",
+        img_url:
+          "http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg",
+      },
+      {
+        uuid: "134554647687988765445398765",
+        policy_id: 6,
+        title:
+          "教育教育教育防溺水创意微视频⑨｜丹巴县城区小学校供热通风个体人格认同感认同感认同感沟通过",
+        create_time: "2023-11-15  14:12:34",
+        img_url:
+          "http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg",
+      },
+      {
+        uuid: "134554647687988765445398765",
+        policy_id:7,
+        title:
+          "安全安全安全防溺水创意微视频⑨｜丹巴县城区小学校供热通风个体人格认同感认同感认同感沟通过",
+        create_time: "2023-11-15  14:12:34",
+        img_url:
+          "http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg",
+      },
+      {
+        uuid: "134554647687988765445398765",
+        policy_id:8,
+        title:
+          "智慧智慧防溺水创意微视频⑨｜丹巴县城区小学校供热通风个体人格认同感认同感认同感沟通过",
+        create_time: "2023-11-15  14:12:34",
+        img_url:
+          "",
+      },
+      {
+        uuid: "134554647687988765445398765",
+        policy_id:9,
+        title:
+          "教育防溺水创意微视频⑨｜丹巴县城区小学校供热通风个体人格认同感认同感认同感沟通过",
+        create_time: "2023-11-15  14:12:34",
+        img_url:
+          "",
+      },
+      {
+        uuid: "134554647687988765445398765",
+        policy_id:10,
+        title:
+          "安全防溺水创意微视频⑨｜丹巴县城区小学校供热通风个体人格认同感认同感认同感沟通过",
+        create_time: "2023-11-15  14:12:34",
+        img_url:
+          "",
+      },
+      {
+        uuid: "134554647687988765445398765",
+        policy_id:11,
+        title:
+          "智慧防溺水创意微视频⑨｜丹巴县城区小学校供热通风个体人格认同感认同感认同感沟通过",
+        create_time: "2023-11-15  14:12:34",
+        img_url:
+          "",
+      },
+    ],
+    msg:"success"
+  },
+  
+
   //相册
   "photos/list":{
     code:1,
@@ -1197,39 +1393,39 @@ export default {
       {
         uuid:'324333546',
         photo_id:0, //相册序号
-        photo_name:'午休情况', //相册名称
+        name:'午休情况', //相册名称
         detail:'午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况',//相册描述
-        photo_num:2,
-        photo_url:'http://123.57.149.51/upload/upload_img/20230518/2b1e874f9b5d6aaba56c322aeeeb7dfa.jpg',
+        num:2,
+        url:'http://123.57.149.51/upload/upload_img/20230518/2b1e874f9b5d6aaba56c322aeeeb7dfa.jpg',
       },
       {
         uuid:'324333546',
         photo_id:1,
-        photo_name:'餐食情况',
+        name:'餐食情况',
         detail:'午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况午休情况',//相册描述
-        photo_num:2,
-        photo_url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+        num:2,
+        url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
       },
       {
         uuid:'324333546',
         photo_id:2,
-        photo_name:'活动情况',
-        photo_num:2,
-        photo_url:'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+        name:'活动情况',
+        num:2,
+        url:'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
       },
       {
         uuid:'324333546',
         photo_id:3,
-        photo_name:'课堂情况',
-        photo_num:2,
-        photo_url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
+        name:'课堂情况',
+        num:2,
+        url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg',
       },
       {
         uuid:'324333546',
         photo_id:4,
-        photo_name:'其他情况',
-        photo_num:5,
-        photo_url:'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+        name:'其他情况',
+        num:5,
+        url:'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
       },
     ],
     msg:'success'

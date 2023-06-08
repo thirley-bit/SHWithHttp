@@ -80,7 +80,7 @@
     }
 }
 
-.modal{
+.confirm-modal{
     .at-modal__content{
         height: 40rpx;
         text-align: center;
@@ -88,18 +88,24 @@
     }
     
 }
-.modal-edit{
-    min-height: 0;
+.edit-modal{
+    .modal-edit{
+        height: 10vh;
+        min-height: 0;
+        font-size: 32rpx;
+    }
+    .modal-input{
+        border: 1rpx  solid #d6e4ef;
+        margin: 4% 0 0 0;
+    }
 }
-.modal-input{
-    border: 1rpx  solid #d6e4ef;
-}
+
 
 .send-button{
     position: fixed;
     width: 97%;
-    margin: 10rpx;
-    bottom: 10rpx;
+    margin: 0 10rpx;
+    bottom: 0;
 }
 
 

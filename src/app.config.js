@@ -2,24 +2,29 @@ export default defineAppConfig({
   pages: [
     // 主页
     'pages/class/class', //主页
-    'pages/class/homeWork/homeWork', //主页——家庭作业
-    'pages/class/homeWork/workDetail/workDetail', //作业详情页面
-    'pages/class/notice/notice', //主页——通知页面
-    'pages/class/notice/noticeDetail/noticeDetail',  //通知详情页面
-    'pages/class/sign/sign', //主页——签到页面
+    'pages/class/HomeWork/HomeWork', //主页——家庭作业
+    'pages/class/HomeWork/WorkDetail/WorkDetail', //作业详情页面
+    'pages/class/Notice/Notice', //主页——通知页面
+    'pages/class/Notice/NoticeDetail/NoticeDetail',  //通知详情页面
+    'pages/class/Sign/Sign', //主页——签到页面
     // 'pages/class/message/history/history', //活动通知——历史记录页面
-    'pages/class/signInfo/signInfo', //主页——签到分类入口页面（区分家长和教师身份）
-    'pages/class/moreArticle/moreArticle', //主页——推荐更多
-    'pages/class/moreModules/moreModules', //主页——更多应用
+    // 'pages/class/signInfo/signInfo', //主页——签到分类入口页面（区分家长和教师身份）
+    'pages/class/MoreArticle/MoreArticle', //主页——推荐更多
+    'pages/class/MoreModules/MoreModules', //主页——更多应用
     'pages/class/Score/Score', //主页——成绩
     'pages/class/Score/PublishScore/PublishScore', //主页——成绩发布
     'pages/class/Score/ScoreTitle/ScoreTitle', //主页——成绩发布
     'pages/class/Score/ScoreDetail/ScoreDetail', //主页——成绩发布
+    'pages/class/DataDownLoad/DataDownLoad', //资料下载
+    'pages/class/ExamChannel/ExamChannel', //参赛通道
+    'pages/class/Policy/Policy', //优惠政策
     'pages/class/Photos/Photos', //主页——相册
-    'pages/class/Photos/NewPhotos/NewPhotos', //新建相册
+    'pages/class/Photos/NewPhotosAlbum/NewPhotosAlbum', //新建相册
     'pages/class/Photos/PhotosDetail/PhotosDetail', //相册详情
     'pages/class/Photos/PublishPhotos/PublishPhotos', //上传照片
+    'pages/class/Photos/ChoosePhotosAlbum/ChoosePhotosAlbum', //选择相册
     'pages/class/CookBook/CookBook', //主页——校园食谱
+    'pages/class/DisplayPublic/DisplayPublic', //展示墙
 
 
     //成长档案
@@ -37,10 +42,9 @@ export default defineAppConfig({
     'pages/my/my', // 我的
 
     //公共页面
-    'pages/component/article/article',  //文章详情
+    'pages/component/Article/Article',  //文章详情
     'pages/component/detail/detail', //通知或作业详情
     'pages/component/publish/publish', //发布页面
-    'pages/component/CardList/CardList', //卡片列表页面
   ],
   'permission':{
     'scope.userLocation':{

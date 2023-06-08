@@ -13,8 +13,8 @@ const model = {
             console.log(response)
             if(response.code == 1){
                 let data = response.data.map(item => {
-                    let image = item.photo_url
-                    let value = item.photo_name
+                    let image = item.url
+                    let value = item.name
                     return {
                         ...item,
                         image,
@@ -26,6 +26,7 @@ const model = {
                     payload:data
                 })
             }
+            return response
         },
         *getPhotoCover({ payload },{ call, put }){
             const response = yield call(getPhotosList, payload)
@@ -35,6 +36,7 @@ const model = {
                     payload:response.data.filter(item => item.photo_id == payload)[0]
                 })
             }
+            return response
         },
         *getPhotoDetail({ payload },{ call, put }){
             const response = yield call(getPhotoDetail, payload)
@@ -44,6 +46,7 @@ const model = {
                     payload:response.data
                 })
             }
+            return response
         }
     },
     reducers:{

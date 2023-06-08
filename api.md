@@ -161,10 +161,45 @@
 ```
 
 ### 作业
-##### 作业—科目选择下拉框
-#### api/v1/subject/select `GET`
+##### 作业—时间选择下拉框
+#### api/v1/subject/title/select `GET`
 * request body
 ```json
+{
+    time:'', //时间选择范围  
+}
+```
+* response body
+```json
+{
+    code: 1,
+    //data为数组
+    data: [
+        {
+            uuid:134554647687988765445398765,
+            subject_id:0, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            subject_name:'语文', //0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            work_id:0, //作业列表序号
+            checked:0, //是否查看状态 0：未查看，1：已查看
+            hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+            hasCompleted:0, //是否完成作业（家长端）
+            title:【语文】 2023.04.25 （周二）语文练习,
+            author:张老师,
+            content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
+            time:2023-12-12 14:34,
+            avatar:'',
+        },
+    ], 
+    msg: "success"
+}
+```
+##### 作业—科目选择下拉框
+#### api/v1/subject/title/select `GET`
+* request body
+```json
+{
+    subject_id:'', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+}
 
 ```
 
@@ -177,7 +212,16 @@
         {
             uuid:134554647687988765445398765,
             subject_id:'', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
-            subject_title:语文  //科目选择范围 语文，数学，英语，物理，化学，生物
+            subject_name:'语文', //0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            work_id:0, //作业列表序号
+            checked:0, //是否查看状态 0：未查看，1：已查看
+            hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+            hasCompleted:0, //是否完成作业（家长端）
+            title:【语文】 2023.04.25 （周二）语文练习,
+            author:张老师,
+            content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
+            time:2023-12-12 14:34,
+            avatar:'',
         },
     ], 
     msg: "success"
@@ -203,7 +247,8 @@
     data: [
         {
             uuid:134554647687988765445398765,
-            subject_id:'', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            subject_id:0, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            subject_name:'语文', //0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
             work_id:0, //作业列表序号
             checked:0, //是否查看状态 0：未查看，1：已查看
             hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
@@ -951,6 +996,234 @@
 }
 ```
 
+### 资料下载
+##### 资料下载列表
+#### api/v1/source/list `GET`
+* request body
+```json
+{
+
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:[
+      {
+        uuid:'3454465456756', 
+        source_id:0, //资料序号
+        name:'SH', //上传的资料名称
+        type:'.rar', //上传类型
+        loader:'张老师',  //上传者
+        load_time:'2023_12_11 : 21:30', //上传时间
+        url:'http://123.57.149.51/upload/upload_img/20230518/2b1e874f9b5d6aaba56c322aeeeb7dfa.jpg'
+      }
+    ],
+    msg:'success'
+}
+```
+##### 下载接口(不确定，尚不明确需要什么数据)
+#### api/v1/source/download `POST`
+* request body
+```json
+{
+    source_id:0,
+    url:'http://123.57.149.51/upload/upload_img/20230518/2b1e874f9b5d6aaba56c322aeeeb7dfa.jpg'
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:[],
+    msg:'success'
+}
+```
+##### 删除资料接口
+#### api/v1/source/delete `POST`
+* request body
+```json
+{
+    source_id:0,
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:[],
+    msg:'success'
+}
+```
+##### 新建文件夹
+#### api/v1/source/new/package `POST`
+* request body
+```json
+{
+    name:'新建文件夹',
+    type:'package',
+    loader:'张老师',
+    load_time: '2012-12-23 22:23',
+    url:''
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:[
+        {
+            uuid:232423, 
+            source_id:2,  //资料序号，自增
+            name:'新建文件夹',
+            type:'package',
+            loader:'张老师',
+            load_time: '2012-12-23 22:23',
+            url:''
+        }
+    ],
+    msg:'success'
+}
+```
+##### 上传文件（图片、视频、文件）
+#### api/v1/source/upload `POST`
+* request body
+```json
+{
+    name:'新上传的文件、视频、图片',
+    type:'jpg' //上传的格式 jpg|mp4|rar|doc|xls 等，
+    loader:'张老师',
+    load_time:'2012-12-23 22:23',
+    url:''
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:[
+        {
+            uuid:232423, 
+            source_id:4,  //资料序号，自增
+            name:'新建文件夹',
+            type:'package',
+            loader:'张老师',
+            load_time: '2012-12-23 22:23',
+            url:''
+        }
+    ],
+    msg:'success'
+}
+```
+
+### 参赛通道
+##### 参赛通道列表
+#### api/v1/channel/list `GET`
+* request body
+```json
+{
+
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:[
+        {
+            uuid:234235435,
+            channel_id:0, //参赛通道序号
+            name:'四六级报名官网', //参赛名称
+            url:'http://cet.neea.edu.cn/',  //参赛访问地址
+        }
+    ],
+    msg:'success'
+}
+```
+##### 上传参赛信息
+#### api/v1/channel/upload `GET`
+* request body
+```json
+{
+    name:'四六级报名官网', //参赛名称
+    url:'http://cet.neea.edu.cn/',  //参赛访问地址
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:[
+        {
+            uuid:234235435,
+            channel_id:1, //参赛通道序号
+            name:'四六级报名官网', //参赛名称
+            url:'http://cet.neea.edu.cn/',  //参赛访问地址
+        }
+    ],
+    msg:'success'
+}
+```
+### 优惠政策
+##### 优惠政策列表
+#### api/v1/policy/list `GET`
+* request body
+```json
+{
+    
+}
+```
+
+* response body
+```json
+{
+    code: 1,
+    count:55,
+    size:10,
+    current:1,
+    //data为数组
+    data: [
+        {
+            uuid:134554647687988765445398765,
+            policy_id:0,
+            title:防溺水创意微视频⑨｜丹巴县城区小学校,
+            create_time:2023-11-15  14:12:34,
+            img_url:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
+        },
+    ], 
+    msg: "success"
+}
+```
+
+##### 优惠政策详情
+#### api/v1/policy/detail `GET`
+* request body
+```json
+{
+    policy_id:0,
+    token:fdgdgvfrtgtgfdgf
+}
+```
+
+* response body
+```json
+{
+    code: 1,
+    //data为对象
+    data: {
+            uuid:134554647687988765445398765,
+            policy_id:0
+            author:张老师,
+            title:防溺水创意微视频⑨｜丹巴县城区小学校,
+            detail_content:"<p>正文内容</p>"   //HTML代码，完整页面内容
+            create_time:2023-11-15  14:12:34,
+            img_url:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
+        }
+    msg: "success"
+}
+```
+
 ### 相册
 ##### 相册列表(相册列表页面)
 #### api/v1/photos/list `GET`
@@ -968,9 +1241,9 @@
         {
             uuid:324333546,
             photo_id:0, //相册序号
-            photo_name:'午休情况', //相册名称
-            photo_num:2, 
-            photo_url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg', //相册封面
+            name:'午休情况', //相册名称
+            num:2, 
+            url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg', //相册封面
         },
     ],
     msg:'success'
@@ -1013,10 +1286,10 @@
 * request body
 ```json
 {
-    photo_name:'新增相册1',
+    name:'新增相册1',
     detail:'新增描述新增描述',
-    photo_num:0,
-    photo_url:'http://123.57.149.51/upload/upload_img/20230518/2b1e874f9b5d6aaba56c322aeeeb7dfa.jpg',
+    num:0,
+    url:'http://123.57.149.51/upload/upload_img/20230518/2b1e874f9b5d6aaba56c322aeeeb7dfa.jpg',
 }
 ```
 * response body
@@ -1027,17 +1300,17 @@
             {
             uuid:324333546,
             photo_id:0, //相册序号
-            photo_name:'午休情况', //相册名称
-            photo_num:2, 
-            photo_url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg', //相册封面
+            name:'午休情况', //相册名称
+            num:2, 
+            url:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg', //相册封面
         },
         {
             uuid:324333546,
             photo_id:1, //相册序号
-            photo_name:'新增相册1',
+            name:'新增相册1',
             detail:'新增描述新增描述',
-            photo_num:0,
-            photo_url:'http://123.57.149.51/upload/upload_img/20230518/2b1e874f9b5d6aaba56c322aeeeb7dfa.jpg',
+            num:0,
+            url:'http://123.57.149.51/upload/upload_img/20230518/2b1e874f9b5d6aaba56c322aeeeb7dfa.jpg',
         },
     ],
     msg:'success'
@@ -1159,6 +1432,74 @@
         }
       }
     ]
+}
+```
+
+### 展示墙
+##### 展示墙—时间选择下拉框
+#### api/v1/subject/title/select `GET`
+* request body
+```json
+{
+    time:'', //时间选择范围  
+}
+```
+* response body
+```json
+{
+    code: 1,
+    //data为数组
+    data: [
+        {
+            uuid:134554647687988765445398765,
+            subject_id:0, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            subject_name:'语文', //0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            work_id:0, //作业列表序号
+            checked:0, //是否查看状态 0：未查看，1：已查看
+            hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+            hasCompleted:0, //是否完成作业（家长端）
+            title:【语文】 2023.04.25 （周二）语文练习,
+            author:张老师,
+            content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
+            time:2023-12-12 14:34,
+            avatar:'',
+        },
+    ], 
+    msg: "success"
+}
+```
+##### 展示墙—类型选择下拉框
+#### api/v1/subject/title/select `GET`
+* request body
+```json
+{
+    subject_id:'', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+}
+
+```
+
+* response body
+```json
+{
+    code: 1,
+    //data为数组
+    data: [
+        {
+            uuid:134554647687988765445398765,
+            subject_id:'', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            subject_name:'语文', //0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            work_id:0, //作业列表序号
+            checked:0, //是否查看状态 0：未查看，1：已查看
+            hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+            hasCompleted:0, //是否完成作业（家长端）
+            title:【语文】 2023.04.25 （周二）语文练习,
+            author:张老师,
+            content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
+            time:2023-12-12 14:34,
+            avatar:'',
+        },
+    ], 
+    msg: "success"
 }
 ```
 

@@ -63,10 +63,9 @@ function PersonList(props) {
               >
                 {/* 点击页面跳转至聊天界面 */}
                 <View className='nav' onClick={enter == "message" && handleNav}>
-                  <View className='card-content clearfix'>
-                    <View className='card-left'>
-                      {/* 头像部分是否有新消息 */}
-                      {item.new == 1 ? (
+                  {/* 头像部分是否有新消息 */}
+                  <View className='left'>
+                  {item.new == 1 ? (
                         // 如果有新消息，则加徽标
                         <AtBadge dot>
                           <AtAvatar
@@ -76,7 +75,7 @@ function PersonList(props) {
                           />
                         </AtBadge>
                       ) : (
-                        <View>
+                        <View className='left'>
                           <AtAvatar
                             className='img'
                             size='small'
@@ -84,6 +83,11 @@ function PersonList(props) {
                           />
                         </View>
                       )}
+                  </View>
+                  
+                  <View className='card-content clearfix'>
+                    <View className='card-left'>
+                      
                     </View>
                     {/* 老师列表展示的老师名称及其他信息 */}
                     <View className='card-center'>

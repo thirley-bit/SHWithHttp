@@ -55,7 +55,7 @@ function Index(props) {
       <Tabs user={identity} tabList={tabList} onClick={tabClick} current={tabsCur}></Tabs>
       <View className='more'>
         <AtList>
-          <Navigator url='/pages/class/moreArticle/moreArticle'>
+          <Navigator url='/pages/class/MoreArticle/MoreArticle'>
             <AtListItem
               title='推荐'
               extraText='更多'

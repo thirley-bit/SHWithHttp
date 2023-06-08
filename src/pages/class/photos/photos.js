@@ -8,17 +8,16 @@ import "./Photos.scss";
 //相册页面
 function Photos(props) {
   const { dispatch, user, photosArr, photoDetail } = props
-  console.log(props)
   useEffect(() => {
-    dispatch({
-      type:'Photos/getPhotosList'
-    })
     dispatch({
       type:'users/getUser'
     })
+    dispatch({
+      type:'Photos/getPhotosList'
+    })    
   },[])
   const handleCreate = () => {
-    Taro.navigateTo({url:'/pages/class/Photos/NewPhotos/NewPhotos'})
+    Taro.navigateTo({url:'/pages/class/Photos/NewPhotosAlbum/NewPhotosAlbum'})
   }
   const handleClick = (item) => {
     console.log(item)
