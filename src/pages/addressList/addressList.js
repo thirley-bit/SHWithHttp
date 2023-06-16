@@ -16,7 +16,7 @@ function AddressList() {
     {
       title: '添加家人',
       image: 'https://img12.360buyimg.com/jdphoto/s72x72_jfs/t6160/14/2008729947/2754/7d512a86/595c3aeeNa89ddf71.png',
-      url:'/pages/addressList/addFamily/addFamily'
+      url:'/pages/addressList/AddFamily/AddFamily'
     },
     {
       title: '群聊',
@@ -32,7 +32,7 @@ function AddressList() {
     {
       title: '审核',
       iconType:'user',
-      url:'/pages/addressList/check/check'
+      url:'/pages/component/JoinedClass/JoinedClass'
     },
   ]
 

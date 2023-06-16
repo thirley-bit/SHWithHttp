@@ -1,0 +1,67 @@
+.join-card {
+  margin: 2% 0;
+  .item-active{
+    border: 1px #569dff solid;
+  }
+  .at-card {
+    position: relative;
+    .at-card__header {
+      display: none;
+    }
+    .at-card__content{
+        padding: 0;
+    }
+    .top{
+        padding: 3% ;
+    }
+    .left {
+      float: left;
+    }
+
+    .card-content {
+      display: inline-block;
+    }
+    .clearfix:after {
+      content: "";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden;
+    }
+
+    .card-center {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      margin-left: 20%;
+      .card-name {
+        display: inline-block;
+        font-size: 30rpx;
+        font-weight: 500;
+      }
+      .card-msg {
+        margin-top: 6rpx;
+        color: #999;
+        font-size: 24rpx;
+      }
+    }
+    .right{
+        float: right;
+        padding-top: 4%;
+        color: #569dff;
+        font-size: 24rpx;
+        opacity: 0.7;
+        .right-button{
+          display: inline-block;
+          .refuse{
+            float: left;
+          }
+        }
+    }
+    .bottom{
+        padding: 1% 0;
+        border-top: 1px #e0e0e0 solid;
+        text-align: center;
+    }
+  }
+}

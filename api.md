@@ -2,7 +2,7 @@
 ## api/list 
 ### 注册|登录 
 #### 注册
-#### register/list `POST`
+#### api/v1/register `POST`
 * request body
 ```json
 {
@@ -10,9 +10,12 @@
     pwd:qwertyui,
     class_code:47687867324325344,
     class_name:一年级一班,
-    user_code:0,  // 登录身份 0：家长，1：教师
-    student_name:张三,
-    relative:爸爸|妈妈|爷爷|奶奶|外公|外婆,  //亲属关系
+    user:0,  // 登录身份 0：家长，1：教师
+    teacher:'张老师', //(仅教师端返回teacher字段)
+    student_id:'20230204', //（仅家长端返回）
+    student_name:张三, //（仅家长端返回）
+    nick_name:"家长01234"|"张风毅", //（家长端返回家长01234|老师端返回"张风毅"）
+    relative:爸爸|妈妈|爷爷|奶奶|外公|外婆,  //亲属关系（仅家长端返回）
     avatar:"http://123.57.149.51/upload/upload_img/20230510/1d4b6d8097826b0c33576e68e88f84f5.png",
     token:fdgdgvfrtgtgfdgf
 }
@@ -23,53 +26,412 @@
     code: 1,
     //data为对象
     data: {
-            uuid:45344534345,
-            user_id:001,
-            phone:11122233345,
-            pwd:qwertyui,
-            class_code:47687867324325344,
-            class_name:一年级一班,
-            user_code:0,  //登录身份 0：家长，1：教师
-            student_id:0, //学生序号
-            student_name:张三,
-            relative:爸爸, //亲属关系  妈妈，爷爷，奶奶，外公，外婆
-            avatar:"http://123.57.149.51/upload/upload_img/20230510/1d4b6d8097826b0c33576e68e88f84f5.png",
-            token:fdgdgvfrtgtgfdgf
+            uuid: "45344534345",
+            parent_id: 0,
+            phone: "11122233345",
+            pwd: "qwertyui",
+            class_code: "47687867324325344",
+            class_name: "一年级一班",
+            user: 0, //登录身份 0：家长，1：教师
+            student_id:'20230204', //学生序号
+            student_name: "张三",
+            nick_name:"家长01323", //家人昵称
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            token: "fdgdgvfrtgtgfdgf",
         }
     msg: "success"
 }
 ```
 #### 登录
-#### login/list `POST`
+#### api/v1/login `POST`
 * request body
 ```json
 {
-    username:11122233345,
+    phone:11122233345,
     pwd:qwertyui,
     token:fdgdgvfrtgtgfdgf
 }
 ```
-
 * response body
 ```json
 {
     code: 1,
     //data为对象
     data: {
-            uuid:45344534345,
-            user_id:001
-            username:11122233345,
-            pwd:qwertyui,
-            class_code:47687867324325344,
-            class_name:一年级一班,
-            user_code:parent|teacher,
-            user_name:家长|老师
-            student_name:张三,
-            relative:爸爸|妈妈|爷爷|奶奶|外公|外婆,
-            avatar:"http://123.57.149.51/upload/upload_img/20230510/1d4b6d8097826b0c33576e68e88f84f5.png",
-            token:fdgdgvfrtgtgfdgf
+            uuid: "45344534345",
+            parent_id: 0,
+            phone: "11122233345",
+            pwd: "qwertyui",
+            class_code: "47687867324325344",
+            class_name: "一年级一班",
+            user: 0, //登录身份 0：家长，1：教师
+            student_id:'20230204', //学生序号
+            student_name: "张三",
+            nick_name:"家长01323", //家人昵称
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            token: "fdgdgvfrtgtgfdgf",
         }
     msg: "success"
+}
+```
+####  身份切换列表——已加入pass为1(家长端)
+#### api/v1/parent/user/pass/list `POST`
+* request body
+```json
+{
+    pass:1,//是否加入班级  0：待审核，1：通过，2：未通过，3：撤销
+}
+```
+* response body
+```json
+{
+    code: 1,
+    //data为数组
+    data: [
+        {
+            uuid: "45344534345",
+            parent_id: 0,
+            phone: "11122233345",
+            pwd: "qwertyui",
+            class_code: "47687867324325344",
+            class_name: "一年级一班",
+            user: 0, //登录身份 0：家长，1：教师
+            student_id:'20230204', //学生序号
+            student_name: "张三",
+            nick_name:"家长01323", //家人昵称
+            pass:1, //是否加入班级  0：待审核，1：通过，2：未通过，3：撤销
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            token: "fdgdgvfrtgtgfdgf",
+        },
+        {
+            uuid: "45344534345",
+            parent_id: 0,
+            phone: "11122233345",
+            pwd: "qwertyui",
+            class_code: "47687867324325344",
+            class_name: "一年级一班",
+            user: 0, //登录身份 0：家长，1：教师
+            student_id:'20230214', //学生序号
+            student_name: "李四",
+            nick_name:"家长01323", //家人昵称
+            pass:1,
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            token: "fdgdgvfrtgtgfdgf",
+        },
+        ]
+    msg: "success"
+}
+```
+####  身份切换列表——待审核pass为0,2(家长端)
+#### api/v1/parent/user/checked/list `POST`
+* request body
+```json
+{
+    pass:-1、0, //是否加入班级  0：待审核，1：通过，2：未通过，3：撤销
+}
+```
+* response body
+```json
+{
+    code: 1,
+    //data为数组
+    data: [
+        {
+            uuid: "45344534345",
+            parent_id: 0,
+            user: 0, //登录身份 0：家长，1：教师
+            student_id:'20230204', //学生序号
+            student_name: "张三",
+            nick_name:"家长01323", //家人昵称
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            pass:0,  //是否加入班级  0：待审核，1：通过，2：未通过，3：撤销
+            token: "fdgdgvfrtgtgfdgf",
+        },
+        {
+            uuid: "45344534345",
+            parent_id: 0,
+            user: 0, //登录身份 0：家长，1：教师
+            student_id:'20230214', //学生序号
+            student_name: "李四",
+            nick_name:"家长01323", //家人昵称
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            pass:2, //是否加入班级  0：待审核，1：通过，2：未通过，3：撤销
+            reason:'资料不齐全', //不通过原因
+            token: "fdgdgvfrtgtgfdgf",
+        },
+        ],
+    msg: "success"
+}
+```
+#### 身份切换（家长端）
+#### api/v1/change/user `POST`
+* request body
+```json
+{
+    student_id:'20230204', //学生序号,
+}
+```
+* response body
+```json
+{
+    code: 1,
+    //data为对象
+    data: {
+            uuid: "45344534345",
+            parent_id: 0,
+            phone: "11122233345",
+            pwd: "qwertyui",
+            class_code: "47687867324325344",
+            class_name: "一年级一班",
+            user: 0, //登录身份 0：家长，1：教师
+            student_id:'20230204', //学生序号
+            student_name: "李四",
+            nick_name:"家长01323", //家人昵称
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            pass:1,
+            token: "fdgdgvfrtgtgfdgf",
+        }
+    msg: "success"
+}
+```
+#### 身份切换列表——待审核（家长端）
+#### api/v1/parent/user/checked/list `GET`
+* request body
+```json
+{
+    
+}
+```
+* response body
+```json
+{
+    code: 1,
+    //data为数组
+    data: [
+        {
+            uuid: "45344534345",
+            parent_id: 0,
+            phone: "11122233345",
+            pwd: "qwertyui",
+            class_code: "47687867324325344",
+            class_name: "一年级一班",
+            user: 1, //登录身份 0：家长，1：教师
+            student_id:'20231204', //学生序号
+            student_name: "李四",
+            nick_name:"家长01323", //家人昵称
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            pass:0,
+            token: "fdgdgvfrtgtgfdgf",
+        },
+        {
+            uuid: "45344534345",
+            parent_id: 0,
+            phone: "11122233345",
+            pwd: "qwertyui",
+            class_code: "47687867324325344",
+            class_name: "一年级一班",
+            user: 1, //登录身份 0：家长，1：教师
+            student_id:'20232304', //学生序号
+            student_name: "李四",
+            nick_name:"家长01323", //家人昵称
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            pass:2,
+            reason:'不是本班级学生',
+            token: "fdgdgvfrtgtgfdgf",
+        },
+        ]
+    msg: "success"
+}
+```
+#### 身份切换列表——待审核——撤销申请（家长端）
+#### api/v1/checked/back `POST`
+* request body
+```json
+{
+    student_id:'20231204', //传入学生id，从审核列表中移除该条数据
+}
+```
+* response body
+```json
+{
+    code: 1,
+    //data为数组
+    data: [
+        {
+            uuid: "45344534345",
+            parent_id: 0,
+            phone: "11122233345",
+            pwd: "qwertyui",
+            class_code: "47687867324325344",
+            class_name: "一年级一班",
+            user: 1, //登录身份 0：家长，1：教师
+            student_id:'20231204', //学生序号
+            student_name: "李四",
+            nick_name:"家长01323", //家人昵称
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            pass:0,
+            token: "fdgdgvfrtgtgfdgf",
+        },
+        {
+            uuid: "45344534345",
+            parent_id: 0,
+            phone: "11122233345",
+            pwd: "qwertyui",
+            class_code: "47687867324325344",
+            class_name: "一年级一班",
+            user: 1, //登录身份 0：家长，1：教师
+            student_id:'20232304', //学生序号
+            student_name: "李四",
+            nick_name:"家长01323", //家人昵称
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            pass:-1,
+            reason:'不是本班学生',
+            token: "fdgdgvfrtgtgfdgf",
+        },
+        ]
+    msg: "success"
+}
+```
+#### 审核列表——已审核（教师端）
+#### api/v1/teacher/user/pass/list `GET`
+* request body
+```json
+{
+    
+}
+```
+* response body
+```json
+{
+    code: 1,
+    //data为数组
+    data: [
+        {
+            uuid: "45344534345",
+            parent_id: 0,
+            phone: "11122233345",
+            pwd: "qwertyui",
+            class_code: "47687867324325344",
+            class_name: "一年级一班",
+            user: 1, //登录身份 0：家长，1：教师
+            student_id:'20231204', //学生序号
+            student_name: "李四",
+            nick_name:"家长01323", //家人昵称
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            pass:1,
+            token: "fdgdgvfrtgtgfdgf",
+        },
+        {
+            uuid: "45344534345",
+            parent_id: 0,
+            phone: "11122233345",
+            pwd: "qwertyui",
+            class_code: "47687867324325344",
+            class_name: "一年级一班",
+            user: 1, //登录身份 0：家长，1：教师
+            student_id:'20232304', //学生序号
+            student_name: "李四",
+            nick_name:"家长01323", //家人昵称
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            pass:2,
+            reason:'不是本班学生',
+            token: "fdgdgvfrtgtgfdgf",
+        },
+        ],
+    msg: "success"
+}
+```
+#### 审核列表——待审核列表（教师端）
+#### api/v1/teacher/user/checked/list `GET`
+* request body
+```json
+{
+    
+}
+```
+* response body
+```json
+{
+    code: 1,
+    //data为数组
+    data: [
+        {
+            uuid: "45344534345",
+            parent_id: 0,
+            phone: "11122233345",
+            pwd: "qwertyui",
+            class_code: "47687867324325344",
+            class_name: "一年级一班",
+            user: 1, //登录身份 0：家长，1：教师
+            student_id:'20231204', //学生序号
+            student_name: "李四",
+            nick_name:"家长01323", //家人昵称
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            pass:0,
+            token: "fdgdgvfrtgtgfdgf",
+        },
+        {
+            uuid: "45344534345",
+            parent_id: 0,
+            phone: "11122233345",
+            pwd: "qwertyui",
+            class_code: "47687867324325344",
+            class_name: "一年级一班",
+            user: 1, //登录身份 0：家长，1：教师
+            student_id:'20232304', //学生序号
+            student_name: "李四",
+            nick_name:"家长01323", //家人昵称
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            pass:0,
+            token: "fdgdgvfrtgtgfdgf",
+        },
+        ],
+    msg: "success"
+}
+```
+#### 审核列表——待审核列表——不通过接口（pass状态为2）（教师端）
+#### api/v1/teacher/user/checked/refuse `GET`
+* request body
+```json
+{
+    student_id:'20231204',
+    // pass:2,//不通过，修改pass为2
+}
+```
+* response body
+```json
+{
+   
+}
+```
+#### 审核列表——待审核列表——通过接口（pass状态为1）（教师端）
+#### api/v1/teacher/user/checked/pass `GET`
+* request body
+```json
+{
+    student_id:'20231204',
+    // pass:1, //通过，修改pass为1
+}
+```
+* response body
+```json
+{
+   
 }
 ```
 

@@ -1,12 +1,12 @@
 import {  View,  } from '@tarojs/components'
-
+import "./AddFamily.scss"
 
 //校园食谱页面
 function AddFamily() {
  
   return (
-    <View className='index'>
-        添加家人
+    <View className='main'>
+        暂无数据
     </View>
   )
 }

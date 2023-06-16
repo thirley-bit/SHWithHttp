@@ -2,7 +2,7 @@
 .table-container {
   .table {
     // height: 100%;
-    min-height: 1vh;
+    min-height: 90vh;
     max-height: 90vh;
     overflow-x: scroll;
     background-color: #fff;
@@ -41,6 +41,7 @@
         display: flex;
         align-items: center;
         .cell {
+          height: 25rpx;
           zoom: 1;
           padding: 8rpx;
           text-align: center;
@@ -49,7 +50,7 @@
           border-right: 1rpx solid #f3f3f3;
           border-bottom: 1rpx solid #f3f3f3;
           background-color: #fff;
-          overflow: scroll;
+          overflow-x: scroll;
           &:nth-child(1) {
             flex: 0 0 140rpx;
           }

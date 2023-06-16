@@ -3,8 +3,7 @@ import 'taro-ui/dist/style/index.scss'
 import { Provider } from 'react-redux'
 import dva from './utils/dva'
 import models from './models'
-// import './app.less'
-// import "./mock/index.js"
+
 const dvaApp = dva.createApp({
   initialState:{},
   models

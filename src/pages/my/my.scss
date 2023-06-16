@@ -1,0 +1,56 @@
+.my-head{
+    position: relative;
+    width: 100%;
+    height: 20vh;
+    background-color: #1F98F0;
+    color: #fff;
+    .avatar{ 
+        display: flex;
+        justify-content: center;
+        .icon{
+            position: relative;
+            .icon-top{
+                position: absolute;
+                top:50%;
+                right:0
+            }
+            .icon-bottom{
+                position: absolute;
+                top: 65%;
+                right: 0;
+            }
+        }
+    }
+    .name{
+        display: block;
+        font-size: 36rpx;
+        margin-bottom: 2%;
+    }
+}
+.my-content{
+    width: 100%;
+    background-color:#fff;
+    padding: 2% 0;
+    .avatar{ 
+        display: flex;
+        justify-content: center;
+    }
+    .name{
+        display: block;
+        font-size: 36rpx;
+        margin-bottom: 2%;
+    }
+    .right{
+        justify-content: end;
+    }
+    .divider{
+        width: 100%;
+        background-color: #fff;
+        .at-divider{
+            background-color: #fff;
+            width: 82%;
+            position: absolute;
+            right: 2%;
+        }
+    }
+}

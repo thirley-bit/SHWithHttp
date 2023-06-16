@@ -9,16 +9,207 @@ export default {
       pwd: "qwertyui",
       class_code: "47687867324325344",
       class_name: "一年级一班",
-      user_code: 1, //登录身份 0：家长，1：教师
-      student_id:0, //学生序号
+      user: 1, //登录身份 0：家长，1：教师
+      student_id:'20230204', //学生序号
       student_name: "张三",
-      nick_name:"家长01323", //家人昵称
-      relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
-      avatar:'',
-        // "http://123.57.149.51/upload/upload_img/20230510/1d4b6d8097826b0c33576e68e88f84f5.png",
+      teacher:'张老师', //如果是教师端返回teacher字段
+      nick_name:"家长01323", //家人昵称（家长端返回字段）
+      relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆（家长端返回字段）
+      avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
       token: "fdgdgvfrtgtgfdgf",
     },
     msg: "success",
+  },
+  "parent/user/pass/list":{
+    code:1,
+    data:[
+      {
+        uuid: "45344534345",
+        parent_id: 0,
+        phone: "11122233345",
+        pwd: "qwertyui",
+        class_code: "47687867324325344",
+        class_name: "一年级一班",
+        user: 0, //登录身份 0：家长，1：教师
+        student_id:'20230204', //学生序号
+        student_name: "张三",
+        nick_name:"家长01323", //家人昵称
+        pass:1, //是否加入班级  0：待审核，1：通过，2：未通过，3：撤销
+        relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+        avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+        token: "fdgdgvfrtgtgfdgf",
+      },
+      {
+        uuid: "45344534345",
+        parent_id: 0,
+        phone: "11122233345",
+        pwd: "qwertyui",
+        class_code: "47687867324325344",
+        class_name: "一年级一班",
+        user: 0, //登录身份 0：家长，1：教师
+        student_id:'20230214', //学生序号
+        student_name: "李四",
+        nick_name:"家长01323", //家人昵称
+        pass:1,
+        relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+        avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+        token: "fdgdgvfrtgtgfdgf",
+    },
+    ],
+    msg:'success'
+  },
+  "parent/user/checked/list":{
+    code:1,
+    data:[
+      {
+          uuid: "45344534345",
+          parent_id: 0,
+          user: 0, //登录身份 0：家长，1：教师
+          student_id:'20230204', //学生序号
+          student_name: "张三",
+          nick_name:"家长01323", //家人昵称
+          relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+          avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+          pass:0,  //是否加入班级  -1：未通过，0：待审核，1：通过
+          token: "fdgdgvfrtgtgfdgf",
+      },
+      {
+          uuid: "45344534345",
+          parent_id: 0,
+          user: 0, //登录身份 0：家长，1：教师
+          student_id:'20230214', //学生序号
+          student_name: "李四",
+          nick_name:"家长01323", //家人昵称
+          relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+          avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+          pass:-1, //是否加入班级  -1：未通过，0：待审核，1：通过
+          reason:'资料不齐全', //不通过原因
+          token: "fdgdgvfrtgtgfdgf",
+      },
+      ],
+  msg: "success"
+  },
+  "change/user":{
+    code:1,
+    data:{
+      uuid: "45344534345",
+      parent_id: 0,
+      phone: "11122233345",
+      pwd: "qwertyui",
+      class_code: "47687867324325344",
+      class_name: "一年级一班",
+      user: 0, //登录身份 0：家长，1：教师
+      student_id:'20230214', //学生序号
+      student_name: "张三",
+      nick_name:"家长01323", //家人昵称
+      relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+      avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+      token: "fdgdgvfrtgtgfdgf",
+    },
+    msg: "success",
+  },
+  //撤销
+  "checked/back":{
+    code: 1,
+    //data为数组
+    data: [
+        {
+            uuid: "45344534345",
+            parent_id: 0,
+            phone: "11122233345",
+            pwd: "qwertyui",
+            class_code: "47687867324325344",
+            class_name: "一年级一班",
+            user: 1, //登录身份 0：家长，1：教师
+            student_id:'20231204', //学生序号
+            student_name: "李四",
+            nick_name:"家长01323", //家人昵称
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            pass:0,
+            token: "fdgdgvfrtgtgfdgf",
+        },
+        ],
+    msg: "success"
+  },
+  "teacher/user/pass/list":{
+    code:1,
+    //data为数组
+    data: [
+        {
+            uuid: "45344534345",
+            parent_id: 0,
+            phone: "11122233345",
+            pwd: "qwertyui",
+            class_code: "47687867324325344",
+            class_name: "一年级一班",
+            user: 1, //登录身份 0：家长，1：教师
+            student_id:'20231204', //学生序号
+            student_name: "李四",
+            nick_name:"家长01323", //家人昵称
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            pass:1,
+            token: "fdgdgvfrtgtgfdgf",
+        },
+        {
+            uuid: "45344534345",
+            parent_id: 0,
+            phone: "11122233345",
+            pwd: "qwertyui",
+            class_code: "47687867324325344",
+            class_name: "一年级一班",
+            user: 1, //登录身份 0：家长，1：教师
+            student_id:'20232304', //学生序号
+            student_name: "李四",
+            nick_name:"家长01323", //家人昵称
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            pass:2,
+            reason:'不是本班学生',
+            token: "fdgdgvfrtgtgfdgf",
+        },
+        ],
+    msg: "success"
+  },
+  "teacher/user/checked/list":{
+    code:1,
+    //data为数组
+    data: [
+        {
+            uuid: "45344534345",
+            parent_id: 0,
+            phone: "11122233345",
+            pwd: "qwertyui",
+            class_code: "47687867324325344",
+            class_name: "一年级一班",
+            user: 1, //登录身份 0：家长，1：教师
+            student_id:'20231204', //学生序号
+            student_name: "李四",
+            nick_name:"家长01323", //家人昵称
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            pass:0,
+            token: "fdgdgvfrtgtgfdgf",
+        },
+        {
+            uuid: "45344534345",
+            parent_id: 0,
+            phone: "11122233345",
+            pwd: "qwertyui",
+            class_code: "47687867324325344",
+            class_name: "一年级一班",
+            user: 1, //登录身份 0：家长，1：教师
+            student_id:'20232304', //学生序号
+            student_name: "李四",
+            nick_name:"家长01323", //家人昵称
+            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+            pass:0,
+            token: "fdgdgvfrtgtgfdgf",
+        },
+        ],
+    msg: "success"
   },
 
   //推荐文章
@@ -1630,7 +1821,7 @@ export default {
         uuid:'dffvdvbfgbfgbgfhb',
         teacher_id:0, //教师序号
         teacher:'张老师',
-        note: '任教科目：语文',
+        note: '语文',
         is_class_teacher:true, //是否是班主任
         is_creator: true, //是否是创建者
         avatar:'http://123.57.149.51/upload/upload_img/20230518/2b1e874f9b5d6aaba56c322aeeeb7dfa.jpg'
@@ -1639,7 +1830,7 @@ export default {
         uuid:'dffvdvbfgbfgbgfhb',
         teacher_id:1, //教师序号
         teacher:'张老师',
-        note: '任教科目：语文',
+        note: '语文',
         is_class_teacher:false, //是否是班主任
         is_creator: false, //是否是创建者
         avatar:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg'
@@ -1648,7 +1839,7 @@ export default {
         uuid:'dffvdvbfgbfgbgfhb',
         teacher_id:2, //教师序号
         teacher:'张老师',
-        note: '任教科目：语文',
+        note: '语文',
         is_class_teacher:false, //是否是班主任
         is_creator: false, //是否是创建者
         avatar:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg'
@@ -1669,12 +1860,14 @@ export default {
       {
         student_id:0,  //学生序号
         parent_id:1, //家长序号
+        nick_name:'家长01234', //家长昵称
         relative:'妈妈',
         avatar:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg'
       },
       {
         student_id:0,  //学生序号
         parent_id:2, //家长序号
+        nick_name:'家长01234', //家长昵称
         relative:'爷爷',
         avatar:'http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg'
       }

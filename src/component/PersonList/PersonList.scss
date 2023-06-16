@@ -1,103 +1,109 @@
-.card{
-    background-color: #fff;
-    .card-item{
-        position: relative;
-        border: none;
-        border-bottom: 1PX #d6e4ef solid;
-        .at-card__header{
-            display: none;
+.person{
+    .card{
+        margin: 1% 0;
+        .at-card{
+            position: relative;
+            border: none;
+            border-bottom: 1PX #d6e4ef solid;
+            padding: 1% 0;
+            .at-card__header{
+                display: none;
+            }
+            .left{
+                float: left;
+            }
+            .at-atbadge{
+                float: left;
+            }
+            .card-content{
+                display: inline-block;
+            }
+            .clearfix:after{
+                content: '';
+                display: block;
+                height: 0;
+                clear: both;
+                visibility: hidden;
+            }
+            .card-center{
+                position: relative;
+                width: 100%;
+                overflow: hidden;
+                margin-left: 10%;
+                .card-name_parent{
+                    position: absolute;
+                    top: 50%;
+                    margin-top: -20rpx;
+                }
+                .card-name{
+                    display: inline-block;
+                    font-size: 30rpx;
+                    font-weight: 500;
+                }
+                .card-msg{
+                    margin-top: 6rpx;
+                    color: #999;
+                    font-size: 24rpx;
+                }
+            }
         }
-        .left{
-            float: left;
+        .card-button{
+            position: absolute;
+            z-index: 10;
+            width: 100rpx;
+            height: 80rpx;
+            line-height:80rpx;
+            text-align: center;
+            top: 35%;
+            right: 2%;
         }
-        .at-atbadge{
-            float: left;
+        .card_address{
+            position: absolute;
+            display: inline-block;
+            z-index: 10;
+            width: 100rpx;
+            height: 80rpx;
+            line-height:80rpx;
+            text-align: center;
+            top: 47rpx;
+            right: 11%;
+            .icon-message{
+                width: 50%;
+                position: absolute;
+                right: 76%;
+            }
+            .icon-phone{
+                width: 50%;
+                position: absolute;
+                right: 15%;
+            }
+        }
+        .card-button_address{
+            position: absolute;
+            display: inline-block;
+            z-index: 10;
+            width: 50rpx;
+            height: 80rpx;
+            line-height:80rpx;
+            text-align: center;
+            top: 47rpx;
+            right: 30rpx;
         }
         
-        .card-content{
-            display: flex;
-        }
-        .clearfix:after{
-            content: '';
-            display: block;
-            height: 0;
-            clear: both;
-            visibility: hidden;
-        }
-        .card-left{
-            float: left;
-            margin-right: 2%;
-        }
-        .card-center{
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            .card-name_parent{
-                position: absolute;
-                top: 50%;
-                margin-top: -20rpx;
-            }
-            .card-name{
-                display: inline-block;
-                font-size: 30rpx;
-                font-weight: 500;
-            }
-            .card-msg{
-                margin-top: 6rpx;
-                color: #999;
-                font-size: 24rpx;
-            }
-        }
         .card-right{
-            flex: 1;
-            padding-top: 3%;
-        }
-    }
-    .card-button{
-        position: absolute;
-        z-index: 10;
-        width: 100rpx;
-        height: 80rpx;
-        line-height:80rpx;
-        text-align: center;
-        top: 47rpx;
-        right: 8rpx;
-    }
-    .card_address{
-        position: absolute;
-        display: inline-block;
-        z-index: 10;
-        width: 100rpx;
-        height: 80rpx;
-        line-height:80rpx;
-        text-align: center;
-        top: 47rpx;
-        right: 11%;
-        .icon-message{
-            width: 50%;
             position: absolute;
-            right: 76%;
-        }
-        .icon-phone{
-            width: 50%;
-            position: absolute;
-            right: 15%;
+            top: 18%;
+            right: 4%;
         }
     }
-    .card-button_address{
-        position: absolute;
-        display: inline-block;
-        z-index: 10;
-        width: 50rpx;
-        height: 80rpx;
-        line-height:80rpx;
+    .join{
+        background-color: none;
+        padding: 1% 0;
+    }
+    .at-modal__content{
+        height: 40rpx;
         text-align: center;
-        top: 47rpx;
-        right: 30rpx;
+        min-height: 0;
     }
-}
-.at-modal__content{
-    height: 40rpx;
-    text-align: center;
-    min-height: 0;
+    
 }

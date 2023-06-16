@@ -28,23 +28,25 @@ export default defineAppConfig({
 
 
     //成长档案
-    'pages/growthFile/growthFile', //成长档案
+    'pages/GrowthFile/GrowthFile', //成长档案
 
     //通讯录
     'pages/addressList/addressList', //通讯录
-    'pages/addressList/addFamily/addFamily', //通讯录——添加家人
+    'pages/addressList/AddFamily/AddFamily', //通讯录——添加家人
     'pages/addressList/groupChat/groupChat', //通讯录——群聊
     'pages/addressList/message/message', //主页——私信列表页面
-    'pages/addressList/message/messageDetail/messageDetail', //主页——私信详情页面
+    'pages/addressList/message/MessageDetail/MessageDetail', //主页——私信详情页面
     'pages/addressList/check/check', //通讯录——审核
 
     //个人中心
     'pages/my/my', // 我的
+    'pages/my/ChildMsg/ChildMsg', //孩子信息页面
 
     //公共页面
     'pages/component/Article/Article',  //文章详情
     'pages/component/detail/detail', //通知或作业详情
     'pages/component/publish/publish', //发布页面
+    'pages/component/JoinedClass/JoinedClass', //切换班级/加入变更审核页面
   ],
   'permission':{
     'scope.userLocation':{
@@ -63,7 +65,7 @@ export default defineAppConfig({
       // 'selectedIconPath':"static/image/main_h_.png"
     },
     {
-      'pagePath':"pages/growthFile/growthFile",
+      'pagePath':"pages/GrowthFile/GrowthFile",
       'text': '成长档案',
       'iconPath':"static/main.jpg",
       'selectedIconPath':"static/main.jpg"
@@ -95,7 +97,4 @@ export default defineAppConfig({
     'navigationBarTitleText': '诚道吉科技有限公司',
     'navigationBarTextStyle': 'black',
   },
-  // usingComponents: {
-  //   "taro-ui": "/node_modules/taro-ui/dist/index.js"
-  // }
 })

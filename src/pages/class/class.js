@@ -16,7 +16,7 @@ function Index(props) {
       type:"users/getUser"
     })
     dispatch({
-      type:"users/getArticleList"
+      type:"Class/getArticleList"
     })
   }, []);
 
@@ -75,7 +75,7 @@ function Index(props) {
 export default connect(state => ({
   title:state.users.title,
   identity:state.users.identity,
-  articleArr:state.users.articleArr,
-  bannerList:state.users.bannerList,
-  tabList:state.users.tabList
+  articleArr:state.Class.articleArr,
+  bannerList:state.Class.bannerList,
+  tabList:state.Class.tabList
 }))(Index)

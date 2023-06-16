@@ -12,7 +12,8 @@ module.exports = {
   // },
   mini: {
     optimizeMainPackage:{
-      enable:true
+      enable:true,
+      
     },
     webpackChain (chain) {
       //   /**

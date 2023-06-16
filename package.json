@@ -14,7 +14,7 @@
     ]
   },
   "scripts": {
-    "build:weapp": "taro build --type weapp",
+    "build:weapp": "cross-env NODE_ENV==dev taro build --type weapp",
     "build:swan": "taro build --type swan",
     "build:alipay": "taro build --type alipay",
     "build:tt": "taro build --type tt",
@@ -23,7 +23,7 @@
     "build:qq": "taro build --type qq",
     "build:jd": "taro build --type jd",
     "build:quickapp": "taro build --type quickapp",
-    "dev:weapp": "npm run build:weapp  -- --watch",
+    "dev:weapp": "cross-env NODE_ENV==dev npm run build:weapp -- --watch",
     "dev:swan": "npm run build:swan -- --watch",
     "dev:alipay": "npm run build:alipay -- --watch",
     "dev:tt": "npm run build:tt -- --watch",
@@ -44,7 +44,6 @@
     "@tarojs/components": "3.6.2",
     "@tarojs/helper": "3.6.2",
     "@tarojs/plugin-framework-react": "3.6.2",
-    "@tarojs/plugin-mock": "0.0.9",
     "@tarojs/plugin-platform-alipay": "3.6.2",
     "@tarojs/plugin-platform-h5": "3.6.2",
     "@tarojs/plugin-platform-jd": "3.6.2",
@@ -87,6 +86,7 @@
     "babel-jest": "^29.5.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-preset-taro": "3.6.2",
+    "cross-env": "^7.0.3",
     "eslint": "^8.12.0",
     "eslint-config-taro": "3.6.2",
     "eslint-plugin-import": "^2.12.0",

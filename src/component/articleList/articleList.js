@@ -8,7 +8,7 @@ function ArticleList(props) {
     console.log(111);
   };
   return (
-    <View className='main'>
+    <View className='article'>
       {articleList.map((item, index) => {
         return (
           <View key={index} className='card'>

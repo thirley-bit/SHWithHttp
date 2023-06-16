@@ -83,7 +83,7 @@ function GroupChat() {
   const handleNav = (e) => {
     console.log(e)
     Taro.navigateTo({
-      url: "/pages/addressList/message/messageDetail/messageDetail",
+      url: "/pages/addressList/message/MessageDetail/MessageDetail",
     });
   };
   //编辑群组

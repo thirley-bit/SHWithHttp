@@ -1,6 +1,6 @@
 
-// import users from '../pages/index/model'
-import users from './ClassModel'
+import Class from './ClassModel'
+import users from './UserModel'
 import Score from './ScoreModel'
 import Photos from './PhotosModel'
 import CookBook from './CookBook'
@@ -9,6 +9,7 @@ import ExamChannel from './ExamChannelModel'
 import Policy from './PolicyModel'
 
 export default [
+  Class,
   users,
   Score,
   Photos,

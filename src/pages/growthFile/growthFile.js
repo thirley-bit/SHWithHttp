@@ -1,13 +1,13 @@
 // import { useState, createContext } from 'react'
 import { View } from '@tarojs/components'
-// import Tabs from '@app/component/tabs/tabs'
+import "./GrowthFile.scss"
 
 function GrowthFile(){
   
  
   return (
-    <View className='index'>
-      班级圈
+    <View className='main'>
+      暂无数据
 
       </View>
   )
