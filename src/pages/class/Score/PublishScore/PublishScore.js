@@ -3,6 +3,7 @@ import { View, Text, Input, Picker } from "@tarojs/components";
 import { AtIcon, AtButton } from "taro-ui";
 import Taro from "@tarojs/taro";
 import Table from "@app/component/Table/Table";
+import NavTab from '@app/component/NavTab/NavTab';
 import { connect } from 'react-redux';
 import "./publishScore.scss";
 
@@ -81,6 +82,7 @@ function PublishScore(props) {
   };
   return (
     <View className='main'>
+      <NavTab needBackIcon mainTitle='上传成绩' />
       <View className='head'>
         <View className='list' onClick={handleAdd}>
           <AtIcon value='settings' />

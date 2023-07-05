@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { AtTabs, AtTabsPane, AtSearchBar, AtCheckbox, AtAvatar, AtModal, AtModalContent, AtModalAction, AtIcon, AtButton } from 'taro-ui'
 import { View, Button, ScrollView, Input, } from "@tarojs/components";
 
+import NavTab from '@app/component/NavTab/NavTab';
 import api from '@/api/api'
 import './chooseUser.scss'
 
@@ -293,6 +294,8 @@ function ChooseUser() {
     }
 
     return <View className='content'>
+      
+      <NavTab needBackIcon mainTitle='诚道吉' />
         <AtTabs current={current} tabList={tabList} onClick={handleChange}>
             <AtTabsPane current={current} index={0}>
                 <View className='main'>

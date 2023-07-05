@@ -3,8 +3,10 @@
 import { useEffect, useState } from 'react'
 import {  View,  } from '@tarojs/components'
 import Work from '@app/component/Work/Work'
-import api from '@/api/api'
+import NavTab from '@app/component/NavTab/NavTab'
 import { connect } from 'react-redux'
+
+import "./Score.scss"
 
 function Score(props) {
   const { dispatch, scoreArr } = props
@@ -15,7 +17,8 @@ function Score(props) {
   },[])
  
   return (
-    <View className='main'>
+    <View className='index'>
+      <NavTab needBackIcon mainTitle='成绩' />
         <Work enter='score' showData={scoreArr} />
     </View>
   )

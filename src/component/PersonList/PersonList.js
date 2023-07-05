@@ -7,7 +7,6 @@ import "./PersonList.scss";
 
 //人员列表组件
 function PersonList(props) {
-  console.log(props);
   const { dispatch, enter, showData, user, userList } = props;
   const [isOpened, setIsOpened] = useState(false);
   const [id, setId] = useState("");
@@ -24,7 +23,7 @@ function PersonList(props) {
   };
 
   const handleClick = (e) => {
-    console.log(e);
+    // console.log(e);
     let newId = e.message_id;
     setId(newId);
     // let url = "message/updateListById"
@@ -59,7 +58,6 @@ function PersonList(props) {
   return (
     <View className='person'>
       {showData.map((item, index) => {
-        console.log(item);
         let title = "";
         let note = "";
         if (item.relative) {

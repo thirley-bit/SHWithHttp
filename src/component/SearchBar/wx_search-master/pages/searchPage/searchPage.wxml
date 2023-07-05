@@ -1,0 +1,14 @@
+<search bind:change="change" bind:searchList="searchList" list="{{list}}" name="routingName" placeholder="请输入地址查找"></search>
+<!-- 展示的数据 -->
+<block wx:for="{{list}}" wx:key="index">
+    <view class="itemBox" data-code="{{item.routingCode}}" bindtap="gotoDetail">
+        <view class="left">
+            <view class="addres">{{item.routingName}}</view>
+            <view class="message">
+                <text>吨位单价(元)：{{item.tonPrice}}</text>
+                <text>方量单价(元)：{{item.cubePrice}}</text>
+            </view>
+        </view>
+        <view class="rightArrow"></view>
+    </view>
+</block>

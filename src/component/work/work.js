@@ -1,31 +1,36 @@
 import { useState, useEffect } from "react";
 import Taro from "@tarojs/taro";
-import { View, Text, Picker, Navigator } from "@tarojs/components";
-import { AtAvatar, AtButton, AtCard, AtFab, AtIcon } from "taro-ui";
+import { View, Text,   } from "@tarojs/components";
+import { AtButton, AtCard, AtFab, AtIcon } from "taro-ui";
 import { connect } from 'react-redux';
 import "./Work.scss";
 
 function Work(props) {
-  const { dispatch, enter, user, selector, showData } = props;
-  const [time, setTime] = useState("");
-  const [selectorChecked, setSelectorChecked] = useState(""); //选中的科目下标
-  const onTimeChange = (e) => {
-    setTime(e.detail.value);
-  };
-  const onSubChange = (e) => {
-    setSelectorChecked(e.detail.value);
-  };
+  console.log(props,"props----")
+  const { dispatch, enter, user,  showData, subjectDetail, scoreDetail } = props;
   const handleCompleted = (e) => {
-    console.log(e);
+    console.log(e,"----e----");
   };
   const handleNav = (e) => {
     let id = ''
-    if(e.work_id){
+    if(enter == 'homework'){
       id = e.work_id
-    }else if(e.notice_id){
+      dispatch({
+        type:'HomeWork/getSubjectDetail',
+        payload:e.work_id
+      })
+    }else if(enter == 'notice'){
       id = e.notice_id
+      dispatch({
+        type:'Notice/getNoticeDetail',
+        payload: e.notice_id
+      })
     }else{
       id = e.score_id
+      dispatch({
+        type:'Score/getScoreDetail',
+        payload:e.score_id
+      })
     }
     //如果是未发布的成绩，进入创建成绩页面，其他进入详情页面
     if(e.publish == 0){
@@ -43,29 +48,6 @@ function Work(props) {
   return (
     <View className='main'>
       <View className='content'>
-        {/* 搜索功能仅存在于作用页面 */}
-        {/* {enter == "homework" && (
-          <View>
-            <View className='date'>
-              <Picker mode='date' onChange={onTimeChange}>
-                {time == "" ? "请选择日期" : time}
-              </Picker>
-            </View>
-            <View className='selector'>
-              <Picker
-                mode='selector'
-                range={selector.map((item) => item.subject_title)}
-                onChange={onSubChange}
-              >
-                {selectorChecked == ""
-                  ? "请选择科目"
-                  : selector.filter(
-                      (item) => item.subject_id == selectorChecked
-                    )[0].subject_title}
-              </Picker>
-            </View>
-          </View>
-        )} */}
         <View className='work'>
           {showData &&
             showData.map((item, index) => {
@@ -74,10 +56,7 @@ function Work(props) {
               //   item.work_id == undefined ? item.notice_id : item.work_id;
               //   setId(newId)
               return (
-                <View key={index} className='work-list' onClick={() => handleNav(item)}>
-                  {/* <Navigator
-                    url={`/pages/component/detail/detail?enter=${enter}&user=${user}&id=${id}`}
-                  > */}
+                <View key={index} className='work-list' >
                     <AtCard
                       className='work-card'
                       note={
@@ -96,6 +75,7 @@ function Work(props) {
                       }
                       extra='>'
                       title={item.title}
+                      onClick={() => handleNav(item)}
                     >
                       {item.content}
                     </AtCard>
@@ -166,8 +146,10 @@ function Work(props) {
     </View>
   );
 }
-// export default Work;
 
 export default connect(state =>({
-  user:state.users.user
+  user:state.users.user,
+  subjectDetail: state.HomeWork.subjectDetail,
+  scoreDetail: state.Score.scoreDetail,
+  noticeDetail: state.Notice.noticeDetail
 }))(Work)

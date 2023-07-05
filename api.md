@@ -7,15 +7,14 @@
 ```json
 {
     phone:11122233345,
-    pwd:qwertyui,
+    pwd:'qwertyui',
     class_code:47687867324325344,
-    class_name:一年级一班,
+    class_name:'一年级一班',
     user:0,  // 登录身份 0：家长，1：教师
-    teacher:'张老师', //(仅教师端返回teacher字段)
     student_id:'20230204', //（仅家长端返回）
-    student_name:张三, //（仅家长端返回）
-    nick_name:"家长01234"|"张风毅", //（家长端返回家长01234|老师端返回"张风毅"）
-    relative:爸爸|妈妈|爷爷|奶奶|外公|外婆,  //亲属关系（仅家长端返回）
+    student_name:'张三', //（仅家长端返回）
+    nick_name:"家长01234"|"张风毅老师", //（家长端返回家长01234|老师端返回"张风毅"）
+    relative:'爸爸'|'妈妈'|'爷爷'|'奶奶'|'外公'|'外婆',  //亲属关系（仅家长端返回某一个）
     avatar:"http://123.57.149.51/upload/upload_img/20230510/1d4b6d8097826b0c33576e68e88f84f5.png",
     token:fdgdgvfrtgtgfdgf
 }
@@ -35,10 +34,10 @@
             user: 0, //登录身份 0：家长，1：教师
             student_id:'20230204', //学生序号
             student_name: "张三",
-            nick_name:"家长01323", //家人昵称
-            relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
-            avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
-            token: "fdgdgvfrtgtgfdgf",
+            nick_name:"家长01234"|"张风毅老师", //（家长端返回家长01234|老师端返回"张风毅"）
+            relative:'爸爸'|'妈妈'|'爷爷'|'奶奶'|'外公'|'外婆',  //亲属关系（仅家长端返回某一个）
+            avatar:"http://123.57.149.51/upload/upload_img/20230510/1d4b6d8097826b0c33576e68e88f84f5.png",
+            token:fdgdgvfrtgtgfdgf
         }
     msg: "success"
 }
@@ -49,7 +48,7 @@
 ```json
 {
     phone:11122233345,
-    pwd:qwertyui,
+    pwd:'qwertyui',
     token:fdgdgvfrtgtgfdgf
 }
 ```
@@ -76,6 +75,7 @@
     msg: "success"
 }
 ```
+### 个人中心页面
 ####  身份切换列表——已加入pass为1(家长端)
 #### api/v1/parent/user/pass/list `POST`
 * request body
@@ -131,7 +131,7 @@
 * request body
 ```json
 {
-    pass:-1、0, //是否加入班级  0：待审核，1：通过，2：未通过，3：撤销
+    pass:0、2, //是否加入班级  0：待审核，1：通过，2：未通过，3：撤销
 }
 ```
 * response body
@@ -436,14 +436,53 @@
 ```
 
 ### 班级页面
+##### 推荐——更多——文章tab标题
+#### api/v1/article/tab `GET`
+* request body
+```json
+{
+
+}
+```
+
+* response body
+```json
+{
+    code: 1,
+    //data为对象
+    data: [
+        {
+        uuid:'134554647687988765445398765',
+        type:0, //tab栏的序号 0：全部，1：教育，2：安全，3：智慧
+        title:'全部', //tab栏的标题 全部，教育，安全，智慧
+      },
+      {
+        uuid:'134554647687988765445398765',
+        type:1, //tab栏的序号 0：全部，1：教育，2：安全，3：智慧
+        title:'教育', //tab栏的标题 全部，教育，安全，智慧
+      },
+      {
+        uuid:'134554647687988765445398765',
+        type:2, //tab栏的序号 0：全部，1：教育，2：安全，3：智慧
+        title:'安全', //tab栏的标题 全部，教育，安全，智慧
+      },
+      {
+        uuid:'134554647687988765445398765',
+        type:3, //tab栏的序号 0：全部，1：教育，2：安全，3：智慧
+        title:'智慧', //tab栏的标题 全部，教育，安全，智慧
+      }
+    ]
+    msg: "success"
+}
+```
 ##### 文章列表
 #### api/v1/article/list `GET`
 * request body
 ```json
 {
-    type: ''|0|1|2,
-    limit:10,
-    page:1,
+    type: 0|1|2|3,  //'':全部，0：教育，1：安全，2：智慧
+    limit:10, //当前页条数
+    pageNo:1, //当前页
     token:fdgdgvfrtgtgfdgf
 }
 ```
@@ -452,17 +491,18 @@
 ```json
 {
     code: 1,
-    count:55,
-    size:10,
-    current:1,
+    count:55,  //总条数
+    size:10, //当前页条数
+    pageNo:1, //当前页
+    pageNum:5, //总页数
     //data为数组
     data: [
         {
             uuid:134554647687988765445398765,
-            type:1,  //接口请求时查找的范围 1:教育，2：安全，3：智慧
+            type:1,  //接口请求时查找的范围 0:全部，1:教育，2：安全，3：智慧
             type_id:0,
-            title:防溺水创意微视频⑨｜丹巴县城区小学校,
-            create_time:2023-11-15  14:12:34,
+            title:'防溺水创意微视频⑨｜丹巴县城区小学校',
+            create_time:'2023-11-15  14:12:34',
             img_url:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
         },
     ], 
@@ -497,38 +537,16 @@
     msg: "success"
 }
 ```
-##### 更多文章tab标题
-#### api/v1/article/tab `GET`
-* request body
-```json
-{
 
-}
-```
-
-* response body
-```json
-{
-    code: 1,
-    //data为对象
-    data: [
-        {
-            uuid:134554647687988765445398765,
-            type_id:0, //tab栏的序号 0：全部，1：教育，2：安全，3：智慧
-            type_name:'全部', //tab栏的标题 全部，教育，安全，智慧
-        }
-    ]
-    msg: "success"
-}
-```
 
 ### 作业
 ##### 作业—时间选择下拉框
-#### api/v1/subject/title/select `GET`
+#### api/v1/subject/time/select `GET`
 * request body
 ```json
 {
-    time:'', //时间选择范围  
+    Time_S:'2023-06-20', //开始时间
+    Time_E:'2023-07-20', //结束时间
 }
 ```
 * response body
@@ -539,30 +557,88 @@
     data: [
         {
             uuid:134554647687988765445398765,
-            subject_id:0, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
-            subject_name:'语文', //0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            subject_type:0, //科目选择  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
             work_id:0, //作业列表序号
-            checked:0, //是否查看状态 0：未查看，1：已查看
+            // checked:0, //是否查看状态 0：未查看，1：已查看
             hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
-            hasCompleted:0, //是否完成作业（家长端）
-            title:【语文】 2023.04.25 （周二）语文练习,
-            author:张老师,
+            hasCompleted:0, //是否完成作业（家长端） 0：未完成，1：已完成
+            title:'【语文】 2023.04.25 （周二）语文练习',
+            author:'张老师',
             content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
-            time:2023-12-12 14:34,
-            avatar:'',
+            time:'2023-06-20 14:34',
+            avatar:'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+        },
+        {
+            uuid:134554647687988765445398765,
+            subject_type:1, //科目选择  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            work_id:0, //作业列表序号
+            // checked:0, //是否查看状态 0：未查看，1：已查看
+            hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+            hasCompleted:0, //是否完成作业（家长端） 0：未完成，1：已完成
+            title:'【语文】 2023.04.25 （周二）语文练习',
+            author:'张老师',
+            content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
+            time:'2023-06-20 16:34',
+            avatar:'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
         },
     ], 
     msg: "success"
 }
 ```
-##### 作业—科目选择下拉框
-#### api/v1/subject/title/select `GET`
+##### 作业—科目选择栏目
+#### api/v1/subject/type/title `GET`
 * request body
 ```json
 {
-    subject_id:'', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
-}
 
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:[
+        {
+        uuid:'134554647687988765445398765',
+        subject_type:0, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+        subject_title:'语文'  //科目选择范围 语文，数学，英语，物理，化学，生物
+      },
+      {
+        uuid:'134554647687988765445398765',
+        subject_type:1, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+        subject_title:'数学'  //科目选择范围 语文，数学，英语，物理，化学，生物
+      },
+      {
+        uuid:'134554647687988765445398765',
+        subject_type:2, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+        subject_title:'英语'  //科目选择范围 语文，数学，英语，物理，化学，生物
+      },
+      {
+        uuid:'134554647687988765445398765',
+        subject_type:3, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+        subject_title:'物理'  //科目选择范围 语文，数学，英语，物理，化学，生物
+      },
+      {
+        uuid:'134554647687988765445398765',
+        subject_type:4, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+        subject_title:'化学'  //科目选择范围 语文，数学，英语，物理，化学，生物
+      },
+      {
+        uuid:'134554647687988765445398765',
+        subject_type:5, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+        subject_title:'生物'  //科目选择范围 语文，数学，英语，物理，化学，生物
+      },
+    ],
+    msg: "success"
+}
+```
+##### 作业—科目选择下拉框
+#### api/v1/subject/type/select `GET`
+* request body
+```json
+{
+    subject_type:'', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+}
 ```
 
 * response body
@@ -573,17 +649,29 @@
     data: [
         {
             uuid:134554647687988765445398765,
-            subject_id:'', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
-            subject_name:'语文', //0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            subject_type:'', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
             work_id:0, //作业列表序号
-            checked:0, //是否查看状态 0：未查看，1：已查看
+            // checked:0, //是否查看状态 0：未查看，1：已查看
             hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
-            hasCompleted:0, //是否完成作业（家长端）
+            hasCompleted:0, //是否完成作业（家长端） 0：未完成，1：已完成
             title:【语文】 2023.04.25 （周二）语文练习,
             author:张老师,
             content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
-            time:2023-12-12 14:34,
-            avatar:'',
+            time:'2023-12-12 14:34',
+            avatar:'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+        },
+        {
+            uuid:134554647687988765445398765,
+            subject_type:0, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            work_id:0, //作业列表序号
+            // checked:0, //是否查看状态 0：未查看，1：已查看
+            hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+            hasCompleted:1, //是否完成作业（家长端）0：未完成，1：已完成
+            title:'【语文】 2023.04.25 （周二）语文练习',
+            author:张老师,
+            content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
+            time:'2023-12-12 14:34',
+            avatar:'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
         },
     ], 
     msg: "success"
@@ -595,8 +683,8 @@
 * request body
 ```json
 {
-    select_time:'' //时间选择 ''全部
-    subject_id:'', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+    // select_time:'' //时间选择 ''全部
+    // subject_type:'', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
     token:fdgdgvfrtgtgfdgf
 },
 ```
@@ -609,16 +697,28 @@
     data: [
         {
             uuid:134554647687988765445398765,
-            subject_id:0, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
-            subject_name:'语文', //0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            subject_type:0, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
             work_id:0, //作业列表序号
-            checked:0, //是否查看状态 0：未查看，1：已查看
+            // checked:0, //是否查看状态 0：未查看，1：已查看
             hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
-            hasCompleted:0, //是否完成作业（家长端）
-            title:【语文】 2023.04.25 （周二）语文练习,
-            author:张老师,
+            hasCompleted:0, //是否完成作业（家长端）0：未完成，1：已完成
+            title:'【语文】 2023.04.25 （周二）语文练习',
+            author:'张老师',
             content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
-            time:2023-12-12 14:34,
+            time:'2023-12-12 14:34',
+            avatar:'',
+        },
+        {
+            uuid:134554647687988765445398765,
+            subject_type:0, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            work_id:1, //作业列表序号
+            // checked:0, //是否查看状态 0：未查看，1：已查看
+            hasNew:1,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+            hasCompleted:1, //是否完成作业（家长端）0：未完成，1：已完成
+            title:'【语文】 2023.04.25 （周二）语文练习',
+            author:'张老师',
+            content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
+            time:'2023-12-12 14:34',
             avatar:'',
         },
     ], 
@@ -644,7 +744,7 @@
     data: {
             uuid:134554647687988765445398765,
             work_id:0,
-            hasCompleted:0, //是否完成作业（家长端）
+            hasCompleted:0, //是否完成作业（家长端）0：未完成，1：已完成
             title:【语文】 2023.04.25 （周二）语文练习,
             author:张老师,
             detail_content:"<p>正文内容</p>",   //HTML代码，完整页面内容
@@ -654,8 +754,8 @@
     msg: "success"
 }
 ```
-##### 家长完成按钮(家长端)
-#### api/v1/subject/detail/completed `POST`
+##### 未完成按钮(家长端)
+#### api/v1/subject/completed `POST`
 * request body
 ```json
 {
@@ -669,38 +769,30 @@
 ```json
 {
     code: 1,
-    //data为对象
+    //data为数组
     data: [
         {
             uuid:134554647687988765445398765,
-            work_id:0,
-            hasCompleted:1, //是否完成作业（家长端）
-            title:【语文】 2023.04.25 （周二）语文练习,
-            author:张老师,
-            detail_content:"<p>正文内容</p>",   //HTML代码，完整页面内容
-            time:2023-11-15  14:12:34,
-            avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
+            work_id:0, //作业列表序号
+            hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+            hasCompleted:1, //是否完成作业（家长端）0：未完成，1：已完成
+            title:'【语文】 2023.04.25 （周二）语文练习',
+            author:'张老师',
+            content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
+            time:'2023-12-12 14:34',
+            avatar:'',
         },
         {
             uuid:134554647687988765445398765,
-            work_id:1,
-            hasCompleted:0, //是否完成作业（家长端）
-            title:【语文】 2023.04.25 （周二）语文练习,
-            author:张老师,
-            detail_content:"<p>正文内容</p>",   //HTML代码，完整页面内容
-            time:2023-11-15  14:12:34,
-            avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
+            work_id:1, //作业列表序号
+            hasNew:1,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+            hasCompleted:1, //是否完成作业（家长端）0：未完成，1：已完成
+            title:'【语文】 2023.04.25 （周二）语文练习',
+            author:'张老师',
+            content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
+            time:'2023-12-12 14:34',
+            avatar:'',
         },
-        {
-            uuid:134554647687988765445398765,
-            work_id:2,
-            hasCompleted:0, //是否完成作业（家长端）
-            title:【语文】 2023.04.25 （周二）语文练习,
-            author:张老师,
-            detail_content:"<p>正文内容</p>",   //HTML代码，完整页面内容
-            time:2023-11-15  14:12:34,
-            avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
-        }
     ],
     msg: "success"
 }
@@ -719,33 +811,119 @@
 ```json
 {
     code: 1,
-    //data为对象
-    data: {
-            work_id:0,
-            student_id:0,
-            student_name:张三,
-            relative:爸爸, 
-            feed_back:"<p>第一自然段的内容是基地及慈善的成绩是底层就v互动和v大夫v回他如果让他如果突然个人复的跟他沟通人</p>",
-            create_time:2023-11-15  14:12:34,
-            avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
-            reply:[
-                {
-                from:张老师,
-                to:张三爸爸,
-                content:ffgff
-                },
-                {
-                from:张三爸爸,
-                to:张老师,
-                content:ffgff
-                },
-            ]
-        },
+    //data为数组
+    data: [
+            {
+                work_id:0,
+                student_id:0,
+                student_name:张三,
+                relative:爸爸, 
+                feed_back_id:0,
+                feed_back:"<p>第一自然段的内容是基地及慈善的成绩是底层就v互动和v大夫v回他如果让他如果突然个人复的跟他沟通人</p>",
+                create_time:2023-11-15  14:12:34,
+                avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
+                reply:[
+                    {
+                        feed_back_id:0,
+                        reply_id:0,
+                        from:张老师,
+                        to:张三爸爸,
+                        content:ffgff
+                    },
+                    {
+                        feed_back_id:0,
+                        reply_id:1,
+                        from:张三爸爸,
+                        to:张老师,
+                        content:ffgff
+                    },
+                ]
+            },
+        ],
+    msg: "success"
+}
+```
+##### 家长反馈详情(教师端)
+#### api/v1/subject/feedback/detail `GET`
+* request body
+```json
+{
+    work_id:0,
+    token:fdgdgvfrtgtgfdgf
+}
+```
+
+* response body
+```json
+{
+    code: 1,
+    //data为数组
+    data: [
+            {
+                work_id:0,
+                student_id:0,
+                student_name:'张三',
+                relative:'爸爸', 
+                feed_back_id:0,
+                feed_back:"<p>第一自然段的内容是基地及慈善的成绩是底层就v互动和v大夫v回他如果让他如果突然个人复的跟他沟通人</p>",
+                create_time:'2023-11-15  14:12:34',
+                avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
+                reply:[
+                    {
+                        feed_back_id:0,
+                        reply_id:0,
+                        from:'张老师',
+                        to:'张三爸爸',
+                        content:'ffgff'
+                    },
+                    {
+                        feed_back_id:0,
+                        reply_id:1,
+                        from:'张三爸爸',
+                        to:'张老师',
+                        content:'ffgff'
+                    },
+                ]
+            },
+            {
+                work_id:0,
+                student_id:0,
+                student_name:'张三',
+                relative:'爸爸', 
+                feed_back_id:1,
+                feed_back:"<p>第一自然段的内容是基地及慈善的成绩是底层就v互动和v大夫v回他如果让他如果突然个人复的跟他沟通人</p>",
+                create_time:'2023-11-15  14:12:34',
+                avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
+                reply:[
+                    {
+                        feed_back_id:1,
+                        reply_id:0,
+                        from:'张老师',
+                        to:'张三爸爸',
+                        content:'ffgff'
+                    },
+                    {
+                        feed_back_id:1,
+                        reply_id:1,
+                        from:'张三爸爸',
+                        to:'张老师',
+                        content:'ffgff'
+                    },
+                    {
+                        feed_back_id:1,
+                        reply_id:2,
+                        from:'张三爸爸',
+                        to:'张老师',
+                        content:'ffgff'
+                    },
+                ]
+            },
+        ],
     msg: "success"
 }
 ```
 
-##### 家长修改反馈(家长端)
+<!-- ##### 家长修改反馈(家长端)
 #### api/v1/subject/edit/feedback/detail `POST`
 * request body
 ```json
@@ -771,8 +949,8 @@
     ]
     token:fdgdgvfrtgtgfdgf
 }
-```
-
+``` -->
+<!-- 
 * response body
 ```json
 {
@@ -801,7 +979,7 @@
         },
     msg: "success"
 }
-```
+``` -->
 
 ##### 修改作业内容（教师端）
 #### api/v1/subject/edit/detail `POST`
@@ -1814,10 +1992,10 @@
     data: [
         {
             uuid:134554647687988765445398765,
-            subject_id:0, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            subject_type:0, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
             subject_name:'语文', //0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
             work_id:0, //作业列表序号
-            checked:0, //是否查看状态 0：未查看，1：已查看
+            // checked:0, //是否查看状态 0：未查看，1：已查看
             hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
             hasCompleted:0, //是否完成作业（家长端）
             title:【语文】 2023.04.25 （周二）语文练习,
@@ -1835,7 +2013,7 @@
 * request body
 ```json
 {
-    subject_id:'', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+    subject_type:'', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
 }
 
 ```
@@ -1848,10 +2026,10 @@
     data: [
         {
             uuid:134554647687988765445398765,
-            subject_id:'', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            subject_type:'', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
             subject_name:'语文', //0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
             work_id:0, //作业列表序号
-            checked:0, //是否查看状态 0：未查看，1：已查看
+            // checked:0, //是否查看状态 0：未查看，1：已查看
             hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
             hasCompleted:0, //是否完成作业（家长端）
             title:【语文】 2023.04.25 （周二）语文练习,
@@ -2139,13 +2317,16 @@
 ```json
 {
     code:1,
+    pageNo:1, //当前页
+    pageNum:3, //总页
+    pageSize:10, //每页条数
     data:[
         {
             uuid:54657568,
             message_id:0,
-            sender:0, //发送者 0：教师，1：家长
-            teacher:张老师
-            message:今天张三表现很好,
+            detail_id:0,
+            speaker:'own'|'other', //发送者 own:自己，other：其他人
+            content:'今天张三表现很好',
             time:2023-11-15  14:12:34,
             avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
             token:fdgdgvfrtgtgfdgf

@@ -10,8 +10,10 @@ import {
   AtFloatLayout,
 } from "taro-ui";
 import CardList from "@app/component/CardList/CardList";
+import NavTab from '@app/component/NavTab/NavTab';
 import { connect } from "react-redux";
 // import PersonList from '@app/component/PersonList/PersonList'
+
 import "./DataDownLoad.scss";
 
 function DataDownLoad(props) {
@@ -52,7 +54,8 @@ function DataDownLoad(props) {
   };
 
   return (
-    <View className='main'>
+    <View className='index'>
+      <NavTab needBackIcon mainTitle='资料下载' />
       <View>
         <AtSearchBar />
       </View>

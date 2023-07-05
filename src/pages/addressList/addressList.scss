@@ -1,6 +1,42 @@
+.index{
+    width: 100%;
+    height: 100%;
+    // padding: 10rpx 32rpx;
+    background: linear-gradient(175deg,rgba(105,194,254,0.8),rgba(107,234,254) 6%,  #F8F9FF 20%),
+}
+.search{
+    width: 90%;
+    margin: 0 5%;
+    background-color: #fff;
+    border-radius: 16rpx;
+    border: 2rpx solid #1BA6FF;
+}
+.at-search-bar{
+    
+    height: 65rpx;
+    background-color: #fff;
+    border-radius: 16rpx;
+    padding: 0 18rpx 0 0;    
+    background: rgba(255,255,255,0.6);
+}
+.at-search-bar__action{
+    border-radius: 8rpx;
+}
+.at-tab-bar{
+    background-color: rgba(255,255,255,0,);
+    position: static;
+}
+.at-tab-bar__inner-img{
+    width: 85rpx;
+}
 .teacher-list{
     width: 100%;
     background-color: #fff;
+    box-shadow: 0rpx 0rpx 38rpx 2rpx rgba(10,110,176,0.1);
+    border-radius: 31rpx;
     margin: 2% 0;
-    padding: 3%;
+    .text{
+        padding-top: 3%;
+        padding-left: 6%;
+    }
 }

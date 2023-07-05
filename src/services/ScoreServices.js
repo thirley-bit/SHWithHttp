@@ -5,9 +5,14 @@ export async function getScoreList(){
     let data = api[url]
     return data
   }
-
 export async function getScoreDetail(){
-  let url = 'score/detail/data'
+  let url = 'score/detail'
+  let data  = api[url]
+  return data
+}
+
+export async function getScoreStudentsList(){
+  let url = 'score/student/list'
   let data = api[url]
   return data
 }

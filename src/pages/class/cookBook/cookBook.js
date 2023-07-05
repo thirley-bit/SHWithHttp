@@ -2,6 +2,7 @@ import { View } from "@tarojs/components";
 import { useEffect, useState } from "react";
 import { AtTabs, AtTabsPane, AtTabBar } from "taro-ui";
 import { connect } from "react-redux";
+import NavTab from '@app/component/NavTab/NavTab';
 import "./CookBook.scss";
 //校园食谱页面
 function CookBook(props) {
@@ -30,7 +31,8 @@ function CookBook(props) {
     setTabBarCurrent(e);
   };
   return (
-    <View className='main'>
+    <View className='index'>
+      <NavTab needBackIcon mainTitle='校园食谱' />
       <View className='tab'>
         <AtTabs
           current={tabCurrent}

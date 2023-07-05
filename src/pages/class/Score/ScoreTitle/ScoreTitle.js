@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "@tarojs/taro";
 import { View, Text,  } from "@tarojs/components";
 import { AtCheckbox, AtForm, AtInput } from "taro-ui";
+import NavTab from '@app/component/NavTab/NavTab';
 import { connect } from 'react-redux';
 
 //成绩列页面

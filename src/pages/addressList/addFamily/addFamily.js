@@ -1,12 +1,14 @@
 import {  View,  } from '@tarojs/components'
-import "./AddFamily.scss"
+import NavTab from '@app/component/NavTab/NavTab'
 
-//校园食谱页面
+import "./AddFamily.scss"
+//添加家人页面
 function AddFamily() {
  
   return (
-    <View className='main'>
-        暂无数据
+    <View className='index'>
+        <NavTab needBackIcon mainTitle='添加' />
+        暂无内容
     </View>
   )
 }

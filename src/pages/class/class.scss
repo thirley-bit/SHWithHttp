@@ -1,21 +1,87 @@
-page{
-    // background-image: url('../../static/bg.png');
-    background-color: #1f98f0;
+.index{
+    width: 92%;
+    height: 100%;
+    padding: 10rpx 32rpx;
+    background: linear-gradient(170deg,#0194FF, #02E2FF 8%,  #F8F9FF 20%),
+                linear-gradient(0deg,rgba(255,255,255,0.2), #F8F9FF 20%, rgba(255,255,255,0.2) 50%);
+
+}
+.at-nav-bar{
+    background-color: rgba(255,255,255,0,);
+    height: 142rpx;
+    position: static;
+}
+.new{
+    color: #f00;
+    width: 100%;
+    text-align: center;
+    font-size: 24rpx;
+    .new-tag{
+        color: #f00;
+        position: relative;
+        overflow: visible;
+        .new-num{
+            position: absolute;
+            top: 12rpx;
+            right: 16rpx;
+            width: 34rpx;
+            height: 34rpx;
+            font-size: 22rpx;
+            border-radius: 50%;
+            border: 1rpx solid #f00;
+            line-height: 1.6;
+        }
+    }
 }
 .banner{
     background-color: #fff;
-    border: solid 0.1rpx #000;
-    margin-bottom: 20rpx;
+    border-radius: 32rpx;
+    // border: solid 0.1rpx #000;
+    margin: 30rpx 0;
+    // margin-bottom: 20rpx; 
+}
+.at-tab-bar{
+    background-color: rgba(255,255,255,0,);
+    border-radius: 26rpx;
+    position: static;
+}
+.at-tab-bar__inner-img{
+    width: 85rpx;
 }
 .more{
+    position: relative;
+    border-radius: 32rpx;
+    margin-top: 30rpx;
     background-color: #fff;
+    box-shadow: #d3d8e2 0px 0px 30px 5px;
+    .more-list{
+        border-radius: 32rpx;
+        border: none;
+        .item-content__info-title{
+            font-weight: 600;
+        }
+        .item-extra__info{
+            font-size: 26rpx;
+        }
+    }
+    .img-down{
+        position: absolute;
+        width: 64rpx;
+        height: 16rpx;
+        top: 62rpx;
+        left: 22rpx;
+    }
+    
+}
+.more-article{
+    position: absolute;
 }
 .card{
     padding: 3% 0;
     .card-item{
         position: relative;
         border: none;
-        border-bottom: 1PX #d6e4ef solid;
+        border-bottom: 1PX rgb(230,230,230,0.8) solid;
         .at-card__header{
             display: none;
         }
@@ -45,3 +111,4 @@ page{
         }
     }
 }
+

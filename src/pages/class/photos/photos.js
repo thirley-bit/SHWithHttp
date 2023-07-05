@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Taro from '@tarojs/taro';
 import { View, Text } from "@tarojs/components";
 import { AtButton, AtGrid, AtFab,AtIcon,  } from "taro-ui";
+import NavTab from '@app/component/NavTab/NavTab';
 import { connect } from 'react-redux';
 import "./Photos.scss";
 
@@ -31,7 +32,8 @@ function Photos(props) {
     Taro.navigateTo({url:'/pages/class/Photos/PublishPhotos/PublishPhotos'})
   }
   return (
-    <View className='main'>
+    <View className='index'>
+      <NavTab needBackIcon mainTitle='相册' />
       <View className='top'>
         <AtButton className='button' type='primary' size='small' onClick={handleCreate}>
           新建相册

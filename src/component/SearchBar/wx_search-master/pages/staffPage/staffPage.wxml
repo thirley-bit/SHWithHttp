@@ -1,0 +1,1 @@
+<staffBox bind:delete="deleteItem"></staffBox>

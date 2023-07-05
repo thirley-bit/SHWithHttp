@@ -36,7 +36,7 @@ export default defineAppConfig({
     'pages/addressList/groupChat/groupChat', //通讯录——群聊
     'pages/addressList/message/message', //主页——私信列表页面
     'pages/addressList/message/MessageDetail/MessageDetail', //主页——私信详情页面
-    'pages/addressList/check/check', //通讯录——审核
+    'pages/addressList/Check/Check', //通讯录——审核
 
     //个人中心
     'pages/my/my', // 我的
@@ -55,46 +55,39 @@ export default defineAppConfig({
   },
   tabBar:{
     backgroundColor: '#fff',
+    selectedColor:'#00a3ff',
+    color:'#b6b6b6',
     list:[{
       'pagePath':"pages/class/class",
-      'text': '班级',
-      'iconPath':"static/main.jpg",
-      'selectedIconPath':"static/main.jpg"
-      
-      // 'iconPath':"static/image/main.png",
-      // 'selectedIconPath':"static/image/main_h_.png"
+      'text': '首页',
+      'iconPath':"static/class.png",
+      'selectedIconPath':"static/class-active.png"
     },
     {
       'pagePath':"pages/GrowthFile/GrowthFile",
       'text': '成长档案',
-      'iconPath':"static/main.jpg",
-      'selectedIconPath':"static/main.jpg"
-      
-      // 'iconPath':"static/image/main.png",
-      // 'selectedIconPath':"static/image/main_h_.png"
+      'iconPath':"static/growth.png",
+      'selectedIconPath':"static/growth-active.png"
     },
     {
       'pagePath':"pages/addressList/addressList",
       'text': '通讯录',
-      'iconPath':"static/main.jpg",
-      'selectedIconPath':"static/main.jpg"
-      
-      // 'iconPath':"static/image/main.png",
-      // 'selectedIconPath':"static/image/main_h_.png"
+      'iconPath':"static/address.png",
+      'selectedIconPath':"static/address-active.png"
     },
     {
       'pagePath':"pages/my/my",
-      'text': '个人中心',
-      'iconPath':"static/main.jpg",
-      'selectedIconPath':"static/main.jpg"
-      // 'iconPath':"static/image/my.png",
-      // 'selectedIconPath':"static/image/my_h_.png"
+      'text': '我的',
+      'iconPath':"static/my.png",
+      'selectedIconPath':"static/my-active.png"
     }]
   },
   window: {
     'backgroundTextStyle': 'light',
-    'navigationBarBackgroundColor': '#1F98F0',
+    'navigationBarBackgroundColor': '#0194ff',
     'navigationBarTitleText': '诚道吉科技有限公司',
     'navigationBarTextStyle': 'black',
+    'navigationStyle': "custom",
+    // 'enablePullDownRefresh': false
   },
 })

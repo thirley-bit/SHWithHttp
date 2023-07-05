@@ -1,18 +1,29 @@
+.index{
+    width: 100%;
+    height: 100%;
+    // background-image: url("../../../static/down.png");
+    background: linear-gradient(175deg,rgba(105,194,254,0.8),rgba(107,234,254) 3%,  #F8F9FF 20%),
+}
 .content{
     margin: 20rpx 0;
     .date{
         float: left;
-        width: 28%;
+        width: 25%;
+        // height: 52rpx;
+        background-color: #fff;
         margin: 0 20rpx;
         padding: 0 3%;
-        border: 1rpx solid #000;
-        border-radius: 10rpx;
+        // border: 1rpx solid #000;
+        border: none;
+        border-radius: 15rpx;
     }
     .selector{
         display: inline-block;
         width: 25%;
         padding: 0 3%;
-        border: 1rpx solid #000;
-        border-radius: 10rpx;
+        background-color: #fff;
+        // border: 1rpx solid #000;
+        border: none;
+        border-radius: 15rpx;
     }
 }

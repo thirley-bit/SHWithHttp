@@ -13,8 +13,38 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/addressList/message/MessageDetail/MessageDetail",
-          "pathName": "pages/addressList/message/MessageDetail/MessageDetail",
+          "name": "pages/my/my",
+          "pathName": "pages/my/my",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/class/class",
+          "pathName": "pages/class/class",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/class/MoreArticle/MoreArticle",
+          "pathName": "pages/class/MoreArticle/MoreArticle",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/class/HomeWork/HomeWork",
+          "pathName": "pages/class/HomeWork/HomeWork",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/class/MoreModules/MoreModules",
+          "pathName": "pages/class/MoreModules/MoreModules",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/addressList/Check/Check",
+          "pathName": "pages/addressList/Check/Check",
           "query": "",
           "scene": null
         }

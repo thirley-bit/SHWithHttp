@@ -1,33 +1,23 @@
 import { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import { View, Text } from "@tarojs/components";
 import { AtAvatar, AtButton, AtDivider, AtIcon } from "taro-ui";
 import api from '@/api/api';
 import "./DetailHeader.scss";
-import { connect } from 'react-redux';
 
 function DetailHeader(props) {
-  const { enter, user, id} = props
+  const { enter, user, subjectDetail, scoreDetail, noticeDetail} = props
   const [detailHeaderData,setDetailHeaderData] = useState({})
-  // const data = JSON.parse(decodeURIComponent(router.params.data));
-console.log(user)
 
   useEffect(() => {
-    detailData()
-  }, [])
-
-  const detailData = () => {
-    console.log(id)
-    let url = ''
     if(enter == "homework"){
-      url = "subject/detail"
+      setDetailHeaderData(subjectDetail)
     }else if(enter == "notice"){
-      url = "notice/detail"
+      setDetailHeaderData(noticeDetail)
     }else{
-      url = "score/detail"
+      setDetailHeaderData(scoreDetail)
     }
-    let data = api[url].data
-    setDetailHeaderData(data)
-  }
+  }, [])
 
   const handleCompleted = () => {
     let url = "subject/detail/completed"
@@ -102,5 +92,8 @@ console.log(user)
 }
 
 export default connect(state => ({
-  user:state.users.user
+  user:state.users.user,
+  subjectDetail: state.HomeWork.subjectDetail,
+  scoreDetail: state.Score.scoreDetail,
+  noticeDetail: state.Notice.noticeDetail
 }))(DetailHeader);

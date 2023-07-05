@@ -4,6 +4,7 @@ import { useRouter } from "@tarojs/taro";
 import { AtButton, AtDivider, AtIcon, AtTabs, AtTabsPane } from "taro-ui";
 import DetailHeader from "@app/component/detailHeader/detailHeader";
 import StudentsList from "@app/component/StudentsList/StudentsList";
+import NavTab from '@app/component/NavTab/NavTab';
 import api from "@/api/api";
 
 import "./noticeDetail.scss";
@@ -51,6 +52,8 @@ function NoticeDetail(props) {
 
   return (
     <View className='main'>
+      
+      <NavTab needBackIcon={false} mainTitle='诚道吉' />
       {/* 头部详情 */}
       <DetailHeader />
     </View>

@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import Taro, { useRouter } from "@tarojs/taro";
 import { View, Text, Form, Picker, ScrollView } from "@tarojs/components";
 import { AtButton } from "taro-ui";
+import { connect } from 'react-redux';
 import api from "@/api/api";
 
 import StudentsList from "@app/component/StudentsList/StudentsList";
-import "./sign.scss";
-import { connect } from 'react-redux';
+import NavTab from '@app/component/NavTab/NavTab';
+import "./Sign.scss";
 
 function Sign(props) {
   const { user } = props
@@ -28,83 +29,6 @@ function Sign(props) {
     //   }).then((res) => {
     // setStudents(res.data.data)
     // })
-    // let data = [
-    //   {
-    //     id: 1,
-    //     label: "张三撒旦士大夫士大夫范德萨对方",
-    //     value: "张三撒旦士大夫士大夫范德萨对方",
-    //     status: 0,
-    //     checked: false,
-    //     img: "https://img1.baidu.com/it/u=413643897,2296924942&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500",
-    //   },
-    //   {
-    //     id: 2,
-    //     label: "李四张",
-    //     value: "李四",
-    //     status: 0,
-    //     checked: true,
-    //     img: "https://img1.baidu.com/it/u=413643897,2296924942&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500",
-    //   },
-    //   {
-    //     id: 3,
-    //     label: "王五",
-    //     value: "王五",
-    //     status: 0,
-    //     checked: true,
-    //     img: "https://img1.baidu.com/it/u=413643897,2296924942&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500",
-    //   },
-    //   {
-    //     id: 4,
-    //     label: "刘毅美画面给",
-    //     value: "刘毅",
-    //     status: 1,
-    //     checked: false,
-    //     img: "https://img1.baidu.com/it/u=413643897,2296924942&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500",
-    //   },
-    //   {
-    //     id: 5,
-    //     label: "小四的地方很精美画面给",
-    //     value: "小四",
-    //     status: 0,
-    //     checked: true,
-    //     img: "https://img1.baidu.com/it/u=413643897,2296924942&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500",
-    //   },
-    //   {
-    //     id: 6,
-    //     label: "张九都·打过",
-    //     value: "张九",
-    //     status: 0,
-    //     checked: true,
-    //   },
-    //   {
-    //     id: 7,
-    //     label: "李承白",
-    //     value: "李承白",
-    //     status: 0,
-    //     checked: false,
-    //   },
-    //   {
-    //     id: 8,
-    //     label: "黄文王",
-    //     value: "黄文王",
-    //     status: 0,
-    //     checked: true,
-    //   },
-    //   {
-    //     id: 9,
-    //     label: "方赵宇发发",
-    //     value: "方赵宇",
-    //     status: 1,
-    //     checked: false,
-    //   },
-    //   {
-    //     id: 10,
-    //     label: "张茂如美画面给",
-    //     value: "张茂如",
-    //     status: 0,
-    //     checked: true,
-    //   },
-    // ];
     setStudents(data);
   };
 
@@ -169,6 +93,7 @@ function Sign(props) {
   const onScroll = () => {};
   return (
     <View className='index'>
+    <NavTab needBackIcon mainTitle='安全确认' />
       {user == 0 ? (
         <View className='parent'>
           <View className='parent-item'>

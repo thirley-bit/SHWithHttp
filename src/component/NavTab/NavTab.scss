@@ -1,0 +1,30 @@
+.tabs{
+  height: 12vh;
+}
+.nav_custom_bar{
+    width: 100%;
+    // background: linear-gradient(90deg,#ffa15b, #ff7954);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+    flex-shrink: 0;
+    .nav_custom_bar_back{
+      position: absolute;
+      bottom: 20px;
+      left: 22px;
+      &.hidden{
+        display: none;
+      }
+    }
+    .nav_custom_bar_title{
+      font-size: 35px;
+      font-weight: 500;
+      text-align: left;
+      color: #343434;
+      margin-bottom: 20px;
+      line-height: 48rpx;
+    }
+  }
+  

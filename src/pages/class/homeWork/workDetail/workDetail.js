@@ -4,6 +4,7 @@ import { useRouter } from "@tarojs/taro";
 import { AtButton, AtDivider, AtIcon, AtTabs, AtTabsPane } from "taro-ui";
 import DetailHeader from "@app/component/detailHeader/detailHeader";
 import StudentsList from "@app/component/StudentsList/StudentsList";
+import NavTab from '@app/component/NavTab/NavTab';
 import api from "@/api/api";
 
 import "./workDetail.scss";
@@ -69,6 +70,7 @@ function WorkDetail(props) {
 
   return (
     <View className='main'>
+      <NavTab needBackIcon mainTitle='作业' />
       {/* 头部详情 */}
       <DetailHeader />
       {/* 家长反馈 */}

@@ -1,6 +1,4 @@
-page{
-    background-color: #e0e0e0;
-}
+
 .main{
     position: relative;
 }
@@ -40,10 +38,12 @@ page{
 .work-list{
     position: relative;
     margin: 20rpx 0;
-    .work_card{
+    .at_card{
         position: absolute;
         top: 0;
         left: 0;
+        border-radius: 31rpx;
+        margin: 0;
     }
     .at-card__content{
         width: 70%;

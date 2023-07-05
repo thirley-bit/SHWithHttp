@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { View, Image, Text } from "@tarojs/components";
 import { AtAvatar, AtGrid } from "taro-ui";
+import NavTab from '@app/component/NavTab/NavTab';
 import { connect } from "react-redux";
 
 import "./PhotosDetail.scss";
@@ -16,6 +17,7 @@ function PhotosDetail(props) {
 
   return (
     <View className='main'>
+      <NavTab needBackIcon mainTitle={photoCover.name} />
       <View className='top'>
         <View className='image'>
           <Image mode='aspectFill' className='img' src={photoCover.url} />

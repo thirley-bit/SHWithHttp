@@ -15,6 +15,7 @@ import {
 } from "taro-ui";
 import { View, Button, ScrollView, Input } from "@tarojs/components";
 
+import NavTab from '@app/component/NavTab/NavTab';
 import api from "@/api/api";
 import "./groupChat.scss";
 
@@ -326,7 +327,8 @@ function GroupChat() {
   };
 
   return (
-    <View className='content'>
+    <View className='index'>
+    <NavTab needBackIcon mainTitle='群聊' />
       <AtTabs current={current} tabList={tabList} onClick={handleChange}>
         {/* 新建群聊 */}
         <AtTabsPane current={current} index={0}>

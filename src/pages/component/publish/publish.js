@@ -4,8 +4,9 @@ import Taro, { useRouter } from "@tarojs/taro";
 import { AtButton, AtList, AtIcon } from "taro-ui";
 import DetailHeader from "@app/component/detailHeader/detailHeader";
 import StudentsList from "@app/component/StudentsList/StudentsList";
+import NavTab from '@app/component/NavTab/NavTab';
 import api from "@/api/api";
-import img from "../../../static/img.jpg";
+// import img from "../../../static/img.jpg";
 import "./publish.scss";
 
 function WorkDetail() {
@@ -58,6 +59,7 @@ function WorkDetail() {
 
   return (
     <View className='main'>
+      <NavTab needBackIcon mainTitle='诚道吉222' />
       <View className='components-page'>
         <View className='editor-box'>
           <Editor

@@ -1,4 +1,4 @@
-import { getScoreList, getScoreDetail } from "../services/ScoreServices";
+import { getScoreList, getScoreStudentsList, getScoreDetail } from "../services/ScoreServices";
 
 const model = {
   namespace: "Score",
@@ -67,7 +67,7 @@ const model = {
       return response
     },
     *getScoreDetailArr({payload},{call,put}){
-      const response = yield call(getScoreDetail, payload);
+      const response = yield call(getScoreStudentsList, payload);
       if (response.code == 1) {
         yield put({
             type:"changeScoreDetailArr",
@@ -81,9 +81,10 @@ const model = {
       if (response.code == 1) {
         yield put({
             type: "changeScoreDetail",
-            payload: response.data.filter(
-              (item) => item.score_detail_id == payload
-            )[0],
+            // payload: response.data.filter(
+            //   (item) => item.score_detail_id == payload
+            // )[0],
+            payload: response.data
           })
       }
       return response

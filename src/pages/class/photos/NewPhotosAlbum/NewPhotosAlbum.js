@@ -2,6 +2,7 @@ import { View, Image, Input } from "@tarojs/components";
 import { useState } from "react";
 import Taro from '@tarojs/taro'
 import { AtDivider, AtButton, AtList, AtListItem, AtTextarea } from "taro-ui";
+import NavTab from '@app/component/NavTab/NavTab';
 import "./NewPhotosAlbum.scss"
 
 //新建相册页面
@@ -32,6 +33,8 @@ function NewPhotosAlbum(props) {
   
   return (
     <View className='main'>
+      
+      <NavTab needBackIcon mainTitle='新建相册' />
       <View className='top'>
         <Input
           className='input'

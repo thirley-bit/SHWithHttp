@@ -1,6 +1,7 @@
 import { View } from "@tarojs/components";
 import { AtImagePicker, AtList, AtListItem, AtButton } from "taro-ui";
 import Taro from "@tarojs/taro";
+import NavTab from '@app/component/NavTab/NavTab';
 import { useState } from "react";
 import "./PublishPhotos.scss";
 
@@ -19,6 +20,7 @@ function PublishPhotos() {
   }
   return (
     <View className='main'>
+      <NavTab needBackIcon mainTitle='上传照片' />
       <AtList>
         <AtListItem
           title='上传到'

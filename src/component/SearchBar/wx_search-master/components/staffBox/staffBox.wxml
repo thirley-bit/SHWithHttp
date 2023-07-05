@@ -1,0 +1,14 @@
+<block wx:for="{{list}}" wx:key="index">
+    <view class="item">
+        <view class="box" data-index="{{index}}" bindtouchstart='touchstart' bindtouchmove='touchmove' bindtouchend='touchend' animation="{{item.aniMation}}">
+            <image class="img" mode="aspectFit" src="{{item.src}}"></image>
+            <view class="msgBox">
+                <view class="name">
+                    {{item.name}}<text class="dutyName">-{{item.dutyName}}</text>
+                </view>
+                <view>{{item.phone}}</view>
+            </view>
+        </view>
+        <view class="delete" data-index="{{index}}" bindtap="delete">删除</view>
+    </view>
+</block>

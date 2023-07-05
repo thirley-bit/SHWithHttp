@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { View, Picker} from '@tarojs/components'
 import Work from '@app/component/Work/Work';
+import NavTab from '@app/component/NavTab/NavTab';
 import api from '@/api/api';
 import "./DisplayPublic.scss"
 
@@ -33,7 +34,8 @@ function DisplayPublic(){
     setShowWorkData(data);
   };
   return (
-    <View className='main'>
+    <View className='index'>
+      <NavTab needBackIcon mainTitle='展示墙' />
       <View>
         <View className='content'>
         <View className='date'>

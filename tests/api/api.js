@@ -15,7 +15,7 @@ export default {
       teacher:'张老师', //如果是教师端返回teacher字段
       nick_name:"家长01323", //家人昵称（家长端返回字段）
       relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆（家长端返回字段）
-      avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+      avatar: '',
       token: "fdgdgvfrtgtgfdgf",
     },
     msg: "success",
@@ -169,6 +169,23 @@ export default {
             reason:'不是本班学生',
             token: "fdgdgvfrtgtgfdgf",
         },
+        {
+          uuid: "45344534345",
+          parent_id: 0,
+          phone: "11122233345",
+          pwd: "qwertyui",
+          class_code: "47687867324325344",
+          class_name: "一年级一班",
+          user: 1, //登录身份 0：家长，1：教师
+          student_id:'20232304', //学生序号
+          student_name: "王五",
+          nick_name:"家长01323", //家人昵称
+          relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
+          avatar: '',
+          pass:2,
+          reason:'不是本班学生',
+          token: "fdgdgvfrtgtgfdgf",
+      },
         ],
     msg: "success"
   },
@@ -385,40 +402,125 @@ export default {
   },
 
   //作业
-  "subject/select":{
+  "subject/time/select":{
+    code: 1,
+    //data为数组
+    data: [
+        {
+            uuid:'134554647687988765445398765',
+            subject_type:0, //科目选择  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            work_id:0, //作业列表序号
+            // checked:0, //是否查看状态 0：未查看，1：已查看
+            hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+            hasCompleted:0, //是否完成作业（家长端）
+            title:'【语文】 2023.04.25 （周二）语文练习',
+            author:'张老师',
+            content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
+            time:'2023-06-20 14:34',
+            avatar:'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+        },
+        {
+            uuid:'134554647687988765445398765',
+            subject_type:1, //科目选择  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            work_id:0, //作业列表序号
+            // checked:0, //是否查看状态 0：未查看，1：已查看
+            hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+            hasCompleted:0, //是否完成作业（家长端）
+            title:'【语文】 2023.04.25 （周二）语文练习',
+            author:'张老师',
+            content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
+            time:'2023-06-20 16:34',
+            avatar:'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+        },
+    ], 
+    msg: "success"
+  },
+  "subject/type/title":{
     code:1,
     data:[
       {
         uuid:'134554647687988765445398765',
-        subject_id:0, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+        subject_type:'all', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+        subject_title:'全部'  //科目选择范围 语文，数学，英语，物理，化学，生物
+      },
+      {
+        uuid:'134554647687988765445398765',
+        subject_type:'Chinese', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
         subject_title:'语文'  //科目选择范围 语文，数学，英语，物理，化学，生物
       },
       {
         uuid:'134554647687988765445398765',
-        subject_id:1, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+        subject_type:'Maths', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
         subject_title:'数学'  //科目选择范围 语文，数学，英语，物理，化学，生物
       },
       {
         uuid:'134554647687988765445398765',
-        subject_id:2, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+        subject_type:'English', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
         subject_title:'英语'  //科目选择范围 语文，数学，英语，物理，化学，生物
       },
       {
         uuid:'134554647687988765445398765',
-        subject_id:3, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+        subject_type:'Physics', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
         subject_title:'物理'  //科目选择范围 语文，数学，英语，物理，化学，生物
       },
       {
         uuid:'134554647687988765445398765',
-        subject_id:4, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+        subject_type:'Chemistry', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
         subject_title:'化学'  //科目选择范围 语文，数学，英语，物理，化学，生物
       },
       {
         uuid:'134554647687988765445398765',
-        subject_id:5, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+        subject_type:'Biology', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
         subject_title:'生物'  //科目选择范围 语文，数学，英语，物理，化学，生物
       },
-    ]
+    ], 
+    msg: "success"
+  },
+  "subject/type/select":{
+    code: 1,
+    //data为数组
+    data: [
+        {
+            uuid:'134554647687988765445398765',
+            subject_type:0, //科目选择  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            work_id:0, //作业列表序号
+            // checked:0, //是否查看状态 0：未查看，1：已查看
+            hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+            hasCompleted:0, //是否完成作业（家长端）
+            title:'【语文】 2023.04.25 （周二）语文练习',
+            author:'张老师',
+            content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
+            time:'2023-06-20 14:34',
+            avatar:'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+        },
+        {
+            uuid:'134554647687988765445398765',
+            subject_type:1, //科目选择  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+            work_id:0, //作业列表序号
+            // checked:0, //是否查看状态 0：未查看，1：已查看
+            hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+            hasCompleted:0, //是否完成作业（家长端）
+            title:'【语文】 2023.04.25 （周二）语文练习',
+            author:'张老师',
+            content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
+            time:'2023-06-20 16:34',
+            avatar:'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+        },
+        {
+          uuid:'134554647687988765445398765',
+          subject_type:1, //科目选择  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+          work_id:0, //作业列表序号
+          // checked:0, //是否查看状态 0：未查看，1：已查看
+          hasNew:1,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+          hasCompleted:1, //是否完成作业（家长端）
+          title:'【语文】 2023.04.25 （周二）语文练习',
+          author:'张老师',
+          content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
+          time:'2023-06-20 16:34',
+          avatar:'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
+      },
+    ], 
+    msg: "success"
   },
 
 
@@ -855,12 +957,12 @@ export default {
  
 
   "subject/list": {
-    code: 200,
+    code: 1,
     content: "success",
     data: [
       {
         uuid:'134554647687988765445398765',
-        subject_id:0, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+        subject_type:0, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
         work_id:0, //作业列表序号
         checked:0, //是否查看状态 0：未查看，1：已查看
         hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
@@ -873,7 +975,7 @@ export default {
     },
     {
       uuid:'134554647687988765445398765',
-      subject_id:1, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+      subject_type:1, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
       work_id:1, //作业列表序号
       checked:0, //是否查看状态 0：未查看，1：已查看
       hasNew:1,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
@@ -886,7 +988,7 @@ export default {
     },
     {
       uuid:'134554647687988765445398765',
-      subject_id:2, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+      subject_type:2, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
       work_id:2, //作业列表序号
       checked:0, //是否查看状态 0：未查看，1：已查看
       hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
@@ -899,7 +1001,7 @@ export default {
     },
     {
       uuid:'134554647687988765445398765',
-      subject_id:3, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+      subject_type:3, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
       work_id:3, //作业列表序号
       checked:0, //是否查看状态 0：未查看，1：已查看
       hasNew:1,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
@@ -912,7 +1014,7 @@ export default {
     },
     {
       uuid:'134554647687988765445398765',
-      subject_id:4, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+      subject_type:4, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
       work_id:4, //作业列表序号
       checked:0, //是否查看状态 0：未查看，1：已查看
       hasNew:1,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
@@ -925,7 +1027,7 @@ export default {
     },
     {
       uuid:'134554647687988765445398765',
-      subject_id:5, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+      subject_type:5, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
       work_id:5, //作业列表序号
       checked:0, //是否查看状态 0：未查看，1：已查看
       hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
@@ -955,18 +1057,49 @@ export default {
   },
 
   //家长端
-  "subject/detail/completed":{
+  "subject/completed":{
     code:1,
-    data:{
-      uuid:'134554647687988765445398765',
-      work_id:0,
-      hasCompleted:1, //是否完成作业（家长端）
-      title:'【语文】 2023.04.25 （周二）语文练习',
-      author:'张老师',
-      detail_content:"<p>正文内容</p>",   //HTML代码，完整页面内容
-      time:'2023-11-15  14:12:34',
-      avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
+    data:[
+      {
+        uuid:'134554647687988765445398765',
+        // subject_type:0, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+        work_id:0, //作业列表序号
+        checked:0, //是否查看状态 0：未查看，1：已查看
+        hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+        hasCompleted:0, //是否完成作业（家长端）0:未完成， 1：已完成
+        title:'【语文】 2023.04.25 （周二）语文练习',
+        author:'张老师',
+        content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
+        time:'2023-12-12 14:34',
+        avatar:'',
     },
+    {
+      uuid:'134554647687988765445398765',
+      // subject_type:1, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+      work_id:1, //作业列表序号
+      checked:0, //是否查看状态 0：未查看，1：已查看
+      hasNew:1,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+      hasCompleted:1, //是否完成作业（家长端）
+      title:'【数学】 2023.04.25 （周二）语文练习',
+      author:'张老师',
+      content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
+      time:'2023-12-12 14:34',
+      avatar:'',
+    },
+    {
+      uuid:'134554647687988765445398765',
+      // subject_type:2, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
+      work_id:2, //作业列表序号
+      checked:0, //是否查看状态 0：未查看，1：已查看
+      hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+      hasCompleted:0, //是否完成作业（家长端）
+      title:'【英语】 2023.04.25 （周二）语文练习',
+      author:'张老师',
+      content:"１、完成课后习题１、２；２、抄fdfer额外的市场形成的是fdfdvg上的色佛的人而发热粉色色夫人serfserfserf 二二分地方士大夫是否色粉色发是的发涩粉色色粉色分色法而发热放热峰输入法方法是大润发地方的方法的方式放松放松的方式的方式发是否士大夫色粉色f写课后第二自然段",
+      time:'2023-12-12 14:34',
+      avatar:'',
+    },
+    ],
     msg:"success"
   },
 
@@ -976,20 +1109,26 @@ export default {
       work_id:0,
       student_id:0,
       student_name:'张三',
-      relative:'爸爸', 
+      relative:'爸爸',
+      feed_back_id:0, 
       feed_back:"<p>第一自然段的内容是基地及慈善的成绩是底层就v互动和v大夫v回他如果让他如果突然个人复的跟他沟通人</p>",
       create_time:'2023-11-15  14:12:34',
-      avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
       reply:[
           {
-          from:'张老师',
-          to:'张三爸爸',
-          content:'ffgff'
+            feed_back_id:0,
+            reply_id:0,
+            from:'张老师',
+            avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
+            to:'张三爸爸',
+            content:'作业内容有问题',
+            time:'2023-2-21 12:34'
           },
           {
-          from:'张三爸爸',
-          to:'张老师',
-          content:'ffgff'
+            feed_back_id:0,
+            reply_id:1,
+            from:'张三爸爸',
+            to:'张老师',
+            content:'有什么问题'
           },
       ]
     },
@@ -1126,54 +1265,69 @@ export default {
   //   ],
   //   msg:"success"
   // },
-  "subject/feedback/list":{
+  "subject/feedback/detail/list":{
     code:1,
     data:[
       {
-        work_id:0,
-        student_id:0,
-        student_name:'张三',
-        relative:'爸爸', 
-        feedback:"<p>第一自然段的内容是基地及慈善的成绩是底层就v互动和v大夫v回他如果让他如果突然个人复的跟他沟通人</p>",
-        create_time:'2023-11-15  14:12:34',
-        avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
-        //回复内容，涉及回复多次
-        reply:[
-            {
-            from:'张老师',
-            to:'张三爸爸',
-            content:'ffgff'
-            },
-            {
-            from:'张三爸爸',
-            to:'张老师',
-            content:'ffgff'
-            },
-        ]
+          work_id:0,
+          student_id:0,
+          student_name:'张三',
+          relative:'爸爸', 
+          feed_back_id:0,
+          feed_back:"<p>第一自然段的内容是基地及慈善的成绩是底层就v互动和v大夫v回他如果让他如果突然个人复的跟他沟通人</p>",
+          create_time:'2023-11-15  14:12:34',
+          avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
+          reply:[
+              {
+                  feed_back_id:0,
+                  reply_id:0,
+                  from:'张老师',
+                  to:'张三爸爸',
+                  content:'有问题'
+              },
+              {
+                  feed_back_id:0,
+                  reply_id:1,
+                  from:'张三爸爸',
+                  to:'张老师',
+                  content:'没有问题'
+              },
+          ]
       },
       {
-        work_id:0,
-        student_id:0,
-        student_name:'张三',
-        relative:'爸爸', 
-        feedback:"<p>第一自然段的内容是基地及慈善的成绩是底层就v互动和v大夫v回他如果让他如果突然个人复的跟他沟通人</p>",
-        create_time:'2023-11-15  14:12:34',
-        avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
-        //回复内容，涉及回复多次
-        reply:[
-            {
-            from:'张老师',
-            to:'张三爸爸',
-            content:'ffgff'
-            },
-            {
-            from:'张三爸爸',
-            to:'张老师',
-            content:'ffgff'
-            },
-        ]
-      }
-    ],
+          work_id:0,
+          student_id:0,
+          student_name:'李四',
+          relative:'爸爸', 
+          feed_back_id:1,
+          feed_back:"<p>第一自然段的内容是基地及慈善的成绩是底层就v互动和v大夫v回他如果让他如果突然个人复的跟他沟通人</p>",
+          create_time:'2023-11-15  14:12:34',
+          avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
+          reply:[
+              {
+                  feed_back_id:1,
+                  reply_id:0,
+                  from:'张老师',
+                  to:'张三爸爸',
+                  content:'什么问题'
+              },
+              {
+                  feed_back_id:1,
+                  reply_id:1,
+                  from:'张三爸爸',
+                  to:'张老师',
+                  content:'123'
+              },
+              {
+                  feed_back_id:1,
+                  reply_id:2,
+                  from:'张三爸爸',
+                  to:'张老师',
+                  content:'345问题'
+              },
+          ]
+      },
+  ],
     msg:"success"
   },
 
@@ -1343,7 +1497,7 @@ export default {
       },
       msg:"success"
   },
-  "score/detail/data":{
+  "score/student/list":{
       code: 1,
       //data为数组
       data:[

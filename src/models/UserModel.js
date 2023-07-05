@@ -5,6 +5,7 @@ const model = {
     state: {
       identity:{}, //登录信息
       user:'',
+      enter:'',
       settingList:[
         {
           id:0,
@@ -48,7 +49,8 @@ const model = {
               })
           }
         return response
-      },   
+      }, 
+
       *getParentPassList({ payload }, { call, put}){
         const response = yield call(getParentPassList, payload)
         if(response.code == 1){
@@ -113,6 +115,12 @@ const model = {
         return{
           ...state,
           user:payload
+        }
+      },
+      changeEnter(state, { payload }){
+        return {
+          ...state,
+          enter:payload
         }
       },
       changeParentPassList(state, { payload }){

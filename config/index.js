@@ -38,8 +38,8 @@ const config = {
       url: {
         enable: true,
         config: {
-          // limit: 1024 // 设定转换尺寸上限
-          limit:2000
+          limit: 1024 // 设定转换尺寸上限
+          // limit:2000
         }
       },
       cssModules: {
@@ -57,6 +57,7 @@ const config = {
             "@":path.resolve(__dirname,"../tests"),
             // "@main":path.resolve(__dirname,"../src")
             "@app": path.resolve(__dirname, "../src"),
+            "@static": path.resolve(__dirname, "../src/static")
           }
         }
       })

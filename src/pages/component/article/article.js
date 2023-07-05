@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { View, Image } from "@tarojs/components";
 import { useRouter } from '@tarojs/taro';
+import NavTab from '@app/component/NavTab/NavTab';
 import api from "@/api/api";
 import './Article.scss'
 
@@ -21,6 +22,7 @@ function ArticleDetail(props) {
   };
   return (
     <View className='tabs'>
+      <NavTab needBackIcon mainTitle='诚道吉111' />
       <View className='at-article'>
         <View className='at-article__h1'>{article.title}</View>
         <View className='at-article__info'>

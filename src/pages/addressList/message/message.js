@@ -9,8 +9,9 @@ import {
 } from "@tarojs/components";
 import { AtSearchBar, AtListItem, AtButton, AtIcon } from "taro-ui";
 import PersonList from '@app/component/personList/personList';
+import NavTab from '@app/component/NavTab/NavTab';
 import api from '@/api/api';
-import img from "../../../static/img.jpg";
+// import img from "../../../static/img.jpg";
 import "./message.scss";
 
 //私信页面
@@ -72,7 +73,8 @@ function Message() {
   };
 
   return (
-    <View className='main'>
+    <View className='index'>
+      <NavTab needBackIcon mainTitle='私信' />
       <View className='search'>
         <AtSearchBar />
       </View>

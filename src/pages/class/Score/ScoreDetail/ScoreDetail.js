@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { AtForm, AtInput, AtButton } from 'taro-ui'
 import { connect } from 'react-redux';
 import { useRouter } from '@tarojs/taro';
+import NavTab from '@app/component/NavTab/NavTab';
 import "./ScoreDetail.scss"
 
 //成绩详情页面
@@ -44,6 +45,7 @@ function ScoreDetail(props) {
   };
   return (
     <View className='main'>
+      <NavTab needBackIcon mainTitle='成绩' />
       <AtForm onSubmit={onSubmit} onReset={onReset}>
         {
           showData.map((item,index) => {

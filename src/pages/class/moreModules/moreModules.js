@@ -1,8 +1,20 @@
 import Taro from "@tarojs/taro";
 import { useState } from "react";
-import { View, Navigator, CoverImage, Text } from "@tarojs/components";
-import p2 from "../../../static/main.jpg";
-import "./moreModules.scss";
+import { View, Navigator, Image, Text } from "@tarojs/components";
+import NavTab from '@app/component/NavTab/NavTab';
+
+import homework from "@static/homework.png";
+import notice from "@static/notice.png";
+import message from "@static/message.png";
+import sign from "@static/sign.png";
+import score from "@static/score.png"
+import download from "@static/download.png"
+import examchannel from "@static/examchannel.png"
+import policy from "@static/policy.png"
+import photo from "@static/photo.png"
+import cookbook from "@static/cookbook.png"
+import display from "@static/display.png"
+import "./MoreModules.scss";
 
 //更多应用页面
 function Notice(props) {
@@ -10,19 +22,19 @@ function Notice(props) {
     {
       id: 0,
       title: "安全确认",
-      img: p2,
+      img: sign,
       pageUrl: "/pages/class/Sign/Sign",
     },
     {
       id: 1,
       title: "通知",
-      img: p2,
+      img: notice,
       pageUrl: "/pages/class/Notice/Notice",
     },
     {
       id: 2,
       title: "私信",
-      img: p2,
+      img: message,
       pageUrl: "/pages/addressList/message/message",
     },
   ];
@@ -30,31 +42,31 @@ function Notice(props) {
     {
       id: 0,
       title: "作业",
-      img: p2,
+      img: homework,
       pageUrl: "/pages/class/HomeWork/HomeWork",
     },
     {
       id: 1,
       title: "成绩",
-      img: p2,
+      img: score,
       pageUrl: "/pages/class/Score/Score",
     },
     {
       id: 2,
       title: "资料下载",
-      img: p2,
+      img: download,
       pageUrl: "/pages/class/DataDownLoad/DataDownLoad",
     },
     {
       id: 3,
       title: "参赛通道",
-      img: p2,
+      img: examchannel,
       pageUrl: "/pages/class/ExamChannel/ExamChannel",
     },
     {
       id: 4,
       title: "优惠政策",
-      img: p2,
+      img: policy,
       pageUrl: "/pages/class/Policy/Policy",
     },
   ];
@@ -62,68 +74,69 @@ function Notice(props) {
     {
         id: 0,
         title: "相册",
-        img: p2,
+        img: photo,
         pageUrl: "/pages/class/Photos/Photos",
       },
       {
         id: 1,
         title: "校园食谱",
-        img: p2,
+        img: cookbook,
         pageUrl: "/pages/class/CookBook/CookBook",
       },
       {
         id: 2,
         title: "展示墙",
-        img: p2,
+        img: display,
         pageUrl: "/pages/class/DisplayPublic/DisplayPublic",
       },
   ]
 
   return (
     <View className='index'>
-      <View className='safety'>
-        <Text>家校安全</Text>
+    <NavTab needBackIcon mainTitle='更多' />
+      <View className='head'>
+        <Text className='text'>家校安全</Text>
         <View>
           {safetyList.map((item, index) => {
             return (
               <View className='formItem' key={index}>
                 <Navigator url={`${item.pageUrl}`}>
                   <View className='img'>
-                    <CoverImage src={item.img} />
+                    <Image className='image' src={item.img} />
                   </View>
-                  <View className='text'>{item.title}</View>
+                  <View className='title'>{item.title}</View>
                 </Navigator>
               </View>
             );
           })}
         </View>
       </View>
-      <View className='construction'>
-        <Text>家校共建</Text>
+      <View className='head'>
+        <Text className='text'>家校共建</Text>
         <View>
           {constructionList.map((item, index) => {
             return (
               <View className='formItem' key={index}>
                 <Navigator url={`${item.pageUrl}`}>
                   <View className='img'>
-                    <CoverImage src={item.img} />
+                    <Image className='image' src={item.img} />
                   </View>
-                  <View className='text'>{item.title}</View>
+                  <View className='title'>{item.title}</View>
                 </Navigator>
               </View>
             );
           })}
         </View>
       </View>
-      <View className='share'>
-        <Text>家校共享</Text>
+      <View className='head'>
+        <Text className='text'>家校共享</Text>
         <View>
           {shareList.map((item, index) => {
             return (
               <View className='formItem' key={index}>
                 <Navigator url={`${item.pageUrl}`}>
                   <View className='img'>
-                    <CoverImage src={item.img} />
+                    <Image className='image' src={item.img} />
                   </View>
                   <View className='title'>{item.title}</View>
                 </Navigator>

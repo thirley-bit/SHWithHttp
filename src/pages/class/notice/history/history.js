@@ -1,8 +1,9 @@
 import { useState, useEffect  } from 'react'
 
 import { AtCard, AtFloatLayout, AtList, AtListItem } from "taro-ui";
-import groupPic from '@app/static/my.jpg'
+import groupPic from '@app/static/my.png'
 import { View, Image } from "@tarojs/components";
+import NavTab from '@app/component/NavTab/NavTab';
 import api from '@/api/api'
 import './history.scss'
 
@@ -51,6 +52,8 @@ function History() {
     }
     console.log(showGroupData)
     return <View>
+        
+        <NavTab needBackIcon={false} mainTitle='诚道吉' />
         {
             history && history.map((item,index) => {
                 return <View

@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import Taro from "@tarojs/taro";
-import {
-  View,
-} from "@tarojs/components";
+import { View } from "@tarojs/components";
 import Work from '@app/component/Work/Work';
+import NavTab from '@app/component/NavTab/NavTab';
 import api from '@/api/api';
 
-import "./notice.scss";
+import "./Notice.scss";
 
 
 //通知页面
@@ -26,7 +25,8 @@ function Notice() {
   }
 
   return (
-    <View className='main'>
+    <View className='index'>
+      <NavTab needBackIcon mainTitle='通知' />
       <Work enter='notice'   showData={showWorkData} />
       {/* <View className='components-page'>
         <View className='operate-box' onClick={() => addImage()}>

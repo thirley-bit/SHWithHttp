@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { View, Text} from '@tarojs/components'
 import { connect } from 'react-redux'
 import { AtButton, AtFab, AtIcon } from 'taro-ui'
+import NavTab from '@app/component/NavTab/NavTab'
 import "./ExamChannel.scss"
 
 function ExamChannel(props){
@@ -20,7 +21,8 @@ function ExamChannel(props){
 
  }
   return (
-    <View className='main'>
+    <View className='index'>
+      <NavTab needBackIcon mainTitle='参赛通道' />
       {
         channelArr.map((item,index) => {
           return <View key={index}>

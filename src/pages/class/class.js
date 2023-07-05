@@ -1,27 +1,73 @@
 import { useState, useEffect } from "react";
-import Taro from "@tarojs/taro";
+import Taro, { getCurrentPages } from "@tarojs/taro";
 import { View, Swiper, SwiperItem, Image, Navigator } from "@tarojs/components";
-import { AtList, AtListItem } from "taro-ui";
-import { connect } from 'react-redux'
+import { AtList, AtListItem, AtTabBar, AtNavBar, AtTag } from "taro-ui";
+import { connect } from "react-redux";
 import ArticleList from "@app/component/articleList/articleList";
-import Tabs from "@app/component/tabs/tabs";
-import "./class.scss";
+// import Tabs from "@app/component/tabs/tabs";
+import NavTab from '@app/component/NavTab/NavTab';
 
+import homework from "@static/homework.png";
+import notice from "@static/notice.png";
+import message from "@static/message.png";
+import sign from "@static/sign.png";
+import more from "@static/more.png";
+import down from "@static/down.png";
+import "./class.scss";
+import "../../app.scss";
 
 function Index(props) {
-  const {dispatch, identity, articleArr, bannerList, tabList} = props
-  const [tabsCur, setTabsCur] = useState(0);
+  const { dispatch, identity, articleArr, bannerList } = props;
+  // const [tabsCur, setTabsCur] = useState(0);
+
+  const [current, setCurrent] = useState(0);
+  const tabList = [
+    {
+      title: "作业",
+      image: homework,
+      url: "/pages/class/HomeWork/HomeWork",
+    },
+    {
+      title: "通知",
+      image: notice,
+      url: "/pages/class/Notice/Notice",
+    },
+    {
+      title: "安全确认",
+      // iconType:'user',
+      image: sign,
+      url: "/pages/class/Sign/Sign",
+    },
+    {
+      title: "私信",
+      // iconType:'user',
+      image: message,
+      url: "/pages/addressList/message/message",
+    },
+    {
+      title: "更多",
+      // iconType:'user',
+      image: more,
+      url: "/pages/class/MoreModules/MoreModules",
+    },
+  ];
   useEffect(() => {
     dispatch({
-      type:"users/getUser"
-    })
+      type: "users/getUser",
+    });
     dispatch({
-      type:"Class/getArticleList"
-    })
+      type: "Class/getArticleList",
+    });
   }, []);
 
-  const tabClick = (e) => {
-    setTabsCur(e);
+  // const tabClick = (e) => {
+  //   setTabsCur(e);
+  // };
+  const handleTabClick = (e) => {
+    setCurrent(e);
+    Taro.navigateTo({
+      url: tabList[e].url,
+    });
   };
   const handleMore = () => {
     console.log("more");
@@ -31,8 +77,32 @@ function Index(props) {
     console.log(value);
   };
 
+  const page = getCurrentPages()
+  console.log(page,">>>>page>>>")
+
   return (
     <View className='index'>
+      {/* <View className='ns'>ddd</View> */}
+      {/* <AtNavBar
+        className="nav-bar"
+        onClickRgIconSt={handleClick}
+        onClickRgIconNd={handleClick}
+        onClickLeftIcon={handleClick}
+        color="#000"
+        title="诚道吉科技有限公司"
+        // leftText='你好，XX老师'
+
+        // rightFirstIconType='bullet-list'
+        // rightSecondIconType='user'
+      /> */}
+      <NavTab  needBackIcon={false} mainTitle='诚道吉' />
+      <View className='new'>
+        <AtTag circle className='new-tag'>
+          我的待办
+            <View className='new-num'>10</View> 
+            {"\xa0\xa0\xa0\xa0"}
+        </AtTag>
+      </View>
       <View className='banner'>
         <Swiper
           indicatorColor='#999'
@@ -40,6 +110,7 @@ function Index(props) {
           circular
           indicatorDots
           autoplay
+          style='overflow:hidden;border-radius:32rpx;translateY(0)'
         >
           {bannerList.map((item, index) => {
             return (
@@ -52,9 +123,9 @@ function Index(props) {
           })}
         </Swiper>
       </View>
-      <Tabs user={identity} tabList={tabList} onClick={tabClick} current={tabsCur}></Tabs>
+      <AtTabBar tabList={tabList} onClick={handleTabClick} current={current} />
       <View className='more'>
-        <AtList>
+        <AtList className='more-list'>
           <Navigator url='/pages/class/MoreArticle/MoreArticle'>
             <AtListItem
               title='推荐'
@@ -64,18 +135,22 @@ function Index(props) {
             />
           </Navigator>
         </AtList>
-        <ArticleList
-          articleList={articleArr}
-          onClick={handleClick}
-        ></ArticleList>
+        <Image className='img-down' src={down} />
+        <View>
+          <ArticleList
+            className='more-article'
+            articleList={articleArr}
+            onClick={handleClick}
+          ></ArticleList>
+        </View>
       </View>
     </View>
   );
 }
-export default connect(state => ({
-  title:state.users.title,
-  identity:state.users.identity,
-  articleArr:state.Class.articleArr,
-  bannerList:state.Class.bannerList,
-  tabList:state.Class.tabList
-}))(Index)
+export default connect((state) => ({
+  title: state.users.title,
+  identity: state.users.identity,
+  articleArr: state.Class.articleArr,
+  bannerList: state.Class.bannerList,
+  tabList: state.Class.tabList,
+}))(Index);

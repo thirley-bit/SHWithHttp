@@ -1,44 +1,96 @@
+
+.index{
+    width: 100%;
+    height: 100vh;
+    // padding: 10rpx 32rpx;
+    background: linear-gradient(175deg,rgba(122,201,254,0.8),rgba(107,234,254) 8%, rgba(248,249,255) 23%,  #F8F9FF 20%),
+                // linear-gradient(0deg,rgba(255,255,255,0.2), #F8F9FF 20%, rgba(255,255,255,0.2) 50%);
+
+}
 .my-head{
     position: relative;
     width: 100%;
-    height: 20vh;
-    background-color: #1F98F0;
+    height: 21vh;
     color: #fff;
     .avatar{ 
-        display: flex;
+        position: relative;
         justify-content: center;
-        .icon{
-            position: relative;
-            .icon-top{
+        margin-left: 17%;
+        border-radius: 50%;
+            .image {
                 position: absolute;
-                top:50%;
-                right:0
-            }
-            .icon-bottom{
-                position: absolute;
-                top: 65%;
-                right: 0;
-            }
+                width: 154rpx;
+                height: 154rpx;
+              }
+    }
+    .icon{
+        position: relative;
+        .head-image{
+            position: absolute;
+            width: 46rpx;
+            height: 46rpx;
+            left: 56%;
+            top: -30rpx;
         }
     }
+    .head{
+        display: flex;
+        flex-direction: column;
+    }
+    
     .name{
         display: block;
-        font-size: 36rpx;
+        font-size: 35rpx;
+        font-weight: 500;
+        text-align: left;
         margin-bottom: 2%;
+        color:  #343434;
+        line-height: 48rpx;
+    }
+    .stu-name{
+        color: #6a6a6a;
+        font-size: 27rpx;
+        font-weight: 500;
+        line-height: 38rpx;
+        margin: 13rpx 87rpx 0 0;
+    }
+    .head-right{
+        color: #6a6a6a;
+        font-size: 23rpx;
+        line-height: 33rpx;
+        margin-top: 8rpx;
     }
 }
 .my-content{
     width: 100%;
     background-color:#fff;
-    padding: 2% 0;
+    box-shadow: 0px 0px 20px 1px rgba(10,110,176,0.100000);
+    border-radius: 31rpx;
+    // margin-top: 38rpx;
+    // display: flex;
+    // flex-direction: column;
+    // padding: 44rpx 46rpx 44rpx 46rpx;
+    padding: 4% 0;
+    .content{
+        // margin: 1% 0;
+        height: 4vh;
+    }
     .avatar{ 
         display: flex;
         justify-content: center;
     }
-    .name{
+    .image{
+        width: 48rpx;
+        height: 48rpx;
+        display: flex;
+        justify-content: center;
+    }
+    .content-name{
         display: block;
-        font-size: 36rpx;
-        margin-bottom: 2%;
+        color: #6a6a6a;
+        font-size: 25rpx;
+        margin-bottom: 6rpx;
+        line-height: 1.5;
     }
     .right{
         justify-content: end;
@@ -48,9 +100,11 @@
         background-color: #fff;
         .at-divider{
             background-color: #fff;
-            width: 82%;
+            width: 81%;
             position: absolute;
-            right: 2%;
+            right: 3%;
         }
     }
 }
+
+

@@ -1,5 +1,6 @@
 // import { useState, createContext } from 'react'
 import { View } from '@tarojs/components'
+import NavTab from '@app/component/NavTab/NavTab';
 import "./GrowthFile.scss"
 
 function GrowthFile(){

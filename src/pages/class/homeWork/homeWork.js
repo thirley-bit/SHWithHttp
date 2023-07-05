@@ -1,65 +1,69 @@
 import { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import { View, Picker } from "@tarojs/components";
-import { AtFab, AtIcon } from "taro-ui";
 import Work from "@app/component/Work/Work";
-import api from "@/api/api";
+import NavTab from '@app/component/NavTab/NavTab';
 import "./HomeWork.scss";
 
 // 作业页面
-function HomeWork() {
-  const [selector, setSelector] = useState([]); //科目选择项
-  const [showWorkData, setShowWorkData] = useState([]); //作业列表
+function HomeWork(props) {
+  console.log(props,'props');
+  const { dispatch, homeWorkArr, subjectTitle } = props;
   const [time, setTime] = useState("");
   const [selectorChecked, setSelectorChecked] = useState(""); //选中的科目下标
-  const onTimeChange = (e) => {
-    setTime(e.detail.value);
-  };
-  const onSubChange = (e) => {
-    setSelectorChecked(e.detail.value);
-  };
 
   useEffect(() => {
-    subData();
-    homeWorkData();
+    dispatch({
+      type: "HomeWork/getSubjectList",
+    });
+    dispatch({
+      type: "HomeWork/getTypeTitle",
+    });
   }, []);
-
-  const subData = () => {
-    let url = "subject/select";
-    let data = api[url].data;
-    setSelector(data);
+  const onTimeChange = (e) => {
+    setTime(e.detail.value);
+    dispatch({
+      type: "HomeWork/getTimeSelect",
+      payload: e.detail.value,
+    });
+  };
+  const onSubChange = (e) => {
+    let No = e.detail.value
+    setSelectorChecked(No);
+    dispatch({
+      type: "HomeWork/getTypeSelect",
+      payload: subjectTitle[No].subject_type,
+    });
   };
 
-  const homeWorkData = () => {
-    let url = "subject/list";
-    let data = api[url].data;
-    setShowWorkData(data);
-  };
   return (
-    <View className='main'>
+    <View className='index'>
+      <NavTab needBackIcon mainTitle='作业' />
       <View>
         <View className='content'>
-        <View className='date'>
-          <Picker mode='date' onChange={onTimeChange}>
-            {time == "" ? "请选择日期" : time}
-          </Picker>
+          <View className='date'>
+            <Picker mode='date' onChange={onTimeChange}>
+              {time == "" ? "日期" : time}
+            </Picker>
+          </View>
+          <View className='selector'>
+            <Picker
+              mode='selector'
+              range={subjectTitle.map((item) => item.subject_title)}
+              onChange={onSubChange}
+            >
+              {selectorChecked == ""
+                ? "科目"
+                : subjectTitle[selectorChecked].subject_title}
+            </Picker>
+          </View>
         </View>
-        <View className='selector'>
-          <Picker
-            mode='selector'
-            range={selector.map((item) => item.subject_title)}
-            onChange={onSubChange}
-          >
-            {selectorChecked == ""
-              ? "请选择科目"
-              : selector.filter((item) => item.subject_id == selectorChecked)[0]
-                  .subject_title}
-          </Picker>
-        </View>
-        </View>
-        
       </View>
-      <Work enter='homework' selector={selector} showData={showWorkData} />
+      <Work enter='homework' showData={homeWorkArr} />
     </View>
   );
 }
-export default HomeWork;
+export default connect((state) => ({
+  homeWorkArr: state.HomeWork.homeWorkArr,
+  subjectTitle: state.HomeWork.subjectTitle,
+}))(HomeWork);
