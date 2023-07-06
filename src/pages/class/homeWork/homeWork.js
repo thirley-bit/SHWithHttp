@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import Taro from '@tarojs/taro';
 import { View, Picker } from "@tarojs/components";
 import Work from "@app/component/Work/Work";
 import NavTab from '@app/component/NavTab/NavTab';
@@ -35,9 +36,16 @@ function HomeWork(props) {
       payload: subjectTitle[No].subject_type,
     });
   };
+  const systeminfo = Taro.getSystemInfoSync()
+  console.log(systeminfo,"systemInfo>>>")
+  const windowHeight = systeminfo.windowHeight
+  console.log(windowHeight,">>>winH")
+  const style = {
+    height:windowHeight
+  }
 
   return (
-    <View className='index'>
+    <View className='index' style={style}>
       <NavTab needBackIcon mainTitle='作业' />
       <View>
         <View className='content'>

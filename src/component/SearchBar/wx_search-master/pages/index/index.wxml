@@ -1,2 +1,0 @@
-<view bindtap="goSearch" class="btn">跳转到搜索框组件展示页</view>
-<view bindtap="goStaff" class="btn">跳转到左滑删除组件展示页</view>

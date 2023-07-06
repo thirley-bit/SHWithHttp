@@ -47,6 +47,12 @@
           "pathName": "pages/addressList/Check/Check",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/class/HomeWork/HomeWork",
+          "pathName": "pages/class/HomeWork/HomeWork",
+          "query": "",
+          "scene": null
         }
       ]
     }

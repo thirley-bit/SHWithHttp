@@ -1,7 +1,0 @@
-<view class="searchbar" style="height: {{height}}rpx; width: {{width}}rpx;">
-    <view class="content" style=" width: {{width}}rpx; background-color: {{backoundColor}};">
-        <image src="https://image.yunpeitong56.com/wechat/index/quteorder/Search.png" class="search-icon" hidden="{{hideicon}}"></image>
-        <input bindinput="handleInput" bindconfirm="handleConfirm" type="text" value="{{inputValue}}" placeholder="{{placeholder}}" placeholder-class="placeholder" class="input" confirm-type="search" style="line-height: {{height}}rpx;"></input>
-        <image wx:if="{{inputValue}}" bindtap="handleDeleteClick" class="delete-icon" src="https://image.yunpeitong56.com/wechat/index/quteorder/inputdelete.png"></image>
-    </view>
-</view>

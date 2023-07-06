@@ -11,7 +11,6 @@ function NavTab(props) {
   // console.log(props)
   const router = useRouter();
   const page = getCurrentPages();
-  //   const height = getMenuB
   const { needBackIcon, mainTitle } = props;
   const [navBarHeight, setNavBarHeight] = useState(0);
   useEffect(() => {
@@ -20,14 +19,14 @@ function NavTab(props) {
 
   const getNavHeight = () => {
     let menuButtonObject = Taro.getMenuButtonBoundingClientRect();
-    var sysinfo = Taro.getSystemInfoSync(); // 获取设备系统对象
+    let sysinfo = Taro.getSystemInfoSync(); // 获取设备系统对象
     let statusBarHeight = sysinfo.statusBarHeight; // 获取状态栏高度
     let menuBottonHeight = menuButtonObject.height; //获取胶囊顶部高度
     let menuBottonTop = menuButtonObject.top; // 获取胶囊距离顶部的高度
     let newNavBarHeight =
       statusBarHeight +
       menuBottonHeight +
-      (menuBottonTop - statusBarHeight) * 2; //计算nav导航栏的高度（上图蓝色线段的长度）
+      (menuBottonTop - statusBarHeight) ; //计算nav导航栏的高度
     setNavBarHeight(newNavBarHeight);
   };
 
