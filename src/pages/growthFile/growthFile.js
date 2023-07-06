@@ -7,9 +7,10 @@ function GrowthFile(){
   
  
   return (
-    <View className='main'>
-      暂无数据
+    <View className='index'>
+      <NavTab needBackIcon={false} mainTitle='诚道吉' />
 
+      暂无数据
       </View>
   )
 }

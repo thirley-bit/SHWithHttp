@@ -50,7 +50,7 @@ function My(props) {
   };
   const handleChange = () => {
     console.log("change");
-    Taro.navigateTo({ url: "/pages/component/JoinedClass/JoinedClass" });
+    Taro.navigateTo({ url: "/pages/addressList/Check/Check" });
   };
   const handleNav = () => {
     console.log("nav");

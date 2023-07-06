@@ -23,20 +23,21 @@ function DisplayPublic(){
   }, []);
 
   const subData = () => {
-    let url = "subject/select";
-    let data = api[url].data;
-    setSelector(data);
+    // let url = "subject/select";
+    // let data = api[url].data;
+    // setSelector(data);
   };
 
   const homeWorkData = () => {
-    let url = "subject/list";
-    let data = api[url].data;
-    setShowWorkData(data);
+    // let url = "subject/list";
+    // let data = api[url].data;
+    // setShowWorkData(data);
   };
+
   return (
     <View className='index'>
       <NavTab needBackIcon mainTitle='展示墙' />
-      <View>
+      {/* <View>
         <View className='content'>
         <View className='date'>
           <Picker mode='date' onChange={onTimeChange}>
@@ -57,8 +58,9 @@ function DisplayPublic(){
         </View>
         </View>
         
-      </View>
-      <Work enter='homework' selector={selector} showData={showWorkData} />
+      </View> */}
+      暂无内容
+      {/* <Work enter='homework' selector={selector} showData={showWorkData} /> */}
     </View>
   );
 }

@@ -38,8 +38,8 @@
 .work-list{
     position: relative;
     margin: 20rpx 0;
-    .at_card{
-        position: absolute;
+    .at-card{
+        // position: absolute;
         top: 0;
         left: 0;
         border-radius: 31rpx;
@@ -71,9 +71,11 @@
     }
     .tip{
         position: absolute;
-        top: 50%;
-        right: 8%;
-        text-align: right;
+        // top: 50%;
+        // top: 10vh;
+        right: 3%;
+        bottom: 2vh;
+        text-align: center;
         font-size: 26rpx;
         .tip-text{
             color: #f00;
