@@ -53,6 +53,12 @@
           "pathName": "pages/class/HomeWork/HomeWork",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/addressList/message/MessageDetail/MessageDetail",
+          "pathName": "pages/addressList/message/MessageDetail/MessageDetail",
+          "query": "",
+          "scene": null
         }
       ]
     }
