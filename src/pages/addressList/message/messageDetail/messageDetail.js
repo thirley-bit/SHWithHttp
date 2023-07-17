@@ -16,11 +16,13 @@ import "./MessageDetail.scss";
 //校园食谱页面
 function MessageDetail() {
   const showLeft = "own";
-  // const scrollTop = 20;
-  const [keyboardHeight, setKeyboardHeight] = useState(0)
-  const [bottomHeight, setBottomHeight] = useState(0)
+  const sys = Taro.getSystemInfoSync();
+  console.log(sys,"sys>>>")
+  // const [keyboardHeight, setKeyboardHeight] = useState(0)
+  const [scrollHeight, setScrollHeight] = useState({height:`${sys.windowHeight - sys.statusBarHeight -165 }px`})
+  const [bottomHeight, setBottomHeight] = useState({marginBottom:'0rpx'})
   const [scrollTop, setScrollTop] = useState(0);
-  const [pageNo, setPageNo] = useState(1);
+  // const [pageNo, setPageNo] = useState(1);
   const [inputVal, setInputVal] = useState("");
   const [showData, setShowData] = useState([
     {
@@ -99,16 +101,12 @@ function MessageDetail() {
       // expertImageUrl:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'
     },
   ]);
-  const sys = Taro.getSystemInfoSync();
-  // const style = {height: sys.windowHeight-sys.statusBarHeight}
-  const style = { height: `${sys.windowHeight}px ` };
-  console.log(sys, "sys>>>");
-  console.log(style, "height>>>");
 
   useEffect(() => {
     scrollMsgBottom();
     // rpxTopx()
   }, []);
+
 
   const scrollMsgBottom = () => {
     //外层加延时函数是为了获取到节点的标准信息
@@ -118,19 +116,38 @@ function MessageDetail() {
       query.select("#scrollview").boundingClientRect();
       query.select("#chatlistview").boundingClientRect();
       query.exec((res) => {
+        console.log(res,'res>>>')
         if (res[1].height > res[0].height) {
-          let newScrollTop = rpxTopx(res[1].height - res[0].height);
+          let newScrollTop = res[1].height - res[0].height
           setScrollTop(newScrollTop);
         }
       });
     }, 15);
   };
-  const rpxTopx = (px) => {
-    let deviceWidth = Taro.getSystemInfoSync().windowWidth;
-    console.log(deviceWidth, "wid");
-    let rpx = (750 / deviceWidth) * Number(px);
-    return Math.floor(rpx);
-  };
+  // const rpxTopx = (px) => {
+  //   let deviceWidth = Taro.getSystemInfoSync().windowWidth
+  //   let rpx = ( 750 / deviceWidth ) * Number(px)
+  //   console.log(rpx,'rpx>>>')
+  //   return Math.floor(rpx)
+  // }
+  const handleKeyBoardHeight = () => {
+    Taro.onKeyboardHeightChange(res => {
+      let newKeyboardHeight = res.height - 20
+      if(newKeyboardHeight < 0){
+        setScrollHeight({height:`${sys.windowHeight + sys.statusBarHeight}rpx`})
+        setBottomHeight({marginBottom:'0rpx'})
+        // setKeyboardHeight(0)
+      }else{
+        let newStyle = { height: `${sys.windowHeight - sys.statusBarHeight - newKeyboardHeight}`};
+        setScrollHeight(newStyle)
+        let newBottomHeight = { marginBottom: `${newKeyboardHeight}px`}
+        setBottomHeight(newBottomHeight)
+        // setKeyboardHeight(newKeyboardHeight)
+      }
+    })
+  }
+  
+
   const handleInput = (e) => {
     console.log(e);
     setInputVal(e.detail.value);
@@ -140,14 +157,13 @@ function MessageDetail() {
     console.log(e);
     setInputVal("");
   };
-  const handleKeyboardHeight = (e) => {
-    console.log(e,"e>>>")
-  }
-  console.log(inputVal,"inputValue>>>")
+  console.log(scrollHeight,"dsdfsddv>>>>")
+  console.log(bottomHeight,"bottomHgirhv>>>")
+
 
   return (
     <View className='index'>
-      <NavTab needBackIcon mainTitle='李老师' style='position:fixed' />
+      <NavTab needBackIcon mainTitle='李老师' />
       
       <ScrollView
         id='scrollview'
@@ -155,8 +171,7 @@ function MessageDetail() {
         scrollY
         scrollWithAnimation
         scrollTop={scrollTop}
-        style={style}
-        // style={height:`${wind}`}
+        style={scrollHeight}
       >
         <View id='chatlistview' className='chatRoom'>
           <View className='chatContent'>
@@ -212,21 +227,21 @@ function MessageDetail() {
           </View>
         </View>
       </ScrollView>
-      <View class='chat-bottom'>
-        <View class='send-msg'>
+      <View class='chat-bottom' onClick={handleKeyBoardHeight}>
+        <View class='send-msg' style={bottomHeight} >
           <View class='taro-textarea'>
             <Textarea
               className='text-area'
               value={inputVal}
               maxlength={-1}
+              autoHeight
               showConfirmBar={false}
-              auto-height
+              adjustPosition={false}
               onInput={handleInput}
-              // adjustPosition={false}
-              onKeyboardHeightChange={handleKeyboardHeight}
+              onKeyboardHeightChange={handleKeyBoardHeight}
             ></Textarea>
           </View>
-          <Button onClick={handleSendMessage} class='send-btn'>
+          <Button onClick={handleSendMessage} class='send-btn' >
             发送
           </Button>
         </View>

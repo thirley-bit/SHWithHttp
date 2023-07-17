@@ -4,6 +4,7 @@
         .at-card{
             position: relative;
             border: none;
+            background-color: rgba(255,255,255,0);
             border-bottom: 1PX #d6e4ef solid;
             padding: 1% 0;
             .at-card__header{
@@ -12,8 +13,16 @@
             .left{
                 float: left;
             }
-            .at-atbadge{
+            .at-badge{
                 float: left;
+                .at-badge__num {
+                    padding: 5rpx 5rpx;
+                    top: -4rpx;
+                    right: 5PX;
+                    font-size: 20rpx;
+                    line-height: 1.4;
+                    border-radius: 50%;
+                }
             }
             .card-content{
                 display: inline-block;

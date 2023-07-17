@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Taro from "@tarojs/taro";
 import { View, Text,   } from "@tarojs/components";
 import { AtButton, AtCard, AtFab, AtIcon } from "taro-ui";
+import GradientButton from '@app/component/GradientButton';
 import { connect } from 'react-redux';
 import "./Work.scss";
 
@@ -96,17 +97,9 @@ function Work(props) {
                     {enter == "homework" &&
                       user == "0" &&
                       (item.hasCompleted == 1 ? (
-                        <AtButton type='secondary' size='small'>
-                          已完成
-                        </AtButton>
+                        <GradientButton type='secondary'>已完成</GradientButton>
                       ) : (
-                        <AtButton
-                          type='primary'
-                          size='small'
-                          onClick={() => handleCompleted(item)}
-                        >
-                          未完成
-                        </AtButton>
+                        <GradientButton type='primary'>未完成</GradientButton>
                       ))}
                     {enter == "score" &&
                       user == "1" &&

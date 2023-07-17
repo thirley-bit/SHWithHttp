@@ -70,8 +70,9 @@ function ChildMsg(props) {
     console.log('save')
   }
   return (
-    <View className='main'>
+    <View className='index'>
     <NavTab needBackIcon mainTitle='孩子信息' />
+    <View className='main'>
       <AtForm>
         {showData.map((item, index) => {
           return (
@@ -87,6 +88,7 @@ function ChildMsg(props) {
           );
         })}
       </AtForm>
+      </View>
       <View className='other'>
         <View className='another'>
           <Text>在此班级中是否还有其他小孩？</Text>

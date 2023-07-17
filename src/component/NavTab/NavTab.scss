@@ -1,5 +1,8 @@
 .tabs{
   height: 12vh;
+  position: sticky;
+  top: 10rpx;
+  z-index: 999;
 }
 .nav_custom_bar{
     width: 100%;

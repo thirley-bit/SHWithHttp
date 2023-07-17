@@ -11,6 +11,8 @@ import {
 
 import StudentsList from "@app/component/StudentsList/StudentsList";
 import Table from "@app/component/Table/Table";
+import GradientButton from '@app/component/GradientButton';
+import normal from "@static/normal.png"
 import api from "@/api/api";
 import { connect } from "react-redux";
 
@@ -24,45 +26,15 @@ function DetailContent(props) {
   const [current, setCurrent] = useState(0);
   const [tabList, setTabList] = useState([]);
   const [isEdit, setIsEdit] = useState(false); //是否修改反馈 true：修改反馈 false：提交反馈
-  // const [allList, setAllList] = useState([]); //全部学生列表
-  // const [delivered, setDelivered] = useState([]); //已交列表
-  // const [noDelivered, setNoDelivered] = useState([]); //未交列表
-
   console.log(submitListAll,submitListAll.length,submittedList,submittedList.length,'length')
 
   useEffect(() => {
     dispatch({
       type: "Score/getScoreDetailArr",
     });
-    // if(user == 0){
-    //   dispatch({
-    //     type: "HomeWork/getFeedBackDetail",
-    //   });
-    // }else{
-    //   dispatch({
-    //     type:'HomeWork/getStudentsList'
-    //   })
-    //   dispatch({
-    //     type: 'HomeWork/getFeedBackList'
-    //   })
-    // }
     studentsList()
   }, [user]);
-  // useEffect(() => {
-  //   studentsList();
-  // },[])
-
   const studentsList = () => {
-    // 数据初始化，并处理数据
-    // let url = "students/list";
-    // let data = api[url].data;
-    // let newDelivered = data.filter((item) => item.hasCompleted === 0);
-    // let newNoDelivered = data.filter((item) => item.hasCompleted === 1);
-    // setStudentsData(data);
-    // setAllList(data);
-    // setDelivered(newDelivered);
-    // setNoDelivered(newNoDelivered);
-    console.log(submitListAll.length,"allLenght")
     let tab = [];
     if (user == 0 && enter == "homework") {
       tab = [
@@ -99,8 +71,6 @@ function DetailContent(props) {
     } else if (index == 2) {
       setStudentsData(notSubmittedList);
     } else {
-      // let url = "subject/feedback/detail/list";
-      // let data = api[url].data;
       setStudentsData(feedBackList);
     }
   };
@@ -137,16 +107,17 @@ function DetailContent(props) {
                 feedBack.reply.map((item, index) => {
                   return (
                     <View key={index} className='feed-content'>
-                        <View className='at-row at-row--wrap'>
-                          <View className='at-col at-col-2 at-col--wrap'>
+                        <View className='at-row'>
+                          <View className='at-col at-col-2'>
                             <View className='card-img'>
-                              <AtAvatar className='img' size='small' circle image={item.avatar} />
+                              <AtAvatar className='img' size='small' circle image={item.avatar ? item.avatar : normal} />
                             </View>
                           </View>
-                          <View className='at-col at-col-9'>
+                          <View className='at-col at-col-9 at-col--wrap' style='margin-top:1%'>
                             <View className='card-name'>{item.from}</View>
                             <View className='card-content'>
-                              回复<Text className='card-name' style='margin:0 6rpx'>{item.to}:</Text>{item.content}
+                              回复<Text className='card-name' style='margin:0 6rpx'>{item.to}:</Text>
+                              {item.content}
                             </View>
                           </View>
                         </View>
@@ -154,11 +125,11 @@ function DetailContent(props) {
                   );
                 })}
             </View>
-            <AtDivider className='divider' />
             {/* 插入图片和文字 */}
             {isEdit && (
               // 家长端修改反馈内容时显示
               <View className='insert'>
+                <AtDivider className='divider' />
                 <View className='img'>
                   <AtIcon value='image'></AtIcon>
                   <Text>添加图片</Text>
@@ -169,13 +140,13 @@ function DetailContent(props) {
                 </View>
               </View>
             )}
-            <AtButton
+            <GradientButton
               type='primary'
               className='send-button'
               onClick={() => handleSend()}
             >
               {isEdit ? "提交反馈" : "修改反馈"}
-            </AtButton>
+            </GradientButton>
           </View>
         )}
         {user == "1" && enter == "homework" && (

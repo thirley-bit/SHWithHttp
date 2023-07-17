@@ -56,7 +56,7 @@ function DataDownLoad(props) {
   return (
     <View className='index'>
       <NavTab needBackIcon mainTitle='资料下载' />
-      <View>
+      <View className='search'>
         <AtSearchBar />
       </View>
       <View>

@@ -1,63 +1,73 @@
+
 .header{
     position: relative;
     width: 98%;
     height: 20%;
-    padding: 1%;
+    padding: 0 3%;
     background-color: #fff;
+    .title{
+        font-size: 31rpx;
+        font-weight: 500;
+        color: #333333;
+    }
     .note{
         position: relative;
         color: rgb(199, 198, 198);
         font-size: 26rpx;
         height: 40rpx;
+        margin: 1% 0;
         .img{
             float: left;
-            width: 55rpx;
-            height: 55rpx;
+            width: 46rpx;
+            height: 46rpx; 
             margin: 0 2%;
         }
         .extra{
             position: absolute;
-            height: 20rpx;
+            height: 33rpx;
+            font-size: 23rpx;
+            color: #999999;
+            line-height: 33rpx;
             top: 50%;
             transform: translateY(-50%);
         }
     }
-    .divider{
-        height: 26rpx;
-    }
-    // .content{
-        // display: flex;
-        //家长端布局
         .text{
             width: 80%;
-            font-size: 30rpx;
-            color: #525151;
+            font-size: 28rpx;
+            font-weight: 500;
+            color: #4c4c4c;
+            line-height: 1.5;
         }
         .content{
-            // position: relative;
-            .button{
-                position: fixed;
-                top: 11%;
-                right: 1%;
-                text-align: right;
-            }
+            position: absolute;
+            top: 8vh;
+            right: 5%; 
         }
         
         //教师端布局
         .text100{
-            width: 100%;
-            font-size: 30rpx;
-            color: #525151;
+            width: 99%;
+            font-size: 28rpx;
+            font-weight: 500;
+            color: #4c4c4c;
+            line-height: 1.5;
         }
         .edit{
             display: flex;
             justify-content: flex-end;
             margin-right: 6%;
-            // .text{
-            //     font-size: 24rpx;
-            // }
+        }
+        .content-edit{
+            position: relative;
         }
         
-        
-    // }
+}
+.divider{
+    height: 26rpx;
+    opacity: 0.8;
+    width: 98%;
+    .at-divider__line{
+        background-color: #e6e6e6;
+    }
 }

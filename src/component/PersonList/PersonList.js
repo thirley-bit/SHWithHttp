@@ -79,8 +79,9 @@ function PersonList(props) {
                 {item.new == 1 ? (
                   // 如果有新消息，则加徽标
                   <View className='left'>
-                    <AtBadge dot>
+                    <AtBadge value={10}>
                       <AtAvatar
+                        circle
                         className='img'
                         size='small'
                         image={item.avatar}
@@ -90,6 +91,7 @@ function PersonList(props) {
                 ) : (
                   <View className='left'>
                     <AtAvatar
+                      circle
                       className='img'
                       size='small'
                       image={item.avatar}

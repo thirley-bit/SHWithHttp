@@ -66,13 +66,9 @@
     background-color:#fff;
     box-shadow: 0px 0px 20px 1px rgba(10,110,176,0.100000);
     border-radius: 31rpx;
-    // margin-top: 38rpx;
-    // display: flex;
-    // flex-direction: column;
-    // padding: 44rpx 46rpx 44rpx 46rpx;
     padding: 4% 0;
     .content{
-        // margin: 1% 0;
+        position: relative;
         height: 4vh;
     }
     .avatar{ 
@@ -97,11 +93,11 @@
     }
     .divider{
         width: 100%;
-        background-color: #fff;
+        top: 100%;
+        position: absolute;
         .at-divider{
-            background-color: #fff;
-            width: 81%;
             position: absolute;
+            width: 81%;
             right: 3%;
         }
     }

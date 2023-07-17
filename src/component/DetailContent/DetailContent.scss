@@ -5,10 +5,16 @@
   margin: 2% 0;
   background-color: #fff;
   .tab-title {
-    padding: 3% 1% 0 1%;
+    font-size: 31rpx;
+    font-weight: 500;
+    color: #333;
+    padding: 1% 1% 0 3%;
   }
   .content {
-    margin: 2% 2%;
+    margin: 2% 3%;
+    font-size: 28rpx;
+    color: #666666;
+    line-height: 1.5;
   }
   .feed {
     width: 96%;
@@ -43,23 +49,21 @@
     height: 100rpx;
   }
 }
-.send-button {
-  position: fixed;
-  width: 98%;
-  bottom: 1%;
-  margin: 1%;
-}
+// .send-button {
+//   position: fixed;
+//   width: 98%;
+//   bottom: 1%;
+//   margin: 1%;
+// }
 
 .at-card__header {
   display: none;
 }
-.at-row--wrap {
-  position: relative;
-}
+
 .card-name {
   color: #6290d0;
-  font-size: 30rpx;
+  font-size: 24rpx;
 }
 .card-content {
-  color: #646464;
+  font-size: 26rpx;
 }

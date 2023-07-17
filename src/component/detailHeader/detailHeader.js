@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { View, Text } from "@tarojs/components";
 import { AtAvatar, AtButton, AtDivider, AtIcon } from "taro-ui";
+// import GradientButton from '@app/component/GradientButton';
+
+import GradientButton from "@app/component/GradientButton";
 import api from '@/api/api';
 import "./DetailHeader.scss";
 
@@ -20,13 +23,14 @@ function DetailHeader(props) {
   }, [])
 
   const handleCompleted = () => {
-    let url = "subject/detail/completed"
-    let data = api[url].data
-    setDetailHeaderData(data)
+    console.log(12124344)
+    // let url = "subject/detail/completed"
+    // let data = api[url].data
+    // setDetailHeaderData(data)
   }
   return (
     // 详情头部组件
-    <View className='main'>
+    <View className='index'>
       <View className='header'>
         <Text className='title'>{detailHeaderData.title}</Text>
         <View className='note'>
@@ -49,20 +53,16 @@ function DetailHeader(props) {
             {enter == "homework" && (
               <View>
                 {detailHeaderData.hasCompleted == 1 ? (
-                  <AtButton className='button' size='small'>
-                    已完成
-                  </AtButton>
+                  <GradientButton type='secondary'>已完成</GradientButton>
                 ) : (
-                  <AtButton className='button' type='primary' size='small' onClick={handleCompleted}>
-                    未完成
-                  </AtButton>
+                  <GradientButton type='primary' onClick={handleCompleted}>未完成</GradientButton>
                 )}
               </View>
             )}
           </View>
         ) : (
           // 存在于教师端的作业和通知部分
-          <View className='content'>
+          <View className='content-edit'>
             <AtDivider className='divider' />
             <View className='edit'>
               <View className='img'>
@@ -79,7 +79,7 @@ function DetailHeader(props) {
                   className='icon'
                   value='trash'
                   size='25'
-                  color='#999'
+                  color='#F00'
                 ></AtIcon>
                 <Text className='text'>删除</Text>
               </View>

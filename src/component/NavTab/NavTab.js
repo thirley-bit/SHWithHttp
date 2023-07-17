@@ -26,7 +26,7 @@ function NavTab(props) {
     let newNavBarHeight =
       statusBarHeight +
       menuBottonHeight +
-      (menuBottonTop - statusBarHeight) ; //计算nav导航栏的高度
+      (menuBottonTop - statusBarHeight); //计算nav导航栏的高度
     setNavBarHeight(newNavBarHeight);
   };
 

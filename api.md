@@ -500,7 +500,7 @@
         {
             uuid:134554647687988765445398765,
             type:1,  //接口请求时查找的范围 0:全部，1:教育，2：安全，3：智慧
-            type_id:0,
+            article_id:0,  //文章序号
             title:'防溺水创意微视频⑨｜丹巴县城区小学校',
             create_time:'2023-11-15  14:12:34',
             img_url:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
@@ -515,7 +515,7 @@
 * request body
 ```json
 {
-    type_id:0,
+    article_id:0,
     token:fdgdgvfrtgtgfdgf
 }
 ```
@@ -527,7 +527,7 @@
     //data为对象
     data: {
             uuid:134554647687988765445398765,
-            type_id:0
+            article_id:0
             author:张老师,
             title:防溺水创意微视频⑨｜丹巴县城区小学校,
             detail_content:"<p>正文内容</p>"   //HTML代码，完整页面内容

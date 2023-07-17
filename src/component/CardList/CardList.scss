@@ -1,9 +1,10 @@
 .my-card{
-    background-color: #fff;
+    // background-color: #fff;
     // padding: 3% 0;
     .card-item{
         border: none;
         border-bottom: 1PX #d6e4ef solid;
+        background-color: rgba(255,255,255,0);
         .at-card__header{
             display: none;
         }

@@ -1,0 +1,19 @@
+.button{
+    font-size: 23rpx;
+    &.at-button--primary{
+        background: linear-gradient(135deg, #1BA5FF,#26E2FF);
+        color: #fff;
+        border: none;
+    }
+    &.at-button--secondary{
+        border-color: #B2B2B2;
+        color: #B2B2B2;
+    }
+    &.send-button{
+        width: 100%;
+        font-size: 23rpx;
+        position: fixed;
+        bottom: 20rpx;
+        left: 3%;
+    }
+}

@@ -12,11 +12,6 @@ function WorkDetail(props) {
   const {
     dispatch,
     user,
-    feedBack,
-    submitListAll,
-    submittedList,
-    notSubmittedList,
-    feedBackList,
   } = props;
   const router = useRouter();
   const enter = router.params.enter;
@@ -42,10 +37,11 @@ function WorkDetail(props) {
   }, []);
 
   return (
-    <View className='main'>
+    <View className='detail-header'>
       <NavTab needBackIcon mainTitle='作业' />
       {/* 头部详情——不含成绩发布和保存页面 */}
       <DetailHeader enter={enter} />
+      <View className='detail-center'></View>
       {/* 仅存在于作业和成绩部分 */}
       {(enter == "homework" || enter == "score") && (
         <DetailContent enter={enter} id={id} />

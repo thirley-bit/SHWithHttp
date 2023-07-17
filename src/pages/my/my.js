@@ -100,7 +100,6 @@ function My(props) {
                   <Text className='content-name'>{item.name}</Text>
                 </View>
                 <View className='at-col at-col-3 right' onClick={handleNav}>
-                  {/* <AtIcon value='chevron-right' size='15'></AtIcon> */}
                   <Image className='image' src={right} />
                 </View>
                 <View className='divider'>
