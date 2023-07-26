@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Taro from "@tarojs/taro";
 import { connect } from "react-redux";
-import { View } from "@tarojs/components";
+import { View, Text } from "@tarojs/components";
 import { AtCard, AtAvatar, AtModal, AtIcon, AtBadge } from "taro-ui";
 import "./PersonList.scss";
 
@@ -98,14 +98,12 @@ function PersonList(props) {
                     />
                   </View>
                 )}
-
                 <View className='card-content clearfix'>
                   {/* 老师列表展示的老师名称及其他信息 */}
-                  <View className='card-center'>
+                  <View className='card-center '>
                     <View className='card-name'>{title}</View>
-                    <View className='card-msg'>{note}</View>
+                    <Text className='card-msg'>{note}</Text>
                   </View>
-                  {/* 仅在私信页面显示聊天时间 */}
                 </View>
               </View>
               {/* 右侧操作按钮（家人列表/学生列表无操作按钮  */}
@@ -131,6 +129,7 @@ function PersonList(props) {
                   </View>
                 </View>
               )}
+              {/* 仅在私信页面显示聊天时间 */}
               {enter == "message" && (
                 <View className='card-right'>
                   <View className='card-time'>

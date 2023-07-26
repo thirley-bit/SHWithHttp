@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import Taro from "@tarojs/taro";
+import { connect } from 'react-redux';
 import { AtAvatar, AtButton, AtInput, AtTextarea } from "taro-ui";
 import {
   View,
-  Input,
   Image,
   Textarea,
   ScrollView,
@@ -13,11 +13,11 @@ import NavTab from "@app/component/NavTab/NavTab";
 import normal from "@static/normal.png";
 import "./MessageDetail.scss";
 
-//校园食谱页面
-function MessageDetail() {
-  const showLeft = "own";
+function MessageDetail(props){
+  console.log(props,'propsdetail')
+  const { dispatch, showLeft, messageDetail} = props
+  // const showLeft = "own";
   const sys = Taro.getSystemInfoSync();
-  console.log(sys,"sys>>>")
   // const [keyboardHeight, setKeyboardHeight] = useState(0)
   const [scrollHeight, setScrollHeight] = useState({height:`${sys.windowHeight - sys.statusBarHeight -165 }px`})
   const [bottomHeight, setBottomHeight] = useState({marginBottom:'0rpx'})
@@ -29,47 +29,47 @@ function MessageDetail() {
       speaker: "other",
       expertName: "刘老师",
       content: "eeeeeee对方的豆腐干大锅饭发红包发给红包发给豆腐干豆腐干地方",
-      expertImageUrl:
+      expertAvatar:
         "https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2",
     },
     {
       speaker: "teacher1",
       expertName: "李老师2",
       content: "eeeeeee对方的豆腐干大锅饭发红包发给红包发给豆腐干豆腐干地方",
-      // expertImageUrl:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'
+      // expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'
     },
     {
       speaker: "other",
       expertName: "刘老师",
       content: "eeeeeee对方的豆腐干大锅饭发红包发给红包发给豆腐干豆腐干地方",
-      expertImageUrl:
+      expertAvatar:
         "https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2",
     },
     {
       speaker: "own",
       userName: "张三爸爸",
-      userImageUrl:
+      userAvatar:
         "https://tse1-mm.cn.bing.net/th/id/OIP-C.6bIS7AFNOpR19axzN94_AAHaHa?w=184&h=184&c=7&r=0&o=5&pid=1.7",
       content: "法规的规定符合符合法规和法规的规定国防部分布广泛",
     },
     {
       speaker: "own",
       userName: "张三爸爸",
-      userImageUrl:
+      userAvatar:
         "https://tse1-mm.cn.bing.net/th/id/OIP-C.6bIS7AFNOpR19axzN94_AAHaHa?w=184&h=184&c=7&r=0&o=5&pid=1.7",
       content: "法规的规定符合符合法规和法规的规定国防部分布广泛",
     },
     {
       speaker: "own",
       userName: "张三爸爸",
-      userImageUrl:
+      userAvatar:
         "https://tse1-mm.cn.bing.net/th/id/OIP-C.6bIS7AFNOpR19axzN94_AAHaHa?w=184&h=184&c=7&r=0&o=5&pid=1.7",
       content: "法规的规定符合符合法规和法规的规定国防部分布广泛",
     },
     {
       speaker: "own",
       userName: "张三爸爸",
-      userImageUrl:
+      userAvatar:
         "https://tse1-mm.cn.bing.net/th/id/OIP-C.6bIS7AFNOpR19axzN94_AAHaHa?w=184&h=184&c=7&r=0&o=5&pid=1.7",
       content: "法规的规定符合符合法规和法规的规定国防部分布广泛",
     },
@@ -78,31 +78,34 @@ function MessageDetail() {
       userName: "张三爸爸",
       content:
         "eeeeeeeword   my name is thirkey对方的豆腐干大锅饭发红包发给红包发给豆腐干豆腐干地方",
-      // userImageUrl:
+      // userAvatar:
       // "https://tse1-mm.cn.bing.net/th/id/OIP-C.6bIS7AFNOpR19axzN94_AAHaHa?w=184&h=184&c=7&r=0&o=5&pid=1.7",
     },
     {
       speaker: "other",
       expertName: "刘老师",
       content: "eeeeeee对方的豆腐干大锅饭发红包发给红包发给豆腐干豆腐干地方",
-      expertImageUrl:
+      expertAvatar:
         "https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2",
     },
     {
       speaker: "other",
       expertName: "李老师",
       content: "eeeeeee对方的豆腐干大锅饭发红包发给红包发给豆腐干豆腐干地方",
-      // expertImageUrl:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'
+      // expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'
     },
     {
       speaker: "teacher1",
       expertName: "李老师1",
       content: "eeeeeee对方的豆腐干大锅饭发红包发给红包发给豆腐干豆腐干地方",
-      // expertImageUrl:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'
+      // expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'
     },
   ]);
 
   useEffect(() => {
+    dispatch({
+      type:'AddressList/getMessageDetail'
+    })
     scrollMsgBottom();
     // rpxTopx()
   }, []);
@@ -157,8 +160,6 @@ function MessageDetail() {
     console.log(e);
     setInputVal("");
   };
-  console.log(scrollHeight,"dsdfsddv>>>>")
-  console.log(bottomHeight,"bottomHgirhv>>>")
 
 
   return (
@@ -175,7 +176,10 @@ function MessageDetail() {
       >
         <View id='chatlistview' className='chatRoom'>
           <View className='chatContent'>
-            {showData?.map((item, index) => {
+            {messageDetail?.map((item, index) => {
+              // let userAvatar = JSON.stringify(item.userAvatar) === '{}' ? normal : item.userAvatar
+              // let expertAvatar = JSON.stringify(item.expertAvatar) === '{}' ? normal : item.expertAvatar
+              // // console.log(userAvatar, expertAvatar ,'avatar')
               //右侧聊天框
               if (item?.speaker == "own") {
                 return (
@@ -183,9 +187,15 @@ function MessageDetail() {
                     <Image
                       className='img'
                       src={
-                        (showLeft == "own"
-                          ? item?.userImageUrl
-                          : item?.expertImageUrl) ?? normal
+                        JSON.stringify(item.userAvatar) === '{}' ? normal : item.userAvatar
+                        // normal
+                        // (showLeft = 'own' ? JSON.stringify(item.userAvatar) != '{}' ? item.userAvatar : JSON.stringify(item.expertAvatar)  != '{}' ? item.expertAvatar ): normal
+                        //   : JSON.stringify(item.expertAvatar)  === '{}'
+                        // showLeft == "own" ? userAvatar : expertAvatar
+                        // (showLeft == "own"
+                        //   ? JSON.stringify(item.userAvatar) === '{}'
+                        //   : JSON.stringify(item.expertAvatar)  === '{}')
+                        //    ?? normal
                       }
                       alt=''
                     />
@@ -207,8 +217,8 @@ function MessageDetail() {
                       className='img'
                       src={
                         (showLeft == "own"
-                          ? item?.expertImageUrl
-                          : item?.userImageUrl) ?? normal
+                          ? item?.expertAvatar
+                          : item?.userAvatar) ?? normal
                       }
                       alt=''
                     />
@@ -249,4 +259,7 @@ function MessageDetail() {
     </View>
   );
 }
-export default MessageDetail;
+export default connect((state) => ({
+  showLeft:state.AddressList.showLeft,
+  messageDetail: state.AddressList.messageDetail
+}))(MessageDetail);

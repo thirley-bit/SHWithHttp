@@ -76,14 +76,6 @@ function Index(props) {
   const handleClick = (value) => {
     console.log(value);
   };
-  
-  const systeminfo = Taro.getSystemInfoSync()
-  console.log(systeminfo,"systemInfo>>>")
-  const windowHeight = systeminfo.windowHeight
-  console.log(windowHeight,">>>winH")
-
-  const page = getCurrentPages()
-  console.log(page,">>>>page>>>")
 
   return (
     <View className='index'>

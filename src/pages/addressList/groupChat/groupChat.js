@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Taro from "@tarojs/taro";
 
+import { connect } from 'react-redux';
 import {
   AtTabs,
   AtTabsPane,
@@ -11,15 +12,17 @@ import {
   AtModalContent,
   AtModalAction,
   AtIcon,
-  AtButton,
 } from "taro-ui";
 import { View, Button, ScrollView, Input } from "@tarojs/components";
-
+import GradientButton from '@app/component/GradientButton';
 import NavTab from '@app/component/NavTab/NavTab';
+import normal from '@static/normal.png'
 import api from "@/api/api";
 import "./groupChat.scss";
 
-function GroupChat() {
+function GroupChat(props) {
+  console.log(props,"chatprops")
+  const { dispatch, studentsList} = props
   const scrollTop = 0;
   const Threshold = 20;
   const [current, setCurrent] = useState(0);
@@ -37,7 +40,7 @@ function GroupChat() {
   const [isOpenedEdit, setIsOpenedEdit] = useState(false);
   const [labelName, setLabelName] = useState(""); //朋友页面添加标签名
   const [labelEdit, setLabelEdit] = useState({}); //群组页面修改标签名
-  console.log(labelEdit)
+  console.log(checkedList,'list>>>')
 
   const tabList = [
     {
@@ -49,6 +52,9 @@ function GroupChat() {
   ];
 
   useEffect(() => {
+    dispatch({
+      type:'HomeWork/getStudentsList'
+    })
     studentsData();
     groupData();
   }, []);
@@ -64,7 +70,7 @@ function GroupChat() {
             size='small'
             circle
             className='avatar-img'
-            image={item.img}
+            image={item.avatar ? item.avatar : normal}
           />
           <View className='label-text'>{item.student_name}</View>
         </View>
@@ -220,7 +226,6 @@ function GroupChat() {
       }
     }
   };
-  console.log(showLabelData,"showLabelData")
 
   //选中的人员或标签，current为0时选中人员，current为1时选中标签
   const handleSelect = (value) => {
@@ -281,7 +286,7 @@ function GroupChat() {
   };
 
   const scrollHeight = {
-    height: "420px",
+    height: "63vh",
   };
 
   const handleClose = () => {
@@ -329,10 +334,13 @@ function GroupChat() {
   return (
     <View className='index'>
     <NavTab needBackIcon mainTitle='群聊' />
+    <View className='group-content'>
+
+    </View>
       <AtTabs current={current} tabList={tabList} onClick={handleChange}>
         {/* 新建群聊 */}
         <AtTabsPane current={current} index={0}>
-          <View className='main'>
+          <View className='group-list'>
             {/* 新建群聊——人员搜索 */}
             <View className='search'>
               <AtSearchBar
@@ -392,17 +400,18 @@ function GroupChat() {
               </AtModal>
             </View>
           </View>
-          <AtButton
+          {/* <AtButton
             type='primary'
             className='send-button'
             onClick={() => handleSend()}
           >
             提交
-          </AtButton>
+          </AtButton> */}
+          
         </AtTabsPane>
         {/* 群聊 */}
         <AtTabsPane current={current} index={1}>
-          <View className='main'>
+          <View className='group-list'>
             {/* 群聊——搜索 */}
             <View className='search'>
               {JSON.stringify(labelEdit) !== '{}' &&
@@ -460,17 +469,20 @@ function GroupChat() {
             </View>
           </View>
 
-          <AtButton
+          {/* <AtButton
             type='primary'
             className='send-button'
             onClick={() => handleSend()}
           >
             提交
-          </AtButton>
+          </AtButton> */}
         </AtTabsPane>
       </AtTabs>
+      <GradientButton disabled={checkedList.length > 0 || checkedLabelList.length > 0 ? false : true} type='primary' className='send-button' onClick={() => handleSend()}>提交</GradientButton>
       {/* <Button type='primary' className='send-button' onClick={() => handleSend()}>提交</Button> */}
     </View>
   );
 }
-export default GroupChat;
+export default connect((state) => ({
+  studentsList: state.HomeWork.studentsList
+})) (GroupChat);

@@ -65,7 +65,11 @@ const config = {
     plugins:[
       '@tarojs/plugin-html',
     ],
-    esnextModules:['taro-ui']
+    esnextModules:['taro-ui'],
+    miniCssExtractPluginOption: {
+      //忽略css文件引入顺序
+      ignoreOrder: true
+  },
   },
   
   h5: {

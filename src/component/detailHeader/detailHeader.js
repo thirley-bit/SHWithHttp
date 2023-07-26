@@ -23,7 +23,6 @@ function DetailHeader(props) {
   }, [])
 
   const handleCompleted = () => {
-    console.log(12124344)
     // let url = "subject/detail/completed"
     // let data = api[url].data
     // setDetailHeaderData(data)
@@ -72,7 +71,6 @@ function DetailHeader(props) {
                   size='25'
                   color='#999'
                 ></AtIcon>
-                <Text className='text'>修改</Text>
               </View>
               <View className='video'>
                 <AtIcon
@@ -81,7 +79,6 @@ function DetailHeader(props) {
                   size='25'
                   color='#F00'
                 ></AtIcon>
-                <Text className='text'>删除</Text>
               </View>
             </View>
           </View>

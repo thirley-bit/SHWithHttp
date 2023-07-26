@@ -1914,7 +1914,7 @@
 * request body
 ```json
 {
-
+ time:2023-2-22
 }
 ```
 * response body
@@ -1924,8 +1924,8 @@
     data:[
         {
           uuid:'3446557657686868',
-          date:'2023-5-29', //本周周一至周五日期
-          recipe:{
+          date:'2023-5-29', //本周周一
+        //   recipe:{
             vegetable:[
             {
               title:'西红柿炒鸡蛋'
@@ -1969,7 +1969,7 @@
               title:'黄瓜圆子汤'
             },
           ]
-        }
+        // }
       }
     ]
 }
@@ -2061,7 +2061,7 @@
         uuid:'dffvdvbfgbfgbgfhb',
         teacher_id:0, //教师序号
         teacher_name:'张老师',
-        subject: '任教科目：语文',
+        subject_type: 0,
         is_class_teacher:true, //是否是班主任
         is_creator: true, //是否是创建者
         avatar:''
@@ -2070,7 +2070,7 @@
         uuid:'dffvdvbfgbfgbgfhb',
         teacher_id:1, //教师序号
         teacher_name:'张老师',
-        subject: '任教科目：语文',
+        subject_type: 1,
         is_class_teacher:false, //是否是班主任
         is_creator: false, //是否是创建者
         avatar:''
@@ -2079,7 +2079,7 @@
         uuid:'dffvdvbfgbfgbgfhb',
         teacher_id:2, //教师序号
         teacher_name:'张老师',
-        subject: '任教科目：语文',
+        subject_type: 2,
         is_class_teacher:false, //是否是班主任
         is_creator: false, //是否是创建者
         avatar:''
@@ -2110,14 +2110,55 @@
       },
       {
         student_id:0,  //学生序号
-        parent_id:0, //家长序号
+        parent_id:1, //家长序号
         nick_name:"家长03934", //家长昵称
         relative:'爸爸',
         avatar:''
       },
       {
         student_id:0,  //学生序号
+        parent_id:2, //家长序号
+        nick_name:"家长03934", //家长昵称
+        relative:'爸爸',
+        avatar:''
+      }
+    ],
+    msg:"success"
+}
+```
+##### 家长人员列表（教师端）
+#### api/v1/address/parent/list `GET`
+* request body
+```json
+{
+
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:[
+        {
+        student_id:0,  //学生序号
+        student_name:'张三',
         parent_id:0, //家长序号
+        nick_name:"家长03934", //家长昵称
+        relative:'爸爸',
+        avatar:''
+      },
+      {
+        student_id:1,  //学生序号
+        student_name:'张三',
+        parent_id:1, //家长序号
+        nick_name:"家长03934", //家长昵称
+        relative:'爸爸',
+        avatar:''
+      },
+      {
+        student_id:2,  //学生序号
+        student_name:'张三',
+        parent_id:2, //家长序号
         nick_name:"家长03934", //家长昵称
         relative:'爸爸',
         avatar:''
@@ -2160,6 +2201,30 @@
 ```
 
 ##### 新建群聊人员列表
+#### api/v1/chat/new/group `POST`
+* request body
+```json
+{
+    group_name:'二年级'|'', //群组名称，可能为空
+    student_list:['张三','李四','王五']
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:[
+        {
+            uuid:efreferfer,
+            group_id:0, //群聊序号
+            group_name:"一年级一班",
+            //content不确定，后期可能会调整
+            student_list:"张三、刘毅美画面给、张九都·打过、李四张、小四的地方很精美画面给哈哈哈哈哈哈哈弄好给你"
+        }
+    ],
+    msg:"success"
+}
+```
 ##### 新建群聊群组列表
 #### api/v1/chat/group/list `GET`
 * request body
@@ -2178,10 +2243,48 @@
             group_id:0, //群聊序号
             group_name:"一年级一班",
             //content不确定，后期可能会调整
-            content:"张三、刘毅美画面给、张九都·打过、李四张、小四的地方很精美画面给哈哈哈哈哈哈哈弄好给你"
+            student_list:"张三、刘毅美画面给、张九都·打过、李四张、小四的地方很精美画面给哈哈哈哈哈哈哈弄好给你"
         }
     ],
     msg:"success"
+}
+```
+
+##### 修改群聊名称
+#### api/v1/chat/edit/group `POST`
+* request body
+```json
+{
+    group_name:'修改后的群名'
+}
+```
+* response body
+```json
+{
+    code:1,
+    data:[
+        {
+            uuid:efreferfer,
+            group_id:0, //群聊序号
+            group_name:"修改后的群名",
+            student_list:"张三、刘毅美画面给、张九都·打过、李四张、小四的地方很精美画面给哈哈哈哈哈哈哈弄好给你"
+        }
+    ],
+    msg:"success"
+}
+```
+##### 删除群聊
+#### api/v1/chat/delete/group `POST`
+* request body
+```json
+{
+    group_id:0,
+}
+```
+* response body
+```json
+{
+ 
 }
 ```
 
@@ -2324,36 +2427,25 @@
         {
             uuid:54657568,
             message_id:0,
-            detail_id:0,
-            speaker:'own'|'other', //发送者 own:自己，other：其他人
-            content:'今天张三表现很好',
-            time:2023-11-15  14:12:34,
-            avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
+            detail_id:0, //消息具体内容的序号
+            speaker:'own', //发送者 own:自己，other：其他人
+            userName:'张三爸爸',
+            userAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'
+            content:'今天张三表现很好', //消息内容
+            time:'2023-11-15  14:12:34',
             token:fdgdgvfrtgtgfdgf
         },
-        {
+       {
             uuid:54657568,
             message_id:0,
-            sender:0,
-            teacher:张老师,
-            message:张三今天没有带水杯回家,
-            time:2023-11-15  14:12:34,
-            avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
+            detail_id:1, //消息具体内容的序号
+            speaker:'other', //发送者 own:自己，other：其他人
+            expertName:'李老师',
+            expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'
+            content:'今天张三表现很好', //消息内容
+            time:'2023-11-15  14:12:34',
             token:fdgdgvfrtgtgfdgf
         },
-        //结构可能需要修改
-        {
-            uuid:54657568,
-            message_id:0,
-            sender:1,  //发送者 0：教师，1：家长
-            student_id:0,
-            relative:爸爸,
-            message:谢谢老师提醒,
-            time:2023-11-15  14:12:34,
-            avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
-            token:fdgdgvfrtgtgfdgf
-        },
-        //结构可能需要修改
     ]
     msg:"success"
 }

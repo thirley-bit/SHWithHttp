@@ -4,6 +4,46 @@
     height: 100vh;
     // padding: 10rpx 32rpx;
     background: linear-gradient(175deg,rgba(122,201,254,0.8),rgba(107,234,254) 8%, rgba(248,249,255) 23%,  #F8F9FF 20%),
-                // linear-gradient(0deg,rgba(255,255,255,0.2), #F8F9FF 20%, rgba(255,255,255,0.2) 50%);
-
 }
+.my-content{
+    width: 100%;
+    background-color:#fff;
+    box-shadow: 0px 0px 20px 1px rgba(10,110,176,0.100000);
+    border-radius: 31rpx;
+    padding: 4% 0;
+    .content{
+        position: relative;
+        height: 4vh;
+    }
+    .avatar{ 
+        display: flex;
+        justify-content: center;
+    }
+    .image{
+        width: 48rpx;
+        height: 48rpx;
+        display: flex;
+        justify-content: center;
+    }
+    .content-name{
+        display: block;
+        color: #6a6a6a;
+        font-size: 25rpx;
+        margin-bottom: 6rpx;
+        line-height: 1.5;
+    }
+    .right{
+        justify-content: end;
+    }
+    .divider{
+        width: 100%;
+        top: 100%;
+        position: absolute;
+        .at-divider{
+            position: absolute;
+            width: 81%;
+            right: 3%;
+        }
+    }
+}
+

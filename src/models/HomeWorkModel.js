@@ -16,9 +16,8 @@ const model = {
     homeWorkArr: [], //作业列表
     subjectTitle: [], //科目选择栏目
     subjectDetail: {}, //作业详情
+    studentsList: [], //学生列表
     submitListAll: [], //学生提交作业列表
-    submittedList: [], //学生已提交作业列表
-    notSubmittedList: [], //学生未提交作业列表
     feedBack: [], //家长端反馈信息
     feedBackList: [], //教师端反馈信息列表
   },
@@ -73,25 +72,17 @@ const model = {
           payload: response.data,
         });
       }
+      return response;
     },
     *getStudentsList({ payload }, { call, put }) {
       const response = yield call(getStudentsList, payload);
       if (response.code == 1) {
-        yield [
-          put({
-            type: "changeSubjectSubmitList",
-            payload: response.data,
-          }),
-          put({
-            type: "changeSubmittedList",
-            payload: response.data.filter((item) => item.hasCompleted == 1),
-          }),
-          put({
-            type: "changeNotSubmittedList",
-            payload: response.data.filter((item) => item.hasCompleted == 0),
-          }),
-        ];
+        yield put({
+          type: "changeStudentsLst",
+          payload: response.data,
+        });
       }
+      return response;
     },
     *getFeedBackDetail({ payload }, { call, put }) {
       const response = yield call(getFeedBackDetail, payload);
@@ -101,6 +92,7 @@ const model = {
           payload: response.data,
         });
       }
+      return response;
     },
     *getEditFeedBack({ payload }, { call, put }) {
       const response = yield call(getEditFeedBack, payload);
@@ -110,6 +102,7 @@ const model = {
           payload: response.data,
         });
       }
+      return response;
     },
     *getFeedBackList({ payload }, { call, put }) {
       const response = yield call(getFeedBackList, payload);
@@ -119,6 +112,7 @@ const model = {
           payload: response.data,
         });
       }
+      return response;
     },
   },
   reducers: {
@@ -152,22 +146,10 @@ const model = {
         subjectDetail: payload,
       };
     },
-    changeSubjectSubmitList(state, { payload }) {
+    changeStudentsLst(state, { payload }) {
       return {
         ...state,
-        submitListAll: payload,
-      };
-    },
-    changeSubmittedList(state, { payload }) {
-      return {
-        ...state,
-        submittedList: payload,
-      };
-    },
-    changeNotSubmittedList(state, { payload }) {
-      return {
-        ...state,
-        notSubmittedList: payload,
+        studentsList: payload,
       };
     },
 

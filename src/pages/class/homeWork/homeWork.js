@@ -37,9 +37,7 @@ function HomeWork(props) {
     });
   };
   const systeminfo = Taro.getSystemInfoSync()
-  console.log(systeminfo,"systemInfo>>>")
   const windowHeight = systeminfo.windowHeight
-  console.log(windowHeight,">>>winH")
   const style = {
     height:windowHeight
   }

@@ -10,6 +10,7 @@ import {
   AtTabsPane,
 } from "taro-ui";
 import NavTab from '@app/component/NavTab/NavTab';
+import GradientButton from '@app/component/GradientButton';
 import normal from "@static/normal.png"
 
 import "./Check.scss";
@@ -76,6 +77,9 @@ function Check(props) {
   const handleBack = (e) => {
     console.log(e);
   };
+  const handleCheck = () => {
+    console.log(222)
+  }
   return (
     <View className='index'>
       <NavTab needBackIcon mainTitle='审核' />
@@ -117,16 +121,18 @@ function Check(props) {
                           "正在审核中..."
                         ) : (
                           <View className='right-button'>
-                            <AtButton
+                            {/* <AtButton
                               className='refuse'
                               type='primary'
                               size='small'
                             >
                               通过
-                            </AtButton>
-                            <AtButton  type='secondary' size='small'>
+                            </AtButton> */}
+                            <GradientButton className='refuse' type='primary' onClick={handleCheck}>通过</GradientButton>
+                            {/* <AtButton  type='secondary' size='small'>
                               不通过
-                            </AtButton>
+                            </AtButton> */}
+                            <GradientButton type='secondary'>不通过</GradientButton>
                           </View>
                         )}
                       </View>

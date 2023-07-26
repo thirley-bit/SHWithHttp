@@ -1,0 +1,35 @@
+.feed-container{
+    margin: 32rpx 30rpx;
+    .feed-name{
+        font-size: 27rpx;
+        font-weight: 500;
+        color: #333333;
+    }
+    .feed-time{
+        font-size: 19rpx;
+        color: #999999;
+        margin: 12rpx 0;
+    }
+    .feed-back{
+        font-size: 27rpx;
+        color: #666666;
+    }
+    .feed-img{
+        margin-left: auto;
+        width: 38rpx;
+        height: 38rpx;
+    }
+    .feed-back-list{
+        background: #eaeaea;
+        border-radius: 4rpx;
+        margin-top: 10rpx;
+        padding: 5rpx 0 5rpx 10rpx;
+        .feed-back-from{
+            font-size: 23rpx;
+            margin: 10rpx 5rpx;
+            .person{
+                color: #1BA5FF;
+            }
+        }
+    }
+}

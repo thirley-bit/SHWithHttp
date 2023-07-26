@@ -59,6 +59,13 @@
     .test-time{
         margin-bottom: 20rpx;
     }
+    .at-card__header-thumb{
+        height: 58rpx;
+    }
+    .at-card__header-thumb-info{
+        width: 58rpx;
+        height: 58rpx;
+    }
     .button-publish{
         border: 1PX #d6e4ef solid;
         border-radius:0 0 12rpx 12rpx;
@@ -69,17 +76,21 @@
         font-size: 26rpx;
         text-align: center;
     }
+    .new-msg{
+        position: absolute;
+        width: 20rpx;
+        height: 20rpx;
+        top: 18rpx;
+        left: 69rpx;
+        border-radius: 50%;
+        background-color: #FF2A15;
+    }
     .tip{
         position: absolute;
-        // top: 50%;
-        // top: 10vh;
         right: 3%;
         bottom: 2vh;
         text-align: center;
         font-size: 26rpx;
-        .tip-text{
-            color: #f00;
-        }
         .publish{
             color: #f00;
         }
@@ -87,4 +98,7 @@
             color: #1f98f0;
         }
     }
+}
+.at-fab{
+    background: linear-gradient(135deg, #1BA5FF,#26E2FF);;
 }

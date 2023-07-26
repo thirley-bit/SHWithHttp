@@ -6,19 +6,24 @@
             border: none;
             background-color: rgba(255,255,255,0);
             border-bottom: 1PX #d6e4ef solid;
-            padding: 1% 0;
+            // padding: 1% 0;
             .at-card__header{
                 display: none;
             }
             .left{
                 float: left;
+                .at-avatar--small{
+                    width: 70rpx;
+                    height: 70rpx;
+                    margin-right: 22rpx;
+                }
             }
             .at-badge{
                 float: left;
                 .at-badge__num {
                     padding: 5rpx 5rpx;
                     top: -4rpx;
-                    right: 5PX;
+                    right:25rpx;
                     font-size: 20rpx;
                     line-height: 1.4;
                     border-radius: 50%;
@@ -37,19 +42,20 @@
             .card-center{
                 position: relative;
                 width: 100%;
-                overflow: hidden;
-                margin-left: 10%;
-                .card-name_parent{
-                    position: absolute;
-                    top: 50%;
-                    margin-top: -20rpx;
-                }
+                height: 40rpx;
+                vertical-align: middle;
+                // margin-left: 10%;
+                // .card-name_parent{
+                //     position: absolute;
+                //     top: 50%;
+                //     margin-top: -20rpx;
+                // }
                 .card-name{
-                    display: inline-block;
                     font-size: 30rpx;
                     font-weight: 500;
                 }
                 .card-msg{
+                    display: inline-block;
                     margin-top: 6rpx;
                     color: #999;
                     font-size: 24rpx;

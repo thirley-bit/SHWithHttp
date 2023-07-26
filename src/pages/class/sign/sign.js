@@ -10,16 +10,20 @@ import NavTab from '@app/component/NavTab/NavTab';
 import "./Sign.scss";
 
 function Sign(props) {
-  const { user } = props
+  const { user, dispatch, studentsList } = props
   const [students, setStudents] = useState([]);
   const [isEdit, setIsEdit] = useState(true);
-  const scrollTop = 0;
-  const Threshold = 20;
 
   useEffect(() => {
+    dispatch({
+      type:'users/getUser'
+    })
+    dispatch({
+      type:'Sign/getStudentsList'
+    })
     studentsData();
   }, []);
-  console.log(user);
+  console.log(user,"user");
 
   const studentsData = () => {
     let url = "students/list";
@@ -97,7 +101,7 @@ function Sign(props) {
       {user == 0 ? (
         <View className='parent'>
           <View className='parent-item'>
-            {student.map((item, index) => {
+            {studentsList.map((item, index) => {
               console.log(item);
               return (
                 <View key={index}>
@@ -136,14 +140,12 @@ function Sign(props) {
                 放学时间：{time}
               </Picker>
             </View>
-            <Text onClick={() => handleChange()}>请确认学生是否到校</Text>
-            <View>
-              <Text className='text-send'>
+            <Text className='text-sign' onClick={() => handleChange()}>请确认学生是否到校</Text>
+            <Text className='text-send'>
                 点击学生将发送消息至家长确定学生到校情况
-              </Text>
-            </View>
+            </Text>
           </View>
-          <StudentsList enter='sign' current={0} showData={students} />
+          <StudentsList enter='sign' current={0} showData={studentsList} />
         </View>
       )}
     </View>
@@ -151,5 +153,6 @@ function Sign(props) {
 }
 
 export default connect(state => ({
-  user:state.users.user
+  user: state.users.user,
+  studentsList: state.Sign.studentsList
 }))(Sign);

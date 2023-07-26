@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Taro from "@tarojs/taro";
+import { connect } from 'react-redux';
 import {
   View,
   Text,
@@ -10,25 +11,18 @@ import {
 import { AtSearchBar, AtListItem, AtButton, AtIcon } from "taro-ui";
 import PersonList from '@app/component/personList/personList';
 import NavTab from '@app/component/NavTab/NavTab';
-import api from '@/api/api';
-// import img from "../../../static/img.jpg";
 import "./message.scss";
 
 //私信页面
-function Message() {
+function Message(props){
+  console.log(props,'messageprops')
+  const { dispatch, messageList } = props
   const [editor, setEditor] = useState("");
-  const [showData, setShowData] = useState([])
   useEffect(() => {
-    messageData()
+    dispatch({
+      type:'AddressList/getMessageList'
+    })
   })
-
-  const messageData = () => {
-    let url = "message/list"
-    let data = api[url].data
-    setShowData(data)
-  }
-
-
   //输入框内容
   const [msg, setMsg] = useState("");
 
@@ -79,7 +73,7 @@ function Message() {
         <AtSearchBar />
       </View>
       <View>
-          <PersonList enter='message' showData={showData} />
+          <PersonList enter='message' showData={messageList} />
       </View>
 
       {/* <View className='components-page'>
@@ -121,4 +115,6 @@ function Message() {
     </View>
   );
 }
-export default Message;
+export default connect((state) =>({
+  messageList: state.AddressList.messageList
+}))(Message);

@@ -38,9 +38,6 @@ function ChooseUser() {
         },
     ]
 
-    console.log(labelEdit)
-    console.log(showData)
-    console.log(checkedList)
     useEffect(() => {
         studentsData()
         groupData()

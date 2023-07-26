@@ -1,10 +1,12 @@
 import { useEffect, useState, useRef } from 'react'
 import Taro from "@tarojs/taro";
+import { connect } from 'react-redux';
 import {  View, Text  } from '@tarojs/components'
 import { AtButton, AtSearchBar, AtTabBar } from 'taro-ui'
 import PersonList from '@app/component/personList/personList'
 import NavTab from '@app/component/NavTab/NavTab';
 import SearchBar from '@app/component/SearchBar/SearchBar';
+
 // import search from '@app/component/SearchBar/wx_search-ma'
 import api from '@/api/api'
 import newAdd from "../../static/newadd.png"
@@ -14,7 +16,9 @@ import addGroup from "../../static/add-group.png"
 import "./AddressList.scss"
 
 
-function AddressList() {
+function AddressList(props) {
+  console.log(props,"addressprops")
+  const { dispatch, teacherList, parentList } = props
   const [current, setCurrent] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [showTeacherData, setShowTeacherData] = useState([])
@@ -45,22 +49,29 @@ function AddressList() {
     },
   ]
 
+
   useEffect(() => {
-    teacherData()
-    parentData()
+    dispatch({
+      type:'AddressList/getTeacherList'
+    })
+    dispatch({
+      type:'AddressList/getParentList'
+    })
+    // teacherData()
+    // parentData()
     
   },[])
 
-  const teacherData = () => {
-    let url = "address/teacher/list"
-    let data = api[url].data
-    setShowTeacherData(data)
-  }
-  const parentData = () => {
-    let url = "address/parent/list"
-    let data = api[url].data
-    setShowParentData(data)
-  }
+  // const teacherData = () => {
+  //   let url = "address/teacher/list"
+  //   let data = api[url].data
+  //   setShowTeacherData(data)
+  // }
+  // const parentData = () => {
+  //   let url = "address/parent/list"
+  //   let data = api[url].data
+  //   setShowParentData(data)
+  // }
 
   const handleClick = (e) => {
     console.log(e)
@@ -106,18 +117,21 @@ function AddressList() {
       />
       <View className='teacher-list'>
       <View  className='text'>
-          <Text>家长</Text>
+          <Text>老师</Text>
         </View>
-        <PersonList enter='address' showData={showTeacherData} />
+        <PersonList enter='address' showData={teacherList} />
       </View>
       <View className='teacher-list'>
         <View  className='text'>
           <Text>家长</Text>
           
         </View>
-        <PersonList enter='address' showData={showParentData} />
+        <PersonList enter='address' showData={parentList} />
       </View>
     </View>
   )
 }
-export default AddressList
+export default connect((state) => ({
+  teacherList: state.AddressList.teacherList,
+  parentList: state.AddressList.parentList
+})) (AddressList)

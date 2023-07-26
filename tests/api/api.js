@@ -410,9 +410,9 @@ export default {
             uuid:'134554647687988765445398765',
             subject_type:0, //科目选择  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
             work_id:0, //作业列表序号
-            // checked:0, //是否查看状态 0：未查看，1：已查看
+            // checked:true, //是否查看状态 0：未查看，1：已查看
             hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
-            hasCompleted:0, //是否完成作业（家长端）
+            hasCompleted:false, //是否完成作业（家长端）
             title:'【语文】 2023.04.25 （周二）语文练习',
             author:'张老师',
             content:"１、完成课后习题１、２；２、想念初中的语文课。映着黄昏的微光，半躺半靠在床上，半醒半睡间，恍恍惚惚地想到了语文课本，忽然，那些隽永的语句，仿佛伴随着老师抑扬顿挫的声音，隐隐回响在脑海，事情就像发生在昨天一样",
@@ -423,9 +423,9 @@ export default {
             uuid:'134554647687988765445398765',
             subject_type:1, //科目选择  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
             work_id:0, //作业列表序号
-            // checked:0, //是否查看状态 0：未查看，1：已查看
+            // checked:true, //是否查看状态 0：未查看，1：已查看
             hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
-            hasCompleted:0, //是否完成作业（家长端）
+            hasCompleted:true, //是否完成作业（家长端）
             title:'【语文】 2023.04.25 （周二）语文练习',
             author:'张老师',
             content:"１、完成课后习题１、２；２、想念初中的语文课。映着黄昏的微光，半躺半靠在床上，半醒半睡间，恍恍惚惚地想到了语文课本，忽然，那些隽永的语句，仿佛伴随着老师抑扬顿挫的声音，隐隐回响在脑海，事情就像发生在昨天一样",
@@ -484,9 +484,9 @@ export default {
             uuid:'134554647687988765445398765',
             subject_type:0, //科目选择  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
             work_id:0, //作业列表序号
-            // checked:0, //是否查看状态 0：未查看，1：已查看
+            // checked:true, //是否查看状态 0：未查看，1：已查看
             hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
-            hasCompleted:0, //是否完成作业（家长端）
+            hasCompleted:false, //是否完成作业（家长端）
             title:'【语文】 2023.04.25 （周二）语文练习',
             author:'张老师',
             content:"１、完成课后习题１、２；２、想念初中的语文课。映着黄昏的微光，半躺半靠在床上，半醒半睡间，恍恍惚惚地想到了语文课本，忽然，那些隽永的语句，仿佛伴随着老师抑扬顿挫的声音，隐隐回响在脑海，事情就像发生在昨天一样",
@@ -497,9 +497,9 @@ export default {
             uuid:'134554647687988765445398765',
             subject_type:1, //科目选择  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
             work_id:0, //作业列表序号
-            // checked:0, //是否查看状态 0：未查看，1：已查看
+            // checked:true, //是否查看状态 0：未查看，1：已查看
             hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
-            hasCompleted:0, //是否完成作业（家长端）
+            hasCompleted:true, //是否完成作业（家长端）
             title:'【语文】 2023.04.25 （周二）语文练习',
             author:'张老师',
             content:"１、完成课后习题１、２；２、想念初中的语文课。映着黄昏的微光，半躺半靠在床上，半醒半睡间，恍恍惚惚地想到了语文课本，忽然，那些隽永的语句，仿佛伴随着老师抑扬顿挫的声音，隐隐回响在脑海，事情就像发生在昨天一样",
@@ -510,9 +510,9 @@ export default {
           uuid:'134554647687988765445398765',
           subject_type:1, //科目选择  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
           work_id:0, //作业列表序号
-          // checked:0, //是否查看状态 0：未查看，1：已查看
+          // checked:true, //是否查看状态 0：未查看，1：已查看
           hasNew:1,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
-          hasCompleted:1, //是否完成作业（家长端）
+          hasCompleted:false, //是否完成作业（家长端）
           title:'【语文】 2023.04.25 （周二）语文练习',
           author:'张老师',
           content:"１、完成课后习题１、２；２、想念初中的语文课。映着黄昏的微光，半躺半靠在床上，半醒半睡间，恍恍惚惚地想到了语文课本，忽然，那些隽永的语句，仿佛伴随着老师抑扬顿挫的声音，隐隐回响在脑海，事情就像发生在昨天一样",
@@ -964,7 +964,7 @@ export default {
         uuid:'134554647687988765445398765',
         subject_type:0, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
         work_id:0, //作业列表序号
-        checked:0, //是否查看状态 0：未查看，1：已查看
+        checked:false, //是否查看状态 0：未查看，1：已查看
         hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
         hasCompleted:0, //是否完成作业（家长端）0:未完成， 1：已完成
         title:'【语文】 2023.04.25 （周二）语文练习',
@@ -977,7 +977,7 @@ export default {
       uuid:'134554647687988765445398765',
       subject_type:1, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
       work_id:1, //作业列表序号
-      checked:0, //是否查看状态 0：未查看，1：已查看
+      checked:true, //是否查看状态 0：未查看，1：已查看
       hasNew:1,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
       hasCompleted:1, //是否完成作业（家长端）
       title:'【数学】 2023.04.25 （周二）语文练习',
@@ -990,7 +990,7 @@ export default {
       uuid:'134554647687988765445398765',
       subject_type:2, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
       work_id:2, //作业列表序号
-      checked:0, //是否查看状态 0：未查看，1：已查看
+      checked:false, //是否查看状态 0：未查看，1：已查看
       hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
       hasCompleted:0, //是否完成作业（家长端）
       title:'【英语】 2023.04.25 （周二）语文练习',
@@ -1003,7 +1003,7 @@ export default {
       uuid:'134554647687988765445398765',
       subject_type:3, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
       work_id:3, //作业列表序号
-      checked:0, //是否查看状态 0：未查看，1：已查看
+      checked:false, //是否查看状态 0：未查看，1：已查看
       hasNew:1,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
       hasCompleted:1, //是否完成作业（家长端）
       title:'【物理】 2023.04.25 （周二）语文练习',
@@ -1016,7 +1016,7 @@ export default {
       uuid:'134554647687988765445398765',
       subject_type:4, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
       work_id:4, //作业列表序号
-      checked:0, //是否查看状态 0：未查看，1：已查看
+      checked:true, //是否查看状态 0：未查看，1：已查看
       hasNew:1,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
       hasCompleted:0, //是否完成作业（家长端）
       title:'【化学】 2023.04.25 （周二）语文练习',
@@ -1029,7 +1029,7 @@ export default {
       uuid:'134554647687988765445398765',
       subject_type:5, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
       work_id:5, //作业列表序号
-      checked:0, //是否查看状态 0：未查看，1：已查看
+      checked:false, //是否查看状态 0：未查看，1：已查看
       hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
       hasCompleted:0, //是否完成作业（家长端）
       title:'【生物】 2023.04.25 （周二）语文练习',
@@ -1064,7 +1064,7 @@ export default {
         uuid:'134554647687988765445398765',
         // subject_type:0, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
         work_id:0, //作业列表序号
-        checked:0, //是否查看状态 0：未查看，1：已查看
+        checked:true, //是否查看状态 0：未查看，1：已查看
         hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
         hasCompleted:0, //是否完成作业（家长端）0:未完成， 1：已完成
         title:'【语文】 2023.04.25 （周二）语文练习',
@@ -1077,7 +1077,7 @@ export default {
       uuid:'134554647687988765445398765',
       // subject_type:1, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
       work_id:1, //作业列表序号
-      checked:0, //是否查看状态 0：未查看，1：已查看
+      checked:true, //是否查看状态 0：未查看，1：已查看
       hasNew:1,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
       hasCompleted:1, //是否完成作业（家长端）
       title:'【数学】 2023.04.25 （周二）语文练习',
@@ -1090,7 +1090,7 @@ export default {
       uuid:'134554647687988765445398765',
       // subject_type:2, //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
       work_id:2, //作业列表序号
-      checked:0, //是否查看状态 0：未查看，1：已查看
+      checked:true, //是否查看状态 0：未查看，1：已查看
       hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
       hasCompleted:0, //是否完成作业（家长端）
       title:'【英语】 2023.04.25 （周二）语文练习',
@@ -1105,8 +1105,8 @@ export default {
 
   "subject/feedback/detail":{
     code:1,
-    data:{
-      work_id:0,
+    data:[
+      {work_id:0,
       student_id:0,
       student_name:'张三',
       relative:'爸爸',
@@ -1192,8 +1192,8 @@ export default {
             to:'张老师',
             content:'有什么问题'
           },
-      ]
-    },
+      ]}
+    ],
     msg:"success"
   },
 
@@ -1223,6 +1223,71 @@ export default {
     msg:"success"
   },
   //教师端
+  "subject/feedback/detail/list":{
+    code:1,
+    data:[
+      {
+          work_id:0,
+          student_id:0,
+          student_name:'张三',
+          relative:'爸爸', 
+          feed_back_id:0,
+          feed_back:"一条浩浩荡荡的长江大河，有时流到很宽阔的境界，平原无际，一泻万里。有时流到很逼狭的境界，两岸丛山叠岭，绝壁断崖，江河流于其间，回环曲折，极其险峻。民族生命的进程，其经历亦复如是",
+          create_time:'2023-11-15  14:12:34',
+          avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
+          reply:[
+              {
+                  feed_back_id:0,
+                  reply_id:0,
+                  from:'张老师',
+                  to:'张三爸爸',
+                  content:'有问题一条浩浩荡荡的长江大河，有时流到很宽阔的境界，平原无际，一泻万里。有时流到很逼狭的境界，两岸丛山叠岭，绝壁断崖，江河流于其间，回环曲折，极其险峻。民族生命的进程，其经历亦复如是'
+              },
+              {
+                  feed_back_id:0,
+                  reply_id:1,
+                  from:'张三爸爸',
+                  to:'张老师',
+                  content:'没有问题一条浩浩荡荡的长江大河，有时流到很宽阔的境界，平原无际，一泻万里。有时流到很逼狭的境界，两岸丛山叠岭，绝壁断崖，江河流于其间，回环曲折，极其险峻。民族生命的进程，其经历亦复如是'
+              },
+          ]
+      },
+      {
+          work_id:0,
+          student_id:0,
+          student_name:'李四',
+          relative:'爸爸', 
+          feed_back_id:1,
+          feed_back:"一条浩浩荡荡的长江大河，有时流到很宽阔的境界，平原无际，一泻万里。有时流到很逼狭的境界，两岸丛山叠岭，绝壁断崖，江河流于其间，回环曲折，极其险峻。民族生命的进程，其经历亦复如是",
+          create_time:'2023-11-15  14:12:34',
+          avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
+          reply:[
+              {
+                  feed_back_id:1,
+                  reply_id:0,
+                  from:'张老师',
+                  to:'张三爸爸',
+                  content:'什么问题一条浩浩荡荡的长江大河，有时流到很宽阔的境界，平原无际，一泻万里。有时流到很逼狭的境界，两岸丛山叠岭，绝壁断崖，江河流于其间，回环曲折，极其险峻。民族生命的进程，其经历亦复如是'
+              },
+              {
+                  feed_back_id:1,
+                  reply_id:1,
+                  from:'张三爸爸',
+                  to:'张老师',
+                  content:'123'
+              },
+              {
+                  feed_back_id:1,
+                  reply_id:2,
+                  from:'张三爸爸',
+                  to:'张老师',
+                  content:'345问题'
+              },
+          ]
+      },
+  ],
+    msg:"success"
+  },
   "subject/edit/detail":{
     code:1,
     data:{
@@ -1242,48 +1307,104 @@ export default {
     data:[
       {
         work_id:0, //作业序号
-        hasCompleted:1,  //是否完成作业 0：未完成，1：已完成
-        checked:0,  //是否签到 0：未签到，1：已签到
+        hasCompleted:true,  //是否完成作业 0：未完成，1：已完成
+        checked:true,  //是否签到 true:可以签到，false：不签到
         student_id:0, //学生序号 
-        student_name:'张三放热峰认同感认同感认同感飞人废人'
+        student_name:'11张三张三张三张三',
+        avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
       },
       {
         work_id:0,
-        hasCompleted:1,
-        checked:0,  //是否签到 0：未签到，1：已签到
+        hasCompleted:true,
+        checked:true,  //是否签到 
         student_id:1,
-        student_name:'张三一塌糊涂有'
+        student_name:'22张四李四王五',
+        avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
       },
       {
         work_id:0,
-        hasCompleted:1,
-        checked:1,  //是否签到 0：未签到，1：已签到
+        hasCompleted:true,
+        checked:false,  //是否签到 
         student_id:2,
-        student_name:'张三与教育经验'
+        student_name:'33张三张三李四李四',
+        avatar:''
       },
       {
         work_id:0,
-        hasCompleted:0,
-        checked:0,  //是否签到 0：未签到，1：已签到
+        hasCompleted:false,
+        checked:true,  //是否签到 
         student_id:3,
-        student_name:'不不不张哈哈哈'
+        student_name:'44李四王五',
+        avatar:''
       },
       {
         work_id:0,
-        hasCompleted:0,
-        checked:1,  //是否签到 0：未签到，1：已签到
+        hasCompleted:false,
+        checked:false,  //是否签到 
         student_id:4,
-        student_name:'和你张三教育教育教育局拒绝'
+        student_name:'55王五',
+        avatar:''
       },
       {
         work_id:0,
-        hasCompleted:1,
-        checked:1,  //是否签到 0：未签到，1：已签到
+        hasCompleted:true,
+        checked:false,  //是否签到 
         student_id:5,
-        student_name:'韩国张三会更好'
+        student_name:'66李四李四王五',
+        avatar:''
+      },
+      {
+        work_id:0,
+        hasCompleted:true,
+        checked:false,  //是否签到 
+        student_id:6,
+        student_name:'77李四李四王五',
+        avatar:''
+      },
+      {
+        work_id:0,
+        hasCompleted:false,
+        checked:true,  //是否签到 
+        student_id:7,
+        student_name:'88李四李四王五',
+        avatar:''
+      },
+      {
+        work_id:0,
+        hasCompleted:false,
+        checked:true,  //是否签到 
+        student_id:8,
+        student_name:'99李四李四王五',
+        avatar:''
+      },
+      {
+        work_id:0,
+        hasCompleted:true,
+        checked:true,  //是否签到 
+        student_id:9,
+        student_name:'00李四李四王五',
+        avatar:''
+      },
+      {
+        work_id:0,
+        hasCompleted:true,
+        checked:false,  //是否签到 
+        student_id:10,
+        student_name:'李四李四王五',
+        avatar:''
       }
     ],
     msg:"success"
+  },
+  "sign/student":{
+    code:1,
+    data:[
+      {
+        student_id:0,
+        student_name:'张三',
+        gohome_checked:true
+      }
+    ]
   },
   // "subject/students/list":{
   //   code:1,
@@ -1327,71 +1448,7 @@ export default {
   //   ],
   //   msg:"success"
   // },
-  "subject/feedback/detail/list":{
-    code:1,
-    data:[
-      {
-          work_id:0,
-          student_id:0,
-          student_name:'张三',
-          relative:'爸爸', 
-          feed_back_id:0,
-          feed_back:"一条浩浩荡荡的长江大河，有时流到很宽阔的境界，平原无际，一泻万里。有时流到很逼狭的境界，两岸丛山叠岭，绝壁断崖，江河流于其间，回环曲折，极其险峻。民族生命的进程，其经历亦复如是",
-          create_time:'2023-11-15  14:12:34',
-          avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
-          reply:[
-              {
-                  feed_back_id:0,
-                  reply_id:0,
-                  from:'张老师',
-                  to:'张三爸爸',
-                  content:'有问题'
-              },
-              {
-                  feed_back_id:0,
-                  reply_id:1,
-                  from:'张三爸爸',
-                  to:'张老师',
-                  content:'没有问题'
-              },
-          ]
-      },
-      {
-          work_id:0,
-          student_id:0,
-          student_name:'李四',
-          relative:'爸爸', 
-          feed_back_id:1,
-          feed_back:"一条浩浩荡荡的长江大河，有时流到很宽阔的境界，平原无际，一泻万里。有时流到很逼狭的境界，两岸丛山叠岭，绝壁断崖，江河流于其间，回环曲折，极其险峻。民族生命的进程，其经历亦复如是",
-          create_time:'2023-11-15  14:12:34',
-          avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
-          reply:[
-              {
-                  feed_back_id:1,
-                  reply_id:0,
-                  from:'张老师',
-                  to:'张三爸爸',
-                  content:'什么问题'
-              },
-              {
-                  feed_back_id:1,
-                  reply_id:1,
-                  from:'张三爸爸',
-                  to:'张老师',
-                  content:'123'
-              },
-              {
-                  feed_back_id:1,
-                  reply_id:2,
-                  from:'张三爸爸',
-                  to:'张老师',
-                  content:'345问题'
-              },
-          ]
-      },
-  ],
-    msg:"success"
-  },
+ 
 
 
 
@@ -1471,7 +1528,7 @@ export default {
     data:{
       uuid:'134554647687988765445398765',
       notice_id:0, //作业列表序号
-      checked:0, //是否查看状态 0：未查看，1：已查看
+      checked:true, //是否查看状态 0：未查看，1：已查看
       hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
       title:'安全注意事项',
       author:'张老师',
@@ -1495,7 +1552,7 @@ export default {
         publish:1, //是否发布成绩 0：未发布成绩， 1：未发布成绩
         test_time:'2023-11-23 12:56',
         time:'2023-12-12 14:34',
-        avatar:'http://123.57.149.51/upload/upload_img/20230510/1d4b6d8097826b0c33576e68e88f84f5.png',
+        avatar:'',
       },
       {
         uuid:'134554647687988765445398765',
@@ -1511,7 +1568,7 @@ export default {
       {
         uuid:'134554647687988765445398765',
         score_id:2, //成绩列表序号
-        hasNew:1,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
+        hasNew:0,  //是否有新的家长反馈消息 0：无新反馈， 1：有新反馈
         title:'语文考试',
         author:'张老师',
         publish:0,
@@ -2297,47 +2354,110 @@ export default {
   },
   "message/detail":{
     code:1,
+    pageNo:1,
+    pageNum:5,
+    pageSize:10,
     data:[
       {
-        msgtype:1,
-        msg:'qqqqqqq',
-        isme:true,
-        avator:'http://123.57.149.51/upload/upload_img/20230510/1d4b6d8097826b0c33576e68e88f84f5.png',
-        author:"张三",
-        img_src:'http://123.57.149.51/upload/upload_img/20230510/1d4b6d8097826b0c33576e68e88f84f5.png'
-      },
-      {
-        msgtype:2,
-        msg:'wwwww',
-        isme:true,
-        avator:'',
-        author:"张三",
-        img_src:''
-      },
-      {
-        msgtype:3,
-        msg:'eeee',
-        isme:true,
-        avator:'',
-        author:"张三",
-        img_src:''
-      },
-      {
-        msgtype:4,
-        msg:'rrrr',
-        isme:true,
-        avator:'',
-        author:"张三",
-        img_src:''
-      },
-      {
-        msgtype:5,
-        msg:'yyy',
-        isme:true,
-        avator:'',
-        author:"张三",
-        img_src:''
-      }
+        uuid:54657568,
+        message_id:0,
+        detail_id:0, //消息具体内容的序号
+        speaker:'own', //发送者 own:自己，other：其他人
+        userName:'张三爸爸',
+        userAvatar:'',
+        content:'今天张三表现很好', //消息内容
+        time:'2023-11-15  14:12:34',
+    },
+   {
+        uuid:54657568,
+        message_id:0,
+        detail_id:1, //消息具体内容的序号
+        speaker:'other', //发送者 own:自己，other：其他人
+        expertName:'李老师',
+        expertAvatar:'',
+        content:'今天张三表现很好', //消息内容
+        time:'2023-11-15  14:12:34',
+    },
+    {
+      uuid:54657568,
+      message_id:0,
+      detail_id:0, //消息具体内容的序号
+      speaker:'own', //发送者 own:自己，other：其他人
+      userName:'张三爸爸',
+      userAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+      content:'今天张三表现很好', //消息内容
+      time:'2023-11-15  14:12:34',
+  },
+ {
+      uuid:54657568,
+      message_id:0,
+      detail_id:1, //消息具体内容的序号
+      speaker:'other', //发送者 own:自己，other：其他人
+      expertName:'李老师',
+      expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+      content:'今天张三表现很好', //消息内容
+      time:'2023-11-15  14:12:34',
+  },
+  {
+    uuid:54657568,
+    message_id:0,
+    detail_id:0, //消息具体内容的序号
+    speaker:'own', //发送者 own:自己，other：其他人
+    userName:'张三爸爸',
+    userAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+    content:'今天张三表现很好', //消息内容
+    time:'2023-11-15  14:12:34',
+},
+{
+    uuid:54657568,
+    message_id:0,
+    detail_id:1, //消息具体内容的序号
+    speaker:'other', //发送者 own:自己，other：其他人
+    expertName:'李老师',
+    expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+    content:'今天张三表现很好', //消息内容
+    time:'2023-11-15  14:12:34',
+},
+{
+  uuid:54657568,
+  message_id:0,
+  detail_id:0, //消息具体内容的序号
+  speaker:'own', //发送者 own:自己，other：其他人
+  userName:'张三爸爸',
+  userAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+  content:'今天张三表现很好', //消息内容
+  time:'2023-11-15  14:12:34',
+},
+{
+  uuid:54657568,
+  message_id:0,
+  detail_id:1, //消息具体内容的序号
+  speaker:'other', //发送者 own:自己，other：其他人
+  expertName:'李老师',
+  expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+  content:'今天张三表现很好', //消息内容
+  time:'2023-11-15  14:12:34',
+},
+{
+  uuid:54657568,
+  message_id:0,
+  detail_id:0, //消息具体内容的序号
+  speaker:'own', //发送者 own:自己，other：其他人
+  userName:'张三爸爸',
+  userAvatar:'',
+  content:'今天张三表现很好', //消息内容
+  time:'2023-11-15  14:12:34',
+},
+{
+  uuid:54657568,
+  message_id:0,
+  detail_id:1, //消息具体内容的序号
+  speaker:'other', //发送者 own:自己，other：其他人
+  expertName:'李老师',
+  expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+  content:'今天张三表现很好', //消息内容
+  time:'2023-11-15  14:12:34',
+},
     ],
     msg:"success"
   },

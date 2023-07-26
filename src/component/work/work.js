@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import Taro from "@tarojs/taro";
 import { View, Text,   } from "@tarojs/components";
-import { AtButton, AtCard, AtFab, AtIcon } from "taro-ui";
+import { AtAvatar, AtBadge, AtButton, AtCard, AtFab, AtIcon } from "taro-ui";
 import GradientButton from '@app/component/GradientButton';
+import normal from "@static/normal.png"
 import { connect } from 'react-redux';
 import "./Work.scss";
 
 function Work(props) {
   console.log(props,"props----")
-  const { dispatch, enter, user,  showData, subjectDetail, scoreDetail } = props;
+  const { dispatch, enter, user,  showData, } = props;
   const handleCompleted = (e) => {
     console.log(e,"----e----");
   };
@@ -61,7 +62,7 @@ function Work(props) {
                     <AtCard
                       className='work-card'
                       note={
-                        enter == "score" ? ( //是否是成绩页面
+                        enter == "score" && //是否是成绩页面
                           <View>
                             <View className='test-time'>
                               {"考试时间:" + "\xa0" + item.test_time}
@@ -69,18 +70,15 @@ function Work(props) {
                             <View>
                               {"发布人:" + "\xa0\xa0\xa0\xa0" + item.author}
                             </View>
-                          </View> // 成绩页面显示的note为
-                        ) : (
-                          item.author + "\xa0\xa0\xa0\xa0" + item.time
-                        )
+                          </View>
                       }
                       extra='>'
                       title={item.title}
+                      thumb={item.avatar ? item.avatar : normal}
                       onClick={() => handleNav(item)}
                     >
                       {item.content}
                     </AtCard>
-                  {/* </Navigator> */}
                   {enter == "score" && user == "1" && item.publish == 0 && (
                     <View
                       className='button-publish'
@@ -90,9 +88,9 @@ function Work(props) {
                       <Text>发布成绩</Text>
                     </View>
                   )}
+                  {/* 是否有新消息 */}
+                  {item.hasNew == 1 && <View className='new-msg'></View>}
                   <View className='tip'>
-                    {/* 是否有新消息 */}
-                    {item.hasNew == 1 && <Text className='tip-text'>新</Text>}
                     {/* 完成按钮仅存在于（家长端）作业页面 */}
                     {enter == "homework" &&
                       user == "0" &&

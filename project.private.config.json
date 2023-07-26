@@ -17,6 +17,48 @@
           "pathName": "pages/my/my",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/GrowthFile/GrowthFile",
+          "pathName": "pages/GrowthFile/GrowthFile",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/class/class",
+          "pathName": "pages/class/class",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/addressList/addressList",
+          "pathName": "pages/addressList/addressList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/addressList/groupChat/groupChat",
+          "pathName": "pages/addressList/groupChat/groupChat",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/class/Sign/Sign",
+          "pathName": "pages/class/Sign/Sign",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/component/detail/detail",
+          "pathName": "pages/component/detail/detail",
+          "query": "enter=homework&id=0",
+          "scene": null
+        },
+        {
+          "name": "pages/GrowthFile/GrowthFile",
+          "pathName": "pages/GrowthFile/GrowthFile",
+          "query": "",
+          "scene": null
         }
       ]
     }

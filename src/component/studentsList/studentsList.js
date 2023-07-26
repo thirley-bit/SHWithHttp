@@ -1,14 +1,32 @@
 import { useState, useEffect } from "react";
-import { View, Text, Picker, Form, ScrollView } from "@tarojs/components";
-import { useRouter } from "@tarojs/taro";
-import { AtAvatar, AtButton, AtDivider } from "taro-ui";
+import {
+  View,
+  Form,
+  ScrollView,
+  Label,
+  Radio,
+} from "@tarojs/components";
+import { connect } from 'react-redux';
+import { AtAvatar } from "taro-ui";
+import GradientButton from "@app/component/GradientButton";
+import normal from "@static/normal.png";
 import "./StudentsList.scss";
 
 function StudentsList(props) {
-  const { enter, showData } = props;
+  // console.log(props, "studentsList");
+  const { enter, showData, selectList, } = props;
+  const [isAllChecked, setIsAllChecked] = useState(false);
   const scrollTop = 0;
   const Threshold = 20;
 
+  const handleAllChecked = () => {
+    if(isAllChecked == true){
+      setIsAllChecked(false)
+      console.log(111)
+    }else{
+      setIsAllChecked(true)
+    }
+  };
   const formSubmit = (index) => {
     console.log(index);
   };
@@ -20,10 +38,20 @@ function StudentsList(props) {
     height: "550px",
   };
   const onScroll = () => {};
+  const handleChecked = (value) => {
+    let newSelectList = selectList.filter(item => item.student_id != value.student_id)
+    console.log(value,'item？？？');
+    console.log(newSelectList,'List>>>')
+  };
 
   return (
     // 详情头部组件
     <View className='teacher'>
+      {enter == "sign" && (
+        <View className='all-check' onClick={handleAllChecked}>
+          <Radio value='选中' checked={isAllChecked}>选中</Radio>
+        </View>
+      )}
       <ScrollView
         className='scroll'
         scrollY
@@ -37,63 +65,70 @@ function StudentsList(props) {
         <View className='form-width'>
           {showData.map((item, index) => {
             const name = item.student_name;
-            let className = "form";
-            if (name.length > 15) {
-              className += " form100";
-            } else if (name.length > 9) {
-              className += " form75";
-            } else if (name.length > 3) {
-              className += " form50";
+            let className = "sign-text";
+            if (name.length > 5) {
+              className += " text2";
             }
-
             return (
               <Form
-                className={className}
+                className='form'
                 key={index}
                 onSubmit={() => formSubmit(item.id)}
               >
-                {enter == 'homework' ? (
+                {enter == "homework" ? (
                   // 学生是否完成作业
                   <View>
-                    {item.hasCompleted == 0 ? (
-                      //hasCompleted:0 未完成作业
-                      <AtButton
-                        className='completed-button'
-                        size='small'
-                      >
-                        {name}
-                      </AtButton>
-                    ) : (
-                      //hasCompleted:1 已完成作业
-                      <AtButton
-                        className='completed-button_completed'
-                        size='small'
-                      >
-                        {name}
-                      </AtButton>
-                    )}
+                    <View className='sign-content' style='marginBottom:32rpx'>
+                    {
+                        item.hasCompleted == true  && <Label className='sign-label'>
+                        <Radio value={item.name} checked={item.hasCompleted} ></Radio>
+                      </Label>
+                      }
+                      <AtAvatar
+                        circle
+                        className='sign-img'
+                        image={item.avatar ? item.avatar : normal}
+                      ></AtAvatar>
+                      <View className={className}>{name}</View>
+                    </View>
                   </View>
                 ) : (
                   // 学生是否签到
                   <View>
-                    {item.checked == 0 ? (
-                      //hasCompleted:0 未签到
-                      <AtButton
-                        className='sign-button'
-                        size='small'
-                        onClick={() => handleSign(item, item.student_id, index)}
-                      >
-                        {name}fff
-                      </AtButton>
-                    ) : (
-                      //hasCompleted:1 已完成作业
-                      <AtButton
-                        className='sign-button_sign'
-                        size='small'
-                      >
-                        {name}sss
-                      </AtButton>
-                    )}
+                    <View
+                      className='sign-content'
+                      style={enter == "homework" ? "marginBottom:32rpx" : ""}
+                    >
+                      {
+                        item.checked == true && isAllChecked == true && <Label className='sign-label'>
+                        <Radio value={item.name} checked={item.checked} onClick={() => handleChecked(item)}></Radio>
+                      </Label>
+                      }
+                      <AtAvatar
+                        circle
+                        className='sign-img'
+                        image={item.avatar ? item.avatar : normal}
+                      ></AtAvatar>
+                      <View className={className}>{name}</View>
+                      {item.checked == true ? (
+                        <GradientButton
+                          className='sign-button'
+                          type='primary'
+                          onClick={() =>
+                            handleSign(item, item.student_id, index)
+                          }
+                        >
+                          确认
+                        </GradientButton>
+                      ) : (
+                        <GradientButton
+                          className='sign-button'
+                          type='secondary'
+                        >
+                          未出发
+                        </GradientButton>
+                      )}
+                    </View>
                   </View>
                 )}
               </Form>
@@ -105,4 +140,6 @@ function StudentsList(props) {
   );
 }
 
-export default StudentsList;
+export default connect((state ) => ({
+  selectList:state.Sign.selectList
+}))(StudentsList);
