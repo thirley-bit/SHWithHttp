@@ -1,6 +1,7 @@
 // import { useState, createContext } from 'react'
 import { View, Image, Text } from "@tarojs/components";
 import { AtDivider, AtAvatar } from "taro-ui";
+import Taro from "@tarojs/taro";
 import NavTab from "@app/component/NavTab/NavTab";
 import info from "@static/info.png";
 import history from "@static/history.png";
@@ -14,20 +15,26 @@ function GrowthFile() {
       id: 0,
       name: "个人信息",
       img: info,
+      url: "/pages/GrowthFile/Info/Info",
     },
     {
       id: 1,
       name: "个人成长史",
       img: history,
+      url: "/pages/GrowthFile/History/History",
     },
     {
       id: 2,
       name: "综合素质评价",
       img: quality,
+      url: "/pages/GrowthFile/Quality/Quality",
     },
   ];
-  const handleNav = () => {
-    console.log(111);
+  const handleNav = (item) => {
+    console.log(item);
+    Taro.navigateTo({
+      url: item.url,
+    });
   };
 
   return (
@@ -36,7 +43,11 @@ function GrowthFile() {
       <View className='growth-content'>
         {settingList.map((item, index) => {
           return (
-            <View key={index} className='growth' onClick={handleNav}>
+            <View
+              key={index}
+              className='growth'
+              onClick={() => handleNav(item)}
+            >
               <View className='growth-msg'>
                 <View className='growth-name'>{item.name}</View>
               </View>

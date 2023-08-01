@@ -3,14 +3,14 @@ import Taro, { useRouter } from "@tarojs/taro";
 import { View, Text, Form, Picker, ScrollView } from "@tarojs/components";
 import { AtButton } from "taro-ui";
 import { connect } from 'react-redux';
-import api from "@/api/api";
 
 import StudentsList from "@app/component/StudentsList/StudentsList";
+import GradientButton from "@app/component/GradientButton";
 import NavTab from '@app/component/NavTab/NavTab';
 import "./Sign.scss";
 
 function Sign(props) {
-  const { user, dispatch, studentsList } = props
+  const { user, dispatch, student, studentsList } = props
   const [students, setStudents] = useState([]);
   const [isEdit, setIsEdit] = useState(true);
 
@@ -21,37 +21,22 @@ function Sign(props) {
     dispatch({
       type:'Sign/getStudentsList'
     })
-    studentsData();
+    dispatch({
+      type:'Sign/getStudent'
+    })
   }, []);
   console.log(user,"user");
 
-  const studentsData = () => {
-    let url = "students/list";
-    let data = api[url].data;
-    // Taro.request({
-    //   url: "http://localhost:9999/api/user/list",
-    //   }).then((res) => {
-    // setStudents(res.data.data)
-    // })
-    setStudents(data);
-  };
+ 
 
-  const [student, setStudent] = useState([
-    {
-      id: 2,
-      name: "张三撒旦士大夫士大夫范德萨对方",
-      status: 0,
-    },
-    {
-      id: 3,
-      name: "李四",
-      status: 0,
-    },
-  ]);
   const [time, setTime] = useState("17:50");
+
 
   const handleChange = () => {
     setIsEdit(!isEdit);
+  };
+  const handleSign = () => {
+    console.log("click");
   };
   const formSubmit = (index) => {
     console.log(index);
@@ -72,7 +57,7 @@ function Sign(props) {
       }
     });
     // const newStudents = student.splice(index,1,newItem,)
-    setStudent(newStudent);
+    // setStudent(newStudent);
 
     const newStudents = students.map((value) => {
       if (value.id === id) {
@@ -91,41 +76,36 @@ function Sign(props) {
   const onTimeChange = (e) => {
     setTime(e.detail.value);
   };
-  const scrollHeight = {
-    height: "550px",
-  };
-  const onScroll = () => {};
   return (
     <View className='index'>
     <NavTab needBackIcon mainTitle='安全确认' />
       {user == 0 ? (
         <View className='parent'>
           <View className='parent-item'>
-            {studentsList.map((item, index) => {
+            {student.map((item, index) => {
               console.log(item);
               return (
                 <View key={index}>
-                  <View className='text'>{item.name}</View>
+                  <View className='text'>{item.student_name}</View>
                   <View className='button'>
-                    {item.status === 0 ? (
-                      <AtButton
-                        className='sign-button_parent'
-                        type='primary'
-                        size='small'
-                        onClick={() => signHandle(item, item.id)}
-                      >
-                        确认是否到家
-                      </AtButton>
-                    ) : (
-                      <AtButton
-                        disabled
-                        className='sign-button_parent'
-                        type='secondary'
-                        size='small'
-                      >
-                        已确认到家
-                      </AtButton>
-                    )}
+                  {item.checked == true ? (
+                        <GradientButton
+                          className='sign-button'
+                          type='primary'
+                          onClick={() =>
+                            handleSign(item, item.student_id, index)
+                          }
+                        >
+                          确认
+                        </GradientButton>
+                      ) : (
+                        <GradientButton
+                          className='sign-button'
+                          type='secondary'
+                        >
+                          未出发
+                        </GradientButton>
+                      )}
                   </View>
                 </View>
               );
@@ -154,5 +134,6 @@ function Sign(props) {
 
 export default connect(state => ({
   user: state.users.user,
-  studentsList: state.Sign.studentsList
+  studentsList: state.Sign.studentsList,
+  student: state.Sign.student
 }))(Sign);

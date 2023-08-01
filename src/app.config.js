@@ -29,6 +29,9 @@ export default defineAppConfig({
 
     //成长档案
     'pages/GrowthFile/GrowthFile', //成长档案
+    'pages/GrowthFile/Info/Info', //个人信息页面
+    'pages/GrowthFile/History/History', //个人成长史页面
+    'pages/GrowthFile/Quality/Quality', //综合素质评价页面
 
     //通讯录
     'pages/addressList/addressList', //通讯录

@@ -1,0 +1,29 @@
+.index{
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(175deg,rgba(122,201,254,0.8),rgba(107,234,254) 8%, rgba(248,249,255) 23%,  #F8F9FF 20%),
+}
+.main{
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0rpx 0rpx 38rpx 2rpx rgba(10,110,176,0.1);
+    border-radius: 31rpx;
+    .at-form{
+        background-color: rgba(255,255,255,0);
+        .at-input{
+            font-size: 27rpx;
+            font-weight: 500;
+            color: #343434;
+            background-color: rgba(255,255,255,0);
+            text-align: right;
+        }
+        .at-input__input{
+            font-size: 25rpx;
+            color: #676767;
+            padding-right: 41rpx;
+        }
+        .at-input--disabled{
+            opacity: 1;
+        }
+    }
+}

@@ -1,25 +1,174 @@
-.index{
-    width: 100%;
-    height: 100vh;
-    background: linear-gradient(175deg,rgba(105,194,254,0.8),rgba(107,234,254) 3%,  #F8F9FF 20%),
-}
-.content{
-    margin: 20rpx 0;
-    .date{
-        background-color: #fff;
-        float: left;
-        width: 28%;
-        margin: 0 20rpx;
-        padding: 0 3%;
-        border: 1rpx solid #000;
-        border-radius: 10rpx;
+$steelBlue: #419af9;
+$landingNavBlue: #1dcd7e;
+$landingNavCyanBlue: #1dcdc7;
+$landingNavSkyBlue: #87cd1d;
+
+$list: $steelBlue, $landingNavBlue, $landingNavCyanBlue, $landingNavSkyBlue;
+
+@mixin bg-color() {
+    $random-color: random(length($list));
+    background: #fff;
+    border: 4rpx solid nth($list, $random-color);
+    color: nth($list, $random-color);
+  }
+  
+  @for $i from 1 through 12 {
+    .show:nth-child(#{$i}) {
+      @for $i from 1 through 20 {
+        .top:nth-child(#{$i}) {
+          @include bg-color;
+        }
+      }
     }
-    .selector{
-        background-color: #fff;
-        display: inline-block;
-        width: 25%;
-        padding: 0 3%;
-        border: 1rpx solid #000;
-        border-radius: 10rpx;
+  }
+.index {
+  width: 100%;
+  height: 100vh;
+  .show {
+    position: relative;
+    width: 90%;
+    height: auto !important;
+    min-height: 320rpx;
+    height: 320rpx;
+    background: #ffffff;
+    margin: 0 auto;
+    padding: 48rpx 0;
+    box-shadow: 0rpx 0rpx 38rpx 2rpx rgba(10, 110, 176, 0.1039);
+    border-radius: 15rpx;
+    .top {
+      position: relative;
+      display: inline-block;
+      min-width: 20%;
+      width: fit-content;
+      height: 58rpx;
+      border-radius: 23rpx;
+      border: 4rpx solid #1dcd7e;
+      font-size: 31rpx;
+      text-align: center;
+      line-height: 58rpx;
+      margin: 20rpx 0 0 3%;
+      display: inline-block;
+      .icon {
+        position: absolute;
+        width: 32rpx;
+        height: 32rpx;
+        right: -12rpx;
+        top: -16rpx;
+        z-index: 100;
+        border-radius: 50%;
+        background-color: #f00;
+      }
+      .icon::before,
+      .icon::after {
+        content: "";
+        position: absolute;
+        height: 20rpx;
+        width: 4rpx;
+        top: 6rpx;
+        right: 14px;
+        background: #ffffff;
+      }
+      .icon::before {
+        transform: rotate(45deg);
+      }
+      .icon::after {
+        transform: rotate(-45deg);
+      }
     }
+    .top.top2 {
+      padding: 0 30rpx;
+    }
+    .clearfloat {
+      clear: both;
+      height: 0;
+      font-size: 1rpx;
+      line-height: 0;
+    }
+    .count {
+      position: absolute;
+      right: 25rpx;
+      font-size: 27rpx;
+      bottom: 2vh;
+      color: #4c4c4c;
+    }
+  }
+  
+  .choose {
+    width: 90%;
+    background: #ffffff;
+    margin: 23rpx auto;
+    padding: 20rpx auto;
+    box-shadow: 0rpx 0rpx 38rpx 2rpx rgba(10, 110, 176, 0.1039);
+    border-radius: 15rpx;
+    .at-tabs__header {
+      background-color: rgba(255, 255, 255, 0);
+    }
+    .at-tabs__item-underline {
+      width: 131rpx;
+      height: 35rpx;
+      left: 6rpx;
+      background-color: rgba(255, 255, 255, 0);
+      background: url("../../../static/down.png") no-repeat center;
+      background-size: 53rpx 13rpx;
+    }
+    .at-tabs__item {
+      flex: none;
+      width: 13%;
+      height: 42rpx;
+      color: #666666;
+      font-size: 31rpx;
+      line-height: 42rpx;
+    }
+    .at-tabs__item .at-tabs__item--active {
+      color: #343434;
+      font-size: 31rpx;
+      line-height: 42rpx;
+    }
+
+    .at-tabs__underline {
+      background-color: rgba(255, 255, 255, 0);
+    }
+    .at-tabs-pane{
+      position: relative;
+    }
+    // .hobby{
+    //   position: absolute;
+    //   height: auto !important;
+    //   min-height: 320rpx;
+    //   height: 320rpx;
+    // }
+    .add-edit {
+      position: absolute;
+      right: 5%;
+      font-size: 27rpx;
+      bottom: 1vh;
+      color: #4c4c4c;
+    }
+  }
+  .bottom {
+    position: relative;
+    display: inline-block;
+    height: 60rpx;
+    float: left;
+    margin: 20rpx 3%;
+  } 
 }
+
+.edit-modal{
+  .modal-edit{
+      height: 11vh;
+      min-height: 0;
+      font-size: 32rpx;
+  }
+  .modal-input{
+      color: #666666;
+      height: 62rpx;
+      line-height: 62rpx;
+      border: 1rpx  solid #e7e7e7;
+      border-radius: 8rpx;
+      margin: 6% 0 0 0;
+      padding-left: 10rpx;
+      font-size: 28rpx;
+  }
+}
+

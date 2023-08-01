@@ -20,7 +20,7 @@ function ChildMsg(props) {
   }, []);
   useEffect(() => {
     if (identity) {
-      console.log(identity);
+      console.log(identity,'iddd');
       const titleList = [
         {
           key: "student_name",

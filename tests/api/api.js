@@ -1402,7 +1402,7 @@ export default {
       {
         student_id:0,
         student_name:'张三',
-        gohome_checked:true
+        checked:true
       }
     ]
   },
@@ -2368,99 +2368,216 @@ export default {
         content:'今天张三表现很好', //消息内容
         time:'2023-11-15  14:12:34',
     },
-   {
+        {
+              uuid:54657568,
+              message_id:0,
+              detail_id:1, //消息具体内容的序号
+              speaker:'other', //发送者 own:自己，other：其他人
+              expertName:'李老师',
+              expertAvatar:'',
+              content:'今天张三表现很好', //消息内容
+              time:'2023-11-15  14:12:34',
+          },
+          {
+            uuid:54657568,
+            message_id:0,
+            detail_id:0, //消息具体内容的序号
+            speaker:'own', //发送者 own:自己，other：其他人
+            userName:'张三爸爸',
+            userAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+            content:'今天张三表现很好', //消息内容
+            time:'2023-11-15  14:12:34',
+        },
+      {
+            uuid:54657568,
+            message_id:0,
+            detail_id:1, //消息具体内容的序号
+            speaker:'other', //发送者 own:自己，other：其他人
+            expertName:'李老师',
+            expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+            content:'今天张三表现很好', //消息内容
+            time:'2023-11-15  14:12:34',
+        },
+        {
+          uuid:54657568,
+          message_id:0,
+          detail_id:0, //消息具体内容的序号
+          speaker:'own', //发送者 own:自己，other：其他人
+          userName:'张三爸爸',
+          userAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+          content:'今天张三表现很好', //消息内容
+          time:'2023-11-15  14:12:34',
+      },
+      {
+          uuid:54657568,
+          message_id:0,
+          detail_id:1, //消息具体内容的序号
+          speaker:'other', //发送者 own:自己，other：其他人
+          expertName:'李老师',
+          expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+          content:'今天张三表现很好', //消息内容
+          time:'2023-11-15  14:12:34',
+      },
+      {
+        uuid:54657568,
+        message_id:0,
+        detail_id:0, //消息具体内容的序号
+        speaker:'own', //发送者 own:自己，other：其他人
+        userName:'张三爸爸',
+        userAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+        content:'今天张三表现很好', //消息内容
+        time:'2023-11-15  14:12:34',
+      },
+      {
         uuid:54657568,
         message_id:0,
         detail_id:1, //消息具体内容的序号
         speaker:'other', //发送者 own:自己，other：其他人
         expertName:'李老师',
-        expertAvatar:'',
+        expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
         content:'今天张三表现很好', //消息内容
         time:'2023-11-15  14:12:34',
-    },
-    {
-      uuid:54657568,
-      message_id:0,
-      detail_id:0, //消息具体内容的序号
-      speaker:'own', //发送者 own:自己，other：其他人
-      userName:'张三爸爸',
-      userAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
-      content:'今天张三表现很好', //消息内容
-      time:'2023-11-15  14:12:34',
-  },
- {
-      uuid:54657568,
-      message_id:0,
-      detail_id:1, //消息具体内容的序号
-      speaker:'other', //发送者 own:自己，other：其他人
-      expertName:'李老师',
-      expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
-      content:'今天张三表现很好', //消息内容
-      time:'2023-11-15  14:12:34',
-  },
-  {
-    uuid:54657568,
-    message_id:0,
-    detail_id:0, //消息具体内容的序号
-    speaker:'own', //发送者 own:自己，other：其他人
-    userName:'张三爸爸',
-    userAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
-    content:'今天张三表现很好', //消息内容
-    time:'2023-11-15  14:12:34',
-},
-{
-    uuid:54657568,
-    message_id:0,
-    detail_id:1, //消息具体内容的序号
-    speaker:'other', //发送者 own:自己，other：其他人
-    expertName:'李老师',
-    expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
-    content:'今天张三表现很好', //消息内容
-    time:'2023-11-15  14:12:34',
-},
-{
-  uuid:54657568,
-  message_id:0,
-  detail_id:0, //消息具体内容的序号
-  speaker:'own', //发送者 own:自己，other：其他人
-  userName:'张三爸爸',
-  userAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
-  content:'今天张三表现很好', //消息内容
-  time:'2023-11-15  14:12:34',
-},
-{
-  uuid:54657568,
-  message_id:0,
-  detail_id:1, //消息具体内容的序号
-  speaker:'other', //发送者 own:自己，other：其他人
-  expertName:'李老师',
-  expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
-  content:'今天张三表现很好', //消息内容
-  time:'2023-11-15  14:12:34',
-},
-{
-  uuid:54657568,
-  message_id:0,
-  detail_id:0, //消息具体内容的序号
-  speaker:'own', //发送者 own:自己，other：其他人
-  userName:'张三爸爸',
-  userAvatar:'',
-  content:'今天张三表现很好', //消息内容
-  time:'2023-11-15  14:12:34',
-},
-{
-  uuid:54657568,
-  message_id:0,
-  detail_id:1, //消息具体内容的序号
-  speaker:'other', //发送者 own:自己，other：其他人
-  expertName:'李老师',
-  expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
-  content:'今天张三表现很好', //消息内容
-  time:'2023-11-15  14:12:34',
-},
+      },
+      {
+        uuid:54657568,
+        message_id:0,
+        detail_id:0, //消息具体内容的序号
+        speaker:'own', //发送者 own:自己，other：其他人
+        userName:'张三爸爸',
+        userAvatar:'',
+        content:'今天张三表现很好', //消息内容
+        time:'2023-11-15  14:12:34',
+      },
+      {
+        uuid:54657568,
+        message_id:0,
+        detail_id:1, //消息具体内容的序号
+        speaker:'other', //发送者 own:自己，other：其他人
+        expertName:'李老师',
+        expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+        content:'今天张三表现很好', //消息内容
+        time:'2023-11-15  14:12:34',
+      },
     ],
     msg:"success"
   },
-};
+
+
+  //成长档案页面接口
+  "growthFile/info": {
+    code: 1,
+    //data为对象
+    data: {
+      uuid: "45344534345",
+      user: 0, //登录身份 0：家长，1：教师
+      student_id:'20230204', //学生序号
+      student_name: "张三",
+      sex:'女',
+      birthday:'2009-12-20',
+      birthplace:'四川省甘孜藏族自治州',
+      address:'四川省甘孜藏族自治州嘉绒步行街38号',
+      school:'四川省甘孜小学',
+      class:'2023级2班',
+      token: "fdgdgvfrtgtgfdgf",
+    },
+    msg: "success",
+  },
+  //爱好与特长
+  "hobby": {
+    code: 1,
+    //data为对象
+    data: [
+      {
+        name: "阅读",
+        active: true,
+      },
+      {
+        name: "运动",
+        active: true,
+      },
+      {
+        name: "跑步",
+        active: true,
+      },
+      {
+        name: "看书",
+        active: false,
+      },
+      {
+        name: "看书",
+        active: false,
+      },
+      {
+        name: "看书看书看书",
+        active: false,
+      },
+      {
+        name: "看书",
+        active: false,
+      },
+      {
+        name: "看书看书看书看书看书看书看书看书看书",
+        active: false,
+      },
+      {
+        name: "看书看书看书看书看书看书看书看看书看书",
+        active: true,
+      },
+      {
+        name: "看书",
+        active: false,
+      },
+    ],
+    msg: "success",
+  },
+  "strengths": {
+    code: 1,
+    //data为对象
+    data: [
+      {
+        name: "绘画",
+        active: true,
+      },
+      {
+        name: "滑冰",
+        active: true,
+      },
+      {
+        name: "看书",
+        active: false,
+      },
+      {
+        name: "看书",
+        active: false,
+      },
+      {
+        name: "看书",
+        active: false,
+      },
+      {
+        name: "看书看书看书",
+        active: true,
+      },
+      {
+        name: "看书",
+        active: false,
+      },
+      {
+        name: "看书看书看书看书看书看书看书看书看书",
+        active: false,
+      },
+      {
+        name: "看书看书看书看书看书看书看书看看书看书",
+        active: false,
+      },
+      {
+        name: "看书",
+        active: false,
+      },
+    ],
+    msg: "success",
+  },
+}
+
 
 

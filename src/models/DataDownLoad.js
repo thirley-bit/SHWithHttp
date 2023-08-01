@@ -1,7 +1,7 @@
 import { getSourceList, DeleteServices } from '../services/DataDownLoad'
 
 const model = {
-    namespace:'Source',
+    namespace:'DataDownLoad',
     state:{
         sourceArr:[]
     },

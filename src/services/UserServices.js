@@ -31,3 +31,8 @@ export async function getTeacherCheckedList(){
     let data = api[url]
     return data
 }
+export async function getStudentInfo(){
+    let url = 'growthFile/info'
+    let data = api[url]
+    return data
+}

@@ -2450,3 +2450,121 @@
     msg:"success"
 }
 ```
+
+### 成长档案页面
+
+##### 个人信息
+#### api/v1/growthFile/info `GET`
+* request body
+```json
+{
+
+}
+```
+* response body
+```json
+{
+    code: 1,
+    //data为对象
+    data: {
+      uuid: "45344534345",
+      user: 0, //登录身份 0：家长，1：教师
+      student_id:'20230204', //学生序号
+      student_name: "张三",
+      sex:'女',
+      birthday:'2009-12-20',
+      birthplace:'四川省甘孜藏族自治州',
+      address:'四川省甘孜藏族自治州嘉绒步行街38号',
+      school:'四川省甘孜小学',
+      class:'2023级2班',
+      token: "fdgdgvfrtgtgfdgf",
+    },
+    msg: "success",
+  },
+```
+
+##### 爱好与特长
+#### api/v1/hobby `GET`
+* request body
+```json
+{
+
+}
+```
+* response body
+```json
+{
+code: 1,
+    //data为对象
+    data: [
+      {
+        name: "阅读",
+        active: true,
+      },
+      {
+        name: "运动",
+        active: true,
+      },
+      {
+        name: "跑步",
+        active: true,
+      },
+    ],
+    msg: "success",
+  },
+```
+#### api/v1/strengths `GET`
+* request body
+```json
+{
+
+}
+```
+* response body
+```json
+{
+code: 1,
+    //data为对象
+    data: [
+     {
+        name: "绘画",
+        active: true,
+      },
+      {
+        name: "滑冰",
+        active: true,
+      }, 
+   ],
+    msg: "success",
+},
+```
+##### 提交
+#### api/v1/change
+* request body
+```json
+{
+hobby:[
+{
+        name: "阅读",
+        active: true,
+      },
+      {
+        name: "运动",
+        active: true,
+      },
+      {
+        name: "跑步",
+        active: true,
+      },
+],
+strengths:[
+{
+        name: "绘画",
+        active: true,
+      },
+      {
+        name: "滑冰",
+        active: true,
+      }, 
+]
+}
