@@ -6,10 +6,10 @@ import {
   AtButton,
   AtCard,
   AtIcon,
-  AtTabs,
   AtTabsPane,
 } from "taro-ui";
 import NavTab from '@app/component/NavTab/NavTab';
+import MyTabs from '@app/component/MyTabs/MyTabs';
 import GradientButton from '@app/component/GradientButton';
 import normal from "@static/normal.png"
 
@@ -83,7 +83,7 @@ function Check(props) {
   return (
     <View className='index'>
       <NavTab needBackIcon mainTitle='审核' />
-      <AtTabs current={current} tabList={tabList} onClick={handleClick}>
+      <MyTabs current={current} tabList={tabList} onClick={handleClick}>
       <AtTabsPane current={current} index={0}>
           {(user == 0 ? parentCheckedList : teacherCheckedList).map(
             (item, index) => {
@@ -241,7 +241,7 @@ function Check(props) {
             );
           })}
         </AtTabsPane>
-      </AtTabs>
+      </MyTabs>
     </View>
   );
 }

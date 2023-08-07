@@ -31,6 +31,8 @@ export default defineAppConfig({
     'pages/GrowthFile/GrowthFile', //成长档案
     'pages/GrowthFile/Info/Info', //个人信息页面
     'pages/GrowthFile/History/History', //个人成长史页面
+    'pages/GrowthFile/History/CheckIn/CheckIn', //个人成长史——考勤页面
+    'pages/GrowthFile/History/CheckIn/Request/Request', //个人成长史——考勤页面——补卡申请页面
     'pages/GrowthFile/Quality/Quality', //综合素质评价页面
 
     //通讯录

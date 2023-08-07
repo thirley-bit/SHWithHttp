@@ -49,7 +49,7 @@ function NavTab(props) {
     }
   };
   return (
-    <View className='tabs'>
+    <View className='NavTabs'>
       <View className='nav_custom_bar' style={{ height: ` ${navBarHeight}px` }}>
         <AtIcon
           className={`nav_custom_bar_back ${needBackIcon ? "" : "hidden"}`}

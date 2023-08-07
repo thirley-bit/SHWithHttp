@@ -3,6 +3,7 @@ import Taro from "@tarojs/taro";
 import { connect } from "react-redux";
 import { View, Input, Text, Button } from "@tarojs/components";
 import NavTab from "@app/component/NavTab/NavTab";
+import MyTabs from '@app/component/MyTabs/MyTabs';
 import GradientButton from "@app/component/GradientButton";
 import {
   AtIcon,
@@ -192,7 +193,7 @@ function DisplayPublic(props) {
         </View>
       </View>
       <View className='choose'>
-        <AtTabs current={current} tabList={tabList} onClick={handleChange}>
+        <MyTabs current={current} tabList={tabList} onClick={handleChange}>
           <AtTabsPane current={current} index={0}>
             <View className='hobby'>
               {hobbyList.map((it, i) => {
@@ -240,7 +241,7 @@ function DisplayPublic(props) {
               </View>
             </View>
           </AtTabsPane>
-        </AtTabs>
+        </MyTabs>
       </View>
       <AtModal
         className='edit-modal'

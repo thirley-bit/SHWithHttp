@@ -1,5 +1,5 @@
 
-interface TableProps {
+interface TabsProps {
     tabList: Array<{           //要传入的值是数组,必须要尖括号包裹起来
     title: string,
     active?: boolean
@@ -9,4 +9,4 @@ interface TableProps {
     current: number,     //没问号的意思是必传,后面的number是变量的类型
     onClick: any,
 }
-export default function Table(props: TableProps): JSX.Element;
+export default function MyTabs(props: TabsProps): JSX.Element;

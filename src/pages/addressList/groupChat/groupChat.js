@@ -3,7 +3,6 @@ import Taro from "@tarojs/taro";
 
 import { connect } from 'react-redux';
 import {
-  AtTabs,
   AtTabsPane,
   AtSearchBar,
   AtCheckbox,
@@ -16,6 +15,7 @@ import {
 import { View, Button, ScrollView, Input } from "@tarojs/components";
 import GradientButton from '@app/component/GradientButton';
 import NavTab from '@app/component/NavTab/NavTab';
+import MyTabs from '@app/component/MyTabs/MyTabs';
 import normal from '@static/normal.png'
 import api from "@/api/api";
 import "./groupChat.scss";
@@ -337,7 +337,7 @@ function GroupChat(props) {
     <View className='group-content'>
 
     </View>
-      <AtTabs current={current} tabList={tabList} onClick={handleChange}>
+      <MyTabs current={current} tabList={tabList} onClick={handleChange}>
         {/* 新建群聊 */}
         <AtTabsPane current={current} index={0}>
           <View className='group-list'>
@@ -477,7 +477,7 @@ function GroupChat(props) {
             提交
           </AtButton> */}
         </AtTabsPane>
-      </AtTabs>
+      </MyTabs>
       <GradientButton disabled={checkedList.length > 0 || checkedLabelList.length > 0 ? false : true} type='primary' className='send-button' onClick={() => handleSend()}>提交</GradientButton>
       {/* <Button type='primary' className='send-button' onClick={() => handleSend()}>提交</Button> */}
     </View>

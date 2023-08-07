@@ -9,7 +9,7 @@ export default {
       pwd: "qwertyui",
       class_code: "47687867324325344",
       class_name: "一年级一班",
-      user: 0, //登录身份 0：家长，1：教师
+      user: 1, //登录身份 0：家长，1：教师
       student_id:'20230204', //学生序号
       student_name: "张三",
       teacher:'张老师', //如果是教师端返回teacher字段

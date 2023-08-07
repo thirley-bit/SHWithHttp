@@ -1,0 +1,28 @@
+.at-tabs__header{
+    background-color: rgba(255, 255,255,0);
+}
+.at-tabs__item-underline{
+    width: 131rpx;
+    height: 35rpx;
+    left: 6rpx;
+    background-color: rgba(255, 255,255,0);
+    background: url("../../static/down.png") no-repeat center;
+    background-size: 53rpx 13rpx;
+}
+.at-tabs__item{
+    flex: none;
+    width: 13%;
+    height: 42rpx;
+    color: #666666;
+    font-size: 31rpx;
+    line-height: 42rpx;
+}
+.at-tabs__item .at-tabs__item--active{
+    color: #343434;
+    font-size: 31rpx;
+    line-height: 42rpx;
+}
+
+.at-tabs__underline{
+    background-color: rgba(255,255,255,0);
+}

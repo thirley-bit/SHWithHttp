@@ -1,9 +1,9 @@
 import { View, Image } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { useState, useEffect } from "react";
-import { AtTabs, AtTabsPane, AtCard } from "taro-ui";
-import ArticleList from "@app/component/articleList/articleList";
+import { AtTabsPane, AtCard } from "taro-ui";
 import NavTab from "@app/component/NavTab/NavTab";
+import MyTabs from '@app/component/MyTabs/MyTabs';
 import api from "@/api/api";
 import "./moreArticle.scss";
 
@@ -62,7 +62,7 @@ function MoreArticle() {
   return (
     <View className='index'>
       <NavTab needBackIcon mainTitle='更多' />
-      <AtTabs current={current} tabList={tabList} onClick={handleChange}>
+      <MyTabs current={current} tabList={tabList} onClick={handleChange}>
         {tabList.map((item, index) => {
           return (
             <AtTabsPane key={index} current={current} index={index}>
@@ -99,7 +99,7 @@ function MoreArticle() {
             </AtTabsPane>
           );
         })}
-      </AtTabs>
+      </MyTabs>
     </View>
   );
 }

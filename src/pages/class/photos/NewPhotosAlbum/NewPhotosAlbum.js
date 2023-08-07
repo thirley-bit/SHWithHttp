@@ -3,6 +3,7 @@ import { useState } from "react";
 import Taro from '@tarojs/taro'
 import { AtDivider, AtButton, AtList, AtListItem, AtTextarea } from "taro-ui";
 import NavTab from '@app/component/NavTab/NavTab';
+import GradientButton from '@app/component/GradientButton';
 import "./NewPhotosAlbum.scss"
 
 //新建相册页面
@@ -55,13 +56,13 @@ function NewPhotosAlbum(props) {
             <Image className='img' src={img} />
         </AtList>
       </View>
-      <AtButton
+      <GradientButton
         type='primary'
         className='send-button'
         onClick={() => handleSend()}
       >
         发送
-      </AtButton>
+      </GradientButton>
     </View>
   );
 }

@@ -1,17 +1,13 @@
 import { useState, useEffect } from "react";
-import { View, Text } from "@tarojs/components";
+import { View } from "@tarojs/components";
 import {
-  AtButton,
-  AtDivider,
-  AtIcon,
-  AtTabs,
   AtTabsPane,
-  AtAvatar,
 } from "taro-ui";
 
 import StudentsList from "@app/component/StudentsList/StudentsList";
 import Table from "@app/component/Table/Table";
 import FeedBack from "@app/component/FeedBack";
+import MyTabs from '@app/component/MyTabs/MyTabs';
 import GradientButton from "@app/component/GradientButton";
 import normal from "@static/normal.png";
 import { connect } from "react-redux";
@@ -125,7 +121,7 @@ function DetailContent(props) {
       <View className='tab'>
         {enter == "homework" && (
           <View>
-            <AtTabs
+            <MyTabs
               current={current}
               tabList={tabList}
               onClick={handleTabChange}
@@ -154,7 +150,7 @@ function DetailContent(props) {
                   </AtTabsPane>
                 );
               })}
-            </AtTabs>
+            </MyTabs>
           </View>
         )}
         {user == "1" && enter == "score" && (

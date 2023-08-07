@@ -65,7 +65,7 @@ function History() {
       id: 7,
       name: "考勤状况",
       img: checkIn,
-      url: "/pages/GrowthFile/Quality/Quality",
+      url: "/pages/GrowthFile/History/CheckIn/CheckIn",
     },
   ]
   const handleNav = (item) => {

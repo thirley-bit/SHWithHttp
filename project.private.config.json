@@ -41,6 +41,18 @@
           "pathName": "pages/GrowthFile/Quality/Quality",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/GrowthFile/History/CheckIn/CheckIn",
+          "pathName": "pages/GrowthFile/History/CheckIn/CheckIn",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/GrowthFile/History/CheckIn/Request/Request",
+          "pathName": "pages/GrowthFile/History/CheckIn/Request/Request",
+          "query": "number=1",
+          "scene": null
         }
       ]
     }

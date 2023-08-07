@@ -5,18 +5,18 @@ import NavTab from '@app/component/NavTab/NavTab';
 import { useState } from "react";
 import "./PublishPhotos.scss";
 
-//校园食谱页面
+//上传照片页面
 function PublishPhotos() {
-  const [state, setState] = useState({});
+  const [folder, setFolder] = useState({})
   const handleChoose = () => {
     Taro.navigateTo({ url: "/pages/class/Photos/ChoosePhotosAlbum/ChoosePhotosAlbum" });
   };
   const handleChange = (files) => {
     console.log(files);
-    setState({ files });
+    setFolder({ files });
   };
   const handleSend = () => {
-    console.log(state)
+    console.log(folder)
   }
   return (
     <View className='main'>
@@ -30,7 +30,7 @@ function PublishPhotos() {
         />
       </AtList>
       <View className='img-picker'>
-        <AtImagePicker files={state.files} onChange={handleChange} />
+        <AtImagePicker files={folder.files} onChange={handleChange} />
       </View>
       <AtButton
         type='primary'

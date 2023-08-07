@@ -100,43 +100,9 @@ $list: $steelBlue, $landingNavBlue, $landingNavCyanBlue, $landingNavSkyBlue;
     padding: 20rpx auto;
     box-shadow: 0rpx 0rpx 38rpx 2rpx rgba(10, 110, 176, 0.1039);
     border-radius: 15rpx;
-    .at-tabs__header {
-      background-color: rgba(255, 255, 255, 0);
-    }
-    .at-tabs__item-underline {
-      width: 131rpx;
-      height: 35rpx;
-      left: 6rpx;
-      background-color: rgba(255, 255, 255, 0);
-      background: url("../../../static/down.png") no-repeat center;
-      background-size: 53rpx 13rpx;
-    }
-    .at-tabs__item {
-      flex: none;
-      width: 13%;
-      height: 42rpx;
-      color: #666666;
-      font-size: 31rpx;
-      line-height: 42rpx;
-    }
-    .at-tabs__item .at-tabs__item--active {
-      color: #343434;
-      font-size: 31rpx;
-      line-height: 42rpx;
-    }
-
-    .at-tabs__underline {
-      background-color: rgba(255, 255, 255, 0);
-    }
     .at-tabs-pane{
       position: relative;
     }
-    // .hobby{
-    //   position: absolute;
-    //   height: auto !important;
-    //   min-height: 320rpx;
-    //   height: 320rpx;
-    // }
     .add-edit {
       position: absolute;
       right: 5%;
