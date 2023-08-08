@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { AtIcon } from 'taro-ui';
+import { AtIcon } from "taro-ui";
 import { View, Text, Icon, Swiper, SwiperItem } from "@tarojs/components";
-import Days from '@app/component/Calendar/Days';
+import Days from "@app/component/Calendar/Days";
 import "./index.scss";
 
 const weekDay = [
@@ -35,12 +35,19 @@ const weekDay = [
   },
 ];
 
+function pad0(data) {
+  return data < 10 ? "0" + data : data;
+}
+
+const date1 = new Date();
 const basic = {
-  year: new Date().getFullYear(),
-  month: new Date().getMonth() + 1,
-  day: new Date().getDate(),
+  year: date1.getFullYear(),
+  month: date1.getMonth() + 1,
+  day: date1.getDate(),
+  time: `${date1.getFullYear()}-${pad0(date1.getMonth() + 1)}-${pad0(
+    date1.getDate()
+  )}`,
 };
-console.log(basic,'basic')
 
 export default function Calendar() {
   // 日期展示
@@ -48,11 +55,155 @@ export default function Calendar() {
   const [showDate, setShowDate] = useState([]);
   // 选择的日期
   const [select, setSelect] = useState({});
-  const date = useRef({ year: 2023, month: 8, day: 7 });
+  const date = useRef({ ...basic });
+  const list = [
+    {
+      time: "2023-08-01",
+      sign: [
+        {
+          time: "09:00:00",
+          s: 0, //1:准时，2：迟到，3：请假申请
+        },
+        {
+          time: "18:00:00",
+          s: 0, //1:准时，2：迟到，3：请假申请
+        },
+      ],
+    },
+    {
+      time: "2023-08-02",
+      sign: [
+        {
+          time: "09:00:00",
+          s: 1, //1:准时，2：迟到，3：请假申请
+        },
+        {
+          time: "18:00:00",
+          s: 1, //1:准时，2：迟到，3：请假申请
+        },
+      ],
+    },
+    {
+      time: "2023-08-03",
+      sign: [
+        {
+          time: "09:00:00",
+          s: 2, //1:准时，2：迟到，3：请假申请
+        },
+        {
+          time: "18:00:00",
+          s: 2, //1:准时，2：迟到，3：请假申请
+        },
+      ],
+    },
+    {
+      time: "2023-08-04",
+      sign: [
+        {
+          time: "09:00:00",
+          s: 0, //1:准时，2：迟到，3：请假申请
+        },
+        {
+          time: "18:00:00",
+          s: 1, //1:准时，2：迟到，3：请假申请
+        },
+      ],
+    },
+    {
+      time: "2023-08-05",
+      sign: [
+        {
+          time: "09:00:00",
+          s: 1, //1:准时，2：迟到，3：请假申请
+        },
+        {
+          time: "18:00:00",
+          s: 2, //1:准时，2：迟到，3：请假申请
+        },
+      ],
+    },
+    {
+      time: "2023-08-06",
+      sign: [
+        {
+          time: "09:00:00",
+          s: 2, //1:准时，2：迟到，3：请假申请
+        },
+        {
+          time: "18:00:00",
+          s: 1, //1:准时，2：迟到，3：请假申请
+        },
+      ],
+    },
+    {
+      time: "2023-08-07",
+      sign: [
+        {
+          time: "09:00:00",
+          s: 1, //1:准时，2：迟到，3：请假申请
+        },
+        {
+          time: "18:00:00",
+          s: 1, //1:准时，2：迟到，3：请假申请
+        },
+      ],
+    },
+    {
+      time: "2023-08-08",
+      sign: [
+        {
+          time: "09:00:00",
+          s: 1, //1:准时，2：迟到，3：请假申请
+        },
+        {
+          time: "18:00:00",
+          s: 1, //1:准时，2：迟到，3：请假申请
+        },
+      ],
+    },
+    {
+      time: "2023-08-09",
+      sign: [
+        {
+          time: "09:00:00",
+          s: 1, //1:准时，2：迟到，3：请假申请
+        },
+        {
+          time: "18:00:00",
+          s: 1, //1:准时，2：迟到，3：请假申请
+        },
+      ],
+    },
+    {
+      time: "2023-08-10",
+      sign: [
+        {
+          time: "09:00:00",
+          s: 1, //1:准时，2：迟到，3：请假申请
+        },
+        {
+          time: "18:00:00",
+          s: 1, //1:准时，2：迟到，3：请假申请
+        },
+      ],
+    },
+    {
+      time: "2023-08-11",
+      sign: [
+        {
+          time: "09:00:00",
+          s: 1, //1:准时，2：迟到，3：请假申请
+        },
+        {
+          time: "18:00:00",
+          s: 2, //1:准时，2：迟到，3：请假申请
+        },
+      ],
+    },
+  ];
 
   useEffect(() => {
-    setSelect({ ...basic });
-    Day(basic.year, basic.month, basic.day);
+    Day(basic.year, basic.month, basic.day, {...basic});
   }, []);
   // 上月
   const handlePrev = () => {
@@ -67,8 +218,14 @@ export default function Calendar() {
       month = 12;
       year = select.year - 1;
     }
-    setSelect({ year: year, month: month, day: day });
-    Day(year, month, day);
+    let selectDay = {
+      year:year,
+      month:month,
+      day:day,
+      time:`${year}-${pad0(month)}-${pad0(day)}`
+    }
+    date.current = { year: year, month: month, day: select.day };
+    Day(year, month, day,{...selectDay});
   };
 
   // 下月
@@ -84,20 +241,31 @@ export default function Calendar() {
       month = 1;
       year = Number(select.year) + 1;
     }
-    setSelect({ year: year, month: month, day: day });
-    Day(year, month, day);
+    let selectDay = {
+      year:year,
+      month:month,
+      day:day,
+      time:`${year}-${pad0(month)}-${pad0(day)}`
+    }
+    date.current = { year: year, month: month, day: select.day };
+    Day(year, month, day, {...selectDay});
   };
 
   // 日期选择
   const handleChangeDate = (val) => {
     // 使用 useRef 存贮点击的日期，可以同步更新
+    let selectDay = {
+      year:select.year,
+      month:select.month,
+      day:val,
+      time:`${select.year}-${pad0(select.month + 1)}-${pad0(val)}`
+    }
     date.current = { year: select.year, month: select.month, day: val };
-    setSelect({ year: select.year, month: select.month, day: val });
-    Day(select.year, select.month, val);
+    Day(selectDay.year,selectDay.month,selectDay.day,{...selectDay});
   };
 
   // 用来计算生成日历面板
-  const Day = (year, month, day) => {
+  const Day = (year, month, day, basicTime) => {
     let total;
     //判断月分是大月还是小月
     //就可以得出这个月除了2月外是30天还是31天
@@ -117,12 +285,12 @@ export default function Calendar() {
     }
     let firstday = new Date(year, month - 1, 1);
     let week = firstday.getDay();
-    let dom = [];
+    let monthPanel = [];
 
     //显示星期
     if (week !== 0) {
       for (let i = 0; i < week; i++) {
-        dom.push("");
+        monthPanel.push("");
       }
     }
     //显示每一天的号数
@@ -137,9 +305,29 @@ export default function Calendar() {
       ) {
         check = true;
       }
-      dom.push({ day: j, check: check });
+      monthPanel.push({ time: `${year}-${pad0(month)}-${pad0(j)}`, day: j, check: check });
     }
-    setShowDate(dom);
+
+    const listObj = list.reduce((p, n) => {
+      const { time } = n;
+      return Object.assign(p, { [time]: n });
+    }, {});
+    let _current = basicTime;
+    let newMonthPanel = monthPanel.map((item) => {
+      const time = item.time;
+      const cur = listObj[time];
+      const sign = (cur && cur.sign) || "";
+      if (_current.time === time) {
+        _current = { ..._current, sign };
+      }
+      return {
+        ...item,
+        sign,
+      };
+    });
+    setShowDate(newMonthPanel);
+    setSelect(_current);
+    //显示是否有下标
   };
 
   return (
@@ -154,6 +342,7 @@ export default function Calendar() {
       </View>
       <Swiper
         circular
+        className='swiper'
         current={current}
         onChange={(e) => {
           if (e.detail.source === "touch") {
@@ -172,6 +361,7 @@ export default function Calendar() {
             weekDay={weekDay}
             showDate={showDate}
             onClick={handleChangeDate}
+            markList={list}
           ></Days>
         </SwiperItem>
 
@@ -180,6 +370,7 @@ export default function Calendar() {
             weekDay={weekDay}
             showDate={showDate}
             onClick={handleChangeDate}
+            markList={list}
           ></Days>
         </SwiperItem>
         <SwiperItem className='swiper-item'>
@@ -187,6 +378,7 @@ export default function Calendar() {
             weekDay={weekDay}
             showDate={showDate}
             onClick={handleChangeDate}
+            markList={list}
           ></Days>
         </SwiperItem>
       </Swiper>

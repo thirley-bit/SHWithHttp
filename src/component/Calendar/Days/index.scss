@@ -1,39 +1,71 @@
 .calendar-data-content {
-    overflow: hidden;
+  overflow: hidden;
 
-    .everyday {
-        position   : relative;
-        font-size  : 16px;
-        list-style : none;
-        width      : 14%;
-        height     : 38px;
-        float      : left;
-        text-align : center;
-        font-weight: 700;
-        .everyday-text {
-            display    : inline-block;
-            height     : 34px;
-            width      : 34px;
-            text-align : center;
-            line-height: 34px;
-        }
-        .everyday-mark{
-            position: absolute;
-            background-color: red;
-            width: 5rpx;
-            height: 5rpx;
-            left: 50%;
-        }
-
+  .weekday{
+    position: relative;
+    width: 14%;
+    height: 95rpx;
+    float: left;
+    text-align: center;
+    font-size: 23rpx;
+    color: #999;
+  }
+  .everyday {
+    position: relative;
+    font-size: 23px;
+    list-style: none;
+    width: 14%;
+    height: 95rpx;
+    float: left;
+    text-align: center;
+    color: #999;
+    .everyday-text {
+      display: inline-block;
+      height: 34px;
+      width: 34px;
+      text-align: center;
+      line-height: 34px;
     }
-
-    .active {
-        color: red;
+    .everyday-mark {
+      position: absolute;
+      left: 48%;
+      bottom: 50%;
     }
-
-    .check {
-        background-color: skyblue;
-        color           : #ffffff;
-        border-radius   : 50%;
+    .mark {
+      display: inline-block;
+      width: 5rpx;
+      height: 5rpx;
     }
+    .mark.normal {
+      background: #0b7cee;
+      width: 5rpx;
+      height: 5rpx;
+      margin-right: 4rpx;
+      color: #0b7cee;
+    }
+    .mark.abnormal {
+      background: #fa9f04;
+      width: 5rpx;
+      height: 5rpx;
+      margin-right: 4rpx;
+      color: #fa9f04;
+    }
+    .mark.applications {
+      background: #6d6e8d;
+      width: 5rpx;
+      height: 5rpx;
+      margin-right: 4rpx;
+      color: #6d6e8d;
+    }
+  }
+
+  .active {
+    color: red;
+  }
+
+  .check {
+    background-color: skyblue;
+    color: #ffffff;
+    border-radius: 50%;
+  }
 }

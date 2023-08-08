@@ -77,7 +77,7 @@ function CheckIn() {
   };
   const handleError = () => {
     setIsOpened(true)
-    console.log("erroe");
+    console.log("error");
   };
 
   const handleRequest = (e) => {
