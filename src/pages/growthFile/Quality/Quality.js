@@ -25,7 +25,7 @@ function Quality() {
       id: 2,
       name: "运动与健康",
       img: sport,
-      url: "/pages/GrowthFile/Quality/Quality",
+      url: "/pages/GrowthFile/Quality/Sport/Sport",
     },
     {
       id: 4,

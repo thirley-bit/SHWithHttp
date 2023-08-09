@@ -53,6 +53,12 @@
           "pathName": "pages/GrowthFile/History/CheckIn/Request/Request",
           "query": "number=1",
           "scene": null
+        },
+        {
+          "name": "pages/GrowthFile/Quality/Sport/Sport",
+          "pathName": "pages/GrowthFile/Quality/Sport/Sport",
+          "query": "",
+          "scene": null
         }
       ]
     }

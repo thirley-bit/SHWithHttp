@@ -7,7 +7,7 @@ import {
   Radio,
 } from "@tarojs/components";
 import { connect } from 'react-redux';
-import { AtAvatar } from "taro-ui";
+import { AtAvatar, AtRadio } from "taro-ui";
 import GradientButton from "@app/component/GradientButton";
 import normal from "@static/normal.png";
 import "./StudentsList.scss";

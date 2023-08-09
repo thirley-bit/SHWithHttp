@@ -34,6 +34,7 @@ export default defineAppConfig({
     'pages/GrowthFile/History/CheckIn/CheckIn', //个人成长史——考勤页面
     'pages/GrowthFile/History/CheckIn/Request/Request', //个人成长史——考勤页面——补卡申请页面
     'pages/GrowthFile/Quality/Quality', //综合素质评价页面
+    'pages/GrowthFile/Quality/Sport/Sport', //综合素质评价页面
 
     //通讯录
     'pages/addressList/addressList', //通讯录

@@ -13,14 +13,10 @@ export default function Days(props) {
     return data.map((i, j, arr) => {
       let _className = 'mark';
       let showOther = true;
-      console.log(arr)
       if (j) {
-        console.log(i.s)
-        console.log(arr[j-1].s)
-        showOther = i.s !== arr[j-1].s;
+        showOther = i.status !== arr[j-1].status;
       }
-      console.log(showOther)
-      switch (i.s) {
+      switch (i.status) {
         case 1:
           _className += ' normal';
           break;

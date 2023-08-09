@@ -1,0 +1,141 @@
+.home {
+    margin: 0 auto;
+    width: 90%;
+    .cont {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      .cont-year {
+        flex: 1;
+        height: 42rpx;
+        line-height: 42rpx;
+        font-weight: 500;
+        color: #343434;
+        font-size: 32rpx;
+      }
+      .score {
+        height: 42rpx;
+        line-height: 42rpx;
+        font-size: 24rpx;
+        font-weight: 400;
+        color: #1aa5ff;
+      }
+      .grade {
+        margin-left: 26rpx;
+      }
+    }
+    .card{
+      width: 100%;
+      height: 227rpx;
+      margin-top: 19rpx;
+      display: flex;
+      justify-content: space-between;
+      background-image: url("../../../../static/purple.png");
+    // background-color: #d6d2fe;
+      background-repeat: no-repeat;
+      background-size: cover;
+      .result{
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        margin-left: 46rpx;
+        .run {
+          width: 100%;
+          height: 42rpx;
+          margin-top: 31rpx;
+          font-size: 46rpx;
+          font-weight: 500;
+          color: #51259c;
+          line-height: 42rpx;
+        }
+        .score{
+          width: 100%;
+          height: 42rpx;
+          margin-top: 24rpx;
+          font-size: 31rpx;
+          font-weight: 400;
+          color: #7746b6;
+          line-height: 42rpx;
+        }
+        .point {
+          width: 100%;
+          height: 42rpx;
+          margin-top: 15rpx;
+          font-size: 31rpx;
+          font-weight: 400;
+          color: #7746b6;
+          line-height: 42rpx;
+        }
+      }
+      .pass {
+        height: 42rpx;
+        margin-top: 15rpx;
+        margin-right: 54rpx;
+        font-size: 38rpx;
+        font-weight: 700;
+        color: #6c41b6;
+        line-height: 42rpx;
+      }
+    }
+  
+    .card-orange {
+      background-image: url("../../../../static/orange.png");
+    // background-color: #ffc5bf;
+      .result-orange {
+        .run-orange {
+          color: #721210;
+        }
+        .score-orange {
+          color: #a5554b;
+        }
+        .point-orange {
+          color: #a5554b;
+        }
+      }
+      .pass-orange {
+        color: #af4426;
+        margin-right: 35rpx;
+      }
+    }
+    .card-yellow {
+      background-image: url("../../../../static/yellow.png");
+    // background-color: #ffecbb;
+      .result-yellow {
+        .run-yellow {
+          color: #831d16;
+        }
+        .score-yellow {
+          color: #986545;
+        }
+        .point-yellow {
+          color: #986545;
+        }
+      }
+      .pass-yellow {
+        color: #af4426;
+        margin-right: 54rpx;
+      }
+    }
+    .card-blue {
+      background-image: url("../../../../static/blue.png");
+    // background-color: #cae8fe;
+      .result-blue {
+        .run-blue {
+          color: #1c48b2;
+        }
+        .score-blue {
+          color: #466bb6;
+        }
+        .point-blue {
+          color: #466bb6;
+        }
+      }
+      .pass-blue {
+        color: #415bc1;
+        margin-right: 54rpx;
+      }
+    }
+  
+  
+  }
+  
