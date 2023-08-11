@@ -5,8 +5,10 @@ import { connect } from "react-redux";
 import { AtAvatar, AtCard, AtDivider, AtIcon } from "taro-ui";
 import NavTab from "@app/component/NavTab/NavTab";
 import Change from "@static/change.png";
-import add from "@static/add.png";
-import newPic from "@static/new.png";
+import newClass from "@static/create-class.png"
+import add from "@static/add-class.png";
+import wait from "@static/wait-todo.png";
+import review from "@static/review.png"
 import setting from "@static/setting.png";
 import right from "@static/right.png";
 import normal from "@static/normal.png"
@@ -19,18 +21,36 @@ function My(props) {
   let settingList = [
     {
       id: 0,
-      name: "加入新班级",
-      avatar: add,
+      name: "创建新班级",
+      avatar: newClass,
+      url:'/pages/my/CreateClass/CreateClass'
     },
     {
       id: 1,
-      name: "我的待办",
-      avatar: newPic,
+      type:true, //教师端和家长端均存在，无该属性表示仅在教师端存在
+      name: "加入新班级",
+      avatar: add,
+      url:'/pages/my/AddClass/AddClass'
     },
     {
       id: 2,
+      type:true,
+      name: "我的待办",
+      avatar: wait,
+      url:'/pages/my/WaitTodo/WaitTodo'
+    },
+    {
+      id: 3,
+      name: "年终总结",
+      avatar: review,
+      url:'/pages/my/Review/Review'
+    },
+    {
+      id: 4,
+      type:true,
       name: "设置",
       avatar: setting,
+      url:'/pages/my/Setting/Setting'
     },
   ];
 
@@ -42,29 +62,28 @@ function My(props) {
       type: "users/getUser",
     });
   }, []);
-  const handleInfo = () => {
-    Taro.navigateTo({ url: "/pages/my/ChildMsg/ChildMsg" });
-  };
   const handleUpload = () => {
     console.log("upload");
   };
-  const handleChange = () => {
-    console.log("change");
-    Taro.navigateTo({ url: "/pages/addressList/Check/Check" });
-  };
-  const handleNav = () => {
-    console.log("nav");
+  const handleNav = (value) => {
+    if(value == 1){
+      Taro.navigateTo({ url: "/pages/addressList/Check/Check" });
+    }else if(value == 2){
+      Taro.navigateTo({ url: "/pages/my/ChildMsg/ChildMsg" });
+    }else{
+      Taro.navigateTo({ url:value})
+    }
   };
   return (
     <View className='index'>
-      <NavTab needBackIcon={false} mainTitle='诚道吉' />
+      <NavTab needBackIcon={false} mainTitle='' />
       <View className='at-row at-row__align--center my-head'>
         <View className='at-col at-col-3 '>
           <View onClick={handleUpload} className='avatar'>
             <AtAvatar circle size='large'  image={identity.avatar ? identity.avatar : normal}></AtAvatar>
             {/* <Image className='image' src={identity.avatar} /> */}
           </View>
-          <View className='icon' onClick={handleChange}>
+          <View className='icon' onClick={() => handleNav(1)}>
               <Image className='head-image' src={Change} />
             </View>
         </View>
@@ -76,7 +95,7 @@ function My(props) {
             
         </View>
         <View className='at-col at-col-2'>
-          <View onClick={handleInfo} className='head-right'>
+          <View onClick={() => handleNav(2)} className='head-right'>
             孩子信息
             <AtIcon value='chevron-right' size='15'></AtIcon>
           </View>
@@ -84,22 +103,18 @@ function My(props) {
       </View>
 
       <View className='my-content'>
-        {settingList.map((item, index) => {
+        {(user == 0 ? settingList.filter(item => item?.type) : settingList).map((item, index) => {
+          console.log(item)
           return (
             <View key={index}>
               <View className='at-row at-row__align--end content'>
                 <View className='at-col at-col-2 avatar'>
-                  {/* <AtAvatar
-                    // circle
-                    size='small'
-                    image={item.avatar}
-                  ></AtAvatar> */}
                   <Image className='image' src={item.avatar} />
                 </View>
                 <View className='at-col at-col-9 '>
                   <Text className='content-name'>{item.name}</Text>
                 </View>
-                <View className='at-col at-col-3 right' onClick={handleNav}>
+                <View className='at-col at-col-3 right' onClick={() => handleNav(item.url)}>
                   <Image className='image' src={right} />
                 </View>
                 <View className='divider'>

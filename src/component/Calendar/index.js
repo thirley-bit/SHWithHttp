@@ -598,7 +598,6 @@ export default function Calendar() {
     Day(selectDay.year, selectDay.month, selectDay.day, { ...selectDay });
   };
 
-  console.log(select, "select");
 
   return (
     <View className='calendar'>
@@ -674,7 +673,7 @@ export default function Calendar() {
           return (
             <View className='time' key={index}>
               {item.time}
-              <Text style='margin:0 10rpx'>
+              <Text style={{margin:'0 10rpx'}}>
                 {index == 0 ? '上学' : '放学'}
               </Text>
 

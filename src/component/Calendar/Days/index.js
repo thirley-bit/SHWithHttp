@@ -3,8 +3,7 @@ import { View, Text } from "@tarojs/components";
 import "./index.scss";
 
 export default function Days(props) {
-  console.log(props, "props");
-  const { weekDay, showDate, markList, onClick } = props;
+  const { weekDay, showDate, onClick } = props;
   const handleChangeDate = (e) => {
     onClick(e);
   };

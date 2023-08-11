@@ -10,7 +10,7 @@
 .my-head{
     position: relative;
     width: 100%;
-    height: 21vh;
+    height: 17vh;
     color: #fff;
     .avatar{ 
         position: relative;
@@ -65,11 +65,11 @@
     width: 100%;
     background-color:#fff;
     box-shadow: 0px 0px 20px 1px rgba(10,110,176,0.100000);
-    border-radius: 31rpx;
-    padding: 4% 0;
+    // border-radius: 31rpx;
+    padding: 1% 0;
     .content{
         position: relative;
-        height: 4vh;
+        height: 6vh;
     }
     .avatar{ 
         display: flex;

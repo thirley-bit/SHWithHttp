@@ -47,6 +47,12 @@ export default defineAppConfig({
     //个人中心
     'pages/my/my', // 我的
     'pages/my/ChildMsg/ChildMsg', //孩子信息页面
+    'pages/my/CreateClass/CreateClass', // 创建新班级
+    'pages/my/AddClass/AddClass', // 加入新班级
+    'pages/my/WaitTodo/WaitTodo', // 我的待办
+    'pages/my/Review/Review', // 年终总结
+    'pages/my/Setting/Setting', // 设置
+    
 
     //公共页面
     'pages/component/Article/Article',  //文章详情

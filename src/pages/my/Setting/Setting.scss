@@ -1,0 +1,38 @@
+
+.report {
+    margin: 0 auto;
+    .head {
+      height: 30rpx;
+      display: flex;
+      align-items: center;
+      background-color: #f5f7fb;
+    }
+  
+    .check {
+      width: 92%;
+      margin: 0 auto;
+  
+      .design {
+        height: 108rpx;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 31rpx;
+        font-weight: 500;
+        color: #323232;
+        border-bottom: 2rpx solid #E6E6E6;
+  
+        .teach {
+          display: flex;
+  
+          .num {
+            margin-left: 61rpx;
+            color: #FF2E26;
+          }
+        }
+  
+  
+      }
+    }
+  }
+  

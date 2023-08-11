@@ -1,0 +1,52 @@
+.report {
+    margin: 0 auto;
+    // width: 92%;
+  
+    .head {
+      // width: 92%;
+      padding-left: 4%;
+      height: 104rpx;
+      display: flex;
+      align-items: center;
+      background-color: #f5f7fb;
+      // border: 1px solid pink;
+  
+      .score {
+        font-size: 31rpx;
+        font-weight: 500;
+        color: #343434;
+      }
+  
+      .result {
+        margin-left: 61rpx;
+      }
+    }
+  
+    .check {
+      width: 92%;
+      margin: 0 auto;
+  
+      .design {
+        height: 108rpx;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 27rpx;
+        font-weight: 500;
+        color: #323232;
+        border-bottom: 2rpx solid #E6E6E6;
+  
+        .teach {
+          display: flex;
+  
+          .num {
+            margin-left: 61rpx;
+            color: #FF2E26;
+          }
+        }
+  
+  
+      }
+    }
+  }
+  

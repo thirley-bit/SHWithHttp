@@ -16,24 +16,6 @@
         font-size: 24rpx;
     }
 }
-.content{
-    margin: 20rpx 0;
-    .date{
-        float: left;
-        width: 28%;
-        margin: 0 20rpx;
-        padding: 0 3%;
-        border: 1rpx solid #000;
-        border-radius: 10rpx;
-    }
-    .selector{
-        display: inline-block;
-        width: 25%;
-        padding: 0 3%;
-        border: 1rpx solid #000;
-        border-radius: 10rpx;
-    }
-}
 
 .work-list{
     position: relative;
@@ -76,6 +58,7 @@
         font-size: 26rpx;
         text-align: center;
     }
+    
     .new-msg{
         position: absolute;
         width: 20rpx;
@@ -88,14 +71,12 @@
     .tip{
         position: absolute;
         right: 3%;
-        bottom: 2vh;
+        top: 10vh;
         text-align: center;
         font-size: 26rpx;
         .publish{
             color: #f00;
-        }
-        .published{
-            color: #1f98f0;
+            bottom: 5vh;
         }
     }
 }

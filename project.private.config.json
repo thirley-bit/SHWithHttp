@@ -19,26 +19,14 @@
           "scene": null
         },
         {
-          "name": "pages/GrowthFile/Info/Info",
-          "pathName": "pages/GrowthFile/Info/Info",
+          "name": "pages/my/my",
+          "pathName": "pages/my/my",
           "query": "",
           "scene": null
         },
         {
-          "name": "pages/class/DisplayPublic/DisplayPublic",
-          "pathName": "pages/class/DisplayPublic/DisplayPublic",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/GrowthFile/History/History",
-          "pathName": "pages/GrowthFile/History/History",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/GrowthFile/Quality/Quality",
-          "pathName": "pages/GrowthFile/Quality/Quality",
+          "name": "pages/my/AddClass/AddClass",
+          "pathName": "pages/my/AddClass/AddClass",
           "query": "",
           "scene": null
         },
@@ -49,14 +37,8 @@
           "scene": null
         },
         {
-          "name": "pages/GrowthFile/History/CheckIn/Request/Request",
-          "pathName": "pages/GrowthFile/History/CheckIn/Request/Request",
-          "query": "number=1",
-          "scene": null
-        },
-        {
-          "name": "pages/GrowthFile/Quality/Sport/Sport",
-          "pathName": "pages/GrowthFile/Quality/Sport/Sport",
+          "name": "pages/class/MoreModules/MoreModules",
+          "pathName": "pages/class/MoreModules/MoreModules",
           "query": "",
           "scene": null
         }

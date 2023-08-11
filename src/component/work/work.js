@@ -104,7 +104,7 @@ function Work(props) {
                       (item.publish == 0 ? (
                         <View className='publish'>未发布</View>
                       ) : (
-                        <View className='published'>已发布</View>
+                        <View className='publish' style={{ color: "#1BA5FF" }}>已发布</View>
                       ))}
                   </View>
                 </View>

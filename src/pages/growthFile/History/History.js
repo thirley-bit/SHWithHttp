@@ -6,9 +6,9 @@ import infoScore from "@static/infoScore.png";
 import list from "@static/list.png";
 import comment from "@static/comment.png";
 import study from "@static/study.png";
-import show from "@static/show.png";
-import rewards from "@static/rewards.png";
-import punish from "@static/punish.png";
+// import show from "@static/show.png";
+// import rewards from "@static/rewards.png";
+// import punish from "@static/punish.png";
 import checkIn from "@static/checkIn.png";
 import "./History.scss";
 
@@ -30,13 +30,13 @@ function History() {
     {
       id: 4,
       name: "日常表现",
-      img: show,
+      // img: show,
       url: "/pages/GrowthFile/History/History",
     },
     {
       id: 6,
       name: "惩罚记录",
-      img: punish,
+      // img: punish,
       url: "/pages/GrowthFile/History/History",
     },
   ];
@@ -57,7 +57,7 @@ function History() {
     {
       id: 5,
       name: "荣誉记录",
-      img: rewards,
+      // img: rewards,
       url: "/pages/GrowthFile/Quality/Quality",
     },
     

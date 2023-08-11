@@ -5,6 +5,7 @@ import { View, Picker } from "@tarojs/components";
 import Work from "@app/component/Work/Work";
 import NavTab from '@app/component/NavTab/NavTab';
 import "./HomeWork.scss";
+import { AtIcon } from 'taro-ui';
 
 // 作业页面
 function HomeWork(props) {
@@ -48,9 +49,10 @@ function HomeWork(props) {
       <View>
         <View className='content'>
           <View className='date'>
-            <Picker mode='date' onChange={onTimeChange}>
+            <Picker mode='date' fields='month' onChange={onTimeChange}>
               {time == "" ? "日期" : time}
             </Picker>
+            <View className='arrow-down'><AtIcon value='chevron-down' size={15} color='#676767'></AtIcon></View>
           </View>
           <View className='selector'>
             <Picker
@@ -62,6 +64,7 @@ function HomeWork(props) {
                 ? "科目"
                 : subjectTitle[selectorChecked].subject_title}
             </Picker>
+            <View className='arrow-down'><AtIcon value='chevron-down' size={15} color='#676767'></AtIcon></View>
           </View>
         </View>
       </View>

@@ -119,7 +119,6 @@ function DisplayPublic(props) {
   const handleEdit = (index) => {
     setIsOpened(true);
     setModalIndex(index);
-    console.log(index, "index");
   };
 
   const handleInput = (e) => {

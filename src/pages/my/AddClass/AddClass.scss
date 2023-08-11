@@ -1,0 +1,98 @@
+
+.index{
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(175deg,rgba(122,201,254,0.8),rgba(107,234,254) 8%, rgba(248,249,255) 23%,  #F8F9FF 20%),
+}
+.new-class {
+    width: 90%;
+    margin: 0 auto;
+  
+    .head {
+      width: 100%;
+      position: relative;
+      margin-top:30rpx;
+      input {
+        border: 2rpx solid #1BA6FF;
+        height: 65rpx;
+        border-radius: 15rpx;
+        padding-left: 56rpx;
+        font-size: 23rpx;
+        font-weight: 400;
+        background-color: #ffffff;
+        color: #3D3D3D;
+      }
+  
+      .search {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 14rpx;
+        z-index: 999;
+      }
+  
+      .close {
+        position: absolute;
+        transform: translateY(-50%);
+        top: 50%;
+        right: 10rpx;
+      }
+    }
+  
+    .team {
+      .chat {
+        margin-top: 46rpx;
+        display: flex;
+        justify-content: space-between;
+  // border: 1px solid pink;
+        .left {
+          display: flex;
+  
+          .content {
+            margin-left: 30rpx;
+  
+            .class {
+              font-size: 31rpx;
+              font-weight: 500;
+              color: #323232;
+            }
+  
+            .people {
+              display: flex;
+              margin-top: 12rpx;
+  
+              & view {
+                font-size: 20rpx;
+                font-weight: 400;
+                color: #1AA5FF;
+              }
+            }
+  
+            .study {
+              margin-top: 13rpx;
+              font-size: 23rpx;
+              font-weight: 400;
+              color: #999999;
+              line-height: 23rpx;
+            }
+          }
+  
+  
+        }
+  
+        .button {
+          .join {
+            width: 138rpx;
+            height: 54rpx;
+            font-size: 25rpx;
+            font-weight: 500;
+            color: #FFFFFF;
+            line-height: 54rpx;
+            border-radius: 15rpx;
+            background: linear-gradient(to right, #1BA5FF, #26E2FF);
+          }
+        }
+      }
+    }
+  }
+  
