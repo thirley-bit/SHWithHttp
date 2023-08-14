@@ -1,5 +1,6 @@
 export default defineAppConfig({
   pages: [
+    'pages/login/login', //登录页面
     // 主页
     'pages/class/class', //主页
     'pages/class/HomeWork/HomeWork', //主页——家庭作业
@@ -52,6 +53,7 @@ export default defineAppConfig({
     'pages/my/WaitTodo/WaitTodo', // 我的待办
     'pages/my/Review/Review', // 年终总结
     'pages/my/Setting/Setting', // 设置
+    'pages/my/Setting/FeedBack/FeedBack', // 设置-意见反馈
     
 
     //公共页面

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { useEffect, useState } from "react";
 import { AtForm, AtCard, AtDivider, AtIcon, AtInput, AtButton } from "taro-ui";
 import NavTab from '@app/component/NavTab/NavTab';
+import GradientButton from '@app/component/GradientButton';
 
 import "./ChildMsg.scss";
 
@@ -95,13 +96,13 @@ function ChildMsg(props) {
           <View className='add-text' onClick={handleAdd}>点此添加</View>
         </View>
       </View>
-      <AtButton
+      <GradientButton
         type='primary'
         className='send-button'
         onClick={() => handleSave()}
       >
         保存修改
-      </AtButton>
+      </GradientButton>
     </View>
   );
 }

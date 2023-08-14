@@ -1,0 +1,42 @@
+.todo {
+    width: 90%;
+    margin: 0 auto;
+  
+    .my-todo {
+      margin-bottom: 51rpx;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  
+      .my-left {
+        display: flex;
+        align-items: center;
+  
+        .work {
+          margin-left: 46rpx;
+          font-size: 31rpx;
+          font-weight: 500;
+          color: #333333;
+        }
+  
+        .my-radius {
+          width: 26rpx;
+          height:26rpx;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 46rpx;
+          border: 2rpx solid #FF2E26;
+          color: #FF2E26;
+          border-radius:26rpx;
+          font-size: 16rpx;
+        }
+        .my-radius-two{
+          @extend .my-radius;
+          padding: 0 6rpx;
+        }
+       
+      }
+    }
+  }
+  

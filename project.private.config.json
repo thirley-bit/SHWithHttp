@@ -11,38 +11,7 @@
       "list": []
     },
     "miniprogram": {
-      "list": [
-        {
-          "name": "pages/class/class",
-          "pathName": "pages/class/class",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/my/my",
-          "pathName": "pages/my/my",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/my/AddClass/AddClass",
-          "pathName": "pages/my/AddClass/AddClass",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/GrowthFile/History/CheckIn/CheckIn",
-          "pathName": "pages/GrowthFile/History/CheckIn/CheckIn",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/class/MoreModules/MoreModules",
-          "pathName": "pages/class/MoreModules/MoreModules",
-          "query": "",
-          "scene": null
-        }
-      ]
+      "list": []
     }
   }
 }

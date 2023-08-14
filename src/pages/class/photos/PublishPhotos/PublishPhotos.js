@@ -1,8 +1,9 @@
+import { useState } from "react";
 import { View } from "@tarojs/components";
 import { AtImagePicker, AtList, AtListItem, AtButton } from "taro-ui";
 import Taro from "@tarojs/taro";
 import NavTab from '@app/component/NavTab/NavTab';
-import { useState } from "react";
+import GradientButton from '@app/component/GradientButton';
 import "./PublishPhotos.scss";
 
 //上传照片页面
@@ -32,13 +33,20 @@ function PublishPhotos() {
       <View className='img-picker'>
         <AtImagePicker files={folder.files} onChange={handleChange} />
       </View>
-      <AtButton
+      {/* <AtButton
         type='primary'
         className='send-button'
         onClick={() => handleSend()}
       >
         发送
-      </AtButton>
+      </AtButton> */}
+      <GradientButton
+        type='primary'
+        className='send-button'
+        onClick={() => handleSend()}
+      >
+        发送
+      </GradientButton>
     </View>
   );
 }

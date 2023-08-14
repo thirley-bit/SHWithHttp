@@ -264,7 +264,7 @@ function DisplayPublic(props) {
         </AtModalAction>
       </AtModal>
       <AtMessage />
-      <GradientButton type='primary' onClick={handleSave}>
+      <GradientButton type='primary' className='send-button' onClick={handleSave}>
         确认
       </GradientButton>
     </View>

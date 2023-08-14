@@ -1,0 +1,24 @@
+.feed {
+  background-color: #f5f7fb;
+  height: 100vh;
+  padding: 31rpx 0 0;
+
+  .at-image-picker__flex-box {
+    padding: 30rpx 10rpx 30rpx 30rpx;
+    background-color: #f5f7fb;
+  }
+
+  .at-image-picker__item {
+    background-color: #fff;
+  }
+  .inputValue {
+    height: 108rpx;
+    margin-bottom: 400rpx;
+    font-size: 27rpx;
+  }
+  .at-input__title{
+    font-size: 32rpx;
+    font-weight: 500;
+    color: #323232;
+  }
+}
