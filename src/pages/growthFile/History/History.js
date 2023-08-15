@@ -2,14 +2,6 @@
 import { View, Image } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import NavTab from "@app/component/NavTab/NavTab";
-import infoScore from "@static/infoScore.png";
-import list from "@static/list.png";
-import comment from "@static/comment.png";
-import study from "@static/study.png";
-// import show from "@static/show.png";
-// import rewards from "@static/rewards.png";
-// import punish from "@static/punish.png";
-import checkIn from "@static/checkIn.png";
 import "./History.scss";
 
 function History() {
@@ -17,55 +9,54 @@ function History() {
     {
       id: 0,
       name: "学习成绩",
-      img: infoScore,
+      img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/cb6a44bda7ea15d2d6fb366976d34e7b.png',
       url: "/pages/GrowthFile/Info/Info",
-    },
-    
+    },    
     {
       id: 2,
       name: "学科评价",
-      img: comment,
-      url: "/pages/GrowthFile/Quality/Quality",
+      img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/3687c9d9155df7a026736191e90902f2.png',
+      url: "/pages/GrowthFile/History/Rewards/Rewards",
     },
     {
       id: 4,
       name: "日常表现",
-      // img: show,
-      url: "/pages/GrowthFile/History/History",
+      img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/1a8770573f8295ba4a69285747e5e983.png',
+      url: "/pages/GrowthFile/History/Rewards/Rewards",
     },
     {
       id: 6,
       name: "惩罚记录",
-      // img: punish,
-      url: "/pages/GrowthFile/History/History",
+      img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/017bf6f21a3b7b200a2f81f9745f858d.png',
+      url: "/pages/GrowthFile/History/Rewards/Rewards",
     },
   ];
   let rightList = [
     {
       id: 1,
       name: "作业列表",
-      img: list,
-      url: "/pages/GrowthFile/History/History",
+      img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/008f4e29328f84dbfc1abefd69b397a2.png',
+      url: "/pages/GrowthFile/History/Rewards/Rewards",
     },
     {
       id: 3,
       name: "课外学习",
-      img: study,
-      url: "/pages/GrowthFile/Info/Info",
+      img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/e16b206f9b241c06bc89aab449fb166b.png',
+      url: "/pages/GrowthFile/History/Rewards/Rewards",
     },
     
     {
       id: 5,
       name: "荣誉记录",
-      // img: rewards,
-      url: "/pages/GrowthFile/Quality/Quality",
+      img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/a074cb90ee4ab6efbb784398ee8f34c5.png',
+      url: "/pages/GrowthFile/History/Rewards/Rewards",
     },
     
     {
       id: 7,
       name: "考勤状况",
-      img: checkIn,
-      url: "/pages/GrowthFile/History/CheckIn/CheckIn",
+      img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/ff0192f186ac7d6806e1ee31608d4c40.png',
+      url: "/pages/GrowthFile/History/Rewards/Rewards",
     },
   ]
   const handleNav = (item) => {

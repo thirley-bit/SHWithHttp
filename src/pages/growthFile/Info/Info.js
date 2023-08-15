@@ -4,9 +4,6 @@ import { View, Image, Text } from "@tarojs/components";
 import { AtDivider, AtForm, AtInput } from "taro-ui";
 import NavTab from "@app/component/NavTab/NavTab";
 import { connect } from "react-redux";
-import info from "@static/info.png";
-import history from "@static/history.png";
-import quality from "@static/quality.png";
 import "./Info.scss";
 
 function Info(props) {
