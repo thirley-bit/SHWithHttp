@@ -5,52 +5,84 @@
     height: 100vh;
     background: linear-gradient(175deg,rgba(105,194,254,0.8),rgba(107,234,254) 3%,  #F8F9FF 20%),
 }
-.tab{
-    .at-tabs__header{
-       background-color: #e0e0e0;
+
+.wrap {
+    .content {
+      padding-left: 31rpx;
+      margin-top: 11rpx;
+      margin-bottom: 51rpx;
+  
+      .vegetable {
+        font-size: 31rpx;
+        font-weight: 500;
+        color: #343434;
+      }
+  
+      .kind {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20rpx;
+        font-size: 27rpx;
+        font-weight: 400;
+        color: #676767;
+  
+        .kind-box {
+          margin-top: 17rpx;
+          margin-right: 30rpx;
+        }
+      }
     }
-    .at-tabs__item--active{
-        background-color: #fff;
+  
+  
+    .at-tabs-pane {
+      background-color: none;
     }
-}
-.at-tabs-pane{
-    background-color: #fff;
-}
-.at-tabs-pane--active{
-    background-color: #fff;
-}
-.recipe{
-    margin: 3%;
-}
-.food-list{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    margin: 2% 0 6% 0;
-    color: #999;
-    font-size: 30rpx;
-    
-}
-.title{
-    width: 25%;
-    display: inline-block;
-    line-height: 1.2;
-    margin-top: 12rpx;
-    padding:  0 10rpx;
-    box-sizing: border-box;
-}
-.title.title50{
-    width: 50%;
-}
-.title.title75{
-    width: 75%;
-}
-.tab-bar{
-    position: fixed;
-    width: 98%;
-    background-color: #999;
-    align-items: center;
-    margin: 0 1%;
-    bottom: 1%;
-    border: solid 1rpx #999;
-}
+  
+    .at-tabs__item {
+      font-size: 31rpx;
+  
+      color: #666;
+      font-size: 29rpx;
+    }
+  
+    .at-tabs__item--active {
+      font-weight: 500;
+      color: #6190E8 !important;
+  
+      font-size: 31rpx;
+    }
+    .login{
+        margin: 50% 15%;
+    }
+  
+    .footer {
+      width: 100%;
+      height: 115rpx;
+      background: #FFFFFF;
+      box-shadow: 0rpx 0rpx 23rpx 2rpx rgba(10, 110, 176, 0.3018);
+      position: fixed;
+      display: flex;
+      // align-items: center;
+      bottom: 0;
+  
+      & button {
+        width: 211rpx;
+        height: 84rpx;
+        margin-top: 10rpx;
+        font-size: 31rpx;
+        color: #FFFFFF;
+        font-weight: 500;
+        background: linear-gradient(right, #26E2FF, #1BA5FF);
+  
+       
+      }
+     .btn{
+        background: #F6F5F5 !important;
+        color: #808080;
+      }
+      .moment {
+        font-size: 23rpx;
+      }
+    }
+  }
+  

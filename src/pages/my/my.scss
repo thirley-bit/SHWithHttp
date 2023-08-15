@@ -62,14 +62,14 @@
     width: 100%;
     background-color:#fff;
     box-shadow: 0px 0px 20px 1px rgba(10,110,176,0.100000);
-    // border-radius: 31rpx;
-    padding: 1% 0;
+    padding: 1% 0 3% 0;
     .content{
         position: relative;
-        height: 6vh;
+        height: 8vh;
     }
     .avatar{ 
         display: flex;
+        height: 5vh;
         justify-content: center;
     }
     .image{
@@ -80,10 +80,11 @@
     }
     .content-name{
         display: block;
+        height: 5vh;
         color: #6a6a6a;
-        font-size: 25rpx;
+        font-size: 28rpx;
         margin-bottom: 6rpx;
-        line-height: 1.5;
+        line-height: 5vh;
     }
     .right{
         justify-content: end;

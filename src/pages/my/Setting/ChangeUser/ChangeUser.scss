@@ -1,0 +1,35 @@
+.account {
+    background-color: #F5F7FB;
+    height: 100vh;
+    padding: 31rpx 0 0;
+  
+    .list {
+      height: 108rpx;
+      padding: 0 2%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #fff;
+  
+      .head {
+        display: flex;
+        align-items: center;
+        .cont {
+          margin-left: 23rpx;
+  
+          .title {
+            font-size: 31rpx;
+            font-weight: 500;
+            color: #323232;
+          }
+  
+          .phone {
+            font-size: 23rpx;
+            font-weight: 400;
+            color: #999999;
+          }
+        }
+      }
+    }
+  }
+  

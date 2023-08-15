@@ -1,0 +1,35 @@
+.container{
+    width: 90%;
+    height: 100vh;
+    margin: 0 auto;
+}
+.login-input{
+    .forget{
+        height: 34rpx;
+        line-height: 34rpx;
+        font-size: 24rpx;
+        color: #1aa5ff;
+    }
+    .error{
+        border: 1rpx solid red;
+    }
+    .error-tip{
+        height: 34rpx;
+        font-size: 24rpx;
+        color: #FF2E26;
+        line-height: 34rpx;
+    }    
+    .at-input{
+        margin: 32rpx 0;
+        border-radius: 16rpx;
+    }
+    .at-input__title{
+        width: 80rpx;
+        text-align: center;
+    }
+    
+}
+.login-button{
+    height: 22vh;
+    margin-top: 64rpx;
+}

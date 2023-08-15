@@ -35,6 +35,24 @@
           "pathName": "pages/GrowthFile/Quality/Sport/Sport",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/my/Setting/Setting",
+          "pathName": "pages/my/Setting/Setting",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/my/Setting/ChangePassword/ChangePassword",
+          "pathName": "pages/my/Setting/ChangePassword/ChangePassword",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/my/my",
+          "pathName": "pages/my/my",
+          "query": "",
+          "scene": null
         }
       ]
     }

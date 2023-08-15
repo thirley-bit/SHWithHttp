@@ -54,6 +54,9 @@ export default defineAppConfig({
     'pages/my/WaitTodo/WaitTodo', // 我的待办
     'pages/my/Review/Review', // 年终总结
     'pages/my/Setting/Setting', // 设置
+    'pages/my/Setting/ChangePassword/ChangePassword', // 设置-密码修改
+    'pages/my/Setting/ChangeUser/ChangeUser', // 设置-切换账户
+    'pages/my/Setting/ChangeUser/AddUser/AddUser', // 设置-添加账户
     'pages/my/Setting/FeedBack/FeedBack', // 设置-意见反馈
     
 

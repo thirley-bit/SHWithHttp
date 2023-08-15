@@ -12,11 +12,11 @@ function Setting(props) {
   const list = [
     {
       name: "密码修改",
-      url: "/pages/my/AddClass/AddClass",
+      url: "/pages/my/Setting/ChangePassword/ChangePassword",
     },
     {
       name: "切换账号",
-      url: "/pages/my/AddClass/AddClass",
+      url: "/pages/my/Setting/ChangeUser/ChangeUser",
     },
     {
       name: "意见反馈",
