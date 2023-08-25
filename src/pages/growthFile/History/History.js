@@ -10,7 +10,7 @@ function History() {
       id: 0,
       name: "学习成绩",
       img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/cb6a44bda7ea15d2d6fb366976d34e7b.png',
-      url: "/pages/GrowthFile/Info/Info",
+      url: "/pages/class/Score/Score",
     },    
     {
       id: 2,
@@ -36,7 +36,7 @@ function History() {
       id: 1,
       name: "作业列表",
       img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/008f4e29328f84dbfc1abefd69b397a2.png',
-      url: "/pages/GrowthFile/History/Rewards/Rewards",
+      url: "/pages/class/HomeWork/HomeWork",
     },
     {
       id: 3,
@@ -56,7 +56,7 @@ function History() {
       id: 7,
       name: "考勤状况",
       img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/ff0192f186ac7d6806e1ee31608d4c40.png',
-      url: "/pages/GrowthFile/History/Rewards/Rewards",
+      url: "/pages/GrowthFile/History/CheckIn/CheckIn",
     },
   ]
   const handleNav = (item) => {

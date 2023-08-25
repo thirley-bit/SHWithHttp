@@ -17,12 +17,13 @@ import { connect } from "react-redux";
 import "./DataDownLoad.scss";
 
 function DataDownLoad(props) {
+  console.log(props,'datedownloadpeops')
   const { dispatch, sourceArr } = props;
   const [isOpened, setIsOpened] = useState(false);
   const [floatIsOpened, setFloatIsOpened] = useState(false);
   useEffect(() => {
     dispatch({
-      type: "Source/getSourceList",
+      type: "DataDownLoad/getSourceList",
     });
   }, []);
 
@@ -129,5 +130,5 @@ function DataDownLoad(props) {
   );
 }
 export default connect((state) => ({
-  sourceArr: state.Source.sourceArr,
+  sourceArr: state.DataDownLoad.sourceArr,
 }))(DataDownLoad);

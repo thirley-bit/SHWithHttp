@@ -27,7 +27,7 @@ function AddressList(props) {
     {
       title: '添加',
       image: newAdd,
-      url:'/pages/addressList/AddFamily/AddFamily'
+      url:'/pages/my/AddClass/AddClass'
     },
     {
       title: '群聊',

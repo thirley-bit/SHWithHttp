@@ -18,7 +18,7 @@ function Quality() {
       id: 0,
       name: "德育",
       img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/300167903a2977434dbe8a225351741b.png',
-      url: "/pages/GrowthFile/Info/Info",
+      url: "/pages/GrowthFile/History/Rewards/Rewards",
     },
     
     {

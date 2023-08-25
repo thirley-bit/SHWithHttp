@@ -1,7 +1,7 @@
 import AddressList from './AddressListModel'
 import Class from './ClassModel'
 import CookBook from './CookBook'
-import Source from './DataDownLoad'
+import DataDownLoad from './DataDownLoad'
 import DisplayPublic from './DisplayPublicModel'
 import ExamChannel from './ExamChannelModel'
 import HomeWork from './HomeWorkModel'
@@ -17,7 +17,7 @@ export default [
   AddressList,
   Class,
   CookBook,
-  Source,
+  DataDownLoad,
   DisplayPublic,
   ExamChannel,
   HomeWork,

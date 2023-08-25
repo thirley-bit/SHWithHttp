@@ -11,7 +11,7 @@ function CreateClass(props) {
   return (
     <View className='index'>
     <NavTab needBackIcon mainTitle='孩子信息' />
-    111
+    <View style={{margin:'50% 40%'}}>暂无内容</View>
     </View>
   );
 }

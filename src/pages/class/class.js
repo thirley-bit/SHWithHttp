@@ -63,6 +63,9 @@ function Index(props) {
   // const tabClick = (e) => {
   //   setTabsCur(e);
   // };
+  const handleNav = () => {
+    Taro.navigateTo({url:'/pages/my/WaitTodo/WaitTodo'})
+  }
   const handleTabClick = (e) => {
     setCurrent(e);
     Taro.navigateTo({
@@ -93,7 +96,7 @@ function Index(props) {
         // rightSecondIconType='user'
       /> */}
       <NavTab  needBackIcon={false} mainTitle='诚道吉' />
-      <View className='new'>
+      <View className='new' onClick={handleNav}>
         <AtTag circle className='new-tag'>
           我的待办
             <View className='new-num'>10</View> 

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Taro from "@tarojs/taro";
-import { View, Text, Image } from "@tarojs/components";
+import { View, Text, Image, Button } from "@tarojs/components";
 import { connect } from "react-redux";
 import { AtAvatar, AtCard, AtDivider, AtIcon } from "taro-ui";
 import NavTab from "@app/component/NavTab/NavTab";
@@ -125,6 +125,7 @@ function My(props) {
           );
         })}
       </View>
+      
     </View>
   );
 }

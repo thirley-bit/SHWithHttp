@@ -19,12 +19,6 @@
           "scene": null
         },
         {
-          "name": "pages/GrowthFile/History/History",
-          "pathName": "pages/GrowthFile/History/History",
-          "query": "",
-          "scene": null
-        },
-        {
           "name": "pages/GrowthFile/Quality/Quality",
           "pathName": "pages/GrowthFile/Quality/Quality",
           "query": "",
@@ -39,18 +33,6 @@
         {
           "name": "pages/my/Setting/Setting",
           "pathName": "pages/my/Setting/Setting",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/my/Setting/ChangePassword/ChangePassword",
-          "pathName": "pages/my/Setting/ChangePassword/ChangePassword",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/my/my",
-          "pathName": "pages/my/my",
           "query": "",
           "scene": null
         }

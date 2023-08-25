@@ -1,6 +1,7 @@
 export default defineAppConfig({
   pages: [
     'pages/login/login', //登录页面
+    'pages/login/Register/Register', //注册页面
     // 主页
     'pages/class/class', //主页
     'pages/class/HomeWork/HomeWork', //主页——家庭作业
