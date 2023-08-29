@@ -25,7 +25,7 @@ function FeedBack(props) {
   };
   return (
     <View>
-      <NavTab needBackIcon mainTitle='意见反馈' />
+      <NavTab back title='意见反馈' />
       <View className='feed'>
         <AtForm onSubmit={onSubmit}>
           <AtTextarea

@@ -59,7 +59,7 @@ function WorkDetail() {
 
   return (
     <View className='main'>
-      <NavTab needBackIcon mainTitle='诚道吉222' />
+      <NavTab back title='诚道吉222' />
       <View className='components-page'>
         <View className='editor-box'>
           <Editor

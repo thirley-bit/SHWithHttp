@@ -14,7 +14,7 @@ function Rewards() {
   
   return (
     <View className='index'>
-      <NavTab needBackIcon mainTitle='个人成长史' />
+      <NavTab back title='个人成长史' />
       <View style={{margin:'50% 40%'}}>暂无内容</View>
     </View>
   );

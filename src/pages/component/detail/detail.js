@@ -20,7 +20,7 @@ function WorkDetail(props) {
 
   return (
     <View className='detail-header'>
-      <NavTab needBackIcon mainTitle='作业' />
+      <NavTab back title='作业' />
       {/* 头部详情——不含成绩发布和保存页面 */}
       <DetailHeader enter={enter} />
       <View className='detail-center'></View>

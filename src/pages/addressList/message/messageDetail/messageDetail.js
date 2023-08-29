@@ -164,7 +164,7 @@ function MessageDetail(props){
 
   return (
     <View className='index'>
-      <NavTab needBackIcon mainTitle='李老师' />
+      <NavTab back title='李老师' />
       
       <ScrollView
         id='scrollview'

@@ -45,7 +45,11 @@ function HomeWork(props) {
 
   return (
     <View className='index' style={style}>
-      <NavTab needBackIcon mainTitle='作业' />
+     <NavTab
+       back
+       title='作业'
+     />
+
       <View>
         <View className='content'>
           <View className='date'>

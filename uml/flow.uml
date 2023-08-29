@@ -1,0 +1,95 @@
+家校共育流程图
+@startuml
+title 家校共育流程图
+actor :用户: as user
+(登录系统) as login
+(账户登录) as loginIn
+(输入用户名) as username
+(输入密码) as userpsd
+(确认登录) as loginCheck
+(注册) as register
+(展示首页) as main
+package 班级页面 {
+(展示班级页面) as class
+(查询作业) as homework
+(查询通知) as notice
+(查询安全确认) as sign
+(查询私信) as msg
+(查询成绩) as score
+(查看资料下载列表) as dataDown
+(查看参赛通道列表) as examChannel
+(查询优惠政策) as policy
+(查询相册) as photos
+(查看校园食谱) as cookBook
+(查看展示墙) as displayPublic
+}
+
+package 成长档案 {
+(展示成长档案页面) as growthFile
+(展示个人信息页面) as info
+(展示个人成长史) as history
+(展示综合素质评价) as quality
+}
+
+package 通讯录 {
+(展示通讯录页面) as address
+(展示老师列表) as teacherList
+(展示家长列表) as parentList
+(添加联系人) as add
+(查看群聊) as groupChat
+(查看审核列表) as check
+}
+
+package 我的 {
+(展示个人中心页面) as my
+(查看孩子信息) as childMsg
+(切换用户) as change
+(创建新班级) as createClass
+(加入新班级) as addClass
+(我的待办) as  waitTodo
+(年终总结) as review
+(设置) as setting
+}
+
+user -right- login
+loginIn -down-|> login
+loginIn .|> loginCheck  : include
+loginIn .left.|> username : include
+loginIn .up.|> userpsd  : include
+loginIn .|> register : include
+
+login -right- main
+main ---> class
+class ..|> homework : include
+class ..|> notice : include
+class ..|> sign : include
+class ..|> msg : include
+class ..|> score : include
+class ..|> dataDown : include
+class ..|> examChannel : include
+class ..|> policy : include
+class ..|> photos : include
+class ..|> cookBook : include
+class ..|> displayPublic : include
+
+main ---> growthFile
+growthFile ..|> info : include
+growthFile ..|> history : include
+growthFile ..|> quality : include
+
+main ---> address
+address -- teacherList
+address -- parentList
+address ..|> add : include
+address ..|> groupChat : include
+address ..|> check : include
+
+main ---> my
+my ..|> childMsg : include
+my ..|> change : include
+my ..|> createClass : include
+my ..|> addClass : include
+my ..|> waitTodo : include
+my ..|> review : include
+my ..|> setting : include
+@enduml

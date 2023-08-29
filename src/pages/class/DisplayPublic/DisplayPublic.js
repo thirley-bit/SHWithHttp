@@ -170,7 +170,7 @@ function DisplayPublic(props) {
 
   return (
     <View className='index'>
-      <NavTab needBackIcon mainname='爱好与特长' />
+      <NavTab back title='爱好与特长' />
       <View className='show'>
         {list.map((item, index) => {
           const name = item.name;

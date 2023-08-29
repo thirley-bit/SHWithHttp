@@ -72,7 +72,7 @@ function ChildMsg(props) {
   }
   return (
     <View className='index'>
-    <NavTab needBackIcon mainTitle='孩子信息' />
+    <NavTab back title='孩子信息' />
     <View className='main'>
       <AtForm>
         {showData.map((item, index) => {

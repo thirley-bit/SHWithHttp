@@ -18,7 +18,7 @@ function Score(props) {
  
   return (
     <View className='index'>
-      <NavTab needBackIcon mainTitle='成绩' />
+      <NavTab back title='成绩' />
         <Work enter='score' showData={scoreArr} />
     </View>
   )

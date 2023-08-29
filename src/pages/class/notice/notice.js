@@ -26,7 +26,7 @@ function Notice() {
 
   return (
     <View className='index'>
-      <NavTab needBackIcon mainTitle='通知' />
+      <NavTab back title='通知' />
       <Work enter='notice'   showData={showWorkData} />
       {/* <View className='components-page'>
         <View className='operate-box' onClick={() => addImage()}>

@@ -53,7 +53,7 @@ function Request() {
   
   return (
     <View className='index'>
-      <NavTab needBackIcon mainTitle='考勤状况' />
+      <NavTab back title='考勤状况' />
       <View className='container'>
         <View className='head'>
           <Text>补卡时间</Text>

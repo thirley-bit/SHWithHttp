@@ -70,7 +70,7 @@
 
 //   return (
 //     <View className='main'>
-//       <NavTab needBackIcon mainTitle='作业' />
+//       <NavTab back title='作业' />
 //       {/* 头部详情 */}
 //       <DetailHeader />
 //       {/* 家长反馈 */}

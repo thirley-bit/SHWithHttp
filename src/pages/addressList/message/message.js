@@ -68,7 +68,7 @@ function Message(props){
 
   return (
     <View className='index'>
-      <NavTab needBackIcon mainTitle='私信' />
+      <NavTab back title='私信' />
       <View className='search'>
         <AtSearchBar />
       </View>

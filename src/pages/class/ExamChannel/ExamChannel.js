@@ -22,7 +22,7 @@ function ExamChannel(props){
  }
   return (
     <View className='index'>
-      <NavTab needBackIcon mainTitle='参赛通道' />
+      <NavTab back title='参赛通道' />
       {
         channelArr.map((item,index) => {
           return <View key={index}>

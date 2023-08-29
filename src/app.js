@@ -1,14 +1,15 @@
 import { Component } from 'react'
+import { View } from "@tarojs/components";
 import 'taro-ui/dist/style/index.scss'
 import { Provider } from 'react-redux'
 import dva from './utils/dva'
 import models from './models'
-import { View } from "@tarojs/components";
 
 const dvaApp = dva.createApp({
   initialState:{},
   models
 })
+
 const store = dvaApp.getStore()
 class App extends Component {
   

@@ -22,7 +22,7 @@ function ArticleDetail(props) {
   };
   return (
     <View className='tabs'>
-      <NavTab needBackIcon mainTitle='诚道吉111' />
+      <NavTab back title='诚道吉111' />
       <View className='at-article'>
         <View className='at-article__h1'>{article.title}</View>
         <View className='at-article__info'>

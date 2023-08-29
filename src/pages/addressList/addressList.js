@@ -105,7 +105,7 @@ function AddressList(props) {
  
   return (
     <View className='index'>
-        <NavTab needBackIcon={false} mainTitle='诚道吉' />
+    <NavTab iconTheme='black' home title='通讯录' />
       <View className='search' handleSearch='handleSearch'>
         <AtSearchBar />
         {/* <SearchBar placeholder='请输入关键字' value={searchValue} /> */}

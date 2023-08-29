@@ -1,0 +1,41 @@
+家校共育通讯录
+@startuml
+title 家校共育通讯录
+(通讯录) as address
+(展示老师列表) as teacherList
+(展示家长列表) as parentList
+(添加联系人) as add
+(查看群聊) as groupChat
+(新建群聊) as createGroup #CornflowerBlue
+(群聊列表) as groupList
+groupChat ..> createGroup #CornflowerBlue;text:CornflowerBlue : include(教师端)
+groupChat --> groupList
+(私信) as message
+(拨打电话) as call
+(搜索) as select
+(查看私信列表) as list
+(进入私信聊天页面) as msgDetail
+(删除) as del
+message ..> list : include
+message ..> del : include
+message ..> msgDetail : include
+message ..> select : include
+
+(查看审核列表) as check
+(查看待审核列表) as todoCheck
+(查看已加入列表) as hasJoined
+(查看已审核列表) as hasChecked #CornflowerBlue
+check --> todoCheck
+check --> hasJoined
+check --> hasChecked #CornflowerBlue
+
+address --> teacherList
+address --> parentList
+address ..|> add : include
+address ..|> groupChat : include
+address ..|> check : include
+
+teacherList ..> message : include
+teacherList ..> del : include
+teacherList ..> msgDetail : include
+@enduml

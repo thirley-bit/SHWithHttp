@@ -61,7 +61,7 @@ function MoreArticle() {
   };
   return (
     <View className='index'>
-      <NavTab needBackIcon mainTitle='更多' />
+      <NavTab back title='更多' />
       <MyTabs current={current} tabList={tabList} onClick={handleChange}>
         {tabList.map((item, index) => {
           return (

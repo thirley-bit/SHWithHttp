@@ -46,7 +46,7 @@ function WaitTodo(props) {
   ];
   return (
     <View>
-      <NavTab needBackIcon mainTitle='我的待办' />
+      <NavTab back title='我的待办' />
       <View className='todo'>
         {todoList.map((item) => {
           const { id, name, image, number } = item;

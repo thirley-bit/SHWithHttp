@@ -1,0 +1,56 @@
+家校共育安全确认、私信、资料下载等列表
+@startuml
+title 家校共育安全确认、私信、资料下载等列表
+
+(安全确认) as sign
+(确定学生到家/到校) as checked
+sign ..> checked : include
+
+(私信) as message
+(搜索) as select
+(查看私信列表) as list
+(删除) as del
+(进入私信聊天页面) as msgDetail
+message ..> list : include
+message ..> del : include
+message ..> msgDetail : include
+message ..> select : include
+
+(资料下载) as dataDown
+(查看列表) as list
+(新增) as publish #CornflowerBlue
+(上传文件) as upload #CornflowerBlue
+(下载文件) as download
+dataDown ...> select : include
+dataDown ...> list : include
+dataDown ...> download : include
+dataDown ..> publish #CornflowerBlue;text:CornflowerBlue : include(教师端)
+dataDown ..> upload #CornflowerBlue;text:CornflowerBlue : include(教师端)
+dataDown ..> del #CornflowerBlue;text:CornflowerBlue : include(教师端)
+
+(参赛通道) as examChannel
+(查看参赛链接) as detail
+examChannel ..> detail : include
+examChannel ..> publish #CornflowerBlue;text:CornflowerBlue : include(教师端)
+
+(优惠政策) as policy
+policy ...> select : include
+policy ...> list : include
+policy ..> publish #CornflowerBlue;text:CornflowerBlue : include(教师端)
+
+(相册) as photos
+(上传照片) as uploadPhoto
+photos ..> uploadPhoto : include
+photos ...> list : include
+photos ..> publish #CornflowerBlue;text:CornflowerBlue : include(教师端)
+(校园食谱) as cookBook
+
+(展示墙) as displayPublic
+(新增特长与爱好) as addNew
+(选中) as choose
+(取消选中) as noChoose
+displayPublic ..> addNew : include
+displayPublic ..> choose : include
+displayPublic ..> noChoose : include
+
+@enduml

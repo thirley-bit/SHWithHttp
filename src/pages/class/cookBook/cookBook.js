@@ -32,7 +32,7 @@
 //   };
 //   return (
 //     <View className='index'>
-//       <NavTab needBackIcon mainTitle='校园食谱' />
+//       <NavTab back title='校园食谱' />
 //       <View className='tab'>
 //         <AtTabs
 //           current={tabCurrent}
@@ -584,7 +584,7 @@ var formatDate = function(date){
   return (
     <View className='index'>
       <View className='wrap'>
-        <NavTab needBackIcon mainTitle='校园食谱' />
+        <NavTab back title='校园食谱' />
         <AtTabs
           current={current}
           scroll

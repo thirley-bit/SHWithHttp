@@ -35,7 +35,7 @@ function NewPhotosAlbum(props) {
   return (
     <View className='main'>
       
-      <NavTab needBackIcon mainTitle='新建相册' />
+      <NavTab back title='新建相册' />
       <View className='top'>
         <Input
           className='input'

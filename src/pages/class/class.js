@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import Taro, { getCurrentPages } from "@tarojs/taro";
 import { View, Swiper, SwiperItem, Image, Navigator } from "@tarojs/components";
-import { AtList, AtListItem, AtTabBar, AtNavBar, AtTag } from "taro-ui";
+import { AtList, AtListItem, AtTabBar, AtNavBar, AtTag, AtButton } from "taro-ui";
 import { connect } from "react-redux";
 import ArticleList from "@app/component/articleList/articleList";
 // import Tabs from "@app/component/tabs/tabs";
+import MyTabs from '@app/component/MyTabs/MyTabs';
 import NavTab from '@app/component/NavTab/NavTab';
 
 import homework from "@static/homework.png";
@@ -17,7 +18,8 @@ import "./class.scss";
 import "../../app.scss";
 
 function Index(props) {
-  const { dispatch, identity, articleArr, bannerList } = props;
+  console.log(props,'props')
+  const { dispatch, identity, articleArr, bannerList, news, AAA } = props;
   // const [tabsCur, setTabsCur] = useState(0);
 
   const [current, setCurrent] = useState(0);
@@ -80,22 +82,42 @@ function Index(props) {
     console.log(value);
   };
 
+  const handleClick1 = () => {
+    dispatch({
+      type: "Class/getNews",
+    });
+    console.log(news,'news')
+    dispatch({
+      type: "Class/getAAA",
+    });
+    console.log(news,'news')
+    // Taro.request({
+    //   url:'https://jsonplaceholder.typicode.com/users',
+    //   header:{
+    //     'content-type':'application/json'
+    //   },
+    //   success:function(res){
+    //     console.log(res.data,'res')
+    //   }
+    // })
+  }
+  console.log(news,AAA)
   return (
     <View className='index'>
-      {/* <View className='ns'>ddd</View> */}
-      {/* <AtNavBar
-        className="nav-bar"
-        onClickRgIconSt={handleClick}
-        onClickRgIconNd={handleClick}
-        onClickLeftIcon={handleClick}
-        color="#000"
-        title="诚道吉科技有限公司"
-        // leftText='你好，XX老师'
+      	<NavTab
+        home
+        title='诚道吉'
+        // renderCenter={
+        //     <View
+        //       className='trace-rowAlignCenter'
+        //     >
+        //       自定义导航栏标题
+        //     </View>
+        //   }
+      	/>
 
-        // rightFirstIconType='bullet-list'
-        // rightSecondIconType='user'
-      /> */}
-      <NavTab  needBackIcon={false} mainTitle='诚道吉' />
+      {/* <NavTab  needBackIcon={false} mainTitle='诚道吉' /> */}
+      <AtButton onClick={handleClick1}>点击request</AtButton>
       <View className='new' onClick={handleNav}>
         <AtTag circle className='new-tag'>
           我的待办
@@ -153,4 +175,6 @@ export default connect((state) => ({
   articleArr: state.Class.articleArr,
   bannerList: state.Class.bannerList,
   tabList: state.Class.tabList,
+  news: state.Class.news,
+  AAA: state.Class.AAA,
 }))(Index);

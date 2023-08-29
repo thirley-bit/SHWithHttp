@@ -31,7 +31,7 @@ function Review(props) {
       return (
         <View className='report'>
             
-            <NavTab needBackIcon mainTitle='年终总结' />
+            <NavTab back title='年终总结' />
           <View className='head'>
             <View className='score'> 总分： 100 </View>
             <View className='score result'> 得分： 95 </View>

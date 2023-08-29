@@ -93,7 +93,7 @@ function Notice(props) {
 
   return (
     <View className='index'>
-    <NavTab needBackIcon mainTitle='更多' />
+    <NavTab back title='更多' />
       <View className='head'>
         <Text className='text'>家校安全</Text>
         <View>

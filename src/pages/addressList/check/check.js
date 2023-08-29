@@ -82,7 +82,11 @@ function Check(props) {
   }
   return (
     <View className='index'>
-      <NavTab needBackIcon mainTitle='审核' />
+      <NavTab
+        iconTheme='black'
+        back
+        title='审核'
+      />
       <MyTabs current={current} tabList={tabList} onClick={handleClick}>
       <AtTabsPane current={current} index={0}>
           {(user == 0 ? parentCheckedList : teacherCheckedList).map(

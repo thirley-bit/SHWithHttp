@@ -292,7 +292,7 @@ function ChooseUser() {
 
     return <View className='content'>
       
-      <NavTab needBackIcon mainTitle='诚道吉' />
+      <NavTab back title='诚道吉' />
         <AtTabs current={current} tabList={tabList} onClick={handleChange}>
             <AtTabsPane current={current} index={0}>
                 <View className='main'>

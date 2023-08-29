@@ -18,7 +18,7 @@ function ChangePassword() {
   };
   return (
     <View className='index'>
-      <NavTab needBackIcon mainTitle='修改密码' />
+      <NavTab back title='修改密码' />
       <View className='pass'>
         <Form onSubmit={onSubmit}>
           <InputItem

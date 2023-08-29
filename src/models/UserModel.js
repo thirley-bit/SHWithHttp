@@ -5,7 +5,7 @@ import {
   getParentCheckedList,
   getTeacherPassList,
   getTeacherCheckedList,
-  getStudentInfo
+  getStudentInfo,
 } from "../services/UserServices";
 
 const model = {

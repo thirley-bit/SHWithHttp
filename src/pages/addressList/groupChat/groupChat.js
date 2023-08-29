@@ -333,7 +333,7 @@ function GroupChat(props) {
 
   return (
     <View className='index'>
-    <NavTab needBackIcon mainTitle='群聊' />
+    <NavTab back title='群聊' />
     <View className='group-content'>
 
     </View>

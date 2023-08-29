@@ -67,7 +67,7 @@ function History() {
   };
   return (
     <View className='index'>
-      <NavTab needBackIcon mainTitle='个人成长史' />
+      <NavTab back title='个人成长史' />
       <View className='history'>
         <View className='left'>
         {leftList.map((item, index) => {

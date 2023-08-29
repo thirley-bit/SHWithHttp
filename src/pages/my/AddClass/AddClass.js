@@ -60,7 +60,7 @@ function AddClass(props) {
 
   return (
     <View className='index'>
-      <NavTab needBackIcon mainTitle='加入新班级' />
+      <NavTab back title='加入新班级' />
       <View className='new-class'>
         <View className='head'>
           <AtIcon

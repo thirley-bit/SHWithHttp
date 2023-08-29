@@ -78,7 +78,7 @@ function Sign(props) {
   };
   return (
     <View className='index'>
-    <NavTab needBackIcon mainTitle='安全确认' />
+    <NavTab back title='安全确认' />
       {user == 0 ? (
         <View className='parent'>
           <View className='parent-item'>

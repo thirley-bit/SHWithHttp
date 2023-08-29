@@ -21,7 +21,7 @@ function PublishPhotos() {
   }
   return (
     <View className='main'>
-      <NavTab needBackIcon mainTitle='上传照片' />
+      <NavTab back title='上传照片' />
       <AtList>
         <AtListItem
           title='上传到'

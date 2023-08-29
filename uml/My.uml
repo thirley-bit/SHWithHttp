@@ -1,0 +1,40 @@
+家校共育我的页面
+@startuml
+title 家校共育我的页面
+
+(我的) as my
+(孩子信息) as childInfo
+
+(查看审核列表/切换用户) as check
+(查看待审核列表) as todoCheck
+(查看已加入列表) as hasJoined
+(查看已审核列表) as hasChecked #CornflowerBlue
+check --> todoCheck
+check --> hasJoined
+check --> hasChecked #CornflowerBlue
+
+
+(创建新班级) as createClass #CornflowerBlue
+(加入新班级) as joinClass
+(我的待办) as todoWait
+(年终总结) as review #CornflowerBlue
+(设置) as setting
+
+(密码修改) as changePassword
+(切换账户) as changeUser
+(意见反馈) as feedBack
+(退出登录) as logout
+setting ..|> changePassword : include
+setting ..|> changeUser : include
+setting ..|> feedBack : include
+setting ..|> logout : include
+
+my ..|> childInfo : include
+my ..|> check : include
+my ..|> createClass : include
+my ..|> joinClass : include
+my ..|> todoWait : include
+my ..|> review : include
+my ..|> setting : include
+
+@enduml

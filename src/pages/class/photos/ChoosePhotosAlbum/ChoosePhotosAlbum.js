@@ -16,7 +16,7 @@ function ChoosePhotosAlbum(props) {
   return (
     <View className='index'>
       
-      <NavTab needBackIcon mainTitle='选择相册' />
+      <NavTab back title='选择相册' />
       <CardList enter='photos' showData={photosArr} />
     </View>
   );

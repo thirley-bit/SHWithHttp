@@ -17,7 +17,7 @@ function PhotosDetail(props) {
 
   return (
     <View className='main'>
-      <NavTab needBackIcon mainTitle={photoCover.name} />
+      <NavTab back title={photoCover.name} />
       <View className='top'>
         <View className='image'>
           <Image mode='aspectFill' className='img' src={photoCover.url} />

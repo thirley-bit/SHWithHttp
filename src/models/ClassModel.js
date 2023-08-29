@@ -1,9 +1,11 @@
-import { getArticleList } from "../services/ClassServices";
+import { getArticleList, getNews, getAAA } from "../services/ClassServices";
 
 const model = {
   namespace: "Class",
   state: {
     articleArr: [], //文章列表数据
+    news: [],
+    AAA: [],
     bannerList: [
       {
         id: 1,
@@ -56,6 +58,28 @@ const model = {
   },
 
   effects: {
+    *getAAA({ payload }, { call, put }) {
+      const response = yield call(getAAA, payload);
+      console.log(response, "responese111");
+      // if (response.statusCode == 200) {
+        yield put({
+          type: "changeAAA",
+          payload: response,
+        });
+      // }
+      return response;
+    },
+    *getNews({ payload }, { call, put }) {
+      const response = yield call(getNews, payload);
+      console.log(response, "responese");
+      if (response.statusCode == 200) {
+        yield put({
+          type: "changeNews",
+          payload: response.data,
+        });
+      }
+      return response;
+    },
     *getArticleList({ payload }, { call, put }) {
       const response = yield call(getArticleList, payload);
       if (response.code == 1) {
@@ -69,6 +93,18 @@ const model = {
   },
 
   reducers: {
+    changeAAA(state, { payload }) {
+      return {
+        ...state,
+        AAA: payload,
+      };
+    },
+    changeNews(state, { payload }) {
+      return {
+        ...state,
+        news: payload,
+      };
+    },
     changeArticleArr(state, { payload }) {
       return {
         ...state,

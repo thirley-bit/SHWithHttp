@@ -18,7 +18,7 @@ function ChangeUser() {
     }
   return (
     <View className='index'>
-      <NavTab needBackIcon mainTitle='切换账号' />
+      <NavTab back title='切换账号' />
       <View className='account'>
      <View className='list'>
       <View className='head'>

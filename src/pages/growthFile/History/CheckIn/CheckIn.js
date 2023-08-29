@@ -599,7 +599,7 @@ function CheckIn() {
 
   return (
     <View className='index'>
-      <NavTab needBackIcon mainTitle='考勤状况' />
+      <NavTab back title='考勤状况' />
       <MyTabs current={current} tabList={tabList} onClick={handleChange}>
         <AtTabsPane current={current} index={0}>
           <View className='container'>

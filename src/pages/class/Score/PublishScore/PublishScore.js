@@ -82,7 +82,7 @@ function PublishScore(props) {
   };
   return (
     <View className='main'>
-      <NavTab needBackIcon mainTitle='上传成绩' />
+      <NavTab back title='上传成绩' />
       <View className='head'>
         <View className='list' onClick={handleAdd}>
           <AtIcon value='settings' />

@@ -1,0 +1,48 @@
+家校共育作业、通知、成绩列表
+@startuml
+title 家校共育作业、通知、成绩列表
+(作业) as homeWork
+(查询日期) as selectAll
+(查询科目) as selectSpecial
+(查看作业列表) as list
+(快捷确认) as quickSend #DarkCyan
+(新增) as publish #CornflowerBlue
+(查看详细内容) as detail
+(家长反馈) as feedBack
+(编辑) as edit #CornflowerBlue
+(删除) as del #CornflowerBlue
+(查看作业完成列表) as student #CornflowerBlue
+homeWork ..> list : include
+homeWork ..> selectAll : include
+homeWork ..> selectSpecial : include
+homeWork ..> quickSend #DarkCyan;text:DarkCyan : include(家长端)
+homeWork ..> publish #CornflowerBlue;text:CornflowerBlue : include(教师端)
+
+list ..> detail : include
+list ...> feedBack : include
+list ..> edit #CornflowerBlue;text:CornflowerBlue : include(教师端)
+list ..> del #CornflowerBlue;text:CornflowerBlue : include(教师端)
+list ..> student #CornflowerBlue;text:CornflowerBlue : include(教师端)
+list ..> quickSend #DarkCyan;text:DarkCyan : include(家长端)
+student .> feedBack 
+
+(通知) as notice
+(查看通知列表) as noticeList
+notice ..> noticeList : include
+noticeList ..> detail : include 
+noticeList ..> edit #CornflowerBlue;text:CornflowerBlue : include(教师端)
+noticeList ..> del  #CornflowerBlue;text:CornflowerBlue : include(教师端)
+notice ..> publish #CornflowerBlue;text:CornflowerBlue : include(教师端)
+
+(成绩) as score
+(查看成绩列表) as scoreList
+(查看成绩表格) as scoreTable
+
+score ..> scoreList : include 
+scoreList ..> detail : include
+scoreList ..> edit #CornflowerBlue;text:CornflowerBlue : include(教师端)
+scoreList ..> del  #CornflowerBlue;text:CornflowerBlue : include(教师端)
+scoreList ..> scoreTable : include
+score ..> publish #CornflowerBlue;text:CornflowerBlue : include(教师端)
+
+@enduml

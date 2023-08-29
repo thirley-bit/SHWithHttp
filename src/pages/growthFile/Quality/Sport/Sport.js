@@ -84,7 +84,7 @@ function Sport() {
 
   return (
     <View className='index'>
-    <NavTab needBackIcon mainTitle='运动与健康' />
+    <NavTab back title='运动与健康' />
     <View className='home'>
       <View className='cont'>
         <View className='cont-year'>{list.year}</View>

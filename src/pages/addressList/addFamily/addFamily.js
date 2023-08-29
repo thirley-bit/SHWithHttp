@@ -7,7 +7,11 @@ function AddFamily() {
  
   return (
     <View className='index'>
-        <NavTab needBackIcon mainTitle='添加' />
+      <NavTab
+        iconTheme='black'
+        back
+        title='添加'
+      />
         暂无内容
     </View>
   )

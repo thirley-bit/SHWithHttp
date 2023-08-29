@@ -31,7 +31,7 @@ function Setting(props) {
   }
   return (
     <View className='index'>
-      <NavTab needBackIcon mainTitle='设置' />
+      <NavTab back title='设置' />
       <View className='head'></View>
       <View className='check'>
         {list.map((item, index) => (

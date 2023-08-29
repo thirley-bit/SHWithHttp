@@ -18,7 +18,7 @@ function Policy(props){
   return (
     <View className='index'>
       
-      <NavTab needBackIcon mainTitle='优惠政策' />
+      <NavTab back title='优惠政策' />
       <View className='search' handleSearch='handleSearch'>
         <AtSearchBar />
         {/* <SearchBar placeholder='请输入关键字' value={searchValue} /> */}

@@ -33,7 +33,7 @@ function Photos(props) {
   }
   return (
     <View className='index'>
-      <NavTab needBackIcon mainTitle='相册' />
+      <NavTab back title='相册' />
       <View className='top'>
         <AtButton className='button' type='primary' size='small' onClick={handleCreate}>
           新建相册

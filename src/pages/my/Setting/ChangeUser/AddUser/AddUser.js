@@ -18,7 +18,7 @@ function AddUser() {
     }
   return (
     <View className='index'>
-      <NavTab needBackIcon mainTitle='添加账号' />
+      <NavTab back title='添加账号' />
       <View className='container'>
       <View className='login-input'>
           <AtInput

@@ -1,0 +1,71 @@
+家校共育成长档案
+@startuml
+title 家校共育成长档案
+(个人信息) as info
+
+(个人成长史) as history
+(作业) as homeWork
+(查询日期) as selectAll
+(查询科目) as selectSpecial
+(查看作业列表) as list
+(快捷确认) as quickSend #DarkCyan
+(新增) as publish #CornflowerBlue
+(查看详细内容) as detail
+(家长反馈) as feedBack
+(编辑) as edit #CornflowerBlue
+(删除) as del #CornflowerBlue
+(查看作业完成列表) as student #CornflowerBlue
+history ..> homeWork : include
+homeWork ..> list : include
+homeWork ..> selectAll : include
+homeWork ..> selectSpecial : include
+homeWork ..> quickSend #DarkCyan;text:DarkCyan : include(家长端)
+homeWork ..> publish #CornflowerBlue;text:CornflowerBlue : include(教师端)
+
+list ..> detail : include
+list ..> feedBack : include
+list ..> edit #CornflowerBlue;text:CornflowerBlue : include(教师端)
+list ..> del #CornflowerBlue;text:CornflowerBlue : include(教师端)
+list ..> student #CornflowerBlue;text:CornflowerBlue : include(教师端)
+list ..> quickSend #DarkCyan;text:DarkCyan : include(家长端)
+student .> feedBack 
+
+(成绩) as score
+(查看成绩列表) as scoreList
+(查看成绩表格) as scoreTable
+history ..> score : include
+score ..> scoreList : include 
+scoreList ..> detail : include
+scoreList ..> edit #CornflowerBlue;text:CornflowerBlue : include(教师端)
+scoreList ..> del  #CornflowerBlue;text:CornflowerBlue : include(教师端)
+scoreList ..> scoreTable : include
+score ..> publish #CornflowerBlue;text:CornflowerBlue : include(教师端)
+
+(学科评价) as comment
+(课外学习) as study
+(日常表现) as perform
+(荣誉记录) as honor
+(惩罚记录) as punish
+(考勤状况) as checkIn
+history ..> comment : include
+history ..> study : include
+history ..> perform : include
+history ..> honor : include
+history ..> punish : include
+history ..> checkIn : include
+
+
+(综合素质评价) as quality
+(德育) as morality
+(公民素养) as diathesis
+(运动与健康) as sports
+(自主学习能力) as selfLearning
+(社会交流能力) as society
+(艺术修养) as art
+quality ..> morality : include
+quality ..> diathesis : include
+quality ..> sports : include
+quality ..> selfLearning : include
+quality ..> society : include
+quality ..> art : include
+@enduml

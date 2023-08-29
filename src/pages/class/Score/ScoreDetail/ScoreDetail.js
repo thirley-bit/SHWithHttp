@@ -45,7 +45,7 @@ function ScoreDetail(props) {
   };
   return (
     <View className='main'>
-      <NavTab needBackIcon mainTitle='成绩' />
+      <NavTab back title='成绩' />
       <AtForm onSubmit={onSubmit} onReset={onReset}>
         {
           showData.map((item,index) => {
