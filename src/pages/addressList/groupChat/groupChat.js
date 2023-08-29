@@ -16,6 +16,7 @@ import { View, Button, ScrollView, Input } from "@tarojs/components";
 import GradientButton from '@app/component/GradientButton';
 import NavTab from '@app/component/NavTab/NavTab';
 import MyTabs from '@app/component/MyTabs/MyTabs';
+import Modal from '@app/component/Modal';
 import normal from '@static/normal.png'
 import api from "@/api/api";
 import "./groupChat.scss";
@@ -378,8 +379,7 @@ function GroupChat(props) {
             </View>
             <View>
               {/* modal框，是否保存为群聊 */}
-              <AtModal
-                className='confirm-modal'
+              <Modal
                 isOpened={isOpened}
                 cancelText='忽略'
                 confirmText='存为标签'

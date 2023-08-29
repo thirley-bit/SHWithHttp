@@ -7,7 +7,6 @@ import "./NavTab.scss";
 let globalSystemInfo = getSystemInfo();
 
 function NavTab(props) {
-  console.log(props)
   const {
     title,
     background,
@@ -144,7 +143,6 @@ function NavTab(props) {
     </View>
     </View>
   );
-  //   );
 }
 
 export default NavTab;

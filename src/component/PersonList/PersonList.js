@@ -3,6 +3,7 @@ import Taro from "@tarojs/taro";
 import { connect } from "react-redux";
 import { View, Text } from "@tarojs/components";
 import { AtCard, AtAvatar, AtModal, AtIcon, AtBadge } from "taro-ui";
+import Modal from '@app/component/Modal';
 import "./PersonList.scss";
 
 //人员列表组件
@@ -138,7 +139,8 @@ function PersonList(props) {
                 </View>
               )}
 
-              <AtModal
+              <Modal
+                className='modal'
                 isOpened={isOpened}
                 cancelText='取消'
                 confirmText='确认'

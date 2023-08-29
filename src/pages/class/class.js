@@ -18,7 +18,6 @@ import "./class.scss";
 import "../../app.scss";
 
 function Index(props) {
-  console.log(props,'props')
   const { dispatch, identity, articleArr, bannerList, news, AAA } = props;
   // const [tabsCur, setTabsCur] = useState(0);
 
@@ -101,7 +100,6 @@ function Index(props) {
     //   }
     // })
   }
-  console.log(news,AAA)
   return (
     <View className='index'>
       	<NavTab
