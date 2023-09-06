@@ -1,5 +1,13 @@
 import {
+  getRegister,
+  getVerifyCode,
+  getClassAll,
+  getLogin,
+  getForgetPass,
+  getLogout,
+  getJoinReviewList,
   getIdentity,
+
   getParentPassList,
   getChangeUser,
   getParentCheckedList,
@@ -14,6 +22,7 @@ const model = {
     identity: {}, //登录信息
     user: "",
     enter: "",
+    classList:[],
     settingList: [
       {
         id: 0,
@@ -34,6 +43,7 @@ const model = {
           "http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg",
       },
     ],
+    checkedList:[], //审核列表
     parentPassList: [], //家长端已加入班级列表
     parentCheckedList: [], //家长端待审核列表
     teacherPassList: [], //教师端已审核列表
@@ -42,6 +52,54 @@ const model = {
   },
 
   effects: {
+    *getRegister({ payload }, { call }) {
+      const response = yield call(getRegister, payload);
+      return response;
+    },
+    *getVerifyCode({ payload }, { call }) {
+      const response = yield call(getVerifyCode, payload);
+      return response;
+    },
+    *getClassAll({ payload }, { call, put }) {
+      const response = yield call(getClassAll, payload);
+      if (response.status == 200) {
+        yield put({
+          type: "changeClassList",
+          payload: response.data,
+        });
+      }
+      return response;
+    },
+    *getForgetPass({ payload }, { call }) {
+      const response = yield call(getForgetPass, payload);
+      return response;
+    },
+    *getLogin({ payload }, { call, put }) {
+      const response = yield call(getLogin, payload);
+      if(response.status == 200){
+        yield put({
+          type: "userReducer",
+          payload: response.data.userType,
+        });
+      }      
+      return response;
+    },
+    *getLogout({ payload }, { call }) {
+      const response = yield call(getLogout, payload);
+      return response;
+    },
+    *getJoinReviewList({ payload }, { call, put }) {
+      const response = yield call(getJoinReviewList, payload);
+      console.log(response,'response')
+      if(response.status == 200){
+        yield put({
+          type:"changeCheckedList",
+          payload:response.data
+        })
+      }
+      return response;
+    },
+
     *getIdentity({ payload }, { call, put }) {
       const response = yield call(getIdentity, payload);
       if (response.code == 1) {
@@ -126,6 +184,12 @@ const model = {
   },
 
   reducers: {
+    changeClassList(state, { payload }) {
+      return {
+        ...state,
+        classList: payload,
+      };
+    },
     changeIdentity(state, { payload }) {
       return {
         ...state,
@@ -142,6 +206,12 @@ const model = {
       return {
         ...state,
         enter: payload,
+      };
+    },
+    changeCheckedList(state, { payload }) {
+      return {
+        ...state,
+        checkedList: payload,
       };
     },
     changeParentPassList(state, { payload }) {

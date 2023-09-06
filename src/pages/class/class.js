@@ -18,9 +18,11 @@ import "./class.scss";
 import "../../app.scss";
 
 function Index(props) {
-  const { dispatch, identity, articleArr, bannerList, news, AAA } = props;
-  // const [tabsCur, setTabsCur] = useState(0);
-
+  const { dispatch, identity,user, articleArr, bannerList, news, AAA } = props;
+  // const [tabsCur, setTabsCur] = useState(0)
+  console.log(user,'user>>>>')
+  // const a = Taro.getStorageSync('token')
+  // console.log(a)
   const [current, setCurrent] = useState(0);
   const tabList = [
     {
@@ -52,10 +54,11 @@ function Index(props) {
       url: "/pages/class/MoreModules/MoreModules",
     },
   ];
+  
   useEffect(() => {
-    dispatch({
-      type: "users/getUser",
-    });
+    // dispatch({
+    //   type: "users/getUser",
+    // });
     dispatch({
       type: "Class/getArticleList",
     });
@@ -82,14 +85,56 @@ function Index(props) {
   };
 
   const handleClick1 = () => {
+    // Taro.request({
+    //   url:'http://192.168.1.157:5002/class/getClassAll',
+    //   data:{},
+    //   header:{
+    //     'content-type': 'application/json'
+    //   },
+    //   success:function(res){
+    //     console.log(res,'res')
+    //   }
+    // })
+    //   Taro.request({
+    //   url:'http://192.168.1.157:5002/user/register',
+    //   data:{
+    //     "telephone":"123456",
+    //     "password":"123",
+    //     "classId":2,
+    //     "userType":1,
+    //     "studentNo":"20231002",
+    //     "studentName":"晓华",
+    //     "userName":"用户1",
+    //     "ifClassTeacher":1,
+    //     "verifyCode":"123"
+    // },
+    // method:'POST',
+    //   header:{
+    //     'content-type': 'application/json'
+    //   },
+    //   success:function(res){
+    //     console.log(res,'res')
+    //   }
+    // })
     dispatch({
       type: "Class/getNews",
+      payload:{
+        "telephone":"1234567",
+        "password":"123",
+        "classId":2,
+        "userType":1,
+        "studentNo":"20231002",
+        "studentName":"晓华",
+        "userName":"用户1",
+        "ifClassTeacher":1,
+        "verifyCode":"123"
+    }
     });
-    console.log(news,'news')
-    dispatch({
-      type: "Class/getAAA",
-    });
-    console.log(news,'news')
+    // console.log(news,'news')
+    // dispatch({
+    //   type: "Class/getAAA",
+    // });
+    // console.log(news,'news')
     // Taro.request({
     //   url:'https://jsonplaceholder.typicode.com/users',
     //   header:{
@@ -168,6 +213,7 @@ function Index(props) {
   );
 }
 export default connect((state) => ({
+  user: state.users.user,
   title: state.users.title,
   identity: state.users.identity,
   articleArr: state.Class.articleArr,

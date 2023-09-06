@@ -35,6 +35,36 @@
           "pathName": "pages/my/Setting/Setting",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/login/login",
+          "pathName": "pages/login/login",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/login/Register/Register",
+          "pathName": "pages/login/Register/Register",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/my/ChildMsg/ChildMsg",
+          "pathName": "pages/my/ChildMsg/ChildMsg",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/login/ForgetPass/ForgetPass",
+          "pathName": "pages/login/ForgetPass/ForgetPass",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/addressList/Check/Check",
+          "pathName": "pages/addressList/Check/Check",
+          "query": "",
+          "scene": null
         }
       ]
     }

@@ -14,6 +14,7 @@ function ChildMsg(props) {
   useEffect(() => {
     dispatch({
       type: "users/getIdentity",
+      
     });
     dispatch({
       type: "users/getUser",
@@ -61,20 +62,24 @@ function ChildMsg(props) {
     }
   }, [identity]);
   console.log(showData);
-  const handleChange = () => {
-    console.log(111);
+  const handleChange = (value,record) => {
+    record.value = value
+    console.log(showData);
   };
   const handleAdd = () => {
     console.log('add')
   }
   const handleSave = () => {
-    console.log('save')
+    console.log(showData)
+  }
+  const handleSubmit = () => {
+    console.log(showData)
   }
   return (
     <View className='index'>
     <NavTab back title='孩子信息' />
     <View className='main'>
-      <AtForm>
+      <AtForm onSubmit={() => handleSubmit()}>
         {showData.map((item, index) => {
           return (
             <AtInput
@@ -84,7 +89,7 @@ function ChildMsg(props) {
               type={item.type}
               value={item.value}
               required={item.required}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e,item)}
             />
           );
         })}

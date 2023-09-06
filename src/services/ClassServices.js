@@ -7,7 +7,7 @@ export async function getArticleList(){
     let data = api[url]
     return data
 }
-export async function getNews() {
+export async function getNews(params) {
     // let data = []
     // Taro.request({
     //     url:'https://jsonplaceholder.typicode.com/users',
@@ -20,8 +20,6 @@ export async function getNews() {
     //     }
     // })
     // return data
-    return httpService.get('/users')
-}
-export async function getAAA() {
-    return httpService.post('/posts')
+    return httpService.get('/class/getClassAll')
+    // return httpService.post('/user/register',params)
 }

@@ -2,13 +2,14 @@ import { View, Text } from "@tarojs/components";
 import { connect } from "react-redux";
 import Taro from "@tarojs/taro";
 import { useEffect, useState } from "react";
-import { AtForm, AtCard, AtDivider, AtIcon, AtInput, AtButton } from "taro-ui";
+import { AtForm, AtCard, AtDivider, AtIcon, AtInput, AtButton, AtMessage } from "taro-ui";
 import NavTab from "@app/component/NavTab/NavTab";
 import GradientButton from "@app/component/GradientButton";
 
 import "./Setting.scss";
 
 function Setting(props) {
+  const {dispatch} = props
   const list = [
     {
       name: "密码修改",
@@ -27,7 +28,17 @@ function Setting(props) {
     Taro.navigateTo({ url: value });
   };
   const handleExit = () => {
-    Taro.navigateTo({url:'/pages/login/login'})
+    dispatch({
+      type:'users/getLogout'
+    }).then(res => {
+      if(res.status == 200){
+        Taro.atMessage({
+          'message':'退出成功',
+          'type':'success'            
+        })
+        Taro.navigateTo({url:'/pages/login/login'})
+      }
+    })
   }
   return (
     <View className='index'>
@@ -46,6 +57,8 @@ function Setting(props) {
           </View>
         ))}
       </View>
+      
+      <AtMessage />
       <GradientButton
         type='primary'
         className='send-button'

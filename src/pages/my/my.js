@@ -58,9 +58,9 @@ function My(props) {
     dispatch({
       type: "users/getIdentity",
     });
-    dispatch({
-      type: "users/getUser",
-    });
+    // dispatch({
+    //   type: "users/getUser",
+    // });
   }, []);
   const handleUpload = () => {
     console.log("upload");

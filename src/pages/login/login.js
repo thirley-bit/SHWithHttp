@@ -1,87 +1,103 @@
 import { useState, useEffect } from "react";
 import Taro from "@tarojs/taro";
 import { View, Text, RadioGroup, Label, Radio, Input } from "@tarojs/components";
-import { AtButton, AtIcon, AtInput } from "taro-ui";
+import { AtButton, AtForm, AtIcon, AtInput, AtMessage } from "taro-ui";
 import GradientButton from "@app/component/GradientButton";
 
 import "./Login.scss";
+import { connect } from 'react-redux';
 
 function Login(props) {
+  console.log(props,'props')
+  const { dispatch, users } = props
   const [numberVal, setNumberVal] = useState("");
-  const [psd, setPsd] = useState("");
-  const [numberIsNull, setNumberIsnull] = useState(false);
-  const [psdIsNull, setPsdIsnull] = useState(false);
-  const list = [
+  const [loginUserType, setLoginUserType] = useState(0);
+ 
+  useEffect(() => {
+    dispatch({
+      type:'users/getUser'
+    })
+  })
+  const checkList = [
     {
-      value: '家长',
-      text: '家长',
-      checked: true
+      value: "0",
+      text: "家长",
+      checked: true,
     },
     {
-      value: '老师',
-      text: '老师',
-      checked: false
+      value: "1",
+      text: "老师",
+      checked: false,
+    },
+  ];
+  const formList = [
+    {
+      key:'telephone',
+      titleIcon: 'user',
+      placeholder: "请输入手机号",
+      type: "phone",
+      value: numberVal,
+    },
+    {
+      key:'password',
+      titleIcon: "lock",
+      placeholder: "请输入密码",
+      type: "number",
+      value: numberVal,
     },
   ]
-  const handleNumberChange = (e) => {
-    if (e.length == 0) {
-      setNumberIsnull(true);
-    } else {
-      setNumberVal(e);
-      setNumberIsnull(false);
-    }
-  };
-  const handlePsdChange = (e) => {
-    if (e.length == 0) {
-      setPsdIsnull(true);
-    } else {
-      setPsd(e);
-      setPsdIsnull(false);
-    }
-    setPsd(e);
-  };
+  //选择班级
+  const handleCheckChange = (e) => {
+    setLoginUserType(parseInt(e.detail.value))
+  }
+  //登录
   const handleLogin = () => {
-    if (numberVal.length == 0) {
-      setNumberIsnull(true);
-    } else if (psd.length == 0) {
-      setPsdIsnull(true);
+    const formObj = formList.reduce((p, n) => {
+      const { key } = n;
+      return Object.assign(p, { [key]: n.value });
+    }, {});
+    //合并输入内容和身份
+    const sendList = Object.assign(formObj,{userType:loginUserType})
+    //判断输入是否为空
+    const nullObj = formList.find(item => item.value == '')
+    if(nullObj){
+      Taro.showToast({
+        title:`${nullObj.placeholder}`,
+        icon:'error'
+      })
     } else {
-      Taro.switchTab({ url: "/pages/class/class" });
+      dispatch({
+        type:'users/getLogin',
+        payload:sendList
+      }).then(res => {
+        if(res.status == 200){
+          Taro.atMessage({
+            'message':'登录成功',
+            'type':'success'            
+          })
+          //将token储存到本地
+          Taro.setStorageSync('token',res.data.token)
+          //切换到主页
+          Taro.switchTab({ url: "/pages/class/class" });
+        }else{
+          Taro.atMessage({
+            'message':res.message,
+            'type':'error'
+          })
+        }
+      })
     }
   };
   const handleSign = (e) => {
-    // Taro.getSetting({
-    //     success: (res) => {
-    //         if(!res.authSetting['scope.record']){
-    //             console.log(111)
-    //             Taro.authorize({
-    //                 scope:'scope.record',
-    //                 success:() => {
-    //                     Taro.startLocationUpdateBackground()
-    //                 }
-    //             })
-    //         }
-    //         console.log(res)
-    //     }
-    // })
-    // Taro.login({
-    //   success: (res) => {
-    //     console.log(res,'res');
-    //     if (res.code) {
-    //       Taro.request({
-    //         url: "https://api.weixin.qq.com/sns/jscode2session",
-    //         method:'GET',
-    //         data: {
-    //           code: res.code,
-    //         },
-    //       });
-    //     } else {
-    //       console.log("登录失败！" + res.errMsg);
-    //     }
-    //   },
-    // });
-    Taro.navigateTo({ url: `/pages/login/Register/Register?type=${e}` });
+    if(e == 0){
+      Taro.navigateTo({ url: `/pages/login/ForgetPass/ForgetPass` });
+    }else{
+      Taro.navigateTo({ url: `/pages/login/Register/Register` });
+    }
   };
+  const handleChange = (e,record) => {
+    record.value = e
+  }
   return (
     <View className='index'>
       <View className='container'>
@@ -91,29 +107,34 @@ function Login(props) {
         </View>
         <View className='login-input'>
           <View className='forget' onClick={() => handleSign(0)}>忘记密码？</View>
-          <AtInput
-            className={numberIsNull ? "error" : ""}
-            title={<AtIcon value='user' size={25} color='#28a1fc'></AtIcon>}
-            placeholder='请输入手机号'
-            type='phone'
-            value={numberVal}
-            onChange={handleNumberChange}
-          />
-          {numberIsNull && <View className='error-tip'>请输入手机号</View>}
-          <AtInput
-            className={psdIsNull ? "error" : ""}
-            title={<AtIcon value='lock' size={25} color='#28a1fc'></AtIcon>}
-            placeholder='请输入密码'
-            type='password'
-            value={psd}
-            onChange={handlePsdChange}
-          />
-          {psdIsNull && <View className='error-tip'>密码不能为空</View>}
+          <AtForm>
+          {formList.map((item, index) => {
+              return (<View key={index}>
+                <AtInput
+                  key={index}
+                  title={<AtIcon value={item.titleIcon} size={25} color='#28a1fc'></AtIcon>}
+                  placeholder={item.placeholder}
+                  type={item.type}
+                  value={item.value}
+                  required={item.required}
+                  onChange={(e) => handleChange(e, item)}
+                />
+                </View>
+              );
+            })}
+          </AtForm>
+          
         </View>
-        <RadioGroup>
-          {list.map((item,index) => {
+        <RadioGroup 
+          onChange={handleCheckChange}
+        >
+          {checkList.map((item,index) => {
             return<Label key={index}>
-              <Radio className='radio-list__radio' value={item.value} checked={item.checked}>{item.text}</Radio></Label>
+              <Radio 
+                style={{marginRight:'64rpx'}} 
+                value={item.value} 
+                checked={item.checked}
+              >{item.text}</Radio></Label>
           })}
         </RadioGroup>
         <View className='login-button'>
@@ -133,7 +154,10 @@ function Login(props) {
           </GradientButton>
         </View>
       </View>
+      <AtMessage />
     </View>
   );
 }
-export default Login;
+export default connect((state) => ({
+  user: state.users.user
+}))(Login);

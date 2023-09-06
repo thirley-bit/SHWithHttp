@@ -23,8 +23,8 @@ function FeedBack(props) {
               {/* <AtAvatar circle size='small' image={item.avatar}></AtAvatar>
               <View>{item.student_name + item.relative}</View> */}
 
-              {/* <View className='at-row'> */}
-                {/* <View className='at-col at-col-2'>
+              <View className='at-row'>
+                <View className='at-col at-col-2'>
                   <View className='feed-avatar'>
                     <AtAvatar
                       className='avatar'
@@ -33,12 +33,12 @@ function FeedBack(props) {
                       image={item.avatar ? item.avatar : normal}
                     />
                   </View>
-                </View> */}
-                {/* <View
+                </View>
+                <View
                   className='at-col at-col-10 at-col--wrap'
                   style='margin-top:1%'
-                > */}
-                  {/* <View className='feed-name'>
+                >
+                  <View className='feed-name'>
                       {item.student_name + item.relative}
                     </View>
                     <View className='feed-time'>{item.create_time}</View>
@@ -46,7 +46,8 @@ function FeedBack(props) {
                     <View className='feed-img' onClick={() => handleFeedBack(item)}>
                       
                     <Image style='width:100%;height:100%' src={dialog} />
-                    </View> */}
+                    </View>
+
                     <View className='feed-back-list'>
                       {item.reply.map((it, i) => {
                         return (
@@ -61,8 +62,8 @@ function FeedBack(props) {
                         );
                       })}
                     </View>
-                  {/* </View> */}
-                {/* </View> */}
+                  </View>
+                </View>
                 <AtDivider height={22} lineColor='#e6e6e6' />
               </View>
           );

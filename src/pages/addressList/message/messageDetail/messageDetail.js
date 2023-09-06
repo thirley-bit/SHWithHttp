@@ -19,8 +19,8 @@ function MessageDetail(props){
   // const showLeft = "own";
   const sys = Taro.getSystemInfoSync();
   // const [keyboardHeight, setKeyboardHeight] = useState(0)
-  const [scrollHeight, setScrollHeight] = useState({height:`${sys.windowHeight - sys.statusBarHeight -165 }px`})
-  const [bottomHeight, setBottomHeight] = useState({marginBottom:'0rpx'})
+  const [scrollHeight, setScrollHeight] = useState({height:`${sys.screenHeight - sys.statusBarHeight -165 }px`})
+  const [bottomHeight, setBottomHeight] = useState({marginBottom:'0px'})
   const [scrollTop, setScrollTop] = useState(0);
   // const [pageNo, setPageNo] = useState(1);
   const [inputVal, setInputVal] = useState("");
@@ -112,7 +112,7 @@ function MessageDetail(props){
 
 
   const scrollMsgBottom = () => {
-    //外层加延时函数是为了获取到节点的标准信息
+    //外层加延时函数是为了获取到节点的标准信息11
     setTimeout(() => {
       let query = Taro.createSelectorQuery();
       //获取节点信息
@@ -137,11 +137,11 @@ function MessageDetail(props){
     Taro.onKeyboardHeightChange(res => {
       let newKeyboardHeight = res.height - 20
       if(newKeyboardHeight < 0){
-        setScrollHeight({height:`${sys.windowHeight + sys.statusBarHeight}rpx`})
-        setBottomHeight({marginBottom:'0rpx'})
+        setScrollHeight({height:`${sys.screenHeight - sys.statusBarHeight -165 }px`})
+        setBottomHeight({marginBottom:'0px'})
         // setKeyboardHeight(0)
       }else{
-        let newStyle = { height: `${sys.windowHeight - sys.statusBarHeight - newKeyboardHeight}`};
+        let newStyle = { height: `${sys.screenHeight - sys.statusBarHeight - newKeyboardHeight}px`};
         setScrollHeight(newStyle)
         let newBottomHeight = { marginBottom: `${newKeyboardHeight}px`}
         setBottomHeight(newBottomHeight)
@@ -149,6 +149,8 @@ function MessageDetail(props){
       }
     })
   }
+  console.log(bottomHeight,'bottonheihght')
+  console.log(scrollHeight,'scroheight')
   
 
   const handleInput = (e) => {
@@ -164,14 +166,16 @@ function MessageDetail(props){
 
   return (
     <View className='index'>
-      <NavTab back title='李老师' />
+      <NavTab style={{positon:'sticky',top:'0',width:'100%'}} back title='李老师' />
       
       <ScrollView
         id='scrollview'
         className='ScrollView'
         scrollY
         scrollWithAnimation
-        scrollTop={scrollTop}
+        scrollIntoView={`scrollId${messageDetail.length}`}
+        // scrollTop={scrollTop}
+
         style={scrollHeight}
       >
         <View id='chatlistview' className='chatRoom'>
@@ -183,7 +187,7 @@ function MessageDetail(props){
               //右侧聊天框
               if (item?.speaker == "own") {
                 return (
-                  <View className='chatRight' key={index}>
+                  <View id={`scrollId${index + 1}`} className='chatRight' key={index}>
                     <Image
                       className='img'
                       src={
@@ -212,7 +216,7 @@ function MessageDetail(props){
               } else {
                 //左侧聊天框
                 return (
-                  <View className='chatLeft' key={index}>
+                  <View id={`scrollId${index + 1}`} className='chatLeft' key={index}>
                     <Image
                       className='img'
                       src={
@@ -237,8 +241,8 @@ function MessageDetail(props){
           </View>
         </View>
       </ScrollView>
-      <View class='chat-bottom' onClick={handleKeyBoardHeight}>
-        <View class='send-msg' style={bottomHeight} >
+      <View class='chat-bottom'>
+        <View class='send-msg'>
           <View class='taro-textarea'>
             <Textarea
               className='text-area'
@@ -246,9 +250,9 @@ function MessageDetail(props){
               maxlength={-1}
               autoHeight
               showConfirmBar={false}
-              adjustPosition={false}
+              adjustPosition
               onInput={handleInput}
-              onKeyboardHeightChange={handleKeyBoardHeight}
+              // onKeyboardHeightChange={() => handleKeyBoardHeight()}
             ></Textarea>
           </View>
           <Button onClick={handleSendMessage} class='send-btn' >

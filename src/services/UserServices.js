@@ -1,4 +1,30 @@
 import api from '@/api/api';
+import httpService from '../utils/httpService';
+
+export async function getRegister(params){
+    return httpService.post('/user/register',params)
+}
+export async function getClassAll(params){
+    return httpService.get('/class/getClassAll',params)
+}
+export async function getVerifyCode(params){
+    return httpService.post('/user/sendMessage',params)
+}
+export async function getLogin(params){
+    return httpService.post('/login/login',params)
+}
+export async function getForgetPass(params){
+    return httpService.post('/user/forgetPass',params)
+}
+export async function getLogout(){
+    return httpService.post('/login/logout')
+}
+export async function getJoinReviewList(params){
+    return httpService.post('/class/getJoinReviewList',params)
+}
+
+
+
 
 export async function getIdentity(){
     // return 

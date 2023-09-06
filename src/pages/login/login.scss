@@ -8,6 +8,9 @@
     width: 90%;
     height: 100vh;
     margin: 0 auto;
+    .at-form{
+        background-color: rgba(255,255,255,0);
+    }
 }
 .head{
     width: 100%;
@@ -31,7 +34,10 @@
         font-size: 24rpx;
         color: #FF2E26;
         line-height: 34rpx;
-    }    
+    }   
+    .at-form{
+        background-color: none;
+    } 
     .at-input{
         margin: 32rpx 0;
         border-radius: 16rpx;

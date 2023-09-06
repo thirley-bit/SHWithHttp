@@ -16,25 +16,26 @@ import normal from "@static/normal.png"
 import "./Check.scss";
 
 function Check(props) {
-  console.log(props);
+  console.log(props,'iooo');
   const {
     dispatch,
-    user,
+    // user,
     identity,
+    checkedList,
     parentPassList,
     parentCheckedList,
     teacherPassList,
     teacherCheckedList,
   } = props;
   const [current, setCurrent] = useState(0);
-  
+  const user = 1
   let tabTitle = user == 0 ? "" : "已审核";
   const tabList = [
     {
       title: "待审核",
     },
     {
-      title: "已加入",
+      title: "已处理",
     },
     {
       title: tabTitle,
@@ -42,6 +43,16 @@ function Check(props) {
     
   ];
   useEffect(() => {
+    dispatch({
+      type: "users/getJoinReviewList",
+      payload:{
+        page:1,
+        pageSize:10,
+        userId:'a7f933b810f2419b8420c3095c8d88d5',
+        status:[0,1],
+      }
+    });
+    
     dispatch({
       type: "users/getIdentity",
     });
@@ -168,7 +179,6 @@ function Check(props) {
               title = item.student_name + item.relative + "申请加入";
               note = "审核人：" + identity.teacher;
             }
-            console.log(item);
             return (
               <View key={index} className='join-card'>
                 <AtCard
@@ -212,7 +222,6 @@ function Check(props) {
               title = item.student_name + item.relative + "申请加入";
               note = "审核人：" + identity.teacher;
             }
-            console.log(item);
             return (
               <View key={index} className='join-card'>
                 <AtCard
@@ -251,6 +260,7 @@ function Check(props) {
 }
 export default connect((state) => ({
   user: state.users.user,
+  checkedList: state.users.checkedList,
   identity: state.users.identity,
   parentPassList: state.users.parentPassList,
   parentCheckedList: state.users.parentCheckedList,

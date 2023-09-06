@@ -2,6 +2,7 @@ export default defineAppConfig({
   pages: [
     'pages/login/login', //登录页面
     'pages/login/Register/Register', //注册页面
+    'pages/login/ForgetPass/ForgetPass', //忘记密码页面
     // 主页
     'pages/class/class', //主页
     'pages/class/HomeWork/HomeWork', //主页——家庭作业
@@ -103,7 +104,7 @@ export default defineAppConfig({
   },
   window: {
     'backgroundTextStyle': 'light',
-    'navigationBarBackgroundColor': '#0194ff',
+    'navigationBarBackgroundColor': '#fff',
     'navigationBarTitleText': '诚道吉科技有限公司',
     'navigationBarTextStyle': 'black',
     'navigationStyle': "custom",

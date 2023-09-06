@@ -1,72 +1,88 @@
-import Taro from '@tarojs/taro';
-import apiConfig from './apiConfig'
+import Taro from "@tarojs/taro";
+import apiConfig from "./apiConfig";
 
 //网络请求拦截器
 const interceptor = function (chain) {
-  const requestParams = chain.requestParams
-  const { method, data, url } = requestParams
-  let token = Taro.getStorageSync('TOKEN')//拿到本地缓存中存的token
-  console.log(token,'tolken')
+  const requestParams = chain.requestParams;
+  const { method, data, url } = requestParams;
+  // let token = Taro.getStorageSync("token"); //拿到本地缓存中存的token
+  // let tokenParams = token ? {token} : {}
   requestParams.header = {
     ...requestParams.header,
-    Authorization: 'Bearer ' + token //将token添加到头部
-  }
-  return chain.proceed(requestParams).then(res => { return res })
-}
-
-Taro.addInterceptor(interceptor)
+    // ...tokenParams, //将token添加到头部
+  };
+  return chain.proceed(requestParams).then((res) => {
+    return res;
+  });
+};
+Taro.addInterceptor(interceptor);
 
 const request = async (method, url, params) => {
   //由于post请求时习惯性query参数使用params，body参数使用data，而taro只有data参数，使用contentType作为区分，因此此处需要做一个判断
-  let contentType = params?.data ? 'application/json' : 'application/x-www-form-urlencoded';
-  if (params) contentType = params?.headers?.contentType || contentType;
+  // let contentType = params ? 'application/json' : 'application/x-www-form-urlencoded';
+  // let contentType = "application/json";
+  // if (params) contentType = params?.headers?.contentType || contentType;
+
+  //接口返回前显示加载状态
+  Taro.showLoading({
+    title:'加载中',
+  })
   const option = {
     method,
     isShowLoading: false,
     url: apiConfig.baseUrl + url,
-    data: params && (params?.data || params?.params),
+    data: params,
     header: {
-      'content-type': contentType,
-    },
+      "content-type": "application/json",
+      "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjE1MDgyMTc4OTg0IiwidXNlclR5cGUiOjAsInJhbmRvbURhdGUiOjE2OTM5MDQ5NjYwNTgsInVzZXJJZCI6ImE3ZjkzM2I4MTBmMjQxOWI4NDIwYzMwOTVjOGQ4OGQ1In0.eez-g7XJEvoFak4EH_WBvlgm2hosSXBtE0WfJbenOVU"
+     },
     success(res) {
-      
-    //根据不同返回状态值3进行操作
-    //   switch (res?.statusCode) {
-    //     case 503: {
-    //  	  ...
-    //       break;
-    //     }
-	// 	...
-    //     default:
-    //       break;
-    //   }
-    console.log(res,'res')
+      console.log(res,'res>>>>')
+      Taro.hideLoading()
+      //如果返回错误，原因
+      let title = res.data?.error;
+      //返回码
+      let status = res?.statusCode
+      //根据不同返回状态值进行操作
+      switch (res?.statusCode) {
+        case 200:{
+          break;
+        }
+        case status: {
+          Taro.showToast({
+            title: title || '',
+            icon: "error",
+          });
+          break;
+        }
+        default:
+          break;
+      }
     },
     error(e) {
-      console.log('api', '请求接口出现问题', e);
-    }
-  }
-  console.log(option,'optikon')
-  const resp = await Taro.request(option);
-  console.log(resp,'resp')
-  return resp
+      console.log("api", "请求接口出现问题", e);
+    },
+  };
+  console.log(option)
+  const resp = await Taro.request(option,'option');
+  return resp.data;
   // return resp.data;//根据个人需要返回
-}
+};
 
 export default {
   get: (url, config) => {
-    return request('GET', url, config);
+    return request("GET", url, config);
   },
   post: (url, config) => {
-    return request('POST', url, config);
+    return request("POST", url, config);
   },
   put: (url, config) => {
-    return request('PUT', url, config);
+    return request("PUT", url, config);
   },
   delete: (url, config) => {
-    return request('DELETE', url, config);
+    return request("DELETE", url, config);
   },
   patch: (url, config) => {
-    return request('PATCH', url, config);
+    return request("PATCH", url, config);
   },
-}
+};

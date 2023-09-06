@@ -3,10 +3,10 @@ const env = process.env.NODE_ENV === 'development' ? 'development' : 'production
 console.log('编译环境：',process.env.NODE_ENV)
 switch (env) {
   case 'development':
-    baseUrlPrefix = 'http://...'
+    baseUrlPrefix = 'http://192.168.1.157:5002'
     break
   case 'production':
-    baseUrlPrefix = 'https://jsonplaceholder.typicode.com'
+    baseUrlPrefix = 'http://192.168.1.157:5002'
     break
 }
 
