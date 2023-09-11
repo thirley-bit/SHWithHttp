@@ -1,8 +1,11 @@
 import {
-  getTimeSelect,
+  getListByType,
   getTypeSelect,
+  getWorkList,
+  getWorkById,
+  getViewHomework,
+
   getSubjectList,
-  getTypeTitle,
   getSubjectDetail,
   getStudentsList,
   getFeedBackDetail,
@@ -13,16 +16,67 @@ import {
 const model = {
   namespace: "HomeWork",
   state: {
-    homeWorkArr: [], //作业列表
-    subjectTitle: [], //科目选择栏目
+    workList:[], //作业列表
+    subjectType: [], //科目选择栏目
     subjectDetail: {}, //作业详情
+
+    
+    homeWorkArr: [], //作业列表
     studentsList: [], //学生列表
+    
     submitListAll: [], //学生提交作业列表
     feedBack: [], //家长端反馈信息
     feedBackList: [], //教师端反馈信息列表
   },
 
   effects: {
+    *getListByType({ payload }, { call, put }) {
+      const response = yield call(getListByType, payload);
+      let all = {
+        id:0,
+        name:'全部',
+        value:'',
+      }
+      let data = response.data.unshift(all)
+      if(response.status == 200){
+        yield put({
+          type: "changeSubjectType",
+          payload: response.data,
+        });
+      }
+      return response;
+    },
+    *getWorkList({ payload }, { call, put }) {
+      const response = yield call(getWorkList, payload);
+      if(response.status == 200){
+        yield put({
+          type: "changeWorkList",
+          payload: response.data,
+        });
+      }
+      return response;
+    },
+    *getViewHomework({ payload }, { call, put }) {
+      const response = yield call(getViewHomework, payload);
+      // if(response.status == 200){
+      //   yield put({
+      //     type: "changeSubjectDetail",
+      //     payload: response.data,
+      //   });
+      // }
+      return response;
+    },
+    *getWorkById({ payload }, { call, put }) {
+      const response = yield call(getWorkById, payload);
+      if (response.status == 200) {
+        yield put({
+          type: "changeSubjectDetail",
+          payload: response.data,
+        });
+      }
+      return response;
+    },
+
     *getSubjectList({ payload }, { call, put }) {
       const response = yield call(getSubjectList, payload);
       if (response.code == 1) {
@@ -33,50 +87,21 @@ const model = {
       }
       return response;
     },
-    *getTimeSelect({ payload }, { call, put }) {
-      const response = yield call(getTimeSelect, payload);
-      if (response.code == 1) {
-        yield put({
-          type: "changeTimeSelect",
-          payload: response.data,
-        });
-      }
-      return response;
-    },
-    *getTypeTitle({ payload }, { call, put }) {
-      const response = yield call(getTypeTitle, payload);
-      if (response.code == 1) {
-        yield put({
-          type: "changeTypeTitle",
-          payload: response.data,
-        });
-      }
-      return response;
-    },
-    *getTypeSelect({ payload }, { call, put }) {
-      const response = yield call(getTypeSelect, payload);
-      console.log(payload, "payload");
-      if (response.code == 1) {
-        yield put({
-          type: "changeTypeSelect",
-          payload: response.data,
-        });
-      }
-      return response;
-    },
+    
+   
     *getSubjectDetail({ payload }, { call, put }) {
       const response = yield call(getSubjectDetail, payload);
       if (response.code == 1) {
-        yield put({
-          type: "changeSubjectDetail",
-          payload: response.data,
-        });
+        // yield put({
+        //   type: "changeSubjectDetail",
+        //   payload: response.data,
+        // });
       }
       return response;
     },
     *getStudentsList({ payload }, { call, put }) {
       const response = yield call(getStudentsList, payload);
-      if (response.code == 1) {
+      if (response.status == 200) {
         yield put({
           type: "changeStudentsLst",
           payload: response.data,
@@ -116,6 +141,18 @@ const model = {
     },
   },
   reducers: {
+    changeSubjectType(state, { payload }) {
+      return {
+        ...state,
+        subjectType: payload,
+      };
+    },
+    changeWorkList(state, { payload }) {
+      return {
+        ...state,
+        workList: payload,
+      };
+    },
     changeSubjectList(state, { payload }) {
       return {
         ...state,
@@ -128,12 +165,7 @@ const model = {
         homeWorkArr: payload,
       };
     },
-    changeTypeTitle(state, { payload }) {
-      return {
-        ...state,
-        subjectTitle: payload,
-      };
-    },
+    
     changeTypeSelect(state, { payload }) {
       return {
         ...state,

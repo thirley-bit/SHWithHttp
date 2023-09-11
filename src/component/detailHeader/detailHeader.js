@@ -5,8 +5,8 @@ import { AtAvatar, AtButton, AtDivider, AtIcon, AtModal } from "taro-ui";
 // import GradientButton from '@app/component/GradientButton';
 
 import GradientButton from "@app/component/GradientButton";
-import api from "@/api/api";
-import edit from "@static/edit.png";
+// import api from "@/api/api";
+// import edit from "@static/edit.png";
 import "./DetailHeader.scss";
 
 function DetailHeader(props) {
@@ -53,12 +53,12 @@ function DetailHeader(props) {
       <View className='header'>
         <Text className='title'>{detailHeaderData.title}</Text>
         <View className='note'>
-          <AtAvatar
+          {/* <AtAvatar
             className='avatar'
             size='small'
             circle
             image={detailHeaderData.avatar}
-          />
+          /> */}
           <Text className='extra'>
             {detailHeaderData.author + "\xa0\xa0\xa0" + detailHeaderData.time}
           </Text>
@@ -90,7 +90,7 @@ function DetailHeader(props) {
             <AtDivider className='divider' />
             <View className='edit'>
               <View className='img' onClick={() => handleEdit()}>
-                <Image className='edit-img' src={edit} />
+                {/* <Image className='edit-img' src={edit} /> */}
               </View>
               <View className='img' onClick={() => handleDel()}>
                 <AtIcon

@@ -1,11 +1,13 @@
-import { View, Text } from "@tarojs/components";
+import { View, Text, Form,Input, Button } from "@tarojs/components";
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
 import {
   AtAvatar,
   AtButton,
   AtCard,
+  AtForm,
   AtIcon,
+  AtInput,
   AtTabsPane,
 } from "taro-ui";
 import NavTab from '@app/component/NavTab/NavTab';
@@ -19,16 +21,13 @@ function Check(props) {
   console.log(props,'iooo');
   const {
     dispatch,
-    // user,
+    user,
+    userId,
+    pageSize,
     identity,
     checkedList,
-    parentPassList,
-    parentCheckedList,
-    teacherPassList,
-    teacherCheckedList,
   } = props;
   const [current, setCurrent] = useState(0);
-  const user = 1
   let tabTitle = user == 0 ? "" : "已审核";
   const tabList = [
     {
@@ -43,41 +42,41 @@ function Check(props) {
     
   ];
   useEffect(() => {
-    dispatch({
-      type: "users/getJoinReviewList",
-      payload:{
-        page:1,
-        pageSize:10,
-        userId:'a7f933b810f2419b8420c3095c8d88d5',
-        status:[0,1],
-      }
-    });
-    
-    dispatch({
-      type: "users/getIdentity",
-    });
-    dispatch({
-      type: "users/getUser",
-    }).then((res) => {
-      if (res.data.user == 0) {
-        dispatch({
-          type: "users/getParentPassList",
-        });
-        dispatch({
-          type: "users/getParentCheckedList",
-        });
-      } else {
-        dispatch({
-          type: "users/getTeacherPassList",
-        });
-        dispatch({
-          type: "users/getTeacherCheckedList",
-        });
-      }
-    });
+      dispatch({
+        type: "users/getJoinReviewList",
+        payload:{
+          page:1,
+          pageSize:pageSize,
+          userId:userId,
+          status:[0],
+        }
+      });
   }, []);
   const handleClick = (e) => {
     setCurrent(e);
+    let status = []
+    switch (e){
+      case 0:
+        status = [0]
+        break;
+      case 1:
+        status = [1,2]
+        break;
+      case 2:
+        status = [3]
+        break;
+      default:
+        break;
+    }
+      dispatch({
+        type: "users/getJoinReviewList",
+        payload:{
+          page:1,
+          pageSize:pageSize,
+          userId:userId,
+          status:status,
+        }
+      });
   };
   const handleChangeUser = (e) => {
     dispatch({
@@ -85,11 +84,16 @@ function Check(props) {
       payload: e,
     });
   };
-  const handleBack = (e) => {
-    console.log(e);
-  };
-  const handleCheck = () => {
-    console.log(222)
+  const handleCheck = (value,status) => {
+    console.log(value,status,'recoed,id')
+    dispatch({
+      type:'users/getUpdateJoinReview',
+      payload:{
+        id:value,
+        status:status,
+        auditRemark:'审核意见'
+      }
+    })
   }
   return (
     <View className='index'>
@@ -100,8 +104,7 @@ function Check(props) {
       />
       <MyTabs current={current} tabList={tabList} onClick={handleClick}>
       <AtTabsPane current={current} index={0}>
-          {(user == 0 ? parentCheckedList : teacherCheckedList).map(
-            (item, index) => {
+          {checkedList.map((item, index) => {
               return (
                 <View key={index} className='join-card'>
                   <AtCard
@@ -124,10 +127,10 @@ function Check(props) {
                       <View className='card-content clearfix'>
                         <View className='card-center'>
                           <View className='card-name'>
-                            {identity.class_name}
+                            {item.className}
                           </View>
                           <View className='card-msg'>
-                            {item.student_name + "\xa0" + item.relative}
+                            {item.studentName + "\xa0" + item.relative}
                           </View>
                         </View>
                       </View>
@@ -136,18 +139,8 @@ function Check(props) {
                           "正在审核中..."
                         ) : (
                           <View className='right-button'>
-                            {/* <AtButton
-                              className='refuse'
-                              type='primary'
-                              size='small'
-                            >
-                              通过
-                            </AtButton> */}
-                            <GradientButton className='refuse' type='primary' onClick={handleCheck}>通过</GradientButton>
-                            {/* <AtButton  type='secondary' size='small'>
-                              不通过
-                            </AtButton> */}
-                            <GradientButton type='secondary'>不通过</GradientButton>
+                            <GradientButton className='refuse' type='primary' onClick={() => handleCheck(item.id,1)}>通过</GradientButton>
+                            <GradientButton type='secondary' onClick={() => handleCheck(item.id,2)}>不通过</GradientButton>
                           </View>
                         )}
                       </View>
@@ -156,7 +149,8 @@ function Check(props) {
                     {user == 0 && (
                       <View
                         className='bottom'
-                        onClick={() => handleBack(item.student_id)}
+                        // onClick={() => handleBack(item.student_id)}
+                        onClick={() => handleCheck(item.id,3)}
                       >
                         <AtIcon value='reload'></AtIcon>
                         <Text>撤销申请</Text>
@@ -169,15 +163,15 @@ function Check(props) {
           )}
         </AtTabsPane>
         <AtTabsPane current={current} index={1}>
-          {(user == 0 ? parentPassList : teacherPassList).map((item, index) => {
+          {checkedList.map((item, index) => {
             let title = "";
             let note = "";
             if (user == 0) {
-              title = item.class_name;
-              note = item.student_name + "\xa0" + item.relative;
+              title = item.className;
+              note = item.studentName + "\xa0" + item.relative;
             } else {
-              title = item.student_name + item.relative + "申请加入";
-              note = "审核人：" + identity.teacher;
+              title = item.studentName + item.relative + "申请加入";
+              note = "审核人：" + item.auditBy;
             }
             return (
               <View key={index} className='join-card'>
@@ -204,7 +198,7 @@ function Check(props) {
                         <View className='card-msg'>{note}</View>
                       </View>
                     </View>
-                    <View className='right'>审核通过</View>
+                    <View className='right'>{item.auditRemark}</View>
                   </View>
                 </AtCard>
               </View>
@@ -212,15 +206,15 @@ function Check(props) {
           })}
         </AtTabsPane>
         <AtTabsPane current={current} index={2}>
-          {(user == 0 ? parentPassList : teacherPassList).map((item, index) => {
+          {checkedList.map((item, index) => {
             let title = "";
             let note = "";
             if (user == 0) {
               title = item.class_name;
-              note = item.student_name + "\xa0" + item.relative;
+              note = item.studentName + "\xa0" + item.relative;
             } else {
-              title = item.student_name + item.relative + "申请加入";
-              note = "审核人：" + identity.teacher;
+              title = item.studentName + item.relative + "申请加入";
+              note = "审核人：" + item.auditBy;
             }
             return (
               <View key={index} className='join-card'>
@@ -247,7 +241,7 @@ function Check(props) {
                         <View className='card-msg'>{note}</View>
                       </View>
                     </View>
-                    <View className='right'>审核通过</View>
+                    <View className='right'>{item.auditRemark}</View>
                   </View>
                 </AtCard>
               </View>
@@ -260,6 +254,8 @@ function Check(props) {
 }
 export default connect((state) => ({
   user: state.users.user,
+  userId: state.users.userId,
+  pageSize: state.users.pageSize,
   checkedList: state.users.checkedList,
   identity: state.users.identity,
   parentPassList: state.users.parentPassList,

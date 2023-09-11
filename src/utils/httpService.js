@@ -34,10 +34,9 @@ const request = async (method, url, params) => {
     data: params,
     header: {
       "content-type": "application/json",
-      "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjE1MDgyMTc4OTg0IiwidXNlclR5cGUiOjAsInJhbmRvbURhdGUiOjE2OTM5MDQ5NjYwNTgsInVzZXJJZCI6ImE3ZjkzM2I4MTBmMjQxOWI4NDIwYzMwOTVjOGQ4OGQ1In0.eez-g7XJEvoFak4EH_WBvlgm2hosSXBtE0WfJbenOVU"
+      "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjE1MDgyMTc4OTg0IiwidXNlclR5cGUiOjAsInVzZXJOYW1lIjoiIiwicmFuZG9tRGF0ZSI6MTY5NDM5NDUyMzQ4MSwidXNlcklkIjoiYTdmOTMzYjgxMGYyNDE5Yjg0MjBjMzA5NWM4ZDg4ZDUifQ.u1NBZELf3b9VJrriXfk0firunJV9hXf4UyvKXeImn0w"
      },
     success(res) {
-      console.log(res,'res>>>>')
       Taro.hideLoading()
       //如果返回错误，原因
       let title = res.data?.error;
@@ -46,6 +45,19 @@ const request = async (method, url, params) => {
       //根据不同返回状态值进行操作
       switch (res?.statusCode) {
         case 200:{
+          break;
+        }
+        case 401:{
+          Taro.showToast({
+            title: '登录超时,请重新登录',
+            icon: "error",
+            duration: 2000,
+            success:() => {
+              setTimeout(function() {
+                Taro.navigateTo({url:'/pages/login/login'})
+              },2000)
+              }
+          });
           break;
         }
         case status: {
@@ -63,10 +75,8 @@ const request = async (method, url, params) => {
       console.log("api", "请求接口出现问题", e);
     },
   };
-  console.log(option)
   const resp = await Taro.request(option,'option');
-  return resp.data;
-  // return resp.data;//根据个人需要返回
+  return resp.data; //根据个人需要返回
 };
 
 export default {

@@ -74,10 +74,11 @@ function Work(props) {
                       }
                       extra='>'
                       title={item.title}
-                      thumb={item.avatar ? item.avatar : normal}
+                      // thumb={item.avatar ? item.avatar : normal}
+                      thumb={normal}
                       onClick={() => handleNav(item)}
                     >
-                      {item.content}
+                      {item.detailContent}
                     </AtCard>
                   {enter == "score" && user == "1" && item.publish == 0 && (
                     <View

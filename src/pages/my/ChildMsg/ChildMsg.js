@@ -34,21 +34,26 @@ function ChildMsg(props) {
           key: "student_id",
           title: "学生学号",
           type: "number",
-        },
-        {
-          key: "relative",
-          title: "亲属关系",
-          type: "text",
-        },
+        }, 
         {
           key: "class_name",
           title: "所属班级",
           type: "text",
         },
         {
-          key: "phone",
-          title: "电话号码",
-          type: "phone",
+          key: "photo",
+          title: "人脸照片",
+          type: "text",
+        },
+        {
+          key: "birthday",
+          title: "出生年月",
+          type: "number",
+        },
+        {
+          key: "address",
+          title: "家庭住址",
+          type: "text",
         },
       ];
       const newShowData = titleList.map((item) => {

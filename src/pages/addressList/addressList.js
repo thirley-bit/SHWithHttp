@@ -119,14 +119,14 @@ function AddressList(props) {
       <View  className='text'>
           <Text>老师</Text>
         </View>
-        <PersonList enter='address' showData={teacherList} />
+        <PersonList enter='teacher' showData={teacherList} />
       </View>
       <View className='teacher-list'>
         <View  className='text'>
           <Text>家长</Text>
           
         </View>
-        <PersonList enter='address' showData={parentList} />
+        <PersonList enter='parent' showData={parentList} />
       </View>
     </View>
   )

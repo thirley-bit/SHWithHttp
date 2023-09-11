@@ -3,12 +3,13 @@ import Taro from "@tarojs/taro";
 import { connect } from "react-redux";
 import { View, Text } from "@tarojs/components";
 import { AtCard, AtAvatar, AtModal, AtIcon, AtBadge } from "taro-ui";
-import Modal from '@app/component/Modal';
+import Modal from "@app/component/Modal";
 import "./PersonList.scss";
 
 //人员列表组件
 function PersonList(props) {
-  const { dispatch, enter, showData, user, userList } = props;
+  console.log(props, "props");
+  const { dispatch, enter, showData, user, userList, onClick } = props;
   const [isOpened, setIsOpened] = useState(false);
   const [id, setId] = useState("");
   useEffect(() => {
@@ -36,11 +37,15 @@ function PersonList(props) {
   //   Taro.navigateTo({'/'})
   //   console.log(222)
   // }
-  const handleEnterPhone = () => {
-    console.log(333);
+  const handleEdit = (record,val) => {
+    console.log(record);
+    onClick(record)
+    console.log(val,'val')
   };
-  const handleDel = (e) => {
-    setId(e.message_id);
+  const handleDel = (record,index) => {
+    console.log(record,index)
+    
+    // setId(e.message_id);
     setIsOpened(true);
   };
 
@@ -57,12 +62,15 @@ function PersonList(props) {
   };
 
   return (
-    <View className='person'>
+    <View className='person-list'>
       {showData.map((item, index) => {
         let title = "";
         let note = "";
-        if (item.relative) {
+        if (enter == 'parent') {
           title = item.nick_name + "(" + item.relative + ")";
+        } else if (enter =='group') {
+          title = item.groupName;
+          note = item.studentList.map((it) => it.studentName).join("、");
         } else {
           title = item.teacher;
           note = item.note;
@@ -77,26 +85,31 @@ function PersonList(props) {
               {/* 点击页面跳转至聊天界面 */}
               <View className='nav' onClick={enter == "message" && handleNav}>
                 {/* 头像部分是否有新消息 */}
-                {item.new == 1 ? (
-                  // 如果有新消息，则加徽标
-                  <View className='left'>
-                    <AtBadge value={10}>
-                      <AtAvatar
-                        circle
-                        className='img'
-                        size='small'
-                        image={item.avatar}
-                      />
-                    </AtBadge>
-                  </View>
-                ) : (
-                  <View className='left'>
-                    <AtAvatar
-                      circle
-                      className='img'
-                      size='small'
-                      image={item.avatar}
-                    />
+                {enter !== 'group' && (
+                  //不是群聊，则有头像
+                  <View>
+                    {item.new == 1 ? (
+                      // 如果有新消息，则加徽标
+                      <View className='left'>
+                        <AtBadge value={10}>
+                          <AtAvatar
+                            circle
+                            className='img'
+                            size='small'
+                            image={item?.avatar}
+                          />
+                        </AtBadge>
+                      </View>
+                    ) : (
+                      <View className='left'>
+                        <AtAvatar
+                          circle
+                          className='img'
+                          size='small'
+                          image={item?.avatar}
+                        />
+                      </View>
+                    )}
                   </View>
                 )}
                 <View className='card-content clearfix'>
@@ -108,28 +121,29 @@ function PersonList(props) {
                 </View>
               </View>
               {/* 右侧操作按钮（家人列表/学生列表无操作按钮  */}
-              {item.teacher && (
-                <View>
-                  {enter == "address" && (
-                    <View className='card_address'>
-                      <View className='icon-message' onClick={handleNav}>
-                        <AtIcon value='message' size='18' color='#03B615' />
-                      </View>
-                      <View className='icon-phone' onClick={handleEnterPhone}>
-                        <AtIcon value='phone' size='18' color='#000' />
-                      </View>
+              {enter !== 'parent' && <View>
+                {enter !== "message" && (
+                  <View className='card_address'>
+                    <View className='icon-message' onClick={handleNav}>
+                      <AtIcon value='message' size='18' color='#03B615' />
                     </View>
-                  )}
-                  <View
-                    className={
-                      enter == "message" ? "card-button" : "card-button_address"
-                    }
-                    onClick={() => handleDel(item)}
-                  >
-                    <AtIcon value='trash' size='18' color='#f00' />
+                    <View className='icon-phone' onClick={() => handleEdit(item, enter == 'teacher' ? 1 : 2)}>
+                      <AtIcon value={enter == 'teacher' ? 'phone' : 'edit'} size='18' color='#000' />
+                    </View>
                   </View>
+                )}
+                <View
+                  className={
+                    enter == "message" ? "card-button" : "card-button_address"
+                  }
+                  onClick={() => handleDel(item,enter == 'group' ? 1 : 2)}
+                >
+                  <AtIcon value='trash' size='18' color='#f00' />
                 </View>
-              )}
+              </View> }
+              {/* {item.teacher || item.groupName && ( */}
+              
+              {/* )} */}
               {/* 仅在私信页面显示聊天时间 */}
               {enter == "message" && (
                 <View className='card-right'>

@@ -84,67 +84,6 @@ function Index(props) {
     console.log(value);
   };
 
-  const handleClick1 = () => {
-    // Taro.request({
-    //   url:'http://192.168.1.157:5002/class/getClassAll',
-    //   data:{},
-    //   header:{
-    //     'content-type': 'application/json'
-    //   },
-    //   success:function(res){
-    //     console.log(res,'res')
-    //   }
-    // })
-    //   Taro.request({
-    //   url:'http://192.168.1.157:5002/user/register',
-    //   data:{
-    //     "telephone":"123456",
-    //     "password":"123",
-    //     "classId":2,
-    //     "userType":1,
-    //     "studentNo":"20231002",
-    //     "studentName":"晓华",
-    //     "userName":"用户1",
-    //     "ifClassTeacher":1,
-    //     "verifyCode":"123"
-    // },
-    // method:'POST',
-    //   header:{
-    //     'content-type': 'application/json'
-    //   },
-    //   success:function(res){
-    //     console.log(res,'res')
-    //   }
-    // })
-    dispatch({
-      type: "Class/getNews",
-      payload:{
-        "telephone":"1234567",
-        "password":"123",
-        "classId":2,
-        "userType":1,
-        "studentNo":"20231002",
-        "studentName":"晓华",
-        "userName":"用户1",
-        "ifClassTeacher":1,
-        "verifyCode":"123"
-    }
-    });
-    // console.log(news,'news')
-    // dispatch({
-    //   type: "Class/getAAA",
-    // });
-    // console.log(news,'news')
-    // Taro.request({
-    //   url:'https://jsonplaceholder.typicode.com/users',
-    //   header:{
-    //     'content-type':'application/json'
-    //   },
-    //   success:function(res){
-    //     console.log(res.data,'res')
-    //   }
-    // })
-  }
   return (
     <View className='index'>
       	<NavTab
@@ -160,7 +99,6 @@ function Index(props) {
       	/>
 
       {/* <NavTab  needBackIcon={false} mainTitle='诚道吉' /> */}
-      <AtButton onClick={handleClick1}>点击request</AtButton>
       <View className='new' onClick={handleNav}>
         <AtTag circle className='new-tag'>
           我的待办

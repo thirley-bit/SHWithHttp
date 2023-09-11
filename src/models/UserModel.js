@@ -5,9 +5,11 @@ import {
   getLogin,
   getForgetPass,
   getLogout,
+  getUpdatePassword,
   getJoinReviewList,
-  getIdentity,
+  getUpdateJoinReview,
 
+  getIdentity,
   getParentPassList,
   getChangeUser,
   getParentCheckedList,
@@ -19,10 +21,13 @@ import {
 const model = {
   namespace: "users",
   state: {
-    identity: {}, //登录信息
-    user: "",
+    identity: {telephone: "15082178984"}, //登录信息
+    user: 0,
+    userId:"a7f933b810f2419b8420c3095c8d88d5",
     enter: "",
     classList:[],
+    pageSize:10,
+    
     settingList: [
       {
         id: 0,
@@ -70,17 +75,21 @@ const model = {
       }
       return response;
     },
-    *getForgetPass({ payload }, { call }) {
-      const response = yield call(getForgetPass, payload);
-      return response;
-    },
+    
     *getLogin({ payload }, { call, put }) {
       const response = yield call(getLogin, payload);
       if(response.status == 200){
-        yield put({
+        yield [put({
           type: "userReducer",
           payload: response.data.userType,
-        });
+        }),put({
+          type: "userIdReducer",
+          payload: response.data.id,
+        }),
+        put({
+          type: "changeIdentity1",
+          payload: response.data,
+        }),];
       }      
       return response;
     },
@@ -88,15 +97,26 @@ const model = {
       const response = yield call(getLogout, payload);
       return response;
     },
+    *getForgetPass({ payload }, { call }) {
+      const response = yield call(getForgetPass, payload);
+      return response;
+    },
+    *getUpdatePassword({ payload }, { call }) {
+      const response = yield call(getUpdatePassword, payload);
+      return response;
+    },
     *getJoinReviewList({ payload }, { call, put }) {
       const response = yield call(getJoinReviewList, payload);
-      console.log(response,'response')
       if(response.status == 200){
         yield put({
           type:"changeCheckedList",
           payload:response.data
         })
       }
+      return response;
+    },
+    *getUpdateJoinReview({ payload }, { call }) {
+      const response = yield call(getUpdateJoinReview, payload);
       return response;
     },
 
@@ -200,6 +220,12 @@ const model = {
       return {
         ...state,
         user: payload,
+      };
+    },
+    userIdReducer(state, { payload }) {
+      return {
+        ...state,
+        userId: payload,
       };
     },
     changeEnter(state, { payload }) {
