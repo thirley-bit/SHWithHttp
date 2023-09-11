@@ -8,15 +8,8 @@ import NavTab from '@app/component/NavTab/NavTab';
 import "./detail.scss";
 
 function WorkDetail(props) {
-  console.log(props, "detailpropssssssssss");
-  const {
-    dispatch,
-    user,
-  } = props;
   const router = useRouter();
   const enter = router.params.enter;
-  const id = router.params.id;
-  console.log(enter, id, "enter,id");
 
   return (
     <View className='detail-header'>
@@ -26,7 +19,7 @@ function WorkDetail(props) {
       <View className='detail-center'></View>
       {/* 仅存在于作业和成绩部分 */}
       {(enter == "homework" || enter == "score") && (
-        <DetailContent enter={enter} id={id} />
+        <DetailContent enter={enter}  />
       )}
     </View>
   );

@@ -8,6 +8,7 @@ import {
   getUpdatePassword,
   getJoinReviewList,
   getUpdateJoinReview,
+  getStudentList,
 
   getIdentity,
   getParentPassList,
@@ -22,10 +23,11 @@ const model = {
   namespace: "users",
   state: {
     identity: {telephone: "15082178984"}, //登录信息
-    user: 0,
+    user: 1,
     userId:"a7f933b810f2419b8420c3095c8d88d5",
     enter: "",
     classList:[],
+    studentId:'22',
     pageSize:10,
     
     settingList: [
@@ -119,6 +121,21 @@ const model = {
       const response = yield call(getUpdateJoinReview, payload);
       return response;
     },
+    *getStudentList({ payload }, { call, put }) {
+      const response = yield call(getStudentList, payload);
+      if (response.status == 200) {
+        yield put({
+          type: "changeStudentList",
+          payload: response.data,
+        });
+      }
+      return response;
+    },
+
+
+
+
+
 
     *getIdentity({ payload }, { call, put }) {
       const response = yield call(getIdentity, payload);
@@ -210,6 +227,16 @@ const model = {
         classList: payload,
       };
     },
+    changeStudentList(state, { payload }) {
+      return {
+        ...state,
+        studentsList: payload,
+      };
+    },
+
+
+
+
     changeIdentity(state, { payload }) {
       return {
         ...state,

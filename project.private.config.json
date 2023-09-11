@@ -41,6 +41,12 @@
           "pathName": "pages/class/HomeWork/HomeWork",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/component/publish/publish",
+          "pathName": "pages/component/publish/publish",
+          "query": "",
+          "scene": null
         }
       ]
     }

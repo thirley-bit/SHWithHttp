@@ -1,9 +1,11 @@
 import {
   getListByType,
   getTypeSelect,
+  getInsertHomework,
   getWorkList,
   getWorkById,
   getViewHomework,
+  getCompleteWork,
 
   getSubjectList,
   getSubjectDetail,
@@ -46,6 +48,10 @@ const model = {
       }
       return response;
     },
+    *getInsertHomework({ payload }, { call, put }) {
+      const response = yield call(getInsertHomework, payload);
+      return response;
+    },
     *getWorkList({ payload }, { call, put }) {
       const response = yield call(getWorkList, payload);
       if(response.status == 200){
@@ -58,12 +64,6 @@ const model = {
     },
     *getViewHomework({ payload }, { call, put }) {
       const response = yield call(getViewHomework, payload);
-      // if(response.status == 200){
-      //   yield put({
-      //     type: "changeSubjectDetail",
-      //     payload: response.data,
-      //   });
-      // }
       return response;
     },
     *getWorkById({ payload }, { call, put }) {
@@ -76,6 +76,15 @@ const model = {
       }
       return response;
     },
+    *getCompleteWork({ payload }, { call, put }) {
+      const response = yield call(getCompleteWork, payload);
+      console.log(response,'response')
+      return response;
+    },
+
+
+
+
 
     *getSubjectList({ payload }, { call, put }) {
       const response = yield call(getSubjectList, payload);
@@ -88,7 +97,6 @@ const model = {
       return response;
     },
     
-   
     *getSubjectDetail({ payload }, { call, put }) {
       const response = yield call(getSubjectDetail, payload);
       if (response.code == 1) {

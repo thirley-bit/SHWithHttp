@@ -5,11 +5,13 @@ import { AtAvatar, AtButton, AtDivider, AtIcon, AtModal } from "taro-ui";
 // import GradientButton from '@app/component/GradientButton';
 
 import GradientButton from "@app/component/GradientButton";
+import normal from "@static/normal.png"
 // import api from "@/api/api";
 // import edit from "@static/edit.png";
 import "./DetailHeader.scss";
 
 function DetailHeader(props) {
+  console.log(props,'propsdetailheaxder')
   const { enter, user, subjectDetail, scoreDetail, noticeDetail } = props;
   const [isOpened, setIsOpened] = useState(false);
   const [detailHeaderData, setDetailHeaderData] = useState({});
@@ -47,6 +49,7 @@ function DetailHeader(props) {
     // console.log(id); //删除接口
     setIsOpened(false);
   };
+  console.log(detailHeaderData,'data')
   return (
     // 详情头部组件
     <View className='index'>
@@ -59,15 +62,21 @@ function DetailHeader(props) {
             circle
             image={detailHeaderData.avatar}
           /> */}
+          <AtAvatar
+            className='avatar'
+            size='small'
+            circle
+            image={normal}
+          />
           <Text className='extra'>
-            {detailHeaderData.author + "\xa0\xa0\xa0" + detailHeaderData.time}
+            {detailHeaderData.author + "\xa0\xa0\xa0" + detailHeaderData.createTime}
           </Text>
         </View>
         <AtDivider className='divider' />
         <View
-          className={user == "0" && enter == "homework" ? "text" : "text100"}
+          className={user == 0 && enter == "homework" ? "text" : "text100"}
         >
-          <Text>{detailHeaderData.detail_content}</Text>
+          <Text>{detailHeaderData.detailContent}</Text>
         </View>
         {/* 仅存在于家长端的作业部分 */}
         {user == "0" ? (

@@ -106,7 +106,7 @@ function My(props) {
         {(user == 0 ? settingList.filter(item => item?.type) : settingList).map((item, index) => {
           console.log(item)
           return (
-            <View key={index}>
+            <View key={index} onClick={() => handleNav(item.url)}>
               <View className='at-row at-row__align--end content'>
                 <View className='at-col at-col-2 avatar'>
                   <Image className='image' src={item.avatar} />
@@ -114,7 +114,7 @@ function My(props) {
                 <View className='at-col at-col-9 '>
                   <Text className='content-name'>{item.name}</Text>
                 </View>
-                <View className='at-col at-col-3 right' onClick={() => handleNav(item.url)}>
+                <View className='at-col at-col-3 right' >
                   <Image className='image' src={right} />
                 </View>
                 <View className='divider'>

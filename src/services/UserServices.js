@@ -34,7 +34,9 @@ export async function getJoinReviewList(params){
 export async function getUpdateJoinReview(params){
     return httpService.post('/class/updateJoinReview',params)
 }
-
+export async function getStudentList(params){
+    return httpService.post('/student/getStudentList',params)
+}
 
 
 export async function getIdentity(){

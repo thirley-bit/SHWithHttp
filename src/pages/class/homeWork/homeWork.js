@@ -10,7 +10,7 @@ import "./HomeWork.scss";
 // 作业页面
 function HomeWork(props) {
   console.log(props, "props");
-  const { dispatch, workList, pageSize, homeWorkArr, subjectType } = props;
+  const { dispatch, studentId, workList, pageSize, homeWorkArr, subjectType } = props;
   const [time, setTime] = useState("");
   const [selectorChecked, setSelectorChecked] = useState(""); //选中的科目下标
   const [page, setPage] = useState(1)
@@ -36,7 +36,7 @@ function HomeWork(props) {
         page: page,
         pageSize: pageSize,
         subjectType: chooseSubjectType,
-        searchId: "11",
+        searchId: studentId,
         createTime: createTime,
         status:''
       },
@@ -94,6 +94,7 @@ function HomeWork(props) {
   );
 }
 export default connect((state) => ({
+  studentId: state.users.studentId,
   workList: state.HomeWork.workList,
   homeWorkArr: state.HomeWork.homeWorkArr,
   subjectType: state.HomeWork.subjectType,

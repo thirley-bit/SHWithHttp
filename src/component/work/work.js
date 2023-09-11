@@ -1,44 +1,67 @@
 import { useState, useEffect } from "react";
 import Taro from "@tarojs/taro";
+import { connect } from 'react-redux';
 import { View, Text,   } from "@tarojs/components";
-import { AtAvatar, AtBadge, AtButton, AtCard, AtFab, AtIcon } from "taro-ui";
+import { AtAvatar, AtBadge, AtButton, AtCard, AtFab, AtIcon, AtMessage } from "taro-ui";
 import GradientButton from '@app/component/GradientButton';
 import normal from "@static/normal.png"
-import { connect } from 'react-redux';
 import "./Work.scss";
 
 function Work(props) {
-  console.log(props,"props----")
-  const { dispatch, enter, user,  showData, } = props;
+  const { dispatch, studentId, enter, user,  showData, } = props;
   const handleCompleted = (e) => {
     console.log(e,"----e----");
+    dispatch({
+      type:'HomeWork/getCompleteWork',
+      payload:{
+        workId:e,
+        studentId:studentId
+      }
+    }).then(res => {
+      if(res.status == 200){
+        Taro.atMessage({
+          message: res.message,
+          type: "success",
+        });
+      }else{
+        Taro.atMessage({
+          message: res.message,
+          type: "error",
+        });
+      }
+    })
   };
   const handleNav = (e) => {
-    let id = ''
+    console.log(e,'eeeeeeee')
+    // let id = ''
     if(enter == 'homework'){
-      id = e.work_id
+      // id = e.work_id
       dispatch({
-        type:'HomeWork/getSubjectDetail',
-        payload:e.work_id
-      })
-    }else if(enter == 'notice'){
-      id = e.notice_id
-      dispatch({
-        type:'Notice/getNoticeDetail',
-        payload: e.notice_id
-      })
-    }else{
-      id = e.score_id
-      dispatch({
-        type:'Score/getScoreDetail',
-        payload:e.score_id
+        type:'HomeWork/getWorkById',
+        payload:{
+          id:e.id,
+          studentId:studentId
+        }
       })
     }
+    // else if(enter == 'notice'){
+    //   id = e.notice_id
+    //   dispatch({
+    //     type:'Notice/getNoticeDetail',
+    //     payload: e.notice_id
+    //   })
+    // }else{
+    //   id = e.score_id
+    //   dispatch({
+    //     type:'Score/getScoreDetail',
+    //     payload:e.score_id
+    //   })
+    // }
     //如果是未发布的成绩，进入创建成绩页面，其他进入详情页面
     if(e.publish == 0){
       Taro.navigateTo({url:`/pages/class/Score/PublishScore/PublishScore`})
     }else{
-      Taro.navigateTo({ url:`/pages/component/detail/detail?enter=${enter}&id=${id}`})
+      Taro.navigateTo({ url:`/pages/component/detail/detail?enter=${enter}`})
     }
   }
   const handleClick = () => {
@@ -80,7 +103,7 @@ function Work(props) {
                     >
                       {item.detailContent}
                     </AtCard>
-                  {enter == "score" && user == "1" && item.publish == 0 && (
+                  {enter == "score" && user == 1 && item.publish == 0 && (
                     <View
                       className='button-publish'
                       onClick={() => handlePublish(item.score_id)}
@@ -94,14 +117,14 @@ function Work(props) {
                   <View className='tip'>
                     {/* 完成按钮仅存在于（家长端）作业页面 */}
                     {enter == "homework" &&
-                      user == "0" &&
+                      user == 0 &&
                       (item.hasCompleted == 1 ? (
                         <GradientButton type='secondary'>已完成</GradientButton>
                       ) : (
-                        <GradientButton type='primary'>未完成</GradientButton>
+                        <GradientButton type='primary' onClick={() => handleCompleted(item.id)}>未完成</GradientButton>
                       ))}
                     {enter == "score" &&
-                      user == "1" &&
+                      user == 1 &&
                       (item.publish == 0 ? (
                         <View className='publish'>未发布</View>
                       ) : (
@@ -114,7 +137,7 @@ function Work(props) {
         </View>
       </View>
       {/* 发布按钮存在于教师端 */}
-      {user == "1" && (
+      {user == 1 && (
         <View className='add'>
           <AtFab onClick={handleClick}>
             <View>
@@ -135,12 +158,14 @@ function Work(props) {
           </AtFab>
         </View>
       )}
+      <AtMessage />
     </View>
   );
 }
 
 export default connect(state =>({
   user:state.users.user,
+  studentId: state.users.studentId,
   subjectDetail: state.HomeWork.subjectDetail,
   scoreDetail: state.Score.scoreDetail,
   noticeDetail: state.Notice.noticeDetail

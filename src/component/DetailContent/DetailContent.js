@@ -14,9 +14,7 @@ import { connect } from "react-redux";
 
 import "./DetailContent.scss";
 
-//校园食谱页面
 function DetailContent(props) {
-  console.log(props, "props detail");
   const {
     dispatch,
     enter,
@@ -114,7 +112,6 @@ function DetailContent(props) {
       setIsEdit(true);
     }
   };
-  console.log(feedBackList, "feedbacklist>>>");
 
   return (
     <View className='main'>

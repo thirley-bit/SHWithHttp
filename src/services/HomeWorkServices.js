@@ -4,6 +4,9 @@ import httpService from '../utils/httpService';
 export async function getListByType(params){
    return httpService.get(`/dictionary/getListByType?type=${params}`,params)
 }
+export async function getInsertHomework(params){
+   return httpService.post(`/homework/insertHomework`,params)
+}
 export async function getWorkList(params){
    return httpService.post(`/homework/getWorkList`,params)
 }
@@ -12,6 +15,9 @@ export async function getViewHomework(params){
 }
 export async function getWorkById(params){
    return httpService.get(`/homework/getWorkById?id=${params.workId}&studentId=${params.studentId}`,params)
+}
+export async function getCompleteWork(params){
+   return httpService.post(`/homework/completeWork`,params)
 }
  export async function getSubjectList(){
     let url = "subject/list"
