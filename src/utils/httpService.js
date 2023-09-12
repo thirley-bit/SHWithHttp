@@ -34,7 +34,7 @@ const request = async (method, url, params) => {
     data: params,
     header: {
       "content-type": "application/json",
-      "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjE1MDgyMTc4OTg0IiwidXNlclR5cGUiOjAsInVzZXJOYW1lIjoiIiwicmFuZG9tRGF0ZSI6MTY5NDQyMzU4NDA2MSwidXNlcklkIjoiYTdmOTMzYjgxMGYyNDE5Yjg0MjBjMzA5NWM4ZDg4ZDUifQ.f19vGWs3Houe9Z50uX9KyYFolqo2o9zZSaAOb339_dg"
+      "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjE1MDgyMTc4OTg0IiwidXNlclR5cGUiOjAsInVzZXJOYW1lIjoiIiwicmFuZG9tRGF0ZSI6MTY5NDQ4NzcwNDE2OCwidXNlcklkIjoiYTdmOTMzYjgxMGYyNDE5Yjg0MjBjMzA5NWM4ZDg4ZDUifQ.gVMqL-f9VnlM3Zks9sf_WhzyGdqpMFLRRqfKHMKpUjk"
      },
     success(res) {
       Taro.hideLoading()
