@@ -38,9 +38,9 @@ function DetailContent(props) {
       type: "Score/getScoreDetailArr",
     });
     if (user == 0 && enter == "homework") {
-      dispatch({
-        type: "HomeWork/getFeedBackDetail",
-      });
+      // dispatch({
+      //   type: "HomeWork/getFeedBackDetail",
+      // });
       let tab = [
         {
           title: "家长反馈",
@@ -48,39 +48,58 @@ function DetailContent(props) {
       ];
       setTabList(tab);
     } else {
-      dispatch({
-        type: "HomeWork/getStudentsList",
-      }).then((res) => {
-        let newListAll = res.data;
-        let newSubmittedList = res.data.filter(
-          (item) => item.hasCompleted == true
-        );
-        let newNotSubmittedList = res.data.filter(
-          (item) => item.hasCompleted == false
-        );
-        setStudentsData(newListAll);
-        setSubmittedList(newSubmittedList);
-        setNotSubmittedList(newNotSubmittedList);
-        let tab = [
-          {
-            id: 0,
-            title: `全部(${newListAll.length})`,
-          },
-          {
-            id: 1,
-            title: `已交(${newSubmittedList.length})`,
-          },
-          {
-            id: 2,
-            title: `未交(${newNotSubmittedList.length})`,
-          },
-          {
-            id: 3,
-            title: `家长反馈`,
-          },
-        ];
-        setTabList(tab);
-      });
+      // dispatch({
+      //   type: "HomeWork/getStudentsList",
+      // }).then((res) => {
+      //   let newListAll = res.data;
+      //   let newSubmittedList = res.data.filter(
+      //     (item) => item.hasCompleted == true
+      //   );
+      //   let newNotSubmittedList = res.data.filter(
+      //     (item) => item.hasCompleted == false
+      //   );
+      //   setStudentsData(newListAll);
+      //   setSubmittedList(newSubmittedList);
+      //   setNotSubmittedList(newNotSubmittedList);
+      //   let tab = [
+      //     {
+      //       id: 0,
+      //       title: `全部(${newListAll.length})`,
+      //     },
+      //     {
+      //       id: 1,
+      //       title: `已交(${newSubmittedList.length})`,
+      //     },
+      //     {
+      //       id: 2,
+      //       title: `未交(${newNotSubmittedList.length})`,
+      //     },
+      //     {
+      //       id: 3,
+      //       title: `家长反馈`,
+      //     },
+      //   ];
+      //   setTabList(tab);
+      // });
+      let tab = [
+        {
+          id: 0,
+          title: `全部`,
+        },
+        {
+          id: 1,
+          title: `已交`,
+        },
+        {
+          id: 2,
+          title: `未交`,
+        },
+        {
+          id: 3,
+          title: `家长反馈`,
+        },
+      ];
+      setTabList(tab);
 
       dispatch({
         type: "HomeWork/getFeedBackList",

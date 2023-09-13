@@ -18,7 +18,8 @@ import "./class.scss";
 import "../../app.scss";
 
 function Index(props) {
-  const { dispatch, identity,user, articleArr, bannerList, news, AAA } = props;
+  console.log(props,'props')
+  const { dispatch, identity,user, articleArr, bannerList, pageSize, userId, studentId } = props;
   // const [tabsCur, setTabsCur] = useState(0)
   console.log(user,'user>>>>')
   // const a = Taro.getStorageSync('token')
@@ -59,6 +60,16 @@ function Index(props) {
     // dispatch({
     //   type: "users/getUser",
     // });
+    //加载当前绑定的学生
+    dispatch({
+      type: "users/getJoinReviewListAll",
+      payload: {
+        page: 1,
+        pageSize: pageSize,
+        userId: userId,
+        status: [0,1,2,3],
+      },
+    });
     dispatch({
       type: "Class/getArticleList",
     });
@@ -152,11 +163,12 @@ function Index(props) {
 }
 export default connect((state) => ({
   user: state.users.user,
+  pageSize: state.users.pageSize,
+  userId: state.users.userId,
+  studentId: state.users.studentId,
   title: state.users.title,
   identity: state.users.identity,
   articleArr: state.Class.articleArr,
   bannerList: state.Class.bannerList,
   tabList: state.Class.tabList,
-  news: state.Class.news,
-  AAA: state.Class.AAA,
 }))(Index);

@@ -28,14 +28,29 @@ export async function getForgetPass(params){
 export async function getUpdatePassword(params){
     return httpService.post('/user/updatePassword',params)
 }
+//审核列表
 export async function getJoinReviewList(params){
-    return httpService.post('/class/getJoinReviewList',params)
+    return httpService.post(`/class/getJoinReviewList`,params)
 }
+//审核接口（撤销，通过，驳回）
 export async function getUpdateJoinReview(params){
     return httpService.post('/class/updateJoinReview',params)
 }
+//绑定的当前学生
+export async function getUpdateDefaultFlag(params){
+    return httpService.post(`/class/updateDefaultFlag/${params}`,params)
+}
+//学生分页查询列表
 export async function getStudentList(params){
     return httpService.post('/student/getStudentList',params)
+}
+//查看学生详情
+export async function getStudentById(params){
+    return httpService.get(`/student/geStudentById?id=${params}`)
+}
+//修改学生详情
+export async function getUpdateStudent(params){
+    return httpService.post(`/student/updateStudent`,params)
 }
 
 

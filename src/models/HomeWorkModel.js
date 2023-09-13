@@ -9,7 +9,7 @@ import {
 
   getSubjectList,
   getSubjectDetail,
-  // getStudentsList,
+  getStudentsList,
   getFeedBackDetail,
   getEditFeedBack,
   getFeedBackList,
@@ -107,16 +107,16 @@ const model = {
       }
       return response;
     },
-    // *getStudentsList({ payload }, { call, put }) {
-    //   const response = yield call(getStudentsList, payload);
-    //   if (response.status == 200) {
-    //     yield put({
-    //       type: "changeStudentsLst",
-    //       payload: response.data,
-    //     });
-    //   }
-    //   return response;
-    // },
+    *getStudentsList({ payload }, { call, put }) {
+      const response = yield call(getStudentsList, payload);
+      if (response.status == 200) {
+        yield put({
+          type: "changeStudentsLst",
+          payload: response.data,
+        });
+      }
+      return response;
+    },
     *getFeedBackDetail({ payload }, { call, put }) {
       const response = yield call(getFeedBackDetail, payload);
       if (response.code == 1) {

@@ -16,6 +16,7 @@ import normal from "@static/normal.png"
 import "./my.scss";
 
 function My(props) {
+  
   const { dispatch, user, identity } = props;
   console.log(props);
   let settingList = [

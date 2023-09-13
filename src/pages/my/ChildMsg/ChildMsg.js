@@ -1,109 +1,144 @@
-import { View, Text } from "@tarojs/components";
+import { View, Text, Input, Button } from "@tarojs/components";
 import { connect } from "react-redux";
+import Taro from "@tarojs/taro";
 import { useEffect, useState } from "react";
-import { AtForm, AtCard, AtDivider, AtIcon, AtInput, AtButton } from "taro-ui";
-import NavTab from '@app/component/NavTab/NavTab';
-import GradientButton from '@app/component/GradientButton';
+import {
+  AtForm,
+  AtModal,
+  AtModalContent,
+  AtModalAction,
+  AtDivider,
+  AtIcon,
+  AtInput,
+  AtButton,
+  AtMessage,
+} from "taro-ui";
+import NavTab from "@app/component/NavTab/NavTab";
+import GradientButton from "@app/component/GradientButton";
 
 import "./ChildMsg.scss";
 
 function ChildMsg(props) {
-  const { dispatch, user, identity, settingList } = props;
+  console.log(props, "porps");
+  const { dispatch, studentId, identity, studentDetail, settingList } = props;
   const [showData, setShowData] = useState([]);
-  console.log(props);
+  const [isOpened, setIsOpened] = useState(false);
+
   useEffect(() => {
     dispatch({
-      type: "users/getIdentity",
-      
-    });
-    dispatch({
-      type: "users/getUser",
+      type: "users/getStudentById",
+      payload: studentId,
+    }).then((res) => {
+      if (res.status == 200) {
+        showDataList(res.data);
+      }
     });
   }, []);
-  useEffect(() => {
-    if (identity) {
-      console.log(identity,'iddd');
-      const titleList = [
-        {
-          key: "student_name",
-          title: "学生姓名",
-          type: "text",
-          required: true,
-        },
-        {
-          key: "student_id",
-          title: "学生学号",
-          type: "number",
-        }, 
-        {
-          key: "class_name",
-          title: "所属班级",
-          type: "text",
-        },
-        {
-          key: "photo",
-          title: "人脸照片",
-          type: "text",
-        },
-        {
-          key: "birthday",
-          title: "出生年月",
-          type: "number",
-        },
-        {
-          key: "address",
-          title: "家庭住址",
-          type: "text",
-        },
-      ];
-      const newShowData = titleList.map((item) => {
-        let value = identity[item.key];
-        return {
-          ...item,
-          value,
-        };
-      });
-      setShowData(newShowData);
-    }
-  }, [identity]);
-  console.log(showData);
-  const handleChange = (value,record) => {
-    record.value = value
-    console.log(showData);
+
+  const showDataList = (val) => {
+    const newShowData = studentDetail.map((item) => {
+      console.log(item, "item111111");
+      let value = val[item.key];
+      return {
+        ...item,
+        value,
+      };
+    });
+    setShowData(newShowData);
+  };
+  const handleChange = (value, record) => {
+    record.value = value;
   };
   const handleAdd = () => {
-    console.log('add')
+    setIsOpened(true);
+  };
+  const onSubmit = (e) => {
+
+    console.log(e.detail.value,'eeeeeeeee111111')
   }
+  const handleClose = () => {
+    setIsOpened(false);
+  };
   const handleSave = () => {
-    console.log(showData)
-  }
-  const handleSubmit = () => {
-    console.log(showData)
-  }
+    let obj = showData.reduce((item, index) => {
+      item[index.key] = index.value;
+      return item;
+    });
+    let { address, birthday, avatar } = obj;
+    let sendObj = Object.assign(
+      { id: studentId },
+      { address, birthday, avatar }
+    );
+    dispatch({
+      type: "users/getUpdateStudent",
+      payload: sendObj,
+    }).then((res) => {
+      if (res.status == 200) {
+        Taro.atMessage({
+          message: res.message,
+          type: "success",
+        });
+        setTimeout(() => {
+          dispatch({
+            type: "users/getStudentById",
+            payload: studentId,
+          }).then((response) => {
+            if (response.status == 200) {
+              showDataList(res.data);
+            }
+          });
+        }, 1000);
+      } else {
+        Taro.atMessage({
+          message: res.message,
+          type: "error",
+        });
+      }
+    });
+  };
+  const title = [
+    {
+      key: "studentName",
+      title: "学生姓名:",
+      type: "text",
+    },
+    {
+      key: "studentName",
+      title: "学生学号:",
+      type: "text",
+    },
+    {
+      key: "studentName",
+      title: "亲属关系:",
+      type: "text",
+    },
+  ];
   return (
     <View className='index'>
-    <NavTab back title='孩子信息' />
-    <View className='main'>
-      <AtForm onSubmit={() => handleSubmit()}>
-        {showData.map((item, index) => {
-          return (
-            <AtInput
-              key={index}
-              name={item.title}
-              title={item.title}
-              type={item.type}
-              value={item.value}
-              required={item.required}
-              onChange={(e) => handleChange(e,item)}
-            />
-          );
-        })}
-      </AtForm>
+      <NavTab back title='孩子信息' />
+      <View className='main'>
+        <AtForm>
+          {showData.map((item, index) => {
+            return (
+              <AtInput
+                key={index}
+                name={item.title}
+                title={item.title}
+                type={item.type}
+                value={item.value}
+                disabled={item.disabled}
+                onChange={(e) => handleChange(e, item)}
+              />
+            );
+          })}
+        </AtForm>
       </View>
       <View className='other'>
         <View className='another'>
           <Text>在此班级中是否还有其他小孩？</Text>
-          <View className='add-text' onClick={handleAdd}>点此添加</View>
+          <View className='add-text' onClick={handleAdd}>
+            点此添加
+          </View>
         </View>
       </View>
       <GradientButton
@@ -113,11 +148,42 @@ function ChildMsg(props) {
       >
         保存修改
       </GradientButton>
+      <AtMessage />
+      <AtModal
+        className='edit-modal'
+        isOpened={isOpened}
+        closeOnClickOverlay={false}
+      >
+      <AtForm onSubmit={onSubmit}>
+        <AtModalContent className='modal-edit'>
+            {title.map((item,index) => {
+              return (
+                <AtInput
+                  key={index}
+                  name={item.title}
+                  title={item.title}
+                  type={item.type}
+                  value={item.value}
+                  disabled={item.disabled}
+                  onChange={(e) => handleChange(e, item)}
+                />
+              );
+            })}
+        </AtModalContent>
+        <AtModalAction>
+          <Button onClick={() => handleClose()}>取消</Button>
+          <Button formType='submit'>确认</Button>
+        </AtModalAction>
+        
+        </AtForm>
+      </AtModal>
     </View>
   );
 }
 export default connect((state) => ({
   user: state.users.user,
+  studentId: state.users.studentId,
+  studentDetail: state.users.studentDetail,
   identity: state.users.identity,
   settingList: state.users.settingList,
 }))(ChildMsg);

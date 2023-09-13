@@ -1,4 +1,4 @@
-import { getArticleList, getNews, getAAA } from "../services/ClassServices";
+import { getJoinClass, getArticleList, getNews, getAAA } from "../services/ClassServices";
 
 const model = {
   namespace: "Class",
@@ -58,6 +58,11 @@ const model = {
   },
 
   effects: {
+    *getJoinClass({ payload }, { call }){
+      const responese = yield call(getJoinClass, payload)
+      console.log(responese,'response')
+      return responese
+    },
     *getAAA({ payload }, { call, put }) {
       const response = yield call(getAAA, payload);
       console.log(response, "responese111");

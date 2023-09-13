@@ -47,6 +47,18 @@
           "pathName": "pages/component/publish/publish",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/addressList/Check/Check",
+          "pathName": "pages/addressList/Check/Check",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/my/ChildMsg/ChildMsg",
+          "pathName": "pages/my/ChildMsg/ChildMsg",
+          "query": "",
+          "scene": null
         }
       ]
     }
