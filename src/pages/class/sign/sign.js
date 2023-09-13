@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Taro, { useRouter } from "@tarojs/taro";
 import { View, Text, Form, Picker, ScrollView } from "@tarojs/components";
-import { AtButton } from "taro-ui";
+import { AtButton, AtMessage } from "taro-ui";
 import { connect } from 'react-redux';
 
 import StudentsList from "@app/component/StudentsList/StudentsList";
@@ -10,71 +10,69 @@ import NavTab from '@app/component/NavTab/NavTab';
 import "./Sign.scss";
 
 function Sign(props) {
-  const { user, dispatch, student, studentsList } = props
+  console.log(props,'props');
+  const { user, dispatch, signRecordList, student, schoolEndTimeInfo } = props
   const [students, setStudents] = useState([]);
   const [isEdit, setIsEdit] = useState(true);
+  const [schoolId,setSchoolId] = useState('')
 
   useEffect(() => {
+
     dispatch({
-      type:'users/getUser'
+      type:'Sign/getSignRecordList',
+      payload: {
+        userId: '3ee83b8573b54f5c99288618039b7c84',
+        studentId:""
+      },
     })
+
     dispatch({
-      type:'Sign/getStudentsList'
+      type:'Sign/getSchoolEndTimeInfo',
+    }).then(res=>{
+      if(res.status == 200){
+        setSchoolId(res.data.id)
+      }
     })
+
     dispatch({
       type:'Sign/getStudent'
     })
   }, []);
-  console.log(user,"user");
 
  
-
-  const [time, setTime] = useState("17:50");
-
-
   const handleChange = () => {
     setIsEdit(!isEdit);
   };
   const handleSign = () => {
     console.log("click");
   };
-  const formSubmit = (index) => {
-    console.log(index);
-  };
-
-  const signHandle = (item, id, index) => {
-    //需要改方法
-    console.log(index);
-    const newStudent = student.map((value) => {
-      if (value.id === id) {
-        const status = 1;
-        return {
-          ...value,
-          status,
-        };
-      } else {
-        return { ...value };
-      }
-    });
-    // const newStudents = student.splice(index,1,newItem,)
-    // setStudent(newStudent);
-
-    const newStudents = students.map((value) => {
-      if (value.id === id) {
-        const status = 1;
-        return {
-          ...value,
-          status,
-        };
-      } else {
-        return { ...value };
-      }
-    });
-    setStudents(newStudents);
-  };
 
   const onTimeChange = (e) => {
-    setTime(e.detail.value);
+    console.log(e.detail.value,'eee')
+    dispatch({
+      type:'Sign/getUpdateSchoolEndTime',
+      payload: {
+        id:schoolId,
+        endTime:e.detail.value
+      }
+    }).then(res => {
+      if (res.status == 200) {
+        dispatch({
+          type:'Sign/getSchoolEndTimeInfo',
+        })
+        //消息提示
+        Taro.atMessage({
+          message: res.message,
+          type: "success",
+        });
+      } else {
+        Taro.atMessage({
+          message: res.message,
+          type: "error",
+        });
+      }
+    })
+    // setTime(e.detail.value);
   };
   return (
     <View className='index'>
@@ -117,7 +115,7 @@ function Sign(props) {
           <View className='text'>
             <View className='time'>
               <Picker className='picker' mode='time' onChange={onTimeChange}>
-                放学时间：{time}
+                放学时间：{schoolEndTimeInfo}
               </Picker>
             </View>
             <Text className='text-sign' onClick={() => handleChange()}>请确认学生是否到校</Text>
@@ -125,15 +123,17 @@ function Sign(props) {
                 点击学生将发送消息至家长确定学生到校情况
             </Text>
           </View>
-          <StudentsList enter='sign' current={0} showData={studentsList} />
+          <StudentsList enter='sign' current={0} showData={signRecordList} />
         </View>
       )}
+      <AtMessage />
     </View>
   );
 }
 
 export default connect(state => ({
   user: state.users.user,
-  studentsList: state.Sign.studentsList,
-  student: state.Sign.student
+  signRecordList: state.Sign.signRecordList,
+  student: state.Sign.student,
+  schoolEndTimeInfo: state.Sign.schoolEndTimeInfo
 }))(Sign);

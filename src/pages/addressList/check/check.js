@@ -44,6 +44,7 @@ function Check(props) {
   }, []);
 
   const reviewData = (e) => {
+    console.log(e,'eeeee')
     let status = [];
     switch (e) {
       case 0:

@@ -59,6 +59,7 @@ function My(props) {
     dispatch({
       type: "users/getIdentity",
     });
+    
     // dispatch({
     //   type: "users/getUser",
     // });

@@ -19,44 +19,8 @@
           "scene": null
         },
         {
-          "name": "pages/login/login",
-          "pathName": "pages/login/login",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/login/Register/Register",
-          "pathName": "pages/login/Register/Register",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/addressList/Check/Check",
-          "pathName": "pages/addressList/Check/Check",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/class/HomeWork/HomeWork",
-          "pathName": "pages/class/HomeWork/HomeWork",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/component/publish/publish",
-          "pathName": "pages/component/publish/publish",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/addressList/Check/Check",
-          "pathName": "pages/addressList/Check/Check",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/my/ChildMsg/ChildMsg",
-          "pathName": "pages/my/ChildMsg/ChildMsg",
+          "name": "pages/class/Sign/Sign",
+          "pathName": "pages/class/Sign/Sign",
           "query": "",
           "scene": null
         }

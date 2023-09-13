@@ -20,9 +20,28 @@ import "./ChildMsg.scss";
 
 function ChildMsg(props) {
   console.log(props, "porps");
-  const { dispatch, studentId, identity, studentDetail, settingList } = props;
+  const { dispatch, studentId, studentDetail, settingList } = props;
   const [showData, setShowData] = useState([]);
   const [isOpened, setIsOpened] = useState(false);
+  const [classId, setClassId] = useState('')
+
+  const title = [
+    {
+      title: "学生姓名:",
+      type: "text",
+      name: 'studentName'
+    },
+    {
+      title: "学生学号:",
+      type: "text",
+      name: 'studentNo'
+    },
+    {
+      title: "亲属关系:",
+      type: "text",
+      name: 'relative'
+    },
+  ];
 
   useEffect(() => {
     dispatch({
@@ -30,6 +49,7 @@ function ChildMsg(props) {
       payload: studentId,
     }).then((res) => {
       if (res.status == 200) {
+        setClassId(res.data.classId)
         showDataList(res.data);
       }
     });
@@ -37,7 +57,6 @@ function ChildMsg(props) {
 
   const showDataList = (val) => {
     const newShowData = studentDetail.map((item) => {
-      console.log(item, "item111111");
       let value = val[item.key];
       return {
         ...item,
@@ -52,9 +71,28 @@ function ChildMsg(props) {
   const handleAdd = () => {
     setIsOpened(true);
   };
-  const onSubmit = (e) => {
 
-    console.log(e.detail.value,'eeeeeeeee111111')
+  const onSubmit = (evt) => {
+    let userObj = Object.assign({classId:classId},evt[0].detail.value)
+    dispatch({
+      type:'Class/getJoinClass',
+      payload:userObj
+    }).then((res) => {
+      if (res.status == 200) {
+        //关闭弹窗
+        setIsOpened(false)
+        //消息提示
+        Taro.atMessage({
+          message: '添加成功，待审核...',
+          type: "success",
+        });
+      } else {
+        Taro.atMessage({
+          message: res.message,
+          type: "error",
+        });
+      }
+    });
   }
   const handleClose = () => {
     setIsOpened(false);
@@ -96,23 +134,7 @@ function ChildMsg(props) {
       }
     });
   };
-  const title = [
-    {
-      key: "studentName",
-      title: "学生姓名:",
-      type: "text",
-    },
-    {
-      key: "studentName",
-      title: "学生学号:",
-      type: "text",
-    },
-    {
-      key: "studentName",
-      title: "亲属关系:",
-      type: "text",
-    },
-  ];
+ 
   return (
     <View className='index'>
       <NavTab back title='孩子信息' />
@@ -122,7 +144,7 @@ function ChildMsg(props) {
             return (
               <AtInput
                 key={index}
-                name={item.title}
+                name={item.key}
                 title={item.title}
                 type={item.type}
                 value={item.value}
@@ -154,13 +176,13 @@ function ChildMsg(props) {
         isOpened={isOpened}
         closeOnClickOverlay={false}
       >
-      <AtForm onSubmit={onSubmit}>
+      <AtForm name='modalname' onSubmit={onSubmit}>
         <AtModalContent className='modal-edit'>
             {title.map((item,index) => {
               return (
                 <AtInput
                   key={index}
-                  name={item.title}
+                  name={item.name}
                   title={item.title}
                   type={item.type}
                   value={item.value}
@@ -182,6 +204,8 @@ function ChildMsg(props) {
 }
 export default connect((state) => ({
   user: state.users.user,
+  pageSize: state.users.pageSize,
+  userId: state.users.userId,
   studentId: state.users.studentId,
   studentDetail: state.users.studentDetail,
   identity: state.users.identity,

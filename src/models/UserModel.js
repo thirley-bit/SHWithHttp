@@ -29,7 +29,7 @@ const model = {
   namespace: "users",
   state: {
     identity: { telephone: "15082178984" }, //登录信息
-    user: 0,
+    user: 1,
     userId: "a7f933b810f2419b8420c3095c8d88d5",
     enter: "",
     classList: [],
@@ -78,6 +78,12 @@ const model = {
       {
         key: "className",
         title: "所属班级",
+        type: "text",
+        disabled: true,
+      },
+      {
+        key: "classId",
+        title: "班级Id",
         type: "text",
         disabled: true,
       },
@@ -334,7 +340,7 @@ const model = {
     changeStudentList(state, { payload }) {
       return {
         ...state,
-        studentsList: payload,
+        studentList: payload,
       };
     },
 

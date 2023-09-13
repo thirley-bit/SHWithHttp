@@ -60,7 +60,6 @@ const model = {
   effects: {
     *getJoinClass({ payload }, { call }){
       const responese = yield call(getJoinClass, payload)
-      console.log(responese,'response')
       return responese
     },
     *getAAA({ payload }, { call, put }) {

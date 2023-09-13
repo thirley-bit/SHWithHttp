@@ -57,6 +57,9 @@ function Index(props) {
   ];
   
   useEffect(() => {
+    dispatch({
+      type:'users/getClassAll'
+    })
     // dispatch({
     //   type: "users/getUser",
     // });

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Taro from "@tarojs/taro"
 import {
   View,
   Form,
@@ -7,31 +8,91 @@ import {
   Radio,
 } from "@tarojs/components";
 import { connect } from 'react-redux';
-import { AtAvatar, AtRadio } from "taro-ui";
+import { AtAvatar, AtMessage, AtRadio } from "taro-ui";
 import GradientButton from "@app/component/GradientButton";
 import normal from "@static/normal.png";
 import "./StudentsList.scss";
 
 function StudentsList(props) {
-  // console.log(props, "studentsList");
-  const { enter, showData, selectList, } = props;
+  const { dispatch, enter, showData, selectList, specialTime} = props;
   const [isAllChecked, setIsAllChecked] = useState(false);
   const scrollTop = 0;
   const Threshold = 20;
+  const signRecordList = () => {
+    dispatch({
+      type:'Sign/getSignRecordList',
+      payload: {
+        userId: '3ee83b8573b54f5c99288618039b7c84',
+        studentId:""
+      },
+    })
+  }
 
   const handleAllChecked = () => {
     if(isAllChecked == true){
       setIsAllChecked(false)
-      console.log(111)
     }else{
       setIsAllChecked(true)
     }
   };
+  const handleAllSend = () => {
+    if(selectList.length > 0){
+      dispatch({
+        type: "Sign/getUpdateSignRecord",
+        payload: {
+          idList:selectList.map(item => item.id),
+          earlyStatus:1,
+          lateStatus:1
+        },
+      }).then(res => {
+        if (res.status == 200) {
+          signRecordList()
+          //消息提示
+          Taro.atMessage({
+            message: res.message,
+            type: "success",
+          });
+        } else {
+          Taro.atMessage({
+            message: res.message,
+            type: "error",
+          });
+        }
+      })
+    }else{
+      Taro.atMessage({
+        message: "已全部确认",
+        type: "waring",
+      });
+    }
+  }
   const formSubmit = (index) => {
     console.log(index);
   };
-  const handleSign = () => {
-    console.log("click");
+  const handleSign = (val) => {
+    
+    dispatch({
+      type: "Sign/getUpdateSignRecord",
+      payload: {
+        id:val.id,
+        earlyStatus:1,
+        lateStatus:1
+      },
+    }).then(res => {
+      if (res.status == 200) {
+        signRecordList()
+        //消息提示
+        Taro.atMessage({
+          message: res.message,
+          type: "success",
+        });
+      } else {
+        Taro.atMessage({
+          message: res.message,
+          type: "error",
+        });
+      }
+    })
   };
 
   const scrollHeight = {
@@ -39,17 +100,23 @@ function StudentsList(props) {
   };
   const onScroll = () => {};
   const handleChecked = (value) => {
-    let newSelectList = selectList.filter(item => item.student_id != value.student_id)
+
+    let newSelectList = selectList.filter(item => item.studentId != value.studentId)
     console.log(value,'item？？？');
     console.log(newSelectList,'List>>>')
+    dispatch({
+      type: "Sign/changeSelectData",
+      payload: newSelectList,
+    })
   };
 
   return (
     // 详情头部组件
     <View className='teacher'>
       {enter == "sign" && (
-        <View className='all-check' onClick={handleAllChecked}>
-          <Radio value='选中' checked={isAllChecked}>选中</Radio>
+        <View className='all-check' >
+          <Radio value='选中' checked={isAllChecked} onClick={handleAllChecked}></Radio>
+          <View style={{display:'inline-block'}} onClick={isAllChecked ?  () => handleAllSend() : ''}>{isAllChecked ? '确定' : '全选'}</View>
         </View>
       )}
       <ScrollView
@@ -62,13 +129,16 @@ function StudentsList(props) {
         upperThreshold={Threshold}
         onScroll={() => onScroll()}
       >
-        <View className='form-width'>
+        {
+          showData ? 
+         <View className='form-width'>
           {showData.map((item, index) => {
-            const name = item.student_name;
+            const name = item.studentName;
             let className = "sign-text";
             if (name.length > 5) {
               className += " text2";
             }
+            let status = specialTime < 12 ? item.earlyStatus : item.lateStatus
             return (
               <Form
                 className='form'
@@ -100,8 +170,8 @@ function StudentsList(props) {
                       style={enter == "homework" ? "marginBottom:32rpx" : ""}
                     >
                       {
-                        item.checked == true && isAllChecked == true && <Label className='sign-label'>
-                        <Radio value={item.name} checked={item.checked} onClick={() => handleChecked(item)}></Radio>
+                        status == 0 && isAllChecked && <Label className='sign-label'>
+                        <Radio value={item.name} checked={selectList.find(it => it.studentId == item.studentId)} onClick={() => handleChecked(item)}></Radio>
                       </Label>
                       }
                       <AtAvatar
@@ -110,12 +180,12 @@ function StudentsList(props) {
                         image={item.avatar ? item.avatar : normal}
                       ></AtAvatar>
                       <View className={className}>{name}</View>
-                      {item.checked == true ? (
+                      {status == 0 ? (
                         <GradientButton
                           className='sign-button'
                           type='primary'
                           onClick={() =>
-                            handleSign(item, item.student_id, index)
+                            handleSign(item)
                           }
                         >
                           确认
@@ -125,7 +195,7 @@ function StudentsList(props) {
                           className='sign-button'
                           type='secondary'
                         >
-                          未出发
+                          已确认
                         </GradientButton>
                       )}
                     </View>
@@ -135,11 +205,16 @@ function StudentsList(props) {
             );
           })}
         </View>
+
+         : '暂无数据'
+        } 
       </ScrollView>
+      <AtMessage />
     </View>
   );
 }
 
 export default connect((state ) => ({
-  selectList:state.Sign.selectList
+  selectList:state.Sign.selectList,
+  specialTime: state.Sign.specialTime
 }))(StudentsList);

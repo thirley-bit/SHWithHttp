@@ -2363,8 +2363,8 @@ export default {
         message_id:0,
         detail_id:0, //消息具体内容的序号
         speaker:'own', //发送者 own:自己，other：其他人
-        userName:'张三爸爸',
-        userAvatar:'',
+        name:'张三爸爸',
+        avatar:'',
         content:'今天张三表现很好1', //消息内容
         time:'2023-11-15  14:12:34',
     },
@@ -2373,8 +2373,8 @@ export default {
               message_id:0,
               detail_id:1, //消息具体内容的序号
               speaker:'other', //发送者 own:自己，other：其他人
-              expertName:'李老师',
-              expertAvatar:'',
+              name:'李老师',
+              avatar:'',
               content:'今天张三表现很好2', //消息内容
               time:'2023-11-15  14:12:34',
           },
@@ -2383,8 +2383,8 @@ export default {
             message_id:0,
             detail_id:0, //消息具体内容的序号
             speaker:'own', //发送者 own:自己，other：其他人
-            userName:'张三爸爸',
-            userAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+            name:'张三爸爸',
+            avatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
             content:'今天张三表现很好3', //消息内容
             time:'2023-11-15  14:12:34',
         },
@@ -2393,8 +2393,8 @@ export default {
             message_id:0,
             detail_id:1, //消息具体内容的序号
             speaker:'other', //发送者 own:自己，other：其他人
-            expertName:'李老师',
-            expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+            name:'李老师',
+            avatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
             content:'今天张三表现很好', //消息内容
             time:'2023-11-15  14:12:34',
         },
@@ -2403,8 +2403,8 @@ export default {
           message_id:0,
           detail_id:0, //消息具体内容的序号
           speaker:'own', //发送者 own:自己，other：其他人
-          userName:'张三爸爸',
-          userAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+          name:'张三爸爸',
+          avatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
           content:'今天张三表现很好', //消息内容
           time:'2023-11-15  14:12:34',
       },
@@ -2413,8 +2413,8 @@ export default {
           message_id:0,
           detail_id:1, //消息具体内容的序号
           speaker:'other', //发送者 own:自己，other：其他人
-          expertName:'李老师',
-          expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+          name:'李老师',
+          avatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
           content:'今天张三表现很好', //消息内容
           time:'2023-11-15  14:12:34',
       },
@@ -2423,8 +2423,8 @@ export default {
         message_id:0,
         detail_id:0, //消息具体内容的序号
         speaker:'own', //发送者 own:自己，other：其他人
-        userName:'张三爸爸',
-        userAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+        name:'张三爸爸',
+        avatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
         content:'今天张三表现很好，倒数第四条', //消息内容
         time:'2023-11-15  14:12:34',
       },
@@ -2433,8 +2433,8 @@ export default {
         message_id:0,
         detail_id:1, //消息具体内容的序号
         speaker:'other', //发送者 own:自己，other：其他人
-        expertName:'李老师',
-        expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+        name:'李老师',
+        avatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
         content:'今天张三表现很好，倒数第三条', //消息内容
         time:'2023-11-15  14:12:34',
       },
@@ -2443,8 +2443,8 @@ export default {
         message_id:0,
         detail_id:0, //消息具体内容的序号
         speaker:'own', //发送者 own:自己，other：其他人
-        userName:'张三爸爸',
-        userAvatar:'',
+        name:'张三爸爸',
+        avatar:'',
         content:'今天张三表现很好，倒数第二条', //消息内容
         time:'2023-11-15  14:12:34',
       },
@@ -2453,8 +2453,8 @@ export default {
         message_id:0,
         detail_id:1, //消息具体内容的序号
         speaker:'other', //发送者 own:自己，other：其他人
-        expertName:'李老师',
-        expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
+        name:'李老师',
+        avatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
         content:'今天张三表现很好，最后一条', //消息内容
         time:'2023-11-15  14:12:34',
       },

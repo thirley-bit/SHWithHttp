@@ -79,4 +79,29 @@
       }
     }
   }
-  
+  .edit-modal {
+    .at-modal__content{
+        height: 300rpx;
+    }
+    .at-input__input{
+        text-align: left;
+    }
+}
+.search {
+  width: 95%;
+  padding: 1%;
+  margin: 3% auto;
+  background-color: #fff;
+  border-radius: 16rpx;
+  border: 2rpx solid #1ba6ff;
+}
+.at-search-bar {
+  height: 65rpx;
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 0 18rpx 0 0;
+  background: rgba(255, 255, 255, 0.6);
+}
+.at-search-bar__action {
+  border-radius: 8rpx;
+}
