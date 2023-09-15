@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import { View } from "@tarojs/components";
-import {
-  AtTabsPane,
-} from "taro-ui";
+import { AtTabsPane } from "taro-ui";
 
 import StudentsList from "@app/component/StudentsList/StudentsList";
 import Table from "@app/component/Table/Table";
 import FeedBack from "@app/component/FeedBack";
-import MyTabs from '@app/component/MyTabs/MyTabs';
+import MyTabs from "@app/component/MyTabs/MyTabs";
 import GradientButton from "@app/component/GradientButton";
 import normal from "@static/normal.png";
 import { connect } from "react-redux";
@@ -15,11 +13,19 @@ import { connect } from "react-redux";
 import "./DetailContent.scss";
 
 function DetailContent(props) {
+  console.log(props, "detailContentProps");
   const {
     dispatch,
+    userId,
+    studentId,
     enter,
     user,
     id,
+    pageSize,
+    replyList,
+
+
+
     scoreTitle,
     scoreDetailArr,
     feedBack,
@@ -27,6 +33,7 @@ function DetailContent(props) {
     studentsList,
   } = props;
   const [studentsData, setStudentsData] = useState([]);
+  const [allSubmittedList, setAllSubmittedList] = useState([]);
   const [submittedList, setSubmittedList] = useState([]);
   const [notSubmittedList, setNotSubmittedList] = useState([]);
   const [current, setCurrent] = useState(0);
@@ -38,9 +45,7 @@ function DetailContent(props) {
       type: "Score/getScoreDetailArr",
     });
     if (user == 0 && enter == "homework") {
-      // dispatch({
-      //   type: "HomeWork/getFeedBackDetail",
-      // });
+      
       let tab = [
         {
           title: "家长反馈",
@@ -48,61 +53,40 @@ function DetailContent(props) {
       ];
       setTabList(tab);
     } else {
-      // dispatch({
-      //   type: "HomeWork/getStudentsList",
-      // }).then((res) => {
-      //   let newListAll = res.data;
-      //   let newSubmittedList = res.data.filter(
-      //     (item) => item.hasCompleted == true
-      //   );
-      //   let newNotSubmittedList = res.data.filter(
-      //     (item) => item.hasCompleted == false
-      //   );
-      //   setStudentsData(newListAll);
-      //   setSubmittedList(newSubmittedList);
-      //   setNotSubmittedList(newNotSubmittedList);
-      //   let tab = [
-      //     {
-      //       id: 0,
-      //       title: `全部(${newListAll.length})`,
-      //     },
-      //     {
-      //       id: 1,
-      //       title: `已交(${newSubmittedList.length})`,
-      //     },
-      //     {
-      //       id: 2,
-      //       title: `未交(${newNotSubmittedList.length})`,
-      //     },
-      //     {
-      //       id: 3,
-      //       title: `家长反馈`,
-      //     },
-      //   ];
-      //   setTabList(tab);
-      // });
-      let tab = [
-        {
-          id: 0,
-          title: `全部`,
-        },
-        {
-          id: 1,
-          title: `已交`,
-        },
-        {
-          id: 2,
-          title: `未交`,
-        },
-        {
-          id: 3,
-          title: `家长反馈`,
-        },
-      ];
-      setTabList(tab);
-
       dispatch({
-        type: "HomeWork/getFeedBackList",
+        type: "HomeWork/getCompleteSituationList",
+        payload: {
+          workId:id,
+        },
+      }).then((res) => {
+        if (res.status == 200) {
+          let newListAll = res.data;
+          let newSubmittedList = res.data.filter((item) => item.status == 1);
+          let newNotSubmittedList = res.data.filter((item) => item.status == 0);
+          setAllSubmittedList(newListAll);
+          setStudentsData(newListAll);
+          setSubmittedList(newSubmittedList);
+          setNotSubmittedList(newNotSubmittedList);
+          let tab = [
+            {
+              id: 0,
+              title: `全部(${newListAll.length})`,
+            },
+            {
+              id: 1,
+              title: `已交(${newSubmittedList.length})`,
+            },
+            {
+              id: 2,
+              title: `未交(${newNotSubmittedList.length})`,
+            },
+            {
+              id: 3,
+              title: `家长反馈`,
+            },
+          ];
+          setTabList(tab);
+        }
       });
     }
   }, [user]);
@@ -111,7 +95,7 @@ function DetailContent(props) {
     setCurrent(index);
     // 切换tab时请求不同的接口，展示不同的数据
     if (index == 0) {
-      setStudentsData(studentsList);
+      setStudentsData(allSubmittedList);
     } else if (index == 1) {
       setStudentsData(submittedList);
     } else if (index == 2) {
@@ -120,17 +104,17 @@ function DetailContent(props) {
       setStudentsData(feedBackList);
     }
   };
-  const handleSend = () => {
-    if (isEdit) {
-      //处于修改反馈状态
-      setIsEdit(false);
-      dispatch({
-        type: "HomeWork/getEditFeedBack",
-      });
-    } else {
-      setIsEdit(true);
-    }
-  };
+  // const handleSend = () => {
+  //   if (isEdit) {
+  //     //处于修改反馈状态
+  //     setIsEdit(false);
+  //     dispatch({
+  //       type: "HomeWork/getEditFeedBack",
+  //     });
+  //   } else {
+  //     setIsEdit(true);
+  //   }
+  // };
 
   return (
     <View className='main'>
@@ -147,11 +131,11 @@ function DetailContent(props) {
                   <AtTabsPane key={index} current={current} index={index}>
                     <View className='data'>
                       {user == 0 ? (
-                        <FeedBack feedData={feedBack}></FeedBack>
+                        <FeedBack workId={id}></FeedBack>
                       ) : (
                         <View>
                           {item.id == 3 ? (
-                            <FeedBack feedData={feedBackList}></FeedBack>
+                            <FeedBack workId={id}></FeedBack>
                           ) : (
                             <StudentsList
                               current={current}
@@ -178,6 +162,11 @@ function DetailContent(props) {
 }
 export default connect((state) => ({
   user: state.users.user,
+  pageSize: state.users.pageSize,
+  userId: state.users.userId,
+  studentId: state.users.studentId,
+  replyList: state.HomeWork.replyList,
+
   scoreTitle: state.Score.scoreTitle,
   scoreDetailArr: state.Score.scoreDetailArr,
   feedBack: state.HomeWork.feedBack,

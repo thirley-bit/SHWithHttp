@@ -48,7 +48,6 @@ function Sign(props) {
   };
 
   const onTimeChange = (e) => {
-    console.log(e.detail.value,'eee')
     dispatch({
       type:'Sign/getUpdateSchoolEndTime',
       payload: {

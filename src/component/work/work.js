@@ -10,7 +10,6 @@ import "./Work.scss";
 function Work(props) {
   const { dispatch, studentId, enter, user,  showData, } = props;
   const handleCompleted = (e) => {
-    console.log(e,"----e----");
     dispatch({
       type:'HomeWork/getCompleteWork',
       payload:{
@@ -32,8 +31,6 @@ function Work(props) {
     })
   };
   const handleNav = (e) => {
-    console.log(e,'eeeeeeee')
-    // let id = ''
     if(enter == 'homework'){
       // id = e.work_id
       dispatch({
@@ -61,7 +58,7 @@ function Work(props) {
     if(e.publish == 0){
       Taro.navigateTo({url:`/pages/class/Score/PublishScore/PublishScore`})
     }else{
-      Taro.navigateTo({ url:`/pages/component/detail/detail?enter=${enter}`})
+      Taro.navigateTo({ url:`/pages/component/detail/detail?enter=${enter}&id=${e.id}`})
     }
   }
   const handleClick = () => {
@@ -101,7 +98,7 @@ function Work(props) {
                       thumb={normal}
                       onClick={() => handleNav(item)}
                     >
-                      {item.detailContent}
+                      <View className='content' style={{height:'72rpx'}} dangerouslySetInnerHTML={{ __html: item.detailContent }}></View>
                     </AtCard>
                   {enter == "score" && user == 1 && item.publish == 0 && (
                     <View

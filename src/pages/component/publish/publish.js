@@ -13,18 +13,25 @@ import api from "@/api/api";
 import "./publish.scss";
 
 function WorkDetail(props) {
-  console.log(props);
-  const { dispatch, subjectType } = props;
+  const { dispatch, subjectType, classStudent } = props;
   const [title, setTitle] = useState("");
   const [editor, setEditor] = useState("");
-  const [selectorChecked, setSelectorChecked] = useState(""); //选中的科目下标
-  //   const [user, setUser] = useState("");
-  //   const [selector, setSelector] = useState([]); //科目选择项
-  //   const [showWorkData, setShowWorkData] = useState([]); //通知列表
+  const [selectedSubject, setSelectedSubject] = useState(""); //选中的科目
+  const [selectedPerson, setSelectedPerson] = useState(""); //选中的班级
+  const [time, setTime] = useState("");//选中日期
 
   const handleTitleInput = (e) => {
     setTitle(e.detail.value);
   };
+  useEffect(() => {
+    dispatch({
+      type:'HomeWork/getListByType',
+      payload:1
+    })
+    dispatch({
+      type:'Class/getClassStudent'
+    })
+  },[])
   //输入框内容
   const [msg, setMsg] = useState("");
 
@@ -34,44 +41,65 @@ function WorkDetail(props) {
   };
 
   //发送按钮
-  console.log(msg, "msg");
   const handleSend = () => {
-    dispatch({
-      type: "HomeWork/getInsertHomework",
-      payload: {
-        title: title,
-        detailContent: msg,
-        subjectType: "1002",
-        studentIdList: ["11", "22", "33"],
-        endTime: "2023-09-21",
-      },
-    }).then((res) => {
-      if (res.status == 200) {
-        Taro.atMessage({
-          message: res.message,
-          type: "success",
-        });
-        //新建成功，跳转至列表页面
-        setTimeout(() => {
-          Taro.navigateTo({ url: "/pages/class/HomeWork/HomeWork" });
-        }, 1000);
-      } else {
-        Taro.atMessage({
-          message: res.message,
-          type: "error",
-        });
-      }
-    });
-    // dispatch({
-    //   type:'HomeWork/getInsertHomework',
-    //   payload:{
-    //     title:title,
-    //     detailContent:msg,
-    //     subjectType:'1002',
-    //     studentIdList:['11','22','33'],
-    //     endTime:'2023-09-21'
-    //   }
-    // })
+    //判断输入是否为空
+    let inputVal = ''
+    let tips = ''
+    if(title == ''){
+      tips = '请输入标题'
+      inputVal = false
+    }else if(msg == ''){
+      tips = '请输入正文内容'
+      inputVal = false
+    }else if(selectedSubject == ''){
+      inputVal = false
+      tips = '请选择学科科目'
+    }else if(selectedPerson == ''){
+      tips = '请选择指定发送人'
+      inputVal = false
+    }else if(time == ''){
+      tips = '截至日期'
+      inputVal = false
+    }else{
+      inputVal = true
+    }
+
+    //输入不为空时请求接口
+    if(inputVal){
+      dispatch({
+        type: "HomeWork/getInsertHomework",
+        payload: {
+          title: title,
+          detailContent: msg,
+          subjectType: subjectType[selectedSubject]?.value,
+          studentIdList:classStudent[selectedPerson]?.studentList.map(it => it.id),
+          endTime: time,
+        },
+      }).then((res) => {
+        if (res.status == 200) {
+          Taro.atMessage({
+            message: res.message,
+            type: "success",
+          });
+          //新建成功，跳转至列表页面
+          setTimeout(() => {
+            Taro.navigateTo({ url: "/pages/class/HomeWork/HomeWork" });
+          }, 1000);
+        } else {
+          Taro.atMessage({
+            message: res.message,
+            type: "error",
+          });
+        }
+      });
+    }else{
+      //输入为空提示
+      Taro.atMessage({
+        message: tips,
+        type: "error",
+      });
+    }
+    
   };
   const editorReady = () => {
     Taro.createSelectorQuery()
@@ -92,7 +120,6 @@ function WorkDetail(props) {
           src: res.tempFilePaths[0],
           width: "60%",
           success: () => {
-            console.log("success");
           },
         });
       },
@@ -100,10 +127,17 @@ function WorkDetail(props) {
   };
   //选择科目
   const onSubChange = (e) => {
-    let No = e.detail.value;
     //设置选择框中的显示科目
-    setSelectorChecked(No);
+    setSelectedSubject(e.detail.value);
   };
+  const onPersonChange = (e) => {
+    setSelectedPerson(e.detail.value);
+  }
+
+  //选择截至日期
+  const onTimeChange = (e) => {
+    setTime(e.detail.value);
+  }
 
   return (
     <View className='main'>
@@ -126,7 +160,6 @@ function WorkDetail(props) {
         </View>
         <View className='add-image' onClick={() => addImage()}>
           <AtIcon
-            className='img1'
             value='camera'
             size='30'
             color='#999'
@@ -145,7 +178,7 @@ function WorkDetail(props) {
                 <Text className='content-name'>学科科目</Text>
               </View>
               <View className='at-col-1'>
-                {selectorChecked == "" ? "" : subjectType[selectorChecked].name}
+                {selectedSubject == "" ? "" : subjectType[selectedSubject].name}
               </View>
               <View className='at-col-0'>
                 <AtIcon value='chevron-right' color='#999'></AtIcon>
@@ -154,18 +187,44 @@ function WorkDetail(props) {
           </View>
         </Picker>
         <Divider />
-        <View className='choose'>
-          <View className='at-row'>
-            <View className='at-col at-col-10 '>
-              <Text className='content-name'>谁可以看</Text>
-            </View>
-            <View className='at-col'>
-              <View style={{ display: "inline-block" }}>公开</View>
-              <AtIcon value='chevron-right' color='#999'></AtIcon>
+        <Picker
+          mode='selector'
+          range={classStudent.map((item) => item.className)}
+          onChange={onPersonChange}
+        >
+          <View className='choose'>
+            <View className='at-row'>
+              <View className='at-col at-col-8'>
+                <Text className='content-name'>指定发送人</Text>
+              </View>
+              <View className='at-col-3'>
+                {selectedPerson == "" ? "" : classStudent[selectedPerson].className}
+              </View>
+              <View className='at-col-0'>
+                <AtIcon value='chevron-right' color='#999'></AtIcon>
+              </View>
             </View>
           </View>
-        </View>
+        </Picker>
         <Divider />
+        <Picker
+          mode='date'
+          onChange={onTimeChange}
+        >
+          <View className='choose'>
+            <View className='at-row'>
+              <View className='at-col at-col-8'>
+                <Text className='content-name'>截至日期</Text>
+              </View>
+              <View className='at-col-3'>
+                {time}
+              </View>
+              <View className='at-col-0'>
+                <AtIcon value='chevron-right' color='#999'></AtIcon>
+              </View>
+            </View>
+          </View>
+        </Picker>
       </View>
 
       <GradientButton
@@ -183,4 +242,5 @@ function WorkDetail(props) {
 
 export default connect((state) => ({
   subjectType: state.HomeWork.subjectType,
+  classStudent: state.Class.classStudent,
 }))(WorkDetail);

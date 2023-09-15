@@ -29,11 +29,13 @@ const model = {
   namespace: "users",
   state: {
     identity: { telephone: "15082178984" }, //登录信息
-    user: 1,
-    userId: "a7f933b810f2419b8420c3095c8d88d5",
+    // identity:{},
+    user: 0,
+    userId: "3ee83b8573b54f5c99288618039b7c84",
+    // userId:'',
     enter: "",
     classList: [],
-    studentId: "11",
+    studentId: "22",
     pageSize: 10,
     checkedList: [], //审核列表
 

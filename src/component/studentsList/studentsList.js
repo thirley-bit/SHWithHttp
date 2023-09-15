@@ -14,7 +14,8 @@ import normal from "@static/normal.png";
 import "./StudentsList.scss";
 
 function StudentsList(props) {
-  const { dispatch, enter, showData, selectList, specialTime} = props;
+  console.log(props,'studentProps')
+  const { dispatch,userId, enter, showData, selectList, specialTime} = props;
   const [isAllChecked, setIsAllChecked] = useState(false);
   const scrollTop = 0;
   const Threshold = 20;
@@ -22,7 +23,7 @@ function StudentsList(props) {
     dispatch({
       type:'Sign/getSignRecordList',
       payload: {
-        userId: '3ee83b8573b54f5c99288618039b7c84',
+        userId: userId,
         studentId:""
       },
     })
@@ -154,11 +155,16 @@ function StudentsList(props) {
                         <Radio value={item.name} checked={item.hasCompleted} ></Radio>
                       </Label>
                       }
-                      <AtAvatar
+                      {/* <AtAvatar
                         circle
                         className='sign-img'
-                        image={item.avatar ? item.avatar : normal}
-                      ></AtAvatar>
+                        image={item.avatar || normal}
+                      ></AtAvatar> */}
+                       <AtAvatar
+                         circle
+                         className='sign-img'
+                         image={normal}
+                       ></AtAvatar>
                       <View className={className}>{name}</View>
                     </View>
                   </View>
@@ -215,6 +221,7 @@ function StudentsList(props) {
 }
 
 export default connect((state ) => ({
+  userId: state.users.userId,
   selectList:state.Sign.selectList,
   specialTime: state.Sign.specialTime
 }))(StudentsList);

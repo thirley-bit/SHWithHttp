@@ -1,8 +1,11 @@
-import { getJoinClass, getArticleList, getNews, getAAA } from "../services/ClassServices";
+import { getJoinClass, getArticleList, getClassStudent, getNews, getAAA } from "../services/ClassServices";
 
 const model = {
   namespace: "Class",
   state: {
+    classStudent:[], //班级学生列表
+
+
     articleArr: [], //文章列表数据
     news: [],
     AAA: [],
@@ -10,17 +13,17 @@ const model = {
       {
         id: 1,
         title: "banner1",
-        url: "http://123.57.149.51/upload/upload_img/20230518/2b1e874f9b5d6aaba56c322aeeeb7dfa.jpg",
+        url: "http://123.57.149.51/upload/upload_img/20230915/3c59fd23f513578756cd9d2f3fece756.png",
       },
       {
         id: 2,
         title: "banner2",
-        url: "http://123.57.149.51/upload/upload_img/20230518/882d1e228be02f0124861a6111a27d5d.jpg",
+        url: "http://123.57.149.51/upload/upload_img/20230915/054b0d1c6c4c599c43fc8105f5c10c93.png",
       },
       {
         id: 3,
         title: "banner3",
-        url: "http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg",
+        url: "http://123.57.149.51/upload/upload_img/20230915/388205be55f4691be498dfb5cc026aea.png",
       },
     ], //banner轮播图
     tabList: [
@@ -62,6 +65,17 @@ const model = {
       const responese = yield call(getJoinClass, payload)
       return responese
     },
+    *getClassStudent({ payload }, { call, put }) {
+      const response = yield call(getClassStudent, payload);
+      console.log(response,'response')
+      if(response.status == 200){
+        yield put({
+          type: "changeClassStudent",
+          payload: response.data,
+        });
+      }
+      return response;
+    },
     *getAAA({ payload }, { call, put }) {
       const response = yield call(getAAA, payload);
       console.log(response, "responese111");
@@ -97,6 +111,18 @@ const model = {
   },
 
   reducers: {
+
+    changeClassStudent(state, { payload }) {
+      return {
+        ...state,
+        classStudent: payload,
+      };
+    },
+
+
+
+
+    
     changeAAA(state, { payload }) {
       return {
         ...state,

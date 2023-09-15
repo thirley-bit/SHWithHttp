@@ -23,6 +23,42 @@
           "pathName": "pages/class/Sign/Sign",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/component/detail/detail",
+          "pathName": "pages/component/detail/detail",
+          "query": "enter=homework",
+          "scene": null
+        },
+        {
+          "name": "pages/component/publish/publish",
+          "pathName": "pages/component/publish/publish",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/component/detail/detail",
+          "pathName": "pages/component/detail/detail",
+          "query": "enter=homework",
+          "scene": null
+        },
+        {
+          "name": "pages/class/HomeWork/HomeWork",
+          "pathName": "pages/class/HomeWork/HomeWork",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/component/detail/detail",
+          "pathName": "pages/component/detail/detail",
+          "query": "enter=homework&id=56b776039af84bd28234a4027bb746a6",
+          "scene": null
+        },
+        {
+          "name": "pages/login/login",
+          "pathName": "pages/login/login",
+          "query": "",
+          "scene": null
         }
       ]
     }

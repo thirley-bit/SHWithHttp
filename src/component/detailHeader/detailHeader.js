@@ -11,7 +11,6 @@ import normal from "@static/normal.png"
 import "./DetailHeader.scss";
 
 function DetailHeader(props) {
-  console.log(props,'propsdetailheaxder')
   const { enter, user, subjectDetail, scoreDetail, noticeDetail } = props;
   const [isOpened, setIsOpened] = useState(false);
   const [detailHeaderData, setDetailHeaderData] = useState({});
@@ -49,7 +48,6 @@ function DetailHeader(props) {
     // console.log(id); //删除接口
     setIsOpened(false);
   };
-  console.log(detailHeaderData,'data')
   return (
     // 详情头部组件
     <View className='index'>
@@ -76,7 +74,7 @@ function DetailHeader(props) {
         <View
           className={user == 0 && enter == "homework" ? "text" : "text100"}
         >
-          <Text>{detailHeaderData.detailContent}</Text>
+          <View dangerouslySetInnerHTML={{ __html: detailHeaderData.detailContent }}></View>
         </View>
         {/* 仅存在于家长端的作业部分 */}
         {user == "0" ? (

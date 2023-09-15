@@ -6,6 +6,10 @@ import {
   getWorkById,
   getViewHomework,
   getCompleteWork,
+  getCompleteSituationList,
+  getReplyList,
+  getFeedbackFirst,
+  getFeedbackReply,
 
   getSubjectList,
   getSubjectDetail,
@@ -21,14 +25,16 @@ const model = {
     workList:[], //作业列表
     subjectType: [], //科目选择栏目
     subjectDetail: {}, //作业详情
+    completeSituationList:[], //作业提交列表
+    replyList:[], //反馈列表
 
+    feedBackList: [], //教师端反馈信息列表
     
     homeWorkArr: [], //作业列表
     studentsList: [], //学生列表
     
     submitListAll: [], //学生提交作业列表
     feedBack: [], //家长端反馈信息
-    feedBackList: [], //教师端反馈信息列表
   },
 
   effects: {
@@ -48,6 +54,7 @@ const model = {
       }
       return response;
     },
+    
     *getInsertHomework({ payload }, { call, put }) {
       const response = yield call(getInsertHomework, payload);
       return response;
@@ -78,9 +85,27 @@ const model = {
     },
     *getCompleteWork({ payload }, { call, put }) {
       const response = yield call(getCompleteWork, payload);
-      console.log(response,'response')
+      return response;
+    }, 
+    *getCompleteSituationList({ payload }, { call, put }) {
+      const response = yield call(getCompleteSituationList, payload);
       return response;
     },
+    *getReplyList({ payload }, { call, put }) {
+      const response = yield call(getReplyList, payload);
+      if (response.status == 200) {
+        yield put({
+          type: "changeReplyList",
+          payload: response.data,
+        });
+      }
+      return response;
+    },
+    *getFeedbackReply({ payload }, { call, put }) {
+      const response = yield call(getFeedbackReply, payload);
+      return response;
+    },
+  getFeedbackReply,
 
 
 
@@ -111,7 +136,7 @@ const model = {
       const response = yield call(getStudentsList, payload);
       if (response.status == 200) {
         yield put({
-          type: "changeStudentsLst",
+          type: "changeStudentsList",
           payload: response.data,
         });
       }
@@ -155,12 +180,24 @@ const model = {
         subjectType: payload,
       };
     },
+   
     changeWorkList(state, { payload }) {
       return {
         ...state,
         workList: payload,
       };
     },
+    changeReplyList(state, { payload }) {
+      return {
+        ...state,
+        replyList: payload,
+      };
+    },
+
+
+
+
+
     changeSubjectList(state, { payload }) {
       return {
         ...state,
@@ -186,12 +223,7 @@ const model = {
         subjectDetail: payload,
       };
     },
-    changeStudentsLst(state, { payload }) {
-      return {
-        ...state,
-        studentsList: payload,
-      };
-    },
+   
 
     changeSubjectFeedBack(state, { payload }) {
       return {
