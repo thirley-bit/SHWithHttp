@@ -64,13 +64,14 @@ function PersonList(props) {
   return (
     <View className='person-list'>
       {showData.map((item, index) => {
+        console.log(item,'item')
         let title = "";
         let note = "";
         if (enter == 'parent') {
           title = item.nick_name + "(" + item.relative + ")";
         } else if (enter =='group') {
           title = item.groupName;
-          note = item.studentList.map((it) => it.studentName).join("、");
+          note = item.parentList.map((it) => it.userName).join("、");
         } else {
           title = item.teacher;
           note = item.note;

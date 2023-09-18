@@ -101,11 +101,15 @@ const model = {
       }
       return response;
     },
+    *getFeedbackFirst({ payload }, { call, put }) {
+      const response = yield call(getFeedbackFirst, payload);
+      console.log(response,'respnonse')
+      return response;
+    },
     *getFeedbackReply({ payload }, { call, put }) {
       const response = yield call(getFeedbackReply, payload);
       return response;
     },
-  getFeedbackReply,
 
 
 

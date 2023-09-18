@@ -30,12 +30,12 @@ const model = {
   state: {
     identity: { telephone: "15082178984" }, //登录信息
     // identity:{},
-    user: 0,
+    user: 1,
     userId: "3ee83b8573b54f5c99288618039b7c84",
     // userId:'',
     enter: "",
     classList: [],
-    studentId: "22",
+    studentId: "11",
     pageSize: 10,
     checkedList: [], //审核列表
 

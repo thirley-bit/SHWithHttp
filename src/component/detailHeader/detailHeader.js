@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Taro from '@tarojs/taro';
 import { connect } from "react-redux";
 import { View, Text, Image } from "@tarojs/components";
 import { AtAvatar, AtButton, AtDivider, AtIcon, AtModal } from "taro-ui";
@@ -32,6 +33,9 @@ function DetailHeader(props) {
   };
   const handleEdit = () => {
     console.log(1);
+    console.log(subjectDetail,'subjectDetail')
+    console.log(detailHeaderData,'detailHeaderData')
+    Taro.navigateTo({ url: `/pages/component/publish/publish?enter=${enter}&type=edit`});
   };
   const handleDel = (e) => {
     setIsOpened(true);
@@ -98,6 +102,12 @@ function DetailHeader(props) {
             <View className='edit'>
               <View className='img' onClick={() => handleEdit()}>
                 {/* <Image className='edit-img' src={edit} /> */}
+                <AtIcon
+                  className='icon'
+                  value='edit'
+                  size='22'
+                  color='#999'
+                ></AtIcon>
               </View>
               <View className='img' onClick={() => handleDel()}>
                 <AtIcon

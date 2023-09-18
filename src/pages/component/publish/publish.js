@@ -14,8 +14,15 @@ import "./publish.scss";
 
 function WorkDetail(props) {
   const { dispatch, subjectType, classStudent } = props;
+  const router = useRouter()
+  console.log(router,'router')
+  const enter = router.params.enter
+  const type = router.params.type
+  console.log(enter,type,'data')
   const [title, setTitle] = useState("");
   const [editor, setEditor] = useState("");
+  //输入框内容
+  const [msg, setMsg] = useState("");
   const [selectedSubject, setSelectedSubject] = useState(""); //选中的科目
   const [selectedPerson, setSelectedPerson] = useState(""); //选中的班级
   const [time, setTime] = useState("");//选中日期
@@ -32,8 +39,6 @@ function WorkDetail(props) {
       type:'Class/getClassStudent'
     })
   },[])
-  //输入框内容
-  const [msg, setMsg] = useState("");
 
   //输入框
   const handleInput = (e) => {

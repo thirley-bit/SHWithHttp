@@ -5,11 +5,11 @@ import apiConfig from "./apiConfig";
 const interceptor = function (chain) {
   const requestParams = chain.requestParams;
   const { method, data, url } = requestParams;
-  let token = Taro.getStorageSync("token"); //拿到本地缓存中存的token
-  let tokenParams = token ? {token} : {}
+  // let token = Taro.getStorageSync("token"); //拿到本地缓存中存的token
+  // let tokenParams = token ? {token} : {}
   requestParams.header = {
     ...requestParams.header,
-    ...tokenParams, //将token添加到头部
+    // ...tokenParams, //将token添加到头部
   };
   return chain.proceed(requestParams).then((res) => {
     return res;
@@ -34,7 +34,7 @@ const request = async (method, url, params) => {
     data: params,
     header: {
       "content-type": "application/json",
-      // "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyIiwicmFuZG9tRGF0ZSI6MTY5NDY1MzEzMjcyNiwidXNlcklkIjoiM2VlODNiODU3M2I1NGY1Yzk5Mjg4NjE4MDM5YjdjODQifQ.e_Gm0pJgMmRPY17BOQgy_MCQMymXvF_HsCh9KiniL9c"
+      "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjE1MDgyMTc4OTg0IiwidXNlclR5cGUiOjAsInVzZXJOYW1lIjoiIiwicmFuZG9tRGF0ZSI6MTY5NTAwMDAzMTU0NCwidXNlcklkIjoiYTdmOTMzYjgxMGYyNDE5Yjg0MjBjMzA5NWM4ZDg4ZDUifQ.1DVVKM_uAtoOSCfkeAzs5Tupj9mfA4uUKCz9Mi0QgXk"
      },
     success(res) {
       Taro.hideLoading()

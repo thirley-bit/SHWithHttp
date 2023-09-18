@@ -3,30 +3,43 @@ import { View, Image } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import NavTab from "@app/component/NavTab/NavTab";
 import "./History.scss";
+import GradientButton from '@app/component/GradientButton';
 
 function History() {
   let leftList = [
     {
       id: 0,
-      name: "学习成绩",
+      name: "学习成绩+学科评价",
       img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/cb6a44bda7ea15d2d6fb366976d34e7b.png',
       url: "/pages/class/Score/Score",
     },    
+    // {
+    //   id: 2,
+    //   name: "学科评价",
+    //   img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/3687c9d9155df7a026736191e90902f2.png',
+    //   url: "/pages/GrowthFile/History/Rewards/Rewards",
+    // },
     {
       id: 2,
-      name: "学科评价",
+      name: "奖惩+日常表现",
+      img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/1a8770573f8295ba4a69285747e5e983.png',
+      url: "/pages/GrowthFile/History/Rewards/Rewards",
+    },
+       {
+      id: 4,
+      name: "德育",
       img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/3687c9d9155df7a026736191e90902f2.png',
       url: "/pages/GrowthFile/History/Rewards/Rewards",
     },
     {
-      id: 4,
-      name: "日常表现",
-      img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/1a8770573f8295ba4a69285747e5e983.png',
+      id: 6,
+      name: "体育",
+      img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/017bf6f21a3b7b200a2f81f9745f858d.png',
       url: "/pages/GrowthFile/History/Rewards/Rewards",
     },
     {
-      id: 6,
-      name: "惩罚记录",
+      id: 8,
+      name: "劳动",
       img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/017bf6f21a3b7b200a2f81f9745f858d.png',
       url: "/pages/GrowthFile/History/Rewards/Rewards",
     },
@@ -38,22 +51,33 @@ function History() {
       img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/008f4e29328f84dbfc1abefd69b397a2.png',
       url: "/pages/class/HomeWork/HomeWork",
     },
+    // {
+    //   id: 3,
+    //   name: "课外学习",
+    //   img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/e16b206f9b241c06bc89aab449fb166b.png',
+    //   url: "/pages/GrowthFile/History/Rewards/Rewards",
+    // },
     {
       id: 3,
       name: "课外学习",
       img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/e16b206f9b241c06bc89aab449fb166b.png',
       url: "/pages/GrowthFile/History/Rewards/Rewards",
     },
-    
+        
     {
       id: 5,
-      name: "荣誉记录",
+      name: "智育",
       img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/a074cb90ee4ab6efbb784398ee8f34c5.png',
       url: "/pages/GrowthFile/History/Rewards/Rewards",
     },
-    
     {
       id: 7,
+      name: "美德",
+      img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/ff0192f186ac7d6806e1ee31608d4c40.png',
+      url: "/pages/GrowthFile/History/CheckIn/CheckIn",
+    },
+    {
+      id: 9,
       name: "考勤状况",
       img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/ff0192f186ac7d6806e1ee31608d4c40.png',
       url: "/pages/GrowthFile/History/CheckIn/CheckIn",
@@ -98,6 +122,8 @@ function History() {
         })}
         </View>
       </View>
+      <GradientButton type='primary' className='send-button'>查看最终报告</GradientButton>
+
     </View>
   );
 }

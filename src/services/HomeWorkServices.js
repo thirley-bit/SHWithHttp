@@ -35,6 +35,7 @@ export async function getReplyList(params){
 }
 //家长端第一次反馈
 export async function getFeedbackFirst(params){
+   console.log(params,'params')
    return httpService.post(`/homework/feedbackFirst`,params)
 }
 //反馈回复

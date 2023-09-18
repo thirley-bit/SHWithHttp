@@ -133,7 +133,7 @@ function Index(props) {
             return (
               <SwiperItem key={index}>
                 <View>
-                  <Image style='width:100%' src={item.url} />
+                  <Image style={{width:'100%',height:'320rpx'}} src={item.url} />
                 </View>
               </SwiperItem>
             );

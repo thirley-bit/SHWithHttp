@@ -11,8 +11,7 @@ import "./Sign.scss";
 
 function Sign(props) {
   console.log(props,'props');
-  const { user, dispatch, signRecordList, student, schoolEndTimeInfo } = props
-  const [students, setStudents] = useState([]);
+  const { user, dispatch, signRecordList,userId, studentId, specialTime, schoolEndTimeInfo } = props
   const [isEdit, setIsEdit] = useState(true);
   const [schoolId,setSchoolId] = useState('')
 
@@ -21,8 +20,8 @@ function Sign(props) {
     dispatch({
       type:'Sign/getSignRecordList',
       payload: {
-        userId: '3ee83b8573b54f5c99288618039b7c84',
-        studentId:""
+        userId: userId,
+        studentId:studentId
       },
     })
 
@@ -43,8 +42,35 @@ function Sign(props) {
   const handleChange = () => {
     setIsEdit(!isEdit);
   };
-  const handleSign = () => {
-    console.log("click");
+  const handleSign = (e) => {
+    dispatch({
+      type: "Sign/getUpdateSignRecord",
+      payload: {
+        id:e.id,
+        earlyStatus:1,
+        lateStatus:1
+      },
+    }).then(res => {
+      if (res.status == 200) {
+        dispatch({
+          type:'Sign/getSignRecordList',
+          payload: {
+            userId: userId,
+            studentId:studentId
+          },
+        })
+        //消息提示
+        Taro.atMessage({
+          message: res.message,
+          type: "success",
+        });
+      } else {
+        Taro.atMessage({
+          message: res.message,
+          type: "error",
+        });
+      }
+    })
   };
 
   const onTimeChange = (e) => {
@@ -79,18 +105,20 @@ function Sign(props) {
       {user == 0 ? (
         <View className='parent'>
           <View className='parent-item'>
-            {student.map((item, index) => {
+            {signRecordList.map((item, index) => {
               console.log(item);
+              let status = specialTime < 12 ? item.earlyStatus : item.lateStatus
+            
               return (
                 <View key={index}>
-                  <View className='text'>{item.student_name}</View>
+                  <View className='text'>{item.studentName}</View>
                   <View className='button'>
-                  {item.checked == true ? (
+                  {status == 0 ? (
                         <GradientButton
                           className='sign-button'
                           type='primary'
                           onClick={() =>
-                            handleSign(item, item.student_id, index)
+                            handleSign(item)
                           }
                         >
                           确认
@@ -100,7 +128,7 @@ function Sign(props) {
                           className='sign-button'
                           type='secondary'
                         >
-                          未出发
+                          已确认
                         </GradientButton>
                       )}
                   </View>
@@ -132,7 +160,9 @@ function Sign(props) {
 
 export default connect(state => ({
   user: state.users.user,
+  userId: state.users.userId,
+  studentId: state.users.studentId,
   signRecordList: state.Sign.signRecordList,
-  student: state.Sign.student,
+  specialTime: state.Sign.specialTime,
   schoolEndTimeInfo: state.Sign.schoolEndTimeInfo
 }))(Sign);

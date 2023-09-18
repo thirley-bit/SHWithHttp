@@ -3,3 +3,33 @@
     height: 23rpx;
     background: #f5f5f5;
 }
+.editor-show{
+    width: 92%;
+    margin: 0 auto;
+    .editor-box{
+        position: relative;
+        width:100%;
+        min-height: 47vh;
+        max-height: 10000rpx;
+        background:#fff;
+        overflow-y: scroll;
+        .editor{
+            position: absolute;
+            height: auto;
+        }
+    }
+    .add-image{
+        width: 100rpx;
+        text-align: center;
+        font-size: 24rpx;
+        color: #9a9a9a;
+    }
+    .choose{
+        width: 100%;
+        height: 60rpx;
+        line-height: 60rpx;
+        font-size: 28rpx;
+        font-weight: 500;
+        color: #333;
+    }
+}
