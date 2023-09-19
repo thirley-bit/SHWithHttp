@@ -2,6 +2,9 @@ import {
   getInsertGroup,
   getUpdateGroup,
   getGroupList,
+  getGroupUserList,
+  getAddressBookList,
+
   getTeacherList,
   getParentList,
   getMessageList,
@@ -13,6 +16,10 @@ const model = {
   state: {
     showLeft: "own", //判断布局是否是own
     groupList: [], //群聊列表
+    groupUserList:[], //群聊家长列表
+    addressList: {}, //通讯录列表
+
+
     teacherList: [], //通讯录老师列表
     parentList: [], //通讯录家长列表
     messageList: [], //私信列表
@@ -37,6 +44,30 @@ const model = {
       }
       return response;
     },
+    *getGroupUserList({ payload }, { call, put }) {
+      const response = yield call(getGroupUserList, payload);
+      if (response.status == 200) {
+        yield put({
+          type: "changeGroupUserList",
+          payload: response.data,
+        });
+      }
+      return response;
+    },
+    *getAddressBookList({ payload }, { call, put }) {
+      const response = yield call(getAddressBookList, payload);
+      if (response.status == 200) {
+        yield put({
+          type: "changeAddressList",
+          payload: response.data,
+        });
+      }
+      return response;
+    },
+
+
+
+
     *getTeacherList({ payload }, { call, put }) {
       const response = yield call(getTeacherList, payload);
       if (response.code == 1) {
@@ -84,6 +115,21 @@ const model = {
         groupList: payload,
       };
     },
+    changeGroupUserList(state, { payload }) {
+      return {
+        ...state,
+        groupUserList: payload,
+      };
+    },
+    changeAddressList(state, { payload }) {
+      return {
+        ...state,
+        addressList: payload,
+      };
+    },
+
+
+
     changeTeacherList(state, { payload }) {
       return {
         ...state,

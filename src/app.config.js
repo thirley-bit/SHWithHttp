@@ -66,6 +66,7 @@ export default defineAppConfig({
     'pages/component/Article/Article',  //文章详情
     'pages/component/detail/detail', //通知或作业详情
     'pages/component/publish/publish', //发布页面
+    'pages/component/publish/SendUserList/SendUserList', //选择的发送班级人员列表
     'pages/component/JoinedClass/JoinedClass', //切换班级/加入变更审核页面
   ],
   'permission':{

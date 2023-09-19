@@ -18,7 +18,7 @@ import "./AddressList.scss"
 
 function AddressList(props) {
   console.log(props,"addressprops")
-  const { dispatch, teacherList, parentList } = props
+  const { dispatch, teacherList, parentList, addressList } = props
   const [current, setCurrent] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [showTeacherData, setShowTeacherData] = useState([])
@@ -51,6 +51,13 @@ function AddressList(props) {
 
 
   useEffect(() => {
+    dispatch({
+      type:'AddressList/getAddressBookList',
+      payload:{
+        searchKey:'',
+        classId:1
+      }
+    })
     dispatch({
       type:'AddressList/getTeacherList'
     })
@@ -119,19 +126,20 @@ function AddressList(props) {
       <View  className='text'>
           <Text>老师</Text>
         </View>
-        <PersonList enter='teacher' showData={teacherList} />
+        <PersonList enter='teacher' showData={addressList.teacherList} />
       </View>
       <View className='teacher-list'>
         <View  className='text'>
           <Text>家长</Text>
           
         </View>
-        <PersonList enter='parent' showData={parentList} />
+        <PersonList enter='parent' showData={addressList.parentList} />
       </View>
     </View>
   )
 }
 export default connect((state) => ({
+  addressList: state.AddressList.addressList,
   teacherList: state.AddressList.teacherList,
   parentList: state.AddressList.parentList
 })) (AddressList)

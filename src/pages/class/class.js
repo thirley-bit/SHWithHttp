@@ -20,10 +20,7 @@ import "../../app.scss";
 function Index(props) {
   console.log(props,'props')
   const { dispatch, identity,user, articleArr, bannerList, pageSize, userId, studentId } = props;
-  // const [tabsCur, setTabsCur] = useState(0)
-  console.log(user,'user>>>>')
-  // const a = Taro.getStorageSync('token')
-  // console.log(a)
+
   const [current, setCurrent] = useState(0);
   const tabList = [
     {
@@ -60,9 +57,6 @@ function Index(props) {
     dispatch({
       type:'users/getClassAll'
     })
-    // dispatch({
-    //   type: "users/getUser",
-    // });
     //加载当前绑定的学生
     dispatch({
       type: "users/getJoinReviewListAll",
@@ -73,14 +67,16 @@ function Index(props) {
         status: [0,1,2,3],
       },
     });
+    //推荐文章
     dispatch({
       type: "Class/getArticleList",
+      payload:{
+        page: 1,
+        pageSize: pageSize,
+        type: null
+      }
     });
   }, []);
-
-  // const tabClick = (e) => {
-  //   setTabsCur(e);
-  // };
   const handleNav = () => {
     Taro.navigateTo({url:'/pages/my/WaitTodo/WaitTodo'})
   }
@@ -94,25 +90,13 @@ function Index(props) {
     console.log("more");
   };
 
-  const handleClick = (value) => {
-    console.log(value);
-  };
 
   return (
     <View className='index'>
       	<NavTab
         home
         title='诚道吉'
-        // renderCenter={
-        //     <View
-        //       className='trace-rowAlignCenter'
-        //     >
-        //       自定义导航栏标题
-        //     </View>
-        //   }
       	/>
-
-      {/* <NavTab  needBackIcon={false} mainTitle='诚道吉' /> */}
       <View className='new' onClick={handleNav}>
         <AtTag circle className='new-tag'>
           我的待办
@@ -157,7 +141,6 @@ function Index(props) {
           <ArticleList
             className='more-article'
             articleList={articleArr}
-            onClick={handleClick}
           ></ArticleList>
         </View>
       </View>

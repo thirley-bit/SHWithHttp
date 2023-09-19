@@ -32,9 +32,6 @@ function DetailHeader(props) {
     // setDetailHeaderData(data)
   };
   const handleEdit = () => {
-    console.log(1);
-    console.log(subjectDetail,'subjectDetail')
-    console.log(detailHeaderData,'detailHeaderData')
     Taro.navigateTo({ url: `/pages/component/publish/publish?enter=${enter}&type=edit`});
   };
   const handleDel = (e) => {

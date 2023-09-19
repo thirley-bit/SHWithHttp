@@ -2,6 +2,7 @@ import {
   getListByType,
   getTypeSelect,
   getInsertHomework,
+  getUpdateHomework,
   getWorkList,
   getWorkById,
   getViewHomework,
@@ -57,6 +58,10 @@ const model = {
     
     *getInsertHomework({ payload }, { call, put }) {
       const response = yield call(getInsertHomework, payload);
+      return response;
+    },
+    *getUpdateHomework({ payload }, { call, put }) {
+      const response = yield call(getUpdateHomework, payload);
       return response;
     },
     *getWorkList({ payload }, { call, put }) {

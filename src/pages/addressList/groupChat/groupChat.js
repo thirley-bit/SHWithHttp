@@ -46,25 +46,26 @@ function GroupChat(props) {
   const [groupName, setGroupName] = useState(""); //修改的群聊名称
   const tabList = [
     {
-      title: "新建群聊",
+      title: "聊天",
     },
     {
-      title: "群聊",
+      title: "新建",
     },
   ];
   const scrollHeight = {
     height: "63vh",
   };
+  console.log(checkedList, "isopendt");
   useEffect(() => {
-    studentsData();
-    groupData;
+    // studentsData();
+    groupData();
     clearAllCheckedData();
   }, []);
   //学生列表数据
   const studentsData = (val) => {
-    console.log(111)
+    console.log(111);
     dispatch({
-      type: "users/getStudentList",
+      type: "AddressList/getGroupUserList",
       payload: {
         page: 1,
         pageSize: pageSize,
@@ -73,6 +74,7 @@ function GroupChat(props) {
     }).then((res) => {
       if (res.status == 200) {
         let newData = res.data.map((item) => {
+          console.log(item, "item");
           let value = item.id;
           let label = (
             <View className='label-avatar'>
@@ -80,9 +82,9 @@ function GroupChat(props) {
                 size='small'
                 circle
                 className='avatar-img'
-                image={item.avatar ? item.avatar : normal}
+                image={item.avatar || normal}
               />
-              <View className='label-text'>{item.studentName}</View>
+              <View className='label-text'>{item.userName}</View>
             </View>
           );
           return {
@@ -124,37 +126,36 @@ function GroupChat(props) {
   const handleChange = (e) => {
     setCurrent(e);
     if (e == 0) {
-      studentsData();
-    } else {
       groupData();
-      setGroupEdit(false)
+      setGroupEdit(false);
+    } else {
+      studentsData();
     }
     //清空全选内容
     clearAllCheckedData();
     setSearchValue("");
-    setSearGroupValue("")
+    setSearGroupValue("");
   };
 
   //输入搜索内容
   const handleSearch = (value) => {
-    //current为0时(新建群聊）， 显示为朋友页面
+    //current为0时(聊天）， 显示为聊天组页面
     if (current === 0) {
+      //current为0时， 显示为群组页面
+      setSearGroupValue(value);
+      if (groupEdit) {
+        //如果是群聊修改状态，则显示搜索学生列表
+        studentsData(value);
+      }
+      //显示搜索群聊列表
+      groupData(value);
+    } else {
       //显示搜索内容
       setSearchValue(value);
       //显示搜索数据,e为搜索的关键字
       studentsData(value);
       //清空搜索内容
       clearAllCheckedData();
-    } else {
-      //current为1时， 显示为群组页面
-      setSearGroupValue(value);
-      if (groupEdit) {
-        //如果是群聊修改状态，则显示搜索学生列表
-        studentsData(value)
-      }
-      //显示搜索群聊列表
-      groupData(value);
-      //清空搜索内容
     }
   };
 
@@ -170,14 +171,15 @@ function GroupChat(props) {
 
   //选中的人员或标签，current为0时选中人员，current为1时选中标签
   const handleSelect = (value) => {
+    console.log(value)
     //当current为0时，显示为朋友页面
     if (current === 0) {
-      setCheckedList(value);
-    } else {
       //编辑群组时显示的人员列表数据
       if (groupEdit) {
         setCheckedList(value);
       }
+    } else {
+      setCheckedList(value);
     }
   };
 
@@ -185,17 +187,6 @@ function GroupChat(props) {
   const handleSelectAll = (value) => {
     //当current为0时，显示为朋友页面
     if (current === 0) {
-      if (value.length > 0) {
-        //全选
-        let newCheckedAll = showData.map((item) => item.value);
-        setCheckedList(newCheckedAll);
-        setCheckedAll(value);
-      } else {
-        //全不选
-        setCheckedList([]);
-        setCheckedAll([]);
-      }
-    } else {
       //编辑群组人员
       if (groupEdit) {
         if (value.length > 0) {
@@ -208,6 +199,17 @@ function GroupChat(props) {
           setCheckedList(groupChecked);
           setCheckedAll([]);
         }
+      }
+    } else {
+      if (value.length > 0) {
+        //全选
+        let newCheckedAll = showData.map((item) => item.value);
+        setCheckedList(newCheckedAll);
+        setCheckedAll(value);
+      } else {
+        //全不选
+        setCheckedList([]);
+        setCheckedAll([]);
       }
     }
   };
@@ -235,43 +237,43 @@ function GroupChat(props) {
   //输入标签的modal框,新建群聊接口
   const handleConfirmEdit = () => {
     dispatch({
-      type:'AddressList/getInsertGroup',
-      payload:{
-        groupName:newGroupName,
-        studentIdList:checkedList
-      }
-    }).then(res => {
-      if(res.status == 200){
+      type: "AddressList/getInsertGroup",
+      payload: {
+        groupName: newGroupName,
+        idList: checkedList,
+      },
+    }).then((res) => {
+      if (res.status == 200) {
         Taro.atMessage({
           message: res.message,
           type: "success",
         });
-        setCheckedList([])
+        setCheckedList([]);
         setIsOpenedEdit(false);
-      }else{
+      } else {
         Taro.atMessage({
           message: res.message,
           type: "error",
         });
       }
-    })
+    });
     //labelName传递给后端完成标签名字的修改
   };
 
   //编辑群聊
   const handleEdit = (val) => {
-    console.log(val,'val')
+    console.log(val, "val");
     //搜索群聊内容清空
     setSearGroupValue("");
     //修改的群聊id
-    setGroupId(val.id)
+    setGroupId(val.id);
     //显示群聊名称
     setGroupName(val.groupName);
     //群聊是否为修改状态
     setGroupEdit(true);
     //获取群聊中存在的学生
     let haveChecked = val.studentList.map((item) => item.id);
-    setGroupChecked(haveChecked)
+    setGroupChecked(haveChecked);
     setCheckedList(haveChecked);
     //如果群聊中的学生存在，全部学生列表显示已选且不可操作
     let newShowData = showData.map((d) => ({
@@ -285,115 +287,45 @@ function GroupChat(props) {
   const handleNameInput = (e) => {
     setGroupName(e.detail.value);
   };
-  
+
   //点击提交按钮
   const handleSend = () => {
     if (current == 0) {
-      setIsOpened(true);
-    } else {
-      console.log(groupName,'name')
-      console.log(checkedList,'list')
       dispatch({
-        type:'AddressList/getUpdateGroup',
-        payload:{
-          id:groupId,
-          groupName:groupName,
-          studentIdList:checkedList
-        }
-      }).then(res => {
-        if(res.status == 200){
+        type: "AddressList/getUpdateGroup",
+        payload: {
+          id: groupId,
+          groupName: groupName,
+          studentIdList: checkedList,
+        },
+      }).then((res) => {
+        if (res.status == 200) {
           Taro.atMessage({
             message: res.message,
             type: "success",
           });
-          groupData()
+          groupData();
           setGroupEdit(false);
-        }else{
+        } else {
           Taro.atMessage({
             message: res.message,
             type: "error",
           });
         }
-      })
+      });
+    } else {
+      console.log(222);
+      setIsOpened(true);
     }
   };
-  
 
   return (
     <View className='index'>
       <NavTab back title='群聊' />
       <View className='group-content'></View>
       <MyTabs current={current} tabList={tabList} onClick={handleChange}>
-        {/* 新建群聊 */}
-        <AtTabsPane current={current} index={0}>
-          <View className='group-list'>
-            {/* 新建群聊——人员搜索 */}
-            <View className='search'>
-              <AtSearchBar
-                value={searchValue}
-                onChange={handleSearch}
-                onClear={handleClear}
-              />
-            </View>
-
-            <View className='person'>
-              <ScrollView
-                className='scroll-view'
-                scrollY
-                scrollWithAnimation
-                style={scrollHeight}
-                scrollTop={scrollTop}
-                lowerThreshold={Threshold}
-                upperThreshold={Threshold}
-              >
-                {/* 新建群聊——全选按钮 */}
-                <AtCheckbox
-                  options={checkOption}
-                  selectedList={checkedAll}
-                  onChange={handleSelectAll}
-                />
-                {/* 新建群聊——人员列表 */}
-                <AtCheckbox
-                  options={showData}
-                  selectedList={checkedList}
-                  onChange={handleSelect}
-                />
-              </ScrollView>
-            </View>
-            <View>
-              {/* modal框，是否保存为群聊 */}
-              <Modal
-                isOpened={isOpened}
-                cancelText='忽略'
-                confirmText='存为标签'
-                onClose={handleClose}
-                onCancel={handleCancel}
-                onConfirm={handleConfirm}
-                content='存为标签，方便下次直接使用'
-              />
-              <AtModal
-                className='edit-modal'
-                isOpened={isOpenedEdit}
-                closeOnClickOverlay={false}
-              >
-                <AtModalContent className='modal-edit'>
-                  标签名字：
-                  <Input
-                    className='modal-input'
-                    maxlength={14}
-                    onInput={handleInput}
-                  />
-                </AtModalContent>
-                <AtModalAction>
-                  <Button onClick={() => handleCloseEdit()}>取消</Button>
-                  <Button onClick={() => handleConfirmEdit()}>确认</Button>
-                </AtModalAction>
-              </AtModal>
-            </View>
-          </View>
-        </AtTabsPane>
         {/* 群聊 */}
-        <AtTabsPane current={current} index={1}>
+        <AtTabsPane current={current} index={0}>
           <View className='group-list'>
             {/* 群聊——搜索 */}
             {groupEdit && (
@@ -409,6 +341,7 @@ function GroupChat(props) {
             )}
             <View className='search'>
               <AtSearchBar
+                showActionButton
                 value={searchGroupValue}
                 onChange={handleSearch}
                 onClear={handleClear}
@@ -450,11 +383,79 @@ function GroupChat(props) {
             </View>
           </View>
         </AtTabsPane>
+
+        {/* 新建群聊 */}
+        <AtTabsPane current={current} index={1}>
+          <View className='group-list'>
+            {/* 新建群聊——人员搜索 */}
+            <View className='search'>
+              <AtSearchBar
+                showActionButton
+                value={searchValue}
+                onChange={handleSearch}
+                onClear={handleClear}
+              />
+            </View>
+
+            <View className='person'>
+              <ScrollView
+                className='scroll-view'
+                scrollY
+                scrollWithAnimation
+                style={scrollHeight}
+                scrollTop={scrollTop}
+                lowerThreshold={Threshold}
+                upperThreshold={Threshold}
+              >
+                {/* 新建群聊——全选按钮 */}
+                <AtCheckbox
+                  options={checkOption}
+                  selectedList={checkedAll}
+                  onChange={handleSelectAll}
+                />
+                {/* 新建群聊——人员列表 */}
+                <AtCheckbox
+                  options={showData}
+                  selectedList={checkedList}
+                  onChange={handleSelect}
+                />
+              </ScrollView>
+            </View>
+          </View>
+        </AtTabsPane>
       </MyTabs>
+      <View>
+        {/* modal框，是否保存为群聊 */}
+        <Modal
+          isOpened={isOpened}
+          cancelText='忽略'
+          confirmText='存为标签'
+          onClose={handleClose}
+          onCancel={handleCancel}
+          onConfirm={handleConfirm}
+          content='存为标签，方便下次直接使用'
+        />
+        <AtModal
+          className='edit-modal'
+          isOpened={isOpenedEdit}
+          closeOnClickOverlay={false}
+        >
+          <AtModalContent className='modal-edit'>
+            标签名字：
+            <Input
+              className='modal-input'
+              maxlength={14}
+              onInput={handleInput}
+            />
+          </AtModalContent>
+          <AtModalAction>
+            <Button onClick={() => handleCloseEdit()}>取消</Button>
+            <Button onClick={() => handleConfirmEdit()}>确认</Button>
+          </AtModalAction>
+        </AtModal>
+      </View>
       <GradientButton
-        disabled={
-          checkedList.length > 0  ? false : true
-        }
+        disabled={checkedList.length > 0 ? false : true}
         type='primary'
         className='send-button'
         onClick={() => handleSend()}

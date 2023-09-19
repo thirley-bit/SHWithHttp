@@ -1,0 +1,19 @@
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+.label-avatar {
+    .avatar-img {
+      float: left;
+      width: 55rpx;
+      height: 55rpx;
+    }
+    .label-text {
+      width: 500rpx;
+      float: right;
+      display: block;
+      margin: 0 10rpx;
+      @extend .ellipsis;
+    }
+  }

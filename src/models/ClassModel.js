@@ -1,12 +1,23 @@
-import { getJoinClass, getArticleList, getClassStudent, getNews, getAAA } from "../services/ClassServices";
+import {
+  getJoinClass,
+  getClassStudent,
+  getArticleList,
+  getArticleById,
+
+
+
+  getNews,
+  getAAA,
+} from "../services/ClassServices";
 
 const model = {
   namespace: "Class",
   state: {
-    classStudent:[], //班级学生列表
-
-
+    classStudent: [], //班级学生列表
     articleArr: [], //文章列表数据
+    articleDetail: {}, //文章详情
+
+
     news: [],
     AAA: [],
     bannerList: [
@@ -23,7 +34,7 @@ const model = {
       {
         id: 3,
         title: "banner3",
-        url: "http://123.57.149.51/upload/upload_img/20230915/388205be55f4691be498dfb5cc026aea.png",
+        url: "http://123.57.149.51/upload/upload_img/20230918/d41718cfbeab3bf6a04b77a9fea38dbf.png",
       },
     ], //banner轮播图
     tabList: [
@@ -61,14 +72,14 @@ const model = {
   },
 
   effects: {
-    *getJoinClass({ payload }, { call }){
-      const responese = yield call(getJoinClass, payload)
-      return responese
+    *getJoinClass({ payload }, { call }) {
+      const responese = yield call(getJoinClass, payload);
+      return responese;
     },
     *getClassStudent({ payload }, { call, put }) {
       const response = yield call(getClassStudent, payload);
-      console.log(response,'response')
-      if(response.status == 200){
+      console.log(response, "response");
+      if (response.status == 200) {
         yield put({
           type: "changeClassStudent",
           payload: response.data,
@@ -76,14 +87,39 @@ const model = {
       }
       return response;
     },
+    *getArticleList({ payload }, { call, put }) {
+      const response = yield call(getArticleList, payload);
+      if (response.status == 200) {
+        yield put({
+          type: "changeArticleArr",
+          payload: response.data,
+        });
+      }
+      return response;
+    },
+    *getArticleById({ payload }, { call, put }) {
+      const response = yield call(getArticleById, payload);
+      if (response.status == 200) {
+        yield put({
+          type: "changeArticleById",
+          payload: response.data,
+        });
+      }
+      return response;
+    },
+
+
+
+
+
     *getAAA({ payload }, { call, put }) {
       const response = yield call(getAAA, payload);
       console.log(response, "responese111");
       // if (response.statusCode == 200) {
-        yield put({
-          type: "changeAAA",
-          payload: response,
-        });
+      yield put({
+        type: "changeAAA",
+        payload: response,
+      });
       // }
       return response;
     },
@@ -98,31 +134,23 @@ const model = {
       }
       return response;
     },
-    *getArticleList({ payload }, { call, put }) {
-      const response = yield call(getArticleList, payload);
-      if (response.code == 1) {
-        yield put({
-          type: "changeArticleArr",
-          payload: response.data.slice(0, 6),
-        });
-      }
-      return response;
-    },
+    
   },
 
   reducers: {
-
     changeClassStudent(state, { payload }) {
       return {
         ...state,
         classStudent: payload,
       };
     },
+    changeArticleById(state, { payload }) {
+      return {
+        ...state,
+        articleDetail: payload,
+      };
+    },
 
-
-
-
-    
     changeAAA(state, { payload }) {
       return {
         ...state,

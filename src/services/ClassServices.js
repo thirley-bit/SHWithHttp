@@ -9,7 +9,15 @@ export async function getJoinClass(params){
 export async function getClassStudent(params){
     return httpService.get('/class/getClassStudent',params)
 }
-export async function getArticleList(){
+//文章列表
+export async function getArticleList(params){
+    return httpService.post('/home/getArticleList',params)
+}
+//文章详情
+export async function getArticleById(params){
+    return httpService.get(`/home/getArticleById?id=${params}`,params)
+}
+export async function getArticleList1(){
     let url = "article/list"
     let data = api[url]
     return data

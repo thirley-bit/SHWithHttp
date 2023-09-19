@@ -62,7 +62,7 @@ function Work(props) {
     }
   }
   const handleClick = () => {
-    Taro.navigateTo({ url: "/pages/component/publish/publish" });
+    Taro.navigateTo({ url: `/pages/component/publish/publish?enter=${enter}&type=new` });
   };
   const handlePublish = (e) => {
     console.log(e);

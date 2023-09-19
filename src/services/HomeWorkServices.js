@@ -9,6 +9,10 @@ export async function getListByType(params){
 export async function getInsertHomework(params){
    return httpService.post(`/homework/insertHomework`,params)
 }
+//修改作业
+export async function getUpdateHomework(params){
+   return httpService.post(`/homework/updateHomework`,params)
+}
 //作业列表
 export async function getWorkList(params){
    return httpService.post(`/homework/getWorkList`,params)

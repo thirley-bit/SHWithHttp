@@ -1,11 +1,16 @@
 import { View, Image, Navigator } from "@tarojs/components";
+import { connect } from 'react-redux';
 import { AtCard } from "taro-ui";
 import "./ArticleList.scss"
 
 function ArticleList(props) {
-  const { articleList } = props;
-  const handleClick = () => {
-    console.log(111);
+  console.log(props,'props111')
+  const { dispatch, articleList, articleDetail } = props;
+  const handleClick = (e) => {
+    dispatch({
+      type:'Class/getArticleById',
+      payload:e.id
+    })
   };
   return (
     <View className='article'>
@@ -21,11 +26,11 @@ function ArticleList(props) {
                 <View className='at-row at-row--wrap'>
                   <View className='at-col at-col-8 at-col--wrap'>
                     <View className='card-content'>{item.title}</View>
-                    <View className='card-time'>{item.create_time}</View>
+                    <View className='card-time'>{item.createTime}</View>
                   </View>
                   <View className='at-col at-col-3'>
                     <View className='card-img'>
-                      <Image className='img' src={item.img_url} />
+                      <Image className='img' src={item.imgUrl} />
                     </View>
                   </View>
                 </View>
@@ -38,4 +43,6 @@ function ArticleList(props) {
   );
 }
 
-export default ArticleList;
+export default connect((state) => ({
+  articleDetail: state.Class.articleDetail
+}))(ArticleList);
