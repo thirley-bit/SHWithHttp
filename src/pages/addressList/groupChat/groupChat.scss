@@ -79,24 +79,7 @@
     }
   }
 }
-.search {
-  width: 95%;
-  padding: 1%;
-  margin: 3% auto;
-  background-color: #fff;
-  border-radius: 16rpx;
-  border: 2rpx solid #1ba6ff;
-}
-.at-search-bar {
-  height: 65rpx;
-  background-color: #fff;
-  border-radius: 16rpx;
-  padding: 0 18rpx 0 0;
-  background: rgba(255, 255, 255, 0.6);
-}
-.at-search-bar__action {
-  border-radius: 8rpx;
-}
+
 .label-avatar {
   .avatar-img {
     float: left;
@@ -122,11 +105,4 @@
     border: 1rpx solid #d6e4ef;
     margin: 4% 0 0 0;
   }
-}
-
-.send-button {
-  position: fixed;
-  width: 97%;
-  margin: 0 10rpx;
-  bottom: 0;
 }

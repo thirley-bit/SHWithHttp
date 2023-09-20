@@ -1,9 +1,13 @@
 import {
   getInsertGroup,
   getUpdateGroup,
+  getDeleteGroup,
   getGroupList,
   getGroupUserList,
   getAddressBookList,
+  getChatList,
+  getUpdateChatList,
+  getBeforeConnect,
 
   getTeacherList,
   getParentList,
@@ -18,6 +22,7 @@ const model = {
     groupList: [], //群聊列表
     groupUserList:[], //群聊家长列表
     addressList: {}, //通讯录列表
+    chatList: [], //私信列表
 
 
     teacherList: [], //通讯录老师列表
@@ -34,6 +39,10 @@ const model = {
         const response = yield call(getUpdateGroup, payload);
         return response;
     },
+    *getDeleteGroup({ payload }, { call }) {
+      const response = yield call(getDeleteGroup, payload);
+      return response;
+  },
     *getGroupList({ payload }, { call, put }) {
       const response = yield call(getGroupList, payload);
       if (response.status == 200) {
@@ -62,6 +71,24 @@ const model = {
           payload: response.data,
         });
       }
+      return response;
+    },
+    *getChatList({ payload }, { call, put }) {
+      const response = yield call(getChatList, payload);
+      if (response.status == 200) {
+        yield put({
+          type: "changeChatList",
+          payload: response.data,
+        });
+      }
+      return response;
+    },
+    *getUpdateChatList({ payload }, { call, put }) {
+      const response = yield call(getUpdateChatList, payload);
+      return response;
+    },
+    *getBeforeConnect({ payload }, { call, put }) {
+      const response = yield call(getBeforeConnect, payload);
       return response;
     },
 
@@ -125,6 +152,12 @@ const model = {
       return {
         ...state,
         addressList: payload,
+      };
+    },
+    changeChatList(state, { payload }) {
+      return {
+       ...state,
+        chatList: payload,
       };
     },
 

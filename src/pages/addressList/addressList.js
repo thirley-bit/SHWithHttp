@@ -55,7 +55,7 @@ function AddressList(props) {
       type:'AddressList/getAddressBookList',
       payload:{
         searchKey:'',
-        classId:1
+        classId:3
       }
     })
     dispatch({

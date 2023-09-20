@@ -16,13 +16,19 @@ import "./message.scss";
 //私信页面
 function Message(props){
   console.log(props,'messageprops')
-  const { dispatch, messageList } = props
+  const { dispatch, messageList,pageSize, chatList } = props
   const [editor, setEditor] = useState("");
   useEffect(() => {
     dispatch({
-      type:'AddressList/getMessageList'
+      type:'AddressList/getChatList',
+      payload:{
+        page:1,
+        pageSize:pageSize,
+        fromId:'3ee83b8573b54f5c99288618039b7c84',
+        searchKey:''
+      }
     })
-  })
+  },[])
   //输入框内容
   const [msg, setMsg] = useState("");
 
@@ -73,7 +79,7 @@ function Message(props){
         <AtSearchBar />
       </View>
       <View>
-          <PersonList enter='message' showData={messageList} />
+          <PersonList enter='message' showData={chatList} />
       </View>
 
       {/* <View className='components-page'>
@@ -116,5 +122,7 @@ function Message(props){
   );
 }
 export default connect((state) =>({
-  messageList: state.AddressList.messageList
+  pageSize: state.users.pageSize,
+  messageList: state.AddressList.messageList,
+  chatList: state.AddressList.chatList
 }))(Message);

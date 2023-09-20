@@ -9,6 +9,10 @@ export async function getInsertGroup(params){
 export async function getUpdateGroup(params){
     return httpService.post('/groupChat/updateGroup',params)
 }
+//删除群聊
+export async function getDeleteGroup(params){
+    return httpService.get(`/groupChat/deleteGroup?id=${params}`,params)
+}
 //群聊列表
 export async function getGroupList(params){
     return httpService.post('/groupChat/getGroupList',params)
@@ -21,7 +25,18 @@ export async function getGroupUserList(params){
 export async function getAddressBookList(params){
     return httpService.post('/user/getAddressBookList',params)
 }
-
+//私信列表
+export async function getChatList(params){
+    return httpService.post('/chat/getChatList',params)
+}
+//进入退出聊天窗口
+export async function getUpdateChatList(params){
+    return httpService.post('/chat/updateChatList',params)
+}
+//socket连接前处理
+export async function getBeforeConnect(params){
+    return httpService.post('/chat/beforeConnect',params)
+}
 
 
 export async function getTeacherList(){

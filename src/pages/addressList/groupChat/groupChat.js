@@ -22,6 +22,7 @@ import Modal from "@app/component/Modal";
 import normal from "@static/normal.png";
 import api from "@/api/api";
 import "./groupChat.scss";
+import SearchBar from "@app/component/SearchBar/SearchBar";
 
 function GroupChat(props) {
   const { dispatch, pageSize } = props;
@@ -57,12 +58,12 @@ function GroupChat(props) {
   };
   console.log(checkedList, "isopendt");
   useEffect(() => {
-    // studentsData();
+    groupUserData();
     groupData();
     clearAllCheckedData();
   }, []);
   //学生列表数据
-  const studentsData = (val) => {
+  const groupUserData = (val) => {
     console.log(111);
     dispatch({
       type: "AddressList/getGroupUserList",
@@ -74,7 +75,6 @@ function GroupChat(props) {
     }).then((res) => {
       if (res.status == 200) {
         let newData = res.data.map((item) => {
-          console.log(item, "item");
           let value = item.id;
           let label = (
             <View className='label-avatar'>
@@ -129,7 +129,7 @@ function GroupChat(props) {
       groupData();
       setGroupEdit(false);
     } else {
-      studentsData();
+      groupUserData();
     }
     //清空全选内容
     clearAllCheckedData();
@@ -145,7 +145,7 @@ function GroupChat(props) {
       setSearGroupValue(value);
       if (groupEdit) {
         //如果是群聊修改状态，则显示搜索学生列表
-        studentsData(value);
+        groupUserData(value);
       }
       //显示搜索群聊列表
       groupData(value);
@@ -153,7 +153,7 @@ function GroupChat(props) {
       //显示搜索内容
       setSearchValue(value);
       //显示搜索数据,e为搜索的关键字
-      studentsData(value);
+      groupUserData(value);
       //清空搜索内容
       clearAllCheckedData();
     }
@@ -162,7 +162,7 @@ function GroupChat(props) {
   //清空搜索内容
   const handleClear = () => {
     //显示原始数据
-    studentsData();
+    groupUserData();
     groupData();
     //清空搜索框内容
     setSearchValue("");
@@ -171,7 +171,7 @@ function GroupChat(props) {
 
   //选中的人员或标签，current为0时选中人员，current为1时选中标签
   const handleSelect = (value) => {
-    console.log(value)
+    console.log(value);
     //当current为0时，显示为朋友页面
     if (current === 0) {
       //编辑群组时显示的人员列表数据
@@ -257,22 +257,21 @@ function GroupChat(props) {
         });
       }
     });
-    //labelName传递给后端完成标签名字的修改
   };
 
   //编辑群聊
-  const handleEdit = (val) => {
-    console.log(val, "val");
+  const handleEdit = (record) => {
+    console.log(record, "val");
     //搜索群聊内容清空
     setSearGroupValue("");
     //修改的群聊id
-    setGroupId(val.id);
+    setGroupId(record.id);
     //显示群聊名称
-    setGroupName(val.groupName);
+    setGroupName(record.groupName);
     //群聊是否为修改状态
     setGroupEdit(true);
-    //获取群聊中存在的学生
-    let haveChecked = val.studentList.map((item) => item.id);
+    //获取群聊中存在的学生家长
+    let haveChecked = record.parentList.map((item) => item.id);
     setGroupChecked(haveChecked);
     setCheckedList(haveChecked);
     //如果群聊中的学生存在，全部学生列表显示已选且不可操作
@@ -287,6 +286,28 @@ function GroupChat(props) {
   const handleNameInput = (e) => {
     setGroupName(e.detail.value);
   };
+  const handleDel = (type, id) => {
+    console.log(type, id, ">>>>>");
+    if (type == 1) {
+      dispatch({
+        type: "AddressList/getDeleteGroup",
+        payload: id,
+      }).then((res) => {
+        if (res.status == 200) {
+          Taro.atMessage({
+            message: res.message,
+            type: "success",
+          });
+          groupData();
+        } else {
+          Taro.atMessage({
+            message: res.message,
+            type: "error",
+          });
+        }
+      });
+    }
+  };
 
   //点击提交按钮
   const handleSend = () => {
@@ -296,7 +317,7 @@ function GroupChat(props) {
         payload: {
           id: groupId,
           groupName: groupName,
-          studentIdList: checkedList,
+          idList: checkedList,
         },
       }).then((res) => {
         if (res.status == 200) {
@@ -314,11 +335,9 @@ function GroupChat(props) {
         }
       });
     } else {
-      console.log(222);
       setIsOpened(true);
     }
   };
-
   return (
     <View className='index'>
       <NavTab back title='群聊' />
@@ -339,14 +358,11 @@ function GroupChat(props) {
                 />
               </View>
             )}
-            <View className='search'>
-              <AtSearchBar
-                showActionButton
-                value={searchGroupValue}
-                onChange={handleSearch}
-                onClear={handleClear}
-              />
-            </View>
+            <SearchBar
+              value={searchGroupValue}
+              onChange={handleSearch}
+              onClear={handleClear}
+            />
             <View className='person'>
               <ScrollView
                 className='scroll-view'
@@ -376,7 +392,8 @@ function GroupChat(props) {
                   <PersonList
                     enter='group'
                     showData={groupList}
-                    onClick={handleEdit}
+                    onEdit={handleEdit}
+                    onDel={handleDel}
                   />
                 )}
               </ScrollView>
@@ -454,14 +471,16 @@ function GroupChat(props) {
           </AtModalAction>
         </AtModal>
       </View>
-      <GradientButton
-        disabled={checkedList.length > 0 ? false : true}
-        type='primary'
-        className='send-button'
-        onClick={() => handleSend()}
-      >
-        提交
-      </GradientButton>
+      {current == 1 && (
+        <GradientButton
+          disabled={checkedList.length > 0 ? false : true}
+          type='primary'
+          className='send-button'
+          onClick={() => handleSend()}
+        >
+          提交
+        </GradientButton>
+      )}
       <AtMessage />
     </View>
   );

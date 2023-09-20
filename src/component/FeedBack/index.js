@@ -43,7 +43,11 @@ function FeedBack(props) {
     // 详情头部组件
     <View className='feed-container'>
       <View>
-        {replyList.length == 0 ? '暂无数据' : (
+        {replyList.length == 0 ? (
+          <View style={{ margin: "2% 1%", color: "#999", fontSize: "24rpx" }}>
+            暂无数据
+          </View>
+        ) : (
           <View>
             {replyList.map((item, index) => {
               return (

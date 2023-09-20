@@ -2,50 +2,72 @@ import { useEffect, useState } from "react";
 import Taro from "@tarojs/taro";
 import { connect } from "react-redux";
 import { View, Text } from "@tarojs/components";
-import { AtCard, AtAvatar, AtModal, AtIcon, AtBadge } from "taro-ui";
+import { AtCard, AtAvatar, AtModal, AtIcon, AtBadge, AtMessage } from "taro-ui";
 import Modal from "@app/component/Modal";
 import "./PersonList.scss";
 
 //人员列表组件
 function PersonList(props) {
   console.log(props, "props");
-  const { dispatch, enter, showData, user, userList, onClick } = props;
+  const { dispatch, enter, showData, user, userList, onEdit, onDel } = props;
   const [isOpened, setIsOpened] = useState(false);
-  const [id, setId] = useState("");
+  const [id, setId] = useState('');
+  const [type, setType] = useState('') //判断是群聊页面还是其他页面
+  const [groupId, setGroupId] = useState(""); //选中需要删除的数据id
   useEffect(() => {
     dispatch({
       type: "users/getUserList",
     });
   }, []);
 
-  const handleNav = () => {
-    Taro.navigateTo({
-      url: "/pages/addressList/message/MessageDetail/MessageDetail",
-    });
+  const handleNav = (val) => {
+    console.log(val,'value');
+    dispatch({
+      type:'AddressList/getUpdateChatList',
+      payload:{
+        id:'2',
+        inWindow:1
+      }
+    })
+    dispatch({
+      type:'AddressList/getBeforeConnect',
+      payload:{
+        id:'1',
+        fromId:'3ee83b8573b54f5c99288618039b7c84',
+        toId:'a7f933b810f2419b8420c3095c8d88d5',
+        studentId:'33',
+        msgType:'0'
+      }
+    }).then(res => {
+      console.log(res,'res')
+      if (res.status == 200) {
+        Taro.atMessage({
+          message: res.message,
+          type: "success",
+        });
+        Taro.navigateTo({
+          url: "/pages/addressList/message/MessageDetail/MessageDetail",
+        });
+      } else {
+        Taro.atMessage({
+          message: res.message,
+          type: "error",
+        });
+      }
+    })
+    
   };
 
   const handleClick = (e) => {
-    // console.log(e);
     let newId = e.message_id;
-    setId(newId);
-    // let url = "message/updateListById"
-    // // let data = api[url].data
-    // setShowData(data)
+    setId(e.message_id);
   };
-
-  // const handleEnterMessage = () => {
-  //   Taro.navigateTo({'/'})
-  //   console.log(222)
-  // }
   const handleEdit = (record, val) => {
-    console.log(record);
-    onClick(record);
-    console.log(val, "val");
+    onEdit(record,val);
   };
   const handleDel = (record, index) => {
-    console.log(record, index);
-
-    // setId(e.message_id);
+    setGroupId(record.id)
+    setType(index)
     setIsOpened(true);
   };
 
@@ -57,8 +79,8 @@ function PersonList(props) {
   };
 
   const handleConfirm = () => {
-    console.log(id); //删除接口
     setIsOpened(false);
+    onDel(type,groupId)
   };
 
   return (
@@ -70,9 +92,12 @@ function PersonList(props) {
             let note = "";
             if (enter == "group") {
               title = item.groupName;
-              note = item.parentList.map((it) => it.userName).join("、");
-            } else {
-              title = item.userName;
+              note = item.parentList.filter(i => i.userName != null).map((it) => it.userName).join("、");
+            } else if(enter == 'message') {
+              title = item.toName;
+              note = item.finalMessage
+            } else{
+              title = item.userName
             }
             return (
               <View key={index} className='card'>
@@ -84,7 +109,7 @@ function PersonList(props) {
                   {/* 点击页面跳转至聊天界面 */}
                   <View
                     className='nav'
-                    onClick={enter == "message" && handleNav}
+                    onClick={enter == "message" && (() => handleNav(item))}
                   >
                     {/* 头像部分是否有新消息 */}
                     {enter !== "group" && (
@@ -165,7 +190,7 @@ function PersonList(props) {
                   {enter == "message" && (
                     <View className='card-right'>
                       <View className='card-time'>
-                        <View>{item.time.slice(11, 17)}</View>
+                        <View>{item?.finalChatTime?.slice(11, 16)}</View>
                       </View>
                     </View>
                   )}
@@ -188,8 +213,9 @@ function PersonList(props) {
           })}
         </View>
       ) : (
-        "暂无数据"
+        <View style={{margin:'2% 5%',color:'#999',fontSize:'22rpx'}}>暂无数据</View>
       )}
+      <AtMessage />
     </View>
   );
 }

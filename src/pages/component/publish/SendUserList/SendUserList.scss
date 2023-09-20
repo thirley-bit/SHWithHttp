@@ -1,19 +1,25 @@
-.ellipsis {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-.label-avatar {
-    .avatar-img {
-      float: left;
-      width: 55rpx;
-      height: 55rpx;
-    }
-    .label-text {
-      width: 500rpx;
-      float: right;
-      display: block;
-      margin: 0 10rpx;
-      @extend .ellipsis;
-    }
-  }
+// .ellipsis {
+//     white-space: nowrap;
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//   }
+// .label-avatar {
+//     .avatar-img {
+//       float: left;
+//       width: 55rpx;
+//       height: 55rpx;
+//     }
+//     .label-text {
+//       width: 500rpx;
+//       float: right;
+//       display: block;
+//       margin: 0 10rpx;
+//       @extend .ellipsis;
+//     }
+//   }
+//   .at-accordion__header{
+//     padding: 0 24rpx 0 0 ;
+//   }
+
+// @import "~taro-ui/dist/style/components/icon.scss";
+// @import "~taro-ui/dist/style/components/checkbox.scss";

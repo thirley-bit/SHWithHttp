@@ -19,38 +19,14 @@
           "scene": null
         },
         {
-          "name": "pages/addressList/addressList",
-          "pathName": "pages/addressList/addressList",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/class/MoreArticle/MoreArticle",
-          "pathName": "pages/class/MoreArticle/MoreArticle",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/addressList/groupChat/groupChat",
-          "pathName": "pages/addressList/groupChat/groupChat",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/component/publish/publish",
-          "pathName": "pages/component/publish/publish",
-          "query": "enter=homework&type=edit",
-          "scene": null
-        },
-        {
-          "name": "pages/component/publish/publish",
-          "pathName": "pages/component/publish/publish",
-          "query": "enter=homework&type=new",
-          "scene": null
-        },
-        {
           "name": "pages/component/publish/SendUserList/SendUserList",
           "pathName": "pages/component/publish/SendUserList/SendUserList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/addressList/Check/Check",
+          "pathName": "pages/addressList/Check/Check",
           "query": "",
           "scene": null
         }

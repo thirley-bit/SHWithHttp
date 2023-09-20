@@ -1,32 +1,33 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { View, Input, Text, Picker, Editor } from "@tarojs/components";
 import Taro, { useRouter } from "@tarojs/taro";
 import { AtButton, AtList, AtIcon, AtMessage } from "taro-ui";
-import DetailHeader from "@app/component/detailHeader/detailHeader";
-import StudentsList from "@app/component/StudentsList/StudentsList";
 import NavTab from "@app/component/NavTab/NavTab";
 import GradientButton from "@app/component/GradientButton";
 import Modal from "@app/component/Modal";
 import Divider from "@app/component/Divider";
-import api from "@/api/api";
 // import img from "../../../static/img.jpg";
 import "./publish.scss";
 
 function WorkDetail(props) {
-  const { dispatch, subjectType, classStudent, subjectDetail } = props;
+  const { dispatch, subjectType, classStudent, subjectDetail, chooseIdList, chooseName } = props;
+  console.log(chooseIdList,'idLis')
+  console.log(chooseName,'studet')
+  const sChooseNames = Object.values(chooseName).join(',');
+  const idList = Object.keys(chooseName)
   const router = useRouter();
   const enter = router.params.enter;
   const type = router.params.type;
   const [title, setTitle] = useState("");
-  const [editor, setEditor] = useState("");
+  // const [editor, setEditor] = useState("");
   //输入框内容
   const [msg, setMsg] = useState("");
   const [selectedSubject, setSelectedSubject] = useState(""); //选中的科目下标
-  const [selectedPerson, setSelectedPerson] = useState(""); //选中的班级下标
   const [time, setTime] = useState(""); //选中日期
   const [isOpened, setIsOpened] = useState(false); //打卡弹窗
 
+  const editorRef = useRef();
   const handleTitleInput = (e) => {
     setTitle(e.detail.value);
   };
@@ -41,7 +42,8 @@ function WorkDetail(props) {
     if (enter == "homework" && type == "edit") {
       setTitle(subjectDetail.title);
       // setMsg(subjectDetail.detailContent)
-      setEditor(subjectDetail.detailEditor);
+      // setEditor(subjectDetail.detailEditor);
+      editorRef.current && editorRef.current.setContents({ html: subjectDetail.detailContent });
       setSelectedSubject(
         subjectType.map((item) => item.value).indexOf(subjectDetail.subjectType)
       );
@@ -55,9 +57,7 @@ function WorkDetail(props) {
       title: title,
       detailContent: msg,
       subjectType: subjectType[selectedSubject]?.value,
-      studentIdList: classStudent[selectedPerson]?.studentList.map(
-        (it) => it.id
-      ),
+      studentIdList: idList,
       endTime: time,
     }
     if(type == 'edit'){
@@ -93,14 +93,21 @@ function WorkDetail(props) {
   }
   //输入框
   const handleInput = (e) => {
+    console.log(e,'>>>>')
     setMsg(e.detail.html);
   };
   const editorReady = (e) => {
+    console.log(e,'eeee')
     Taro.createSelectorQuery()
       .select("#editor")
       .context((res) => {
-        let newData = res.context;
-        setEditor(newData);
+        editorRef.current = res.context;
+        editorRef.current.setContents({ html: subjectDetail.detailContent });
+        // newData.value = 12
+        // console.log(newData,'newData')
+        // newData.setContents({html:'<p>11</p>'})
+        // setEditor(newData);
+        // setEditor
       })
       .exec();
   };
@@ -110,7 +117,7 @@ function WorkDetail(props) {
       sizeType: ["original", "compressed"],
       sourceType: ["album", "camera"],
       success: (res) => {
-        editor.insertImage({
+        editorRef.current.insertImage({
           src: res.tempFilePaths[0],
           width: "60%",
           success: () => {},
@@ -122,9 +129,6 @@ function WorkDetail(props) {
   const onSubChange = (e) => {
     //设置选择框中的显示科目
     setSelectedSubject(e.detail.value);
-  };
-  const onPersonChange = (e) => {
-    setSelectedPerson(e.detail.value);
   };
 
   //选择截至日期
@@ -146,7 +150,7 @@ function WorkDetail(props) {
     } else if (selectedSubject == "") {
       inputVal = false;
       tips = "请选择学科科目";
-    } else if (selectedPerson == "") {
+    } else if (chooseName == "") {
       tips = "请选择指定发送人";
       inputVal = false;
     } else if (time == "") {
@@ -227,27 +231,20 @@ function WorkDetail(props) {
           </View>
         </Picker>
         <Divider />
-        {/* <Picker
-          mode='selector'
-          range={classStudent.map((item) => item.className)}
-          onChange={onPersonChange}
-        > */}
           <View className='choose' onClick={() => {Taro.navigateTo({url:'/pages/component/publish/SendUserList/SendUserList'})}}>
             <View className='at-row'>
               <View className='at-col at-col-8'>
-                <Text className='content-name'>选择发送人</Text>
+                <Text className='content-name'>选择发送人<Text style={{fontSize:'22rpx',color:'red'}}>(请先选择，防止其他数据清空)</Text></Text>
               </View>
-              <View className='at-col-3'>
-                {selectedPerson == ""
-                  ? ""
-                  : classStudent[selectedPerson].className}
+              <View className='at-col-3' style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow:'ellipsis'}}>
+                {/* {chooseName == '' ? '' : chooseName} */}
+                {sChooseNames}
               </View>
               <View className='at-col-0'>
                 <AtIcon value='chevron-right' color='#999'></AtIcon>
               </View>
             </View>
           </View>
-        {/* </Picker> */}
         <Divider />
         <Picker mode='date' onChange={onTimeChange}>
           <View className='choose'>
@@ -290,5 +287,7 @@ function WorkDetail(props) {
 export default connect((state) => ({
   subjectType: state.HomeWork.subjectType,
   classStudent: state.Class.classStudent,
+  chooseIdList: state.Class.chooseIdList,
+  chooseName: state.Class.chooseName,
   subjectDetail: state.HomeWork.subjectDetail,
 }))(WorkDetail);

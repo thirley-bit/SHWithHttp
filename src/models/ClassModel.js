@@ -16,6 +16,8 @@ const model = {
     classStudent: [], //班级学生列表
     articleArr: [], //文章列表数据
     articleDetail: {}, //文章详情
+    chooseIdList: [], //选择的人员id
+    chooseName: '', //选择的人员名称
 
 
     news: [],
@@ -142,6 +144,18 @@ const model = {
       return {
         ...state,
         classStudent: payload,
+      };
+    },
+    changeChooseIdList(state, { payload }) {
+      return {
+       ...state,
+        chooseIdList: payload,
+      };
+    },
+    changeChooseName(state, { payload }) {
+      return {
+       ...state,
+        chooseName: payload,
       };
     },
     changeArticleById(state, { payload }) {

@@ -145,7 +145,8 @@ function Check(props) {
                           <View className='card-center'>
                             <View className='card-name'>{item.className}</View>
                             <View className='card-msg'>
-                              {item.studentName + "\xa0" + item.relative}
+                              {/* {item.studentName + "\xa0" + item.relative} */}
+                              {item.userName}
                             </View>
                           </View>
                         </View>
@@ -188,7 +189,7 @@ function Check(props) {
               })}
             </View>
           ) : (
-            <View style={{ margin: "50% 40%" }}>暂无内容</View>
+            <View style={{ margin: "50% 40%" }}>暂无数据</View>
           )}
         </AtTabsPane>
         <AtTabsPane current={current} index={1}>
@@ -201,7 +202,8 @@ function Check(props) {
                   title = item.className;
                   note = item.studentName + "\xa0" + item.relative;
                 } else {
-                  title = item.studentName + item.relative + "申请加入";
+                  // title = item.studentName + item.relative + "申请加入";
+                  title = item.userName + "申请加入";
                   note = "审核人：" + item.auditBy;
                 }
                 return (
@@ -250,7 +252,8 @@ function Check(props) {
                   title = item.class_name;
                   note = item.studentName + "\xa0" + item.relative;
                 } else {
-                  title = item.studentName + item.relative + "申请加入";
+                  // title = item.studentName + item.relative + "申请加入";
+                  title = item.userName + "申请加入";
                   note = "审核人：" + item.auditBy;
                 }
                 return (
@@ -286,7 +289,7 @@ function Check(props) {
               })}
             </View>
           ) : (
-            <View style={{ margin: "50% 40%" }}>暂无内容</View>
+            <View style={{ margin: "50% 40%" }}>暂无数据</View>
           )}
         </AtTabsPane>
       </MyTabs>
