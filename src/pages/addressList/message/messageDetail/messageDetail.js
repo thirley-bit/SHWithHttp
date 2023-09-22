@@ -24,7 +24,6 @@ function MessageDetail(props) {
   const router = useRouter()
   const roomId = router.params.roomId
   const toId = router.params.toId
-  console.log(roomId, toId,'roomid,toid')
 
   useEffect(() => {
     dispatch({
@@ -32,28 +31,23 @@ function MessageDetail(props) {
       payload: {
         page: 1,
         pageSize: 10,
-        roomId:roomId
+        roomId:"6c535c2f22e049748943bf0ea91905c9"
       },
     });
 
     Taro.connectSocket({
       // url:`ws://192.168.1.157:5002/websocket/${userId}/${roomId}`
-      url:`ws://192.168.1.157:5002/websocket/${userId}/${roomId}`,
+      url:`ws://192.168.1.157:5002/websocket/${userId}/6c535c2f22e049748943bf0ea91905c9`,
       header: {
         'content-type': 'application/json', // 默认值
-        "token":'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjE1MDgyMTc4OTg0IiwidXNlclR5cGUiOjAsInVzZXJOYW1lIjoiIiwicmFuZG9tRGF0ZSI6MTY5NTM2NjUwODc1MiwidXNlcklkIjoiYTdmOTMzYjgxMGYyNDE5Yjg0MjBjMzA5NWM4ZDg4ZDUifQ.8nWu2NQ875nvi6ViDZXouctTDILvxD4fLdDkQ8LQEGg'
+        "token":'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTUzNzMxODEzODgsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.C1hFYhEuIt7lfOhPm5Pgyao2PBxFiZxM12oKCgrU9kI'
       },
-      success: function (res1) {
-        console.log(res1.data)
-      }
     }).then(task => {
       task.onOpen(function () {
-        console.log('onOpen')
         // task.send({ data: '新消息发送' })
       })
     })
     Taro.onSocketOpen(function (socket) {
-      console.log(121212)
       setSocketOpen(true)
       // for(let i = 0;i < socketMsgQueue.length; i++){
       //   console.log(222)
@@ -65,10 +59,6 @@ function MessageDetail(props) {
     Taro.onSocketMessage(function (res) {
       console.log('收到服务器内容：' + res.data)
     })
- 
-
-
-
 
     Taro.onKeyboardHeightChange((res) => {
       console.log(res, "keyboard height");
@@ -80,6 +70,7 @@ function MessageDetail(props) {
     // rpxTopx()
    
   }, []);
+  console.log(messageList,'list')
   const sendSocketMessage = (msg) =>{
     if(socketOpen){
       Taro.sendSocketMessage({data:JSON.stringify(msg)}
@@ -158,8 +149,9 @@ function MessageDetail(props) {
   //     "sendMessage":"单聊第一条消息"
   // }
   let msg = {
-    roomId:roomId,
-    toId:toId,
+    // roomId:roomId,
+    roomId:'6c535c2f22e049748943bf0ea91905c9',
+    toId:'c57dae13ea244eb292f9d5e441200cf2',
     fromId:userId,
     msgType:0,
     sendMessage:inputVal

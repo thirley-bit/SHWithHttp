@@ -32,7 +32,7 @@ function PersonList(props) {
     dispatch({
       type:'AddressList/getBeforeConnect',
       payload:{
-        roomId:'',
+        roomId:'6c535c2f22e049748943bf0ea91905c9',
         fromId:userId,
         toId:val.userId,
         msgType:'0'
@@ -46,7 +46,9 @@ function PersonList(props) {
         });
         
         Taro.navigateTo({
-          url: `/pages/addressList/message/MessageDetail/MessageDetail?roomId=${res.data}&toId=${val.userId}`,
+          // url: `/pages/addressList/message/MessageDetail/MessageDetail?roomId=${res.data}&toId=${val.userId}`,
+         
+          url: `/pages/addressList/message/MessageDetail/MessageDetail?roomId=6c535c2f22e049748943bf0ea91905c9&toId=${val.userId}`,
         });
       } else {
         Taro.atMessage({

@@ -16,7 +16,7 @@ import "./message.scss";
 //私信页面
 function Message(props){
   console.log(props,'props')
-  const { dispatch, messageList,pageSize, chatList } = props
+  const { dispatch, messageList, userId, pageSize, chatList } = props
   const [editor, setEditor] = useState("");
   useEffect(() => {
     dispatch({
@@ -24,7 +24,7 @@ function Message(props){
       payload:{
         page:1,
         pageSize:pageSize,
-        fromId:'0b086c03b31248b786ca90eac03b9d83',
+        fromId:userId,
         searchKey:''
       }
     })
@@ -127,6 +127,7 @@ function Message(props){
   );
 }
 export default connect((state) =>({
+  userId: state.users.userId,
   pageSize: state.users.pageSize,
   messageList: state.AddressList.messageList,
   chatList: state.AddressList.chatList

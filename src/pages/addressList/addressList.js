@@ -54,7 +54,7 @@ function AddressList(props) {
       type:'AddressList/getAddressBookList',
       payload:{
         searchKey:'',
-        classId:3
+        classId:1
       }
     })
     dispatch({
@@ -132,7 +132,7 @@ function AddressList(props) {
           <Text>家长</Text>
           
         </View>
-        <PersonList enter='parent' showData={addressList.parentList} />
+        <PersonList enter='teacher' showData={addressList.parentList} />
       </View>
     </View>
   )
