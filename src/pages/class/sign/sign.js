@@ -10,7 +10,6 @@ import NavTab from '@app/component/NavTab/NavTab';
 import "./Sign.scss";
 
 function Sign(props) {
-  console.log(props,'props');
   const { user, dispatch, signRecordList,userId, studentId, specialTime, schoolEndTimeInfo } = props
   const [isEdit, setIsEdit] = useState(true);
   const [schoolId,setSchoolId] = useState('')

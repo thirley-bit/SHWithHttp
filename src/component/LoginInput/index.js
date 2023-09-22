@@ -15,7 +15,6 @@ import classIcon from "@static/class-icon.png";
 import "./index.scss";
 
 function LoginInput(props) {
-  console.log(props, "props");
   const { dispatch, loginType, loginUserType, classList, formList } = props;
   // const { dispatch, formList} = props
   const [classTeacher, setClassTeacher] = useState(0);
@@ -95,7 +94,7 @@ function LoginInput(props) {
     });
     //如果是家长，则所有必填，如果是老师，手机号，密码，验证码和身份必填});
     // const sendList = Object.assign(formObj)
-    console.log(sendList, "sendList");
+    // console.log(sendList, "sendList");
     //判断输入是否为空
     const nullObj = formList.find((item) => item.value == "");
     if (nullObj) {

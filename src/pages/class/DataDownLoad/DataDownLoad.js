@@ -17,7 +17,6 @@ import { connect } from "react-redux";
 import "./DataDownLoad.scss";
 
 function DataDownLoad(props) {
-  console.log(props,'datedownloadpeops')
   const { dispatch, sourceArr } = props;
   const [isOpened, setIsOpened] = useState(false);
   const [floatIsOpened, setFloatIsOpened] = useState(false);

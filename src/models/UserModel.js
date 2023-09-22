@@ -28,14 +28,16 @@ import {
 const model = {
   namespace: "users",
   state: {
-    identity: { telephone: "15082178984" }, //登录信息
-    // identity:{},
-    user: 1,
+    // identity: { telephone: "15082178984" }, //登录信息
+    // userId:'a7f933b810f2419b8420c3095c8d88d5',
+    // user:0,
+    // studentId: "11",
+
+    user:1,
     userId: "3ee83b8573b54f5c99288618039b7c84",
-    // userId:'',
+    identity:{telephone:'123'},
     enter: "",
     classList: [],
-    studentId: "11",
     pageSize: 10,
     checkedList: [], //审核列表
 
@@ -171,8 +173,6 @@ const model = {
     },
     *getJoinReviewListAll({ payload }, { call, put }) {
       const response = yield call(getJoinReviewList, payload);
-      console.log(response.data.filter((item) => item.defaultFlag == 1)[0]
-      .studentId)
       if (response.status == 200) {
         yield 
           put({
@@ -206,7 +206,6 @@ const model = {
       return response;
     },
     *getUpdateStudent({ payload }, { call, put }) {
-      console.log(payload,'payload')
       const response = yield call(getUpdateStudent, payload);
       return response;
     },

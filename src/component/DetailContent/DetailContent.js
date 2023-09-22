@@ -13,7 +13,6 @@ import { connect } from "react-redux";
 import "./DetailContent.scss";
 
 function DetailContent(props) {
-  console.log(props, "detailContentProps");
   const {
     dispatch,
     userId,

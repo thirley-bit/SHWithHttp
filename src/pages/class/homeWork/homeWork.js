@@ -9,8 +9,7 @@ import "./HomeWork.scss";
 
 // 作业页面
 function HomeWork(props) {
-  console.log(props, "props");
-  const { dispatch, studentId, workList, pageSize, homeWorkArr, subjectType } = props;
+  const { dispatch, user, userId, studentId, workList, pageSize, subjectType } = props;
   const [time, setTime] = useState("");
   const [selectorChecked, setSelectorChecked] = useState(""); //选中的科目下标
   const [page, setPage] = useState(1)
@@ -27,22 +26,32 @@ function HomeWork(props) {
       type: "HomeWork/getListByType",
       payload:1
     });
+    workListData()
   },[]);
-  //选择的page,时间，科目变化时请求接口
-  useEffect(() => {
+  const workListData = () => {
+    let payload = {
+      page: page,
+      pageSize: pageSize,
+      subjectType: chooseSubjectType,
+      createTime: createTime,
+      status:''
+    }
+    if(user == 0){
+      payload = {
+        ...payload,
+        searchId: studentId
+      }
+    }else{
+      payload = {
+      ...payload,
+        searchId: userId
+      }
+    }
     dispatch({
       type: "HomeWork/getWorkList",
-      payload: {
-        page: page,
-        pageSize: pageSize,
-        subjectType: chooseSubjectType,
-        searchId: studentId,
-        createTime: createTime,
-        status:''
-      },
+      payload: payload
     })
-  }, [page, createTime,chooseSubjectType])
- 
+  }
   //选择时间
   const onTimeChange = (e) => {
     //设置选择框中的显示时间
@@ -94,9 +103,10 @@ function HomeWork(props) {
   );
 }
 export default connect((state) => ({
+  user: state.users.user,
+  userId: state.users.userId,
   studentId: state.users.studentId,
   workList: state.HomeWork.workList,
-  homeWorkArr: state.HomeWork.homeWorkArr,
   subjectType: state.HomeWork.subjectType,
   pageSize: state.users.pageSize,
 }))(HomeWork);

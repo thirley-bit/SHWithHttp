@@ -1,31 +1,48 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { connect } from "react-redux";
-import { View, Input, Text, Picker, Editor } from "@tarojs/components";
+import { View, Input, Text, Picker, Editor, Button } from "@tarojs/components";
 import Taro, { useRouter } from "@tarojs/taro";
-import { AtButton, AtList, AtIcon, AtMessage } from "taro-ui";
+import {
+  AtButton,
+  AtList,
+  AtIcon,
+  AtMessage,
+  AtModal,
+  AtModalContent,
+  AtModalAction,
+} from "taro-ui";
 import NavTab from "@app/component/NavTab/NavTab";
 import GradientButton from "@app/component/GradientButton";
+import TreeSelect from "@app/component/TreeSelect/TreeSelect";
 import Modal from "@app/component/Modal";
 import Divider from "@app/component/Divider";
 // import img from "../../../static/img.jpg";
 import "./publish.scss";
 
 function WorkDetail(props) {
-  const { dispatch, subjectType, classStudent, subjectDetail, chooseIdList, chooseName } = props;
-  console.log(chooseIdList,'idLis')
-  console.log(chooseName,'studet')
-  const sChooseNames = Object.values(chooseName).join(',');
-  const idList = Object.keys(chooseName)
+  const {
+    dispatch,
+    subjectType,
+    classStudent,
+    subjectDetail,
+    chooseIdList,
+    chooseName,
+  } = props;
+  console.log(classStudent, "calss");
+  const sChooseNames = Object.values(chooseName).join(",");
+  // const idList = Object.keys(chooseName)
+  // const idList = ["11", "33", "44", "55", "66", "77", "88"];
   const router = useRouter();
   const enter = router.params.enter;
   const type = router.params.type;
   const [title, setTitle] = useState("");
-  // const [editor, setEditor] = useState("");
-  //输入框内容
   const [msg, setMsg] = useState("");
   const [selectedSubject, setSelectedSubject] = useState(""); //选中的科目下标
   const [time, setTime] = useState(""); //选中日期
   const [isOpened, setIsOpened] = useState(false); //打卡弹窗
+  const [personModalOpened, setPersonModalOpened] = useState(false); //人员选择弹窗
+  const [choosePerson, setChoosePerson] = useState([]) //选择的学生列表人员
+  const refTree = useRef();
 
   const editorRef = useRef();
   const handleTitleInput = (e) => {
@@ -36,43 +53,57 @@ function WorkDetail(props) {
       type: "HomeWork/getListByType",
       payload: 1,
     });
-    dispatch({
-      type: "Class/getClassStudent",
-    });
+    
+    let payload = {
+      workId:subjectDetail.id,
+      // workId:'4c5e2127a6134d64829bcc85b8df30a2',
+      searchKey:''
+    }
+
     if (enter == "homework" && type == "edit") {
       setTitle(subjectDetail.title);
-      // setMsg(subjectDetail.detailContent)
+      setMsg(subjectDetail.detailContent)
       // setEditor(subjectDetail.detailEditor);
-      editorRef.current && editorRef.current.setContents({ html: subjectDetail.detailContent });
+      editorRef.current &&
+        editorRef.current.setContents({ html: subjectDetail.detailContent });
       setSelectedSubject(
         subjectType.map((item) => item.value).indexOf(subjectDetail.subjectType)
       );
       setTime(subjectDetail.endTime);
     }
+    dispatch({
+      type: "Class/getClassStudent",
+      payload:payload
+    });
   }, []);
+  console.log(subjectType.map((item) => item.value),'value>>>')
+  console.log(subjectDetail.subjectType,'type')
+  console.log(subjectType.map((item) => item.value).indexOf(subjectDetail.subjectType),'12121212121')
+  console.log(subjectDetail,'subject')
 
   const sendData = (val) => {
-    let url = ''
+    let url = "";
     let payload = {
       title: title,
       detailContent: msg,
       subjectType: subjectType[selectedSubject]?.value,
-      studentIdList: idList,
+      studentIdList: choosePerson?.map(item => item.value),
       endTime: time,
-    }
-    if(type == 'edit'){
-      url = 'HomeWork/getUpdateHomework'
+    };
+    if (type == "edit") {
+      url = "HomeWork/getUpdateHomework";
       payload = {
         ...payload,
-        id:subjectDetail.id,
-        type:val
-      }
-    }else{
-      url = 'HomeWork/getInsertHomework'
+        id: subjectDetail.id,
+        type: val,
+      };
+    } else {
+      url = "HomeWork/getInsertHomework";
     }
+    console.log(payload,'payload')
     dispatch({
       type: url,
-      payload: payload
+      payload: payload,
     }).then((res) => {
       if (res.status == 200) {
         Taro.atMessage({
@@ -90,14 +121,14 @@ function WorkDetail(props) {
         });
       }
     });
-  }
+  };
   //输入框
   const handleInput = (e) => {
-    console.log(e,'>>>>')
+    console.log(e, ">>>>");
     setMsg(e.detail.html);
   };
   const editorReady = (e) => {
-    console.log(e,'eeee')
+    console.log(e, "eeee");
     Taro.createSelectorQuery()
       .select("#editor")
       .context((res) => {
@@ -130,6 +161,50 @@ function WorkDetail(props) {
     //设置选择框中的显示科目
     setSelectedSubject(e.detail.value);
   };
+  //选择发送人
+  const onPersonChange = () => {
+    setPersonModalOpened(true);
+  };
+  //处理传入treeSelect的数据结构
+  const dataSource = classStudent.map((item) => {
+    let label = item.className;
+    // eslint-disable-next-line no-shadow
+    let value = item.id;
+    let checked = false;
+    let children = item.studentList.map((jt) => {
+      // eslint-disable-next-line no-shadow
+      let label = jt.studentName;
+      // eslint-disable-next-line no-shadow
+      let value = jt.id;
+      // eslint-disable-next-line no-shadow
+      let checked = false;
+      return {
+        label,
+        value,
+        checked,
+      };
+    });
+    return {
+      label,
+      value,
+      checked,
+      children,
+    };
+  });
+  //获取树形选择器传出的值
+  const onChangeHandler = useCallback((selectItems) => {
+    setChoosePerson(selectItems)
+  }, []);
+  const handlePersonClose = () => {
+    setPersonModalOpened(false)
+  }
+  const handlePersonCancel = () => {
+    setPersonModalOpened(false);
+    // setChoosePerson([])
+  }
+  const handlePersonConfirm = () => {
+    setPersonModalOpened(false);
+  }
 
   //选择截至日期
   const onTimeChange = (e) => {
@@ -150,7 +225,8 @@ function WorkDetail(props) {
     } else if (selectedSubject == "") {
       inputVal = false;
       tips = "请选择学科科目";
-    } else if (chooseName == "") {
+      //此处修改过
+    } else if (choosePerson.length == 0) {
       tips = "请选择指定发送人";
       inputVal = false;
     } else if (time == "") {
@@ -165,7 +241,7 @@ function WorkDetail(props) {
       if (type == "edit") {
         setIsOpened(true);
       } else {
-        sendData()
+        sendData();
       }
     } else {
       //输入为空提示
@@ -180,11 +256,13 @@ function WorkDetail(props) {
   };
   const handleCancel = () => {
     setIsOpened(false);
-    sendData(0)
+    sendData(0);
+    Taro.navigateTo({ url: "/pages/class/HomeWork/HomeWork" });
   };
   const handleConfirm = () => {
     setIsOpened(false);
-    sendData(1)
+    sendData(1);
+    Taro.navigateTo({ url: "/pages/class/HomeWork/HomeWork" });
   };
   return (
     <View className='main'>
@@ -222,7 +300,9 @@ function WorkDetail(props) {
                 <Text className='content-name'>学科科目</Text>
               </View>
               <View className='at-col-1'>
-                {selectedSubject == "" ? "" : subjectType[selectedSubject]?.name}
+                {selectedSubject == ""
+                  ? ""
+                  : subjectType[selectedSubject]?.name}
               </View>
               <View className='at-col-0'>
                 <AtIcon value='chevron-right' color='#999'></AtIcon>
@@ -231,20 +311,28 @@ function WorkDetail(props) {
           </View>
         </Picker>
         <Divider />
-          <View className='choose' onClick={() => {Taro.navigateTo({url:'/pages/component/publish/SendUserList/SendUserList'})}}>
-            <View className='at-row'>
-              <View className='at-col at-col-8'>
-                <Text className='content-name'>选择发送人<Text style={{fontSize:'22rpx',color:'red'}}>(请先选择，防止其他数据清空)</Text></Text>
-              </View>
-              <View className='at-col-3' style={{overflow:'hidden',whiteSpace:'nowrap',textOverflow:'ellipsis'}}>
-                {/* {chooseName == '' ? '' : chooseName} */}
-                {sChooseNames}
-              </View>
-              <View className='at-col-0'>
-                <AtIcon value='chevron-right' color='#999'></AtIcon>
-              </View>
+        <View className='choose' onClick={() => onPersonChange()}>
+          <View className='at-row'>
+            <View className='at-col at-col-8'>
+              <Text className='content-name'>
+                选择发送人
+              </Text>
+            </View>
+            <View
+              className='at-col-3'
+              style={{
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {choosePerson.length  ? Object.values(choosePerson.map(item => item.label)).join(',') : ''}
+            </View>
+            <View className='at-col-0'>
+              <AtIcon value='chevron-right' color='#999'></AtIcon>
             </View>
           </View>
+        </View>
         <Divider />
         <Picker mode='date' onChange={onTimeChange}>
           <View className='choose'>
@@ -270,7 +358,6 @@ function WorkDetail(props) {
       </GradientButton>
       <AtMessage />
       <Modal
-        className='modal'
         isOpened={isOpened}
         cancelText='否'
         confirmText='是'
@@ -279,8 +366,26 @@ function WorkDetail(props) {
         onConfirm={handleConfirm}
         content='通知学生重新完成？'
       />
+      <View className='person'>
+        <AtModal isOpened={personModalOpened} onClose={handlePersonClose}>
+          <AtModalContent className='person-modal'>
+              {dataSource.length ? (
+                <TreeSelect
+                  ref={refTree}
+                  dataSource={dataSource}
+                  onChange={onChangeHandler}
+                />
+              ) : (
+                <View style={{ margin: "50% 40%" }}>暂无数据</View>
+              )}
+          </AtModalContent>
+          <AtModalAction>
+            <Button style={{borderRight:'1rpx solid #dedede'}} onClick={handlePersonCancel}>取消</Button>
+            <Button onClick={handlePersonConfirm}>确定</Button>
+          </AtModalAction>
+        </AtModal>
+      </View>
     </View>
-    // </View>
   );
 }
 

@@ -10,22 +10,27 @@ import Modal from "@app/component/Modal";
 import "./index.scss";
 
 function FeedBack(props) {
-  console.log(props, "freegds");
-  const { dispatch, pageSize, userId, workId, studentId, replyList } = props;
+  const { dispatch, pageSize, user, userId, workId, studentId, replyList } = props;
   const { showInput, hideInput } = useCommentContext();
   const { showEditor, hideEditor } = useCommentContext();
 
   useEffect(() => {
     hideEditor();
-    dispatch({
-      type: "HomeWork/getReplyList",
-      payload: {
-        page: 1,
-        pageSize: pageSize,
-        workId: workId,
+    let payload = {
+      page:1,
+      pageSize: pageSize,
+      workId: workId,
+    }
+    if(user == 0) {
+      payload = {
+        ...payload,
         studentId: studentId,
         userId: userId,
-      },
+      }
+    }
+    dispatch({
+      type: "HomeWork/getReplyList",
+      payload: payload
     }).then((res) => {
       if (res.status == 200) {
         if (res.data.length == 0) {
@@ -36,6 +41,7 @@ function FeedBack(props) {
   }, []);
 
   const handleFeedBack = (value) => {
+    console.log(value,'value')
     showInput(value);
   };
 
@@ -44,9 +50,15 @@ function FeedBack(props) {
     <View className='feed-container'>
       <View>
         {replyList.length == 0 ? (
-          <View style={{ margin: "2% 1%", color: "#999", fontSize: "24rpx" }}>
-            暂无数据
+          <View>
+            {
+              user == 1 && 
+              <View style={{ margin: "2% 1%", color: "#999", fontSize: "24rpx" }}>
+              暂无数据
+            </View>
+            }
           </View>
+          
         ) : (
           <View>
             {replyList.map((item, index) => {

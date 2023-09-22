@@ -7,7 +7,7 @@ export async function getJoinClass(params){
     return httpService.post('/class/joinClass',params)
 }
 export async function getClassStudent(params){
-    return httpService.get('/class/getClassStudent',params)
+    return httpService.get(`/class/getClassStudent?workId=${params.workId}&searchKey=${params.searchKey}`,params)
 }
 //文章列表
 export async function getArticleList(params){

@@ -21,7 +21,6 @@ import normal from "@static/normal.png";
 import "./Check.scss";
 
 function Check(props) {
-  console.log(props, "iooo");
   const { dispatch, user, userId, pageSize, identity, checkedList } = props;
   const [current, setCurrent] = useState(0);
   const [isOpened, setIsOpened] = useState(false);

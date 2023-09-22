@@ -1,51 +1,73 @@
-@import './style.scss';
+// @import './style.scss';
 
-$cls-prefix: 'cp-tree';
+// $cls-prefix: 'cp-tree';
 
-.#{$cls-prefix} {
-  .tree {
-    padding-left: 36px;
-    &-item-content {
-      position: relative;
+// .#{$cls-prefix} {
+//   .tree {
+//     padding-left: 36px;
+//     &-item-content {
+//       position: relative;
+//     }
+//     &-item-more {
+//       width: 80px;
+//       height: 90px;
+//       position: absolute;
+//       padding-right: 16px;
+//       top: 0;
+//       right: 0;
+//       z-index: 10;
+//       display: flex;
+//       align-items: center;
+//       justify-content: flex-end;
+//     }
+//   }
+// }
+
+// .#{$cls-prefix}-radio {
+//   .tree-item-radio {
+//     color: #333;
+//     font-size: 32px;
+//     padding: 24rpx 32rpx 24rpx 0;
+//     @include hairline-bottom(#d6e4ef);
+//     .label {
+//       padding-right: 24px;
+//     }
+//     .checked {
+//       color: #1890FF;
+//     }
+//     .disabled {
+//       opacity: 0.3;
+//     }
+//   }
+// }
+
+
+// .#{$cls-prefix}-multiple {
+//   .at-checkbox::before {
+//     border-top: 0;
+//   }
+// }
+
+ .tree-select {
+  width: 95%;
+  margin: 0 auto;
+    .tselect {
+        &-header {
+            margin-top: 0.75em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        &-content {
+            padding-left: 20rpx;
+            display: none;
+            &__item {
+                margin-top: 0.75em;
+            }
+            &.is-open {
+                display: block;
+                text-align: left;
+            }
+        }
     }
-    &-item-more {
-      width: 80px;
-      height: 90px;
-      position: absolute;
-      padding-right: 16px;
-      top: 0;
-      right: 0;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-    }
-  }
 }
-
-.#{$cls-prefix}-radio {
-  .tree-item-radio {
-    color: #333;
-    font-size: 32px;
-    padding: 24rpx 32rpx 24rpx 0;
-    @include hairline-bottom(#d6e4ef);
-    .label {
-      padding-right: 24px;
-    }
-    .checked {
-      color: #1890FF;
-    }
-    .disabled {
-      opacity: 0.3;
-    }
-  }
-}
-
-
-.#{$cls-prefix}-multiple {
-  .at-checkbox::before {
-    border-top: 0;
-  }
-}
-
-

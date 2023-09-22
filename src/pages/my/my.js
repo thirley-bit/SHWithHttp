@@ -18,7 +18,6 @@ import "./my.scss";
 function My(props) {
   
   const { dispatch, user, identity } = props;
-  console.log(props);
   let settingList = [
     {
       id: 0,

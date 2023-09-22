@@ -64,7 +64,6 @@ function GroupChat(props) {
   }, []);
   //学生列表数据
   const groupUserData = (val) => {
-    console.log(111);
     dispatch({
       type: "AddressList/getGroupUserList",
       payload: {

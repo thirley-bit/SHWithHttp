@@ -9,7 +9,6 @@ import "./Info.scss";
 function Info(props) {
   const { dispatch, user, studentInfo } = props;
   const [showData, setShowData] = useState([]);
-  console.log(props);
   useEffect(() => {
     dispatch({
       type: "users/getIdentity",

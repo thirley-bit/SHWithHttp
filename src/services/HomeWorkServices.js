@@ -17,7 +17,7 @@ export async function getUpdateHomework(params){
 export async function getWorkList(params){
    return httpService.post(`/homework/getWorkList`,params)
 }
-//作业列表去除红点（取出新消息）
+//作业列表去除红点（去除新消息）
 export async function getViewHomework(params){
    return httpService.post(`/homework/viewHomework`,params)
 }

@@ -15,7 +15,6 @@ import "./message.scss";
 
 //私信页面
 function Message(props){
-  console.log(props,'messageprops')
   const { dispatch, messageList,pageSize, chatList } = props
   const [editor, setEditor] = useState("");
   useEffect(() => {

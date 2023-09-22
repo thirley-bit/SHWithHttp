@@ -166,9 +166,9 @@
 // }))(SendUserList);
 
 import cls from 'classnames'
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { connect } from "react-redux";
-import { View } from "@tarojs/components";
+import { Button, View } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { AtCheckbox, AtAvatar, AtAccordion } from "taro-ui";
 import NavTab from "@app/component/NavTab/NavTab";
@@ -183,6 +183,9 @@ const clsPrefix = 'cp-tree'
 
 function SendUserList(props) {
   const { dispatch, classStudent, chooseIdList } = props;
+  const [idList, setIdList] = useState([])
+  const [nameList, setNameList] = useState([])
+  const refTree = useRef()
   useEffect(() => {
     classData("", "");
   }, []);
@@ -210,97 +213,57 @@ function SendUserList(props) {
     });
   };
 
-  const [value, setValue] = useState([]);
-  // const [multiple, setMultiple] = useState(true);
-  // const [dataSource, setDataSource] = useState([]);
-  const loadData = (data) => {
-    data.children = [{
-      label: '冰糖雪梨',
-      value: 'test',
-    }]
-  }
+
   const dataSource = classStudent.map((item) => {
     let label = item.className
     // eslint-disable-next-line no-shadow
     let value = item.id
-    let parentLevel = true
+    let checked = false
     let children = item.studentList.map((jt) => {
       // eslint-disable-next-line no-shadow
       let label = jt.studentName
       // eslint-disable-next-line no-shadow
       let value = jt.id
+      // eslint-disable-next-line no-shadow
+      let checked = false
       return {
         label,
         value,
+        checked
       }
     })
     return {
       label,
       value,
-      parentLevel,
+      checked,
       children,
     }
   })
-  // console.log(dataSource,'datasource')
 
-  const onChange = (val,id,parentLevel) => {
-    // id => 当前数据
-    // value => 选中显示数据
-    /**
-     * [
-     *  {
-     *   "parentId": [
-          *  childId
-          * ]
-     * }
-     * ]
-     */
-    console.log(id,'id')
-    console.log(val,'Value>>>')
-    console.log(parentLevel,'prenatLevel>>>>')
-    let objChecked  = {}
-    let idList = []
-    if(parentLevel){
-      let newCheckedAll = dataSource.filter((item) =>{return val.includes(item.value)})
-      // let newCheckedAll = dataSource.filter((item) => item.value == id)
-      
-      if(newCheckedAll.length == 0){
-        console.log(1212)
-        let newChecked = dataSource.filter((item) => item.value == id)
-        newChecked.forEach(jt => {
-          idList = jt.children.map(item => item.value)
-        })
-        // console.log(idList,'idList')
-        // console.log(newChecked,'newChecked')
-      }
-      // console.log(newCheckedAll,'newChallll>>>>>>>>>>>')
-      newCheckedAll.forEach(jt => {
-        jt.children.forEach(item => {
-          objChecked[item.value] = item.label
-        })
-      })
-    }
-    let a = val.filter((item) => idList.indexOf(item) != -1)
-    // console.log(a,'aaa')
-    // console.log(objChecked,'checked')
-    // console.log(newVal,'newVal?????')
-    // console.log(val.concat(newVal),'concat>>>>>')
-    setValue(val.concat(Object.keys(objChecked)))
-    // setValue(Object.keys(objChecked))
-    // setValue(a)
-    // setValue(val)
-  };
+  const onChangeHandler = useCallback((selectItems) => {
+    console.log(selectItems)
+    setIdList(selectItems.map((item) => item.value))
+    setNameList(selectItems.map((item) => item.label))
 
+  },[])
+
+  const handleSend = () => {
+    console.log(idList,)
+    console.log(nameList)
+  }
   return (
     <View className='main'>
       <NavTab back title='新建' />
-      <TreeSelect
-        multiple
-        value={value} 
-        loadData={loadData}
-        dataSource={dataSource} 
-        onChange={onChange}
-      />
+      {
+        dataSource.length ?
+        <TreeSelect
+          ref={refTree}
+          dataSource={dataSource} 
+          onChange={onChangeHandler}
+        />
+        :<View style={{ margin: "50% 40%" }}>暂无数据</View>
+      }
+      <Button onClick={handleSend}>2222</Button>
     </View>
   );
 }

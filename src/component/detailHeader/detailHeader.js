@@ -12,24 +12,59 @@ import normal from "@static/normal.png"
 import "./DetailHeader.scss";
 
 function DetailHeader(props) {
-  const { enter, user, subjectDetail, scoreDetail, noticeDetail } = props;
+  const { dispatch, enter, pageSize, user, studentId, subjectDetail, scoreDetail, noticeDetail } = props;
   const [isOpened, setIsOpened] = useState(false);
   const [detailHeaderData, setDetailHeaderData] = useState({});
 
   useEffect(() => {
-    if (enter == "homework") {
+    if (enter == "homework" && subjectDetail) {
       setDetailHeaderData(subjectDetail);
     } else if (enter == "notice") {
       setDetailHeaderData(noticeDetail);
     } else {
       setDetailHeaderData(scoreDetail);
     }
-  }, []);
+  }, [subjectDetail]);
 
   const handleCompleted = () => {
-    // let url = "subject/detail/completed"
-    // let data = api[url].data
-    // setDetailHeaderData(data)
+    console.log(111)
+    dispatch({
+      type:"HomeWork/getCompleteWork",
+      payload:{
+        workId:detailHeaderData.id,
+        studentId:studentId
+      }
+    }).then(res => {
+      if(res.status == 200){
+        Taro.atMessage({
+          message: res.message,
+          type: "success",
+        });
+        dispatch({
+          type: "HomeWork/getWorkList",
+          payload: {
+            page: 1,
+            pageSize: pageSize,
+            subjectType: '',
+            searchId: studentId,
+            createTime: '',
+            status:''
+          },
+        })
+        dispatch({
+          type:'HomeWork/getWorkById',
+          payload:{
+            id:detailHeaderData.id,
+            studentId:studentId
+          }
+        })
+      }else{
+        Taro.atMessage({
+          message: res.message,
+          type: "error",
+        });
+      }
+    })
   };
   const handleEdit = () => {
     Taro.navigateTo({ url: `/pages/component/publish/publish?enter=${enter}&type=edit`});
@@ -55,17 +90,11 @@ function DetailHeader(props) {
       <View className='header'>
         <Text className='title'>{detailHeaderData.title}</Text>
         <View className='note'>
-          {/* <AtAvatar
-            className='avatar'
-            size='small'
-            circle
-            image={detailHeaderData.avatar}
-          /> */}
           <AtAvatar
             className='avatar'
             size='small'
             circle
-            image={normal}
+            image={detailHeaderData.avatar || normal}
           />
           <Text className='extra'>
             {detailHeaderData.author + "\xa0\xa0\xa0" + detailHeaderData.createTime}
@@ -82,7 +111,7 @@ function DetailHeader(props) {
           <View className='content'>
             {enter == "homework" && (
               <View>
-                {detailHeaderData.hasCompleted == 1 ? (
+                {detailHeaderData.status == 1 ? (
                   <GradientButton type='secondary'>已完成</GradientButton>
                 ) : (
                   <GradientButton type='primary' onClick={handleCompleted}>
@@ -135,6 +164,8 @@ function DetailHeader(props) {
 
 export default connect((state) => ({
   user: state.users.user,
+  pageSize: state.users.pageSize,
+  studentId: state.users.studentId,
   subjectDetail: state.HomeWork.subjectDetail,
   scoreDetail: state.Score.scoreDetail,
   noticeDetail: state.Notice.noticeDetail,

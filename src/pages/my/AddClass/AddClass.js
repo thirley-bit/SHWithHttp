@@ -10,7 +10,6 @@ import normal from "@static/normal.png";
 import "./AddClass.scss";
 
 function AddClass(props) {
-  console.log(props,'props')
   const { dispatch, classList } = props
   const [showClassData, setShowClassData] = useState([])
   const [isOpened, setIsOpened] = useState(false)

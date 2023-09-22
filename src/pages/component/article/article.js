@@ -7,7 +7,6 @@ import api from "@/api/api";
 import './Article.scss'
 
 function ArticleDetail(props) {
-  console.log(props,'1122333444');
   const { dispatch, articleDetail } = props;
   const [article, setArticle] = useState({});
   const router = useRouter()

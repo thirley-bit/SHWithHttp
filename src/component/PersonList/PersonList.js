@@ -8,7 +8,6 @@ import "./PersonList.scss";
 
 //人员列表组件
 function PersonList(props) {
-  console.log(props, "props");
   const { dispatch, enter, showData, user, userList, onEdit, onDel } = props;
   const [isOpened, setIsOpened] = useState(false);
   const [id, setId] = useState('');

@@ -24,7 +24,6 @@ import relative from "@static/relative-icon.png";
 import "./Register.scss";
 
 function Register(props) {
-  console.log(props, "props");
   const { dispatch, classList } = props;
   const [loginUserType, setLoginUserType] = useState(0);
 

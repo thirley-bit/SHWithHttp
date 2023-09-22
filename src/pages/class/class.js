@@ -18,7 +18,6 @@ import "./class.scss";
 import "../../app.scss";
 
 function Index(props) {
-  console.log(props,'props')
   const { dispatch, identity,user, articleArr, bannerList, pageSize, userId, studentId } = props;
 
   const [current, setCurrent] = useState(0);

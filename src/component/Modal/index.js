@@ -8,8 +8,7 @@ function Modal({children, className, ...props }) {
     return 'modal'
   }, [className])
   return (
-    //   <AtButton size='small' {...props} className={_className}>{children}</AtButton>
-      <AtModal {...props} className={_className} />
+    <AtModal {...props} className={_className} />
   );
 }
 

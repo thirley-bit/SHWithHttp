@@ -4,7 +4,6 @@ import { AtCard } from "taro-ui";
 import "./ArticleList.scss"
 
 function ArticleList(props) {
-  console.log(props,'props111')
   const { dispatch, articleList, articleDetail } = props;
   const handleClick = (e) => {
     dispatch({

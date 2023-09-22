@@ -33,11 +33,23 @@ export async function getChatList(params){
 export async function getUpdateChatList(params){
     return httpService.post('/chat/updateChatList',params)
 }
+//进入退出聊天窗口
+export async function getDeleteChatList(params){
+    return httpService.post(`/chat/deleteChatList/${params}`,params)
+}
+//进入退出聊天窗口
+export async function getMessageList(params){
+    return httpService.post(`/chat/getMessageList`,params)
+}
+
 //socket连接前处理
 export async function getBeforeConnect(params){
     return httpService.post('/chat/beforeConnect',params)
 }
-
+//socket连接
+export async function getWebsocket(params){
+    return httpService.post(`websocket/${params.userId}/${params.roomId}`,params)
+}
 
 export async function getTeacherList(){
     let url = 'address/teacher/list'
@@ -59,11 +71,11 @@ export async function getChatGroupList(){
     let data = api[url]
     return data
 }
-export async function getMessageList(){
-    let url = 'message/list'
-    let data = api[url]
-    return data
-}
+// export async function getMessageList(){
+//     let url = 'message/list'
+//     let data = api[url]
+//     return data
+// }
 export async function getMessageDetail(){
     let url = 'message/detail'
     let data = api[url]

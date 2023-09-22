@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import "./Table.scss";
 
 function Table(props) {
-  console.log(props)
   const { dispatch, scoreTitle, dataSource } = props;
   const [isOpened, setIsOpened] = useState(false)
   const [id,setId] = useState('')

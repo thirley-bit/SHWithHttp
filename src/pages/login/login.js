@@ -11,7 +11,6 @@ import lock from "@static/lock-icon.png";
 import "./Login.scss";
 
 function Login(props) {
-  console.log(props,'props')
   const { dispatch, users } = props
   const [numberVal, setNumberVal] = useState("");
   const [loginUserType, setLoginUserType] = useState(0);

@@ -13,6 +13,18 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/component/publish/SendUserList/SendUserList",
+          "pathName": "pages/component/publish/SendUserList/SendUserList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/addressList/Check/Check",
+          "pathName": "pages/addressList/Check/Check",
+          "query": "",
+          "scene": null
+        },
+        {
           "name": "pages/class/class",
           "pathName": "pages/class/class",
           "query": "",
@@ -25,9 +37,9 @@
           "scene": null
         },
         {
-          "name": "pages/addressList/Check/Check",
-          "pathName": "pages/addressList/Check/Check",
-          "query": "",
+          "name": "pages/component/publish/publish",
+          "pathName": "pages/component/publish/publish",
+          "query": "enter=homework&type=new",
           "scene": null
         }
       ]

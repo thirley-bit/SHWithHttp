@@ -17,7 +17,6 @@ import "./AddressList.scss"
 
 
 function AddressList(props) {
-  console.log(props,"addressprops")
   const { dispatch, teacherList, parentList, addressList } = props
   const [current, setCurrent] = useState(0)
   const [searchValue, setSearchValue] = useState('')

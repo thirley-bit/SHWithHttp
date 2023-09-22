@@ -19,7 +19,6 @@ import GradientButton from "@app/component/GradientButton";
 import "./ChildMsg.scss";
 
 function ChildMsg(props) {
-  console.log(props, "porps");
   const { dispatch, studentId, studentDetail, settingList } = props;
   const [showData, setShowData] = useState([]);
   const [isOpened, setIsOpened] = useState(false);

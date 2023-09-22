@@ -1,47 +1,73 @@
-import { View , Input, Editor} from "@tarojs/components";
+import { View, Input, Editor } from "@tarojs/components";
 import Taro, { useRouter } from "@tarojs/taro";
-import { AtIcon, AtMessage } from 'taro-ui';
+import { AtIcon, AtMessage } from "taro-ui";
 import { connect } from "react-redux";
 import { createContext, useContext, useEffect, useState } from "react";
 import DetailHeader from "@app/component/detailHeader/detailHeader";
 import DetailContent from "@app/component/detailContent/detailContent";
-import CommentContext from '@app/component/context/CommentContext';
-import GradientButton from '@app/component/GradientButton';
-import NavTab from '@app/component/NavTab/NavTab';
+import CommentContext from "@app/component/context/CommentContext";
+import GradientButton from "@app/component/GradientButton";
+import NavTab from "@app/component/NavTab/NavTab";
 import "./detail.scss";
 
 function WorkDetail(props) {
-  const { dispatch, user, studentId, userId, pageSize, replyList } = props;
+  const {
+    dispatch,
+    user,
+    studentId,
+    userId,
+    pageSize,
+    subjectDetail,
+    replyList,
+  } = props;
   const router = useRouter();
   const enter = router.params.enter;
-  const id = router.params.id;
-  console.log(id,'id')
-  const [editorShow,setEditorShow] = useState(false) // 显示家长第一次反馈的文本框及提交按钮
+  const [editorShow, setEditorShow] = useState(false); // 显示家长第一次反馈的文本框及提交按钮
   const [editorValue, setEditorValue] = useState(""); //文本框内容
   const [editor, setEditor] = useState(""); //文本框输入内容
-  const [inputShow, setShowInput] = useState(false) //显示回复的输入框
-  const [inputValue, setInputValue] = useState("") //输入框内容
-  const [feedBackId, setFeedBackId] = useState("") //反馈内容id
- 
+  const [inputShow, setShowInput] = useState(false); //显示回复的输入框
+  const [inputValue, setInputValue] = useState(""); //输入框内容
+  const [toId, setToId] = useState(""); //教师端反馈给家长端时的家长id
+  const [feedBackId, setFeedBackId] = useState(""); //反馈内容id
+
+  console.log(subjectDetail, "subjectDetail");
+  const replyListData = () => {
+    let payload = {
+      page: 1,
+      pageSize: pageSize,
+      workId: subjectDetail.id,
+    };
+    if (user == 0) {
+      payload = {
+        ...payload,
+        studentId: studentId,
+        userId: userId,
+      };
+    }
+    dispatch({
+      type: "HomeWork/getReplyList",
+      payload: payload,
+    });
+  };
 
   //是否显示回复的输入框
   const showInput = (e) => {
-    console.log(e,'eeeeee>>>')
-    setFeedBackId(e.id)
-    setShowInput(true)
-  }
+    setToId(e.userId);
+    setFeedBackId(e.id);
+    setShowInput(true);
+  };
   //是否隐藏回复的输入框
   const hideInput = () => {
-    setShowInput(false)
-  }
+    setShowInput(false);
+  };
   //是否显示第一次回复的文本框
   const showEditor = () => {
-    setEditorShow(true)
-  }
+    setEditorShow(true);
+  };
   //是否隐藏第一次回复的文本框
   const hideEditor = () => {
-    setEditorShow(false)
-  }
+    setEditorShow(false);
+  };
   //文本框
   const editorReady = () => {
     Taro.createSelectorQuery()
@@ -75,36 +101,21 @@ function WorkDetail(props) {
   //发送第一次反馈内容，调用接口
   const handleSend = () => {
     dispatch({
-      type:'HomeWork/getFeedbackFirst',
-      payload:{
-        studentId:studentId,
-        workId:id,
-        // workId:"69db8993970c40a79dc6171f0539895f",
-        userId:userId,
-        feedback:editorValue
-      }
+      type: "HomeWork/getFeedbackFirst",
+      payload: {
+        studentId: studentId,
+        workId: subjectDetail.id,
+        userId: userId,
+        feedback: editorValue,
+      },
     }).then((res) => {
       if (res.status == 200) {
         Taro.atMessage({
           message: res.message,
           type: "success",
         });
-        dispatch({
-          type: "HomeWork/getReplyList",
-          payload: {
-            page: 1,
-            pageSize: pageSize,
-            // workId:id,
-            // workId: "69db8993970c40a79dc6171f0539895f",
-            // studentId:studentId,
-            // userId:userId
-        workId: "69db8993970c40a79dc6171f0539895f",
-        // studentId: studentId,
-        studentId:'22',
-        // userId:userId
-        userId: "94d66de363b643b59598efa995722318",
-          },
-        })
+        setEditorShow(false);
+        replyListData();
       } else {
         Taro.atMessage({
           message: res.message,
@@ -112,41 +123,42 @@ function WorkDetail(props) {
         });
       }
     });
-  }
+  };
 
   //文本框输入内容
   const handleInput = (e) => {
-    setInputValue(e.detail.value)
-  }
-  console.log(inputValue,feedBackId,'inputval')
+    setInputValue(e.detail.value);
+  };
   //发送回复内容，调用接口
   const handleComfirm = (e) => {
-    console.log(e,'val')
+    console.log(e, "val");
+    let payload = {
+      fromId: userId,
+      mainId: feedBackId,
+      content: inputValue,
+    };
+    if (user == 0) {
+      payload = {
+        ...payload,
+        toId: subjectDetail.createBy,
+      };
+    } else {
+      payload = {
+        ...payload,
+        toId: toId,
+      };
+    }
     dispatch({
-      type:'HomeWork/getFeedbackReply',
-      payload:{
-        toId:"3ee83b8573b54f5c99288618039b7c84",
-        fromId:"3ee83b8573b54f5c99288618039b7c84",
-        mainId:feedBackId,
-        content:inputValue
-      }
+      type: "HomeWork/getFeedbackReply",
+      payload: payload,
     }).then((res) => {
       if (res.status == 200) {
         Taro.atMessage({
           message: res.message,
           type: "success",
         });
-        setInputValue('')
-        dispatch({
-          type: "HomeWork/getReplyList",
-          payload: {
-            page: 1,
-            pageSize: pageSize,
-            workId:id,
-            studentId:studentId,
-            userId:userId
-          },
-        })
+        setInputValue("");
+        replyListData();
       } else {
         Taro.atMessage({
           message: res.message,
@@ -154,8 +166,8 @@ function WorkDetail(props) {
         });
       }
     });
-  }
-  
+  };
+
   return (
     <View className='detail-header'>
       <NavTab back title='作业' />
@@ -164,13 +176,22 @@ function WorkDetail(props) {
       <View className='detail-center'></View>
       {/* 仅存在于作业和成绩部分 */}
       {(enter == "homework" || enter == "score") && (
-        <CommentContext value={{ showInput, hideInput, showEditor, hideEditor }}>
-          <DetailContent enter={enter} id={id} />
+        <CommentContext
+          value={{ showInput, hideInput, showEditor, hideEditor }}
+        >
+          <DetailContent enter={enter} id={subjectDetail.id} />
         </CommentContext>
       )}
 
-      <View style={{position:'fixed',bottom:'220rpx'}}>
-      <Input type='text' value={inputValue} focus={inputShow} confirmType='发送' onInput={handleInput} onConfirm={handleComfirm} />
+      <View style={{ position: "fixed", bottom: "220rpx", left: "12rpx" }}>
+        <Input
+          type='text'
+          value={inputValue}
+          focus={inputShow}
+          confirmType='发送'
+          onInput={handleInput}
+          onConfirm={handleComfirm}
+        />
       </View>
       {user == 0 && editorShow && (
         <View className='editor-show'>
@@ -178,7 +199,7 @@ function WorkDetail(props) {
             <Editor
               id='editor'
               className='editor'
-              placeholder='正文...'
+              placeholder='请输入反馈...'
               onReady={() => editorReady()}
               onInput={(e) => handleEditorInput(e)}
             ></Editor>
@@ -187,7 +208,13 @@ function WorkDetail(props) {
             <AtIcon value='camera' size='30' color='#999'></AtIcon>
             <View>添加图片</View>
           </View>
-          <GradientButton type='primary' className='send-button' onClick={() => handleSend()}>提交反馈</GradientButton>
+          <GradientButton
+            type='primary'
+            className='send-button'
+            onClick={() => handleSend()}
+          >
+            提交反馈
+          </GradientButton>
         </View>
       )}
       <AtMessage />
@@ -200,5 +227,6 @@ export default connect((state) => ({
   pageSize: state.users.pageSize,
   userId: state.users.userId,
   studentId: state.users.studentId,
-  replyList: state.HomeWork.replyList
+  subjectDetail: state.HomeWork.subjectDetail,
+  replyList: state.HomeWork.replyList,
 }))(WorkDetail);

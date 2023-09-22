@@ -14,7 +14,6 @@ import normal from "@static/normal.png";
 import "./StudentsList.scss";
 
 function StudentsList(props) {
-  console.log(props,'studentProps')
   const { dispatch,userId, enter, showData, selectList, specialTime} = props;
   const [isAllChecked, setIsAllChecked] = useState(false);
   const scrollTop = 0;
@@ -103,8 +102,6 @@ function StudentsList(props) {
   const handleChecked = (value) => {
 
     let newSelectList = selectList.filter(item => item.studentId != value.studentId)
-    console.log(value,'item？？？');
-    console.log(newSelectList,'List>>>')
     dispatch({
       type: "Sign/changeSelectData",
       payload: newSelectList,
@@ -134,9 +131,10 @@ function StudentsList(props) {
           showData ? 
          <View className='form-width'>
           {showData.map((item, index) => {
-            const name = item.studentName;
+            console.log(item,'item')
+            const name = item?.studentName;
             let className = "sign-text";
-            if (name.length > 5) {
+            if (name?.length > 5) {
               className += " text2";
             }
             let status = specialTime < 12 ? item.earlyStatus : item.lateStatus
@@ -155,16 +153,11 @@ function StudentsList(props) {
                         <Radio value={item.name} checked={item.hasCompleted} ></Radio>
                       </Label>
                       }
-                      {/* <AtAvatar
+                      <AtAvatar
                         circle
                         className='sign-img'
                         image={item.avatar || normal}
-                      ></AtAvatar> */}
-                       <AtAvatar
-                         circle
-                         className='sign-img'
-                         image={normal}
-                       ></AtAvatar>
+                      ></AtAvatar>
                       <View className={className}>{name}</View>
                     </View>
                   </View>
@@ -183,7 +176,7 @@ function StudentsList(props) {
                       <AtAvatar
                         circle
                         className='sign-img'
-                        image={item.avatar ? item.avatar : normal}
+                        image={item.avatar || normal}
                       ></AtAvatar>
                       <View className={className}>{name}</View>
                       {status == 0 ? (

@@ -34,5 +34,19 @@
         font-weight: 500;
         color: #333;
     }
+   
+}
+.person{
+    .at-modal__container{
+        width: auto;
+        border-radius: 45rpx;
+        top: 65%;
+        color: #000;
+        text-align: left;
+    }
+    .person-modal{
+        width: 100vw;
+        height: 60vh;
+    }
 }
 
