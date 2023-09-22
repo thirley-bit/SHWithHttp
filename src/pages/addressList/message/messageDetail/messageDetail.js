@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Taro from "@tarojs/taro";
+import Taro, { useRouter } from "@tarojs/taro";
 import { connect } from "react-redux";
 // import { AtAvatar, AtButton, AtInput, AtTextarea } from "taro-ui";
 import { View, Image, Textarea, ScrollView, Button } from "@tarojs/components";
@@ -8,8 +8,10 @@ import normal from "@static/normal.png";
 import "./MessageDetail.scss";
 
 function MessageDetail(props) {
-  // console.log(props, "propsdetail");
-  const { dispatch, messageDetail } = props;
+  console.log(props, "propsdetail");
+  const { dispatch, messageList, userId,  messageDetail } = props;
+  const [socketOpen, setSocketOpen] = useState(false);
+  const [socketMsgQueue, setSocketMsgQueue] = useState([])
   // const showLeft = "own";
   // const sys = Taro.getSystemInfoSync();
   // const [keyboardHeight, setKeyboardHeight] = useState(0)
@@ -18,92 +20,56 @@ function MessageDetail(props) {
     // height: `${sys.safeArea.height - 177}px`,
     height: "100%",
   });
-
-  // const [bottomHeight, setBottomHeight] = useState({ marginBottom: "0px" });
-  // const [scrollTop, setScrollTop] = useState(0);
-  // const [pageNo, setPageNo] = useState(1);
   const [inputVal, setInputVal] = useState("");
-  // const [showData, setShowData] = useState([
-  //   {
-  //     speaker: "other",
-  //     expertName: "刘老师",
-  //     content: "eeeeeee对方的豆腐干大锅饭发红包发给红包发给豆腐干豆腐干地方",
-  //     expertAvatar:
-  //       "https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2",
-  //   },
-  //   {
-  //     speaker: "teacher1",
-  //     expertName: "李老师2",
-  //     content: "eeeeeee对方的豆腐干大锅饭发红包发给红包发给豆腐干豆腐干地方",
-  //     // expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'
-  //   },
-  //   {
-  //     speaker: "other",
-  //     expertName: "刘老师",
-  //     content: "eeeeeee对方的豆腐干大锅饭发红包发给红包发给豆腐干豆腐干地方",
-  //     expertAvatar:
-  //       "https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2",
-  //   },
-  //   {
-  //     speaker: "own",
-  //     userName: "张三爸爸",
-  //     userAvatar:
-  //       "https://tse1-mm.cn.bing.net/th/id/OIP-C.6bIS7AFNOpR19axzN94_AAHaHa?w=184&h=184&c=7&r=0&o=5&pid=1.7",
-  //     content: "法规的规定符合符合法规和法规的规定国防部分布广泛",
-  //   },
-  //   {
-  //     speaker: "own",
-  //     userName: "张三爸爸",
-  //     userAvatar:
-  //       "https://tse1-mm.cn.bing.net/th/id/OIP-C.6bIS7AFNOpR19axzN94_AAHaHa?w=184&h=184&c=7&r=0&o=5&pid=1.7",
-  //     content: "法规的规定符合符合法规和法规的规定国防部分布广泛",
-  //   },
-  //   {
-  //     speaker: "own",
-  //     userName: "张三爸爸",
-  //     userAvatar:
-  //       "https://tse1-mm.cn.bing.net/th/id/OIP-C.6bIS7AFNOpR19axzN94_AAHaHa?w=184&h=184&c=7&r=0&o=5&pid=1.7",
-  //     content: "法规的规定符合符合法规和法规的规定国防部分布广泛",
-  //   },
-  //   {
-  //     speaker: "own",
-  //     userName: "张三爸爸",
-  //     userAvatar:
-  //       "https://tse1-mm.cn.bing.net/th/id/OIP-C.6bIS7AFNOpR19axzN94_AAHaHa?w=184&h=184&c=7&r=0&o=5&pid=1.7",
-  //     content: "法规的规定符合符合法规和法规的规定国防部分布广泛",
-  //   },
-  //   {
-  //     speaker: "own",
-  //     userName: "张三爸爸",
-  //     content:
-  //       "eeeeeeeword   my name is thirkey对方的豆腐干大锅饭发红包发给红包发给豆腐干豆腐干地方",
-  //     // userAvatar:
-  //     // "https://tse1-mm.cn.bing.net/th/id/OIP-C.6bIS7AFNOpR19axzN94_AAHaHa?w=184&h=184&c=7&r=0&o=5&pid=1.7",
-  //   },
-  //   {
-  //     speaker: "other",
-  //     expertName: "刘老师",
-  //     content: "eeeeeee对方的豆腐干大锅饭发红包发给红包发给豆腐干豆腐干地方",
-  //     expertAvatar:
-  //       "https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2",
-  //   },
-  //   {
-  //     speaker: "other",
-  //     expertName: "李老师",
-  //     content: "eeeeeee对方的豆腐干大锅饭发红包发给红包发给豆腐干豆腐干地方",
-  //     // expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'
-  //   },
-  //   {
-  //     speaker: "teacher1",
-  //     expertName: "李老师1",
-  //     content: "eeeeeee对方的豆腐干大锅饭发红包发给红包发给豆腐干豆腐干地方",
-  //     // expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'
-  //   },
-  // ]);
+  const router = useRouter()
+  const roomId = router.params.roomId
+  const toId = router.params.toId
+  console.log(roomId, toId,'roomid,toid')
+
   useEffect(() => {
     dispatch({
-      type: "AddressList/getMessageDetail",
+      type: "AddressList/getMessageList",
+      payload: {
+        page: 1,
+        pageSize: 10,
+        roomId:roomId
+      },
     });
+
+    Taro.connectSocket({
+      // url:`ws://192.168.1.157:5002/websocket/${userId}/${roomId}`
+      url:`ws://192.168.1.157:5002/websocket/${userId}/${roomId}`,
+      header: {
+        'content-type': 'application/json', // 默认值
+        "token":'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjE1MDgyMTc4OTg0IiwidXNlclR5cGUiOjAsInVzZXJOYW1lIjoiIiwicmFuZG9tRGF0ZSI6MTY5NTM2NjUwODc1MiwidXNlcklkIjoiYTdmOTMzYjgxMGYyNDE5Yjg0MjBjMzA5NWM4ZDg4ZDUifQ.8nWu2NQ875nvi6ViDZXouctTDILvxD4fLdDkQ8LQEGg'
+      },
+      success: function (res1) {
+        console.log(res1.data)
+      }
+    }).then(task => {
+      task.onOpen(function () {
+        console.log('onOpen')
+        // task.send({ data: '新消息发送' })
+      })
+    })
+    Taro.onSocketOpen(function (socket) {
+      console.log(121212)
+      setSocketOpen(true)
+      // for(let i = 0;i < socketMsgQueue.length; i++){
+      //   console.log(222)
+        // sendSocketMessage(socketMsgQueue[i])
+      // }
+      // setSocketMsgQueue([])
+      console.log('onSocketOpen连接已打开')
+    })
+    Taro.onSocketMessage(function (res) {
+      console.log('收到服务器内容：' + res.data)
+    })
+ 
+
+
+
+
     Taro.onKeyboardHeightChange((res) => {
       console.log(res, "keyboard height");
       const { height } = res;
@@ -112,7 +78,19 @@ function MessageDetail(props) {
     // scrollMsgBottom();
     return () => Taro.offKeyboardHeightChange();
     // rpxTopx()
+   
   }, []);
+  const sendSocketMessage = (msg) =>{
+    if(socketOpen){
+      Taro.sendSocketMessage({data:JSON.stringify(msg)}
+        ).then(res => {
+        console.log(res,'res')
+      })
+    }else{
+      setSocketMsgQueue(socketMsgQueue.push(msg))
+    }
+  }
+
 
   // const scrollMsgBottom = () => {
   //   //外层加延时函数是为了获取到节点的标准信息11
@@ -168,23 +146,42 @@ function MessageDetail(props) {
     // console.log(e);
     setInputVal(e.detail.value);
   };
+  console.log(socketOpen,'open')
 
   const handleSendMessage = (e) => {
+    console.log(inputVal,'inpiut')
+  //   let msg =  {
+  //     "roomId":"e020f5e2a81d4c19a6b81ea4b99153fc",
+  //     "toId":"65f65ea3277f4aae8a8d025706e1ab73",
+  //     "fromId":"a7f933b810f2419b8420c3095c8d88d5",
+  //     "msgType":0,
+  //     "sendMessage":"单聊第一条消息"
+  // }
+  let msg = {
+    roomId:roomId,
+    toId:toId,
+    fromId:userId,
+    msgType:0,
+    sendMessage:inputVal
+  }
+  
+    sendSocketMessage(msg)
+
     // console.log(e);
-    setInputVal("");
-    Taro.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有，在H5浏览器端支持使用 `user` 和 `environment`分别指定为前后摄像头
-      success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        var tempFilePaths = res.tempFilePaths
-      }
-    })
+    // setInputVal("");
+    // Taro.chooseImage({
+    //   count: 1,
+    //   sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+    //   sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有，在H5浏览器端支持使用 `user` 和 `environment`分别指定为前后摄像头
+    //   success: function (res) {
+    //     // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+    //     var tempFilePaths = res.tempFilePaths
+    //   }
+    // })
   };
 
   const _renderMessage = (msgInfo, index) => {
-    if (msgInfo?.speaker == "own") {
+    if (msgInfo?.fromId == userId) {
       return (
         <View
           id={`scrollId${index + 1}`}
@@ -212,10 +209,10 @@ function MessageDetail(props) {
           />
           <View className='info'>
             <View className='name' style='text-align:right'>
-              {msgInfo.name}
+              {msgInfo.fromName}
             </View>
             <View className='textCon'>
-              <View className='text'>{msgInfo?.content}</View>
+              <View className='text'>{msgInfo?.sendMessage}</View>
             </View>
           </View>
         </View>
@@ -235,10 +232,10 @@ function MessageDetail(props) {
           />
           <View className='info'>
             <View className='name'>
-              {msgInfo.name}
+              {msgInfo.toName}
             </View>
             <View className='textCon'>
-              <View className='text'>{msgInfo?.content}</View>
+              <View className='text'>{msgInfo?.sendMessage}</View>
             </View>
           </View>
         </View>
@@ -259,13 +256,13 @@ function MessageDetail(props) {
           className='ScrollView scroll__view'
           scrollY
           scrollWithAnimation
-          scrollIntoView={`scrollId${messageDetail.length}`}
+          scrollIntoView={`scrollId${messageList.length}`}
           // scrollTop={scrollTop}
           // style={scrollHeight}
         >
           <View id='chatlistview' className='chatRoom'>
             <View className='chatContent'>
-              {messageDetail?.map(_renderMessage)}
+              {messageList?.map(_renderMessage)}
             </View>
           </View>
         </ScrollView>
@@ -294,6 +291,8 @@ function MessageDetail(props) {
   );
 }
 export default connect((state) => ({
+  userId: state.users.userId,
   showLeft: state.AddressList.showLeft,
+  messageList: state.AddressList.messageList,
   messageDetail: state.AddressList.messageDetail,
 }))(MessageDetail);

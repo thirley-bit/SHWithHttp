@@ -8,7 +8,7 @@ import "./PersonList.scss";
 
 //人员列表组件
 function PersonList(props) {
-  const { dispatch, enter, showData, user, userList, onEdit, onDel } = props;
+  const { dispatch, enter, showData,userId, user, userList, onEdit, onDel } = props;
   const [isOpened, setIsOpened] = useState(false);
   const [id, setId] = useState('');
   const [type, setType] = useState('') //判断是群聊页面还是其他页面
@@ -17,10 +17,11 @@ function PersonList(props) {
     dispatch({
       type: "users/getUserList",
     });
+    
   }, []);
 
   const handleNav = (val) => {
-    console.log(val,'value');
+    console.log(val,'value111111');
     dispatch({
       type:'AddressList/getUpdateChatList',
       payload:{
@@ -31,10 +32,9 @@ function PersonList(props) {
     dispatch({
       type:'AddressList/getBeforeConnect',
       payload:{
-        id:'1',
-        fromId:'3ee83b8573b54f5c99288618039b7c84',
-        toId:'a7f933b810f2419b8420c3095c8d88d5',
-        studentId:'33',
+        roomId:'',
+        fromId:userId,
+        toId:val.userId,
         msgType:'0'
       }
     }).then(res => {
@@ -44,8 +44,9 @@ function PersonList(props) {
           message: res.message,
           type: "success",
         });
+        
         Taro.navigateTo({
-          url: "/pages/addressList/message/MessageDetail/MessageDetail",
+          url: `/pages/addressList/message/MessageDetail/MessageDetail?roomId=${res.data}&toId=${val.userId}`,
         });
       } else {
         Taro.atMessage({
@@ -151,7 +152,7 @@ function PersonList(props) {
                     <View>
                       {enter !== "message" && (
                         <View className='card_address'>
-                          <View className='icon-message' onClick={handleNav}>
+                          <View className='icon-message' onClick={() => handleNav(item)}>
                             <AtIcon value='message' size='18' color='#03B615' />
                           </View>
                           <View
@@ -220,5 +221,6 @@ function PersonList(props) {
 }
 export default connect((state) => ({
   user: state.users.user,
+  userId: state.users.userId,
   userList: state.users.userList,
 }))(PersonList);

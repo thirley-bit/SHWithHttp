@@ -41,6 +41,30 @@
           "pathName": "pages/component/publish/publish",
           "query": "enter=homework&type=new",
           "scene": null
+        },
+        {
+          "name": "pages/addressList/addressList",
+          "pathName": "pages/addressList/addressList",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/addressList/message/message",
+          "pathName": "pages/addressList/message/message",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/addressList/message/MessageDetail/MessageDetail",
+          "pathName": "pages/addressList/message/MessageDetail/MessageDetail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/addressList/addressList",
+          "pathName": "pages/addressList/addressList",
+          "query": "",
+          "scene": null
         }
       ]
     }

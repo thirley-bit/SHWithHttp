@@ -7,11 +7,14 @@ import {
   getAddressBookList,
   getChatList,
   getUpdateChatList,
+  getDeleteChatList,
+  getMessageList,
   getBeforeConnect,
+  getWebsocket,
 
   getTeacherList,
   getParentList,
-  getMessageList,
+  // getMessageList,
   getMessageDetail,
 } from "../services/AddressListServices";
 
@@ -87,8 +90,26 @@ const model = {
       const response = yield call(getUpdateChatList, payload);
       return response;
     },
+    *getDeleteChatList({ payload }, { call, put }) {
+      const response = yield call(getDeleteChatList, payload);
+      return response;
+    },
+    *getMessageList({ payload }, { call, put }) {
+      const response = yield call(getMessageList, payload);
+      if (response.status == 200) {
+        yield put({
+          type: "changeMessageList",
+          payload: response.data,
+        });
+      }
+      return response;
+    },
     *getBeforeConnect({ payload }, { call, put }) {
       const response = yield call(getBeforeConnect, payload);
+      return response;
+    },
+    *getWebsocket({ payload }, { call, put }) {
+      const response = yield call(getWebsocket, payload);
       return response;
     },
 
@@ -115,16 +136,7 @@ const model = {
       }
       return response;
     },
-    *getMessageList({ payload }, { call, put }) {
-      const response = yield call(getMessageList, payload);
-      if (response.code == 1) {
-        yield put({
-          type: "changeMessageList",
-          payload: response.data,
-        });
-      }
-      return response;
-    },
+    
     *getMessageDetail({ payload }, { call, put }) {
       const response = yield call(getMessageDetail, payload);
       if (response.code == 1) {

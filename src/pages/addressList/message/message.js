@@ -15,6 +15,7 @@ import "./message.scss";
 
 //私信页面
 function Message(props){
+  console.log(props,'props')
   const { dispatch, messageList,pageSize, chatList } = props
   const [editor, setEditor] = useState("");
   useEffect(() => {
@@ -23,11 +24,16 @@ function Message(props){
       payload:{
         page:1,
         pageSize:pageSize,
-        fromId:'3ee83b8573b54f5c99288618039b7c84',
+        fromId:'0b086c03b31248b786ca90eac03b9d83',
         searchKey:''
       }
     })
+    console.log(111,'111')
+    
+
+
   },[])
+
   //输入框内容
   const [msg, setMsg] = useState("");
 

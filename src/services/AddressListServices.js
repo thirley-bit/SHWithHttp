@@ -33,15 +33,14 @@ export async function getChatList(params){
 export async function getUpdateChatList(params){
     return httpService.post('/chat/updateChatList',params)
 }
-//进入退出聊天窗口
+//删除聊天记录
 export async function getDeleteChatList(params){
     return httpService.post(`/chat/deleteChatList/${params}`,params)
 }
-//进入退出聊天窗口
+//消息列表
 export async function getMessageList(params){
     return httpService.post(`/chat/getMessageList`,params)
 }
-
 //socket连接前处理
 export async function getBeforeConnect(params){
     return httpService.post('/chat/beforeConnect',params)
