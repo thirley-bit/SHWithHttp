@@ -18,11 +18,11 @@ import GradientButton from "@app/component/GradientButton";
 import NavTab from "@app/component/NavTab/NavTab";
 import MyTabs from "@app/component/MyTabs/MyTabs";
 import PersonList from "@app/component/PersonList/PersonList";
+import SearchBar from "@app/component/SearchBar/SearchBar";
 import Modal from "@app/component/Modal";
 import normal from "@static/normal.png";
 import api from "@/api/api";
 import "./groupChat.scss";
-import SearchBar from "@app/component/SearchBar/SearchBar";
 
 function GroupChat(props) {
   const { dispatch, pageSize } = props;
@@ -287,7 +287,7 @@ function GroupChat(props) {
   };
   const handleDel = (type, id) => {
     console.log(type, id, ">>>>>");
-    if (type == 1) {
+    // if (type == 1) {
       dispatch({
         type: "AddressList/getDeleteGroup",
         payload: id,
@@ -305,7 +305,7 @@ function GroupChat(props) {
           });
         }
       });
-    }
+    // }
   };
 
   //点击提交按钮

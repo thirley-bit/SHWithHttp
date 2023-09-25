@@ -22,6 +22,8 @@ const model = {
   namespace: "AddressList",
   state: {
     showLeft: "own", //判断布局是否是own
+    roomId:'',
+    toId:'',
     groupList: [], //群聊列表
     groupUserList:[], //群聊家长列表
     addressList: {}, //通讯录列表
@@ -96,6 +98,8 @@ const model = {
     },
     *getMessageList({ payload }, { call, put }) {
       const response = yield call(getMessageList, payload);
+      console.log(response.data,'respeondse')
+
       if (response.status == 200) {
         yield put({
           type: "changeMessageList",
@@ -172,6 +176,18 @@ const model = {
         chatList: payload,
       };
     },
+    changeRoomId(state, { payload }) {
+      return {
+       ...state,
+        roomId: payload,
+      };
+    },
+    changeToId(state, { payload }) {
+      return {
+       ...state,
+        toId: payload,
+      };
+    },
 
 
 
@@ -188,6 +204,7 @@ const model = {
       };
     },
     changeMessageList(state, { payload }) {
+      console.log(payload,'payload')
       return {
         ...state,
         messageList: payload,

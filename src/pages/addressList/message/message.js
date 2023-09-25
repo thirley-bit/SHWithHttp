@@ -15,10 +15,11 @@ import "./message.scss";
 
 //私信页面
 function Message(props){
-  console.log(props,'props')
-  const { dispatch, messageList, userId, pageSize, chatList } = props
-  const [editor, setEditor] = useState("");
+  const { dispatch, userId, pageSize, chatList } = props
   useEffect(() => {
+    chatListData()
+  },[])
+  const chatListData = () => {
     dispatch({
       type:'AddressList/getChatList',
       payload:{
@@ -28,54 +29,28 @@ function Message(props){
         searchKey:''
       }
     })
-    console.log(111,'111')
-    
-
-
-  },[])
-
-  //输入框内容
-  const [msg, setMsg] = useState("");
-
-  //输入框
-  const handleInput = (e) => {
-    setMsg(e.target.value)
-    console.log(e);
-    console.log(e.detail.html);
-    console.log(e.detail.text);
-    console.log(e.detail.delta);
-  };
-
-  //发送按钮
-  const handleSend = async () => {
-    const sendMsg = msg;
-    console.log(sendMsg)
-  };
-  const editorReady = () => {
-    Taro.createSelectorQuery()
-      .select("#editor")
-      .context((res) => {
-        let newData = res.context;
-        setEditor(newData);
-      })
-      .exec();
-  };
-  const addImage = () => {
-    Taro.chooseImage({
-      count: 1,
-      sizeType: ["original", "compressed"],
-      sourceType: ["album"],
-      success: (res) => {
-        editor.insertImage({
-          src: res.tempFilePaths[0],
-          width: "60%",
-          success: () => {
-            console.log("success");
-          },
+  }
+  const handleDel = (type,id) => {
+    console.log(type,id,'type,id')
+    dispatch({
+      type:'AddressList/getDeleteChatList',
+      payload:id
+    }).then((res) => {
+      if (res.status == 200) {
+        Taro.atMessage({
+          message: res.message,
+          type: "success",
         });
-      },
+        chatListData()
+      } else {
+        Taro.atMessage({
+          message: res.message,
+          type: "error",
+        });
+      }
     });
-  };
+  }
+
 
   return (
     <View className='index'>
@@ -84,7 +59,7 @@ function Message(props){
         <AtSearchBar />
       </View>
       <View>
-          <PersonList enter='message' showData={chatList} />
+          <PersonList enter='message' showData={chatList} onDel={handleDel} />
       </View>
 
       {/* <View className='components-page'>

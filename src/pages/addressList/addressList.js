@@ -17,7 +17,7 @@ import "./AddressList.scss"
 
 
 function AddressList(props) {
-  const { dispatch, teacherList, parentList, addressList } = props
+  const { dispatch, user,  teacherList, parentList, addressList } = props
   const [current, setCurrent] = useState(0)
   const [searchValue, setSearchValue] = useState('')
   const [showTeacherData, setShowTeacherData] = useState([])
@@ -50,13 +50,17 @@ function AddressList(props) {
 
 
   useEffect(() => {
+    let classId = '';
+    if (user == 1) {
+      classId = 1;
+    }
     dispatch({
-      type:'AddressList/getAddressBookList',
-      payload:{
+      type: "AddressList/getAddressBookList",
+      payload: {
         searchKey:'',
-        classId:1
-      }
-    })
+        classId:classId,
+      },
+    });
     dispatch({
       type:'AddressList/getTeacherList'
     })
@@ -108,6 +112,9 @@ function AddressList(props) {
     //   console.log(e.detail,"e.detail")
     // }
   }
+  const handleDel = (type,id) => {
+    console.log(type,id,'type,id')
+  }
  
   return (
     <View className='index'>
@@ -125,19 +132,20 @@ function AddressList(props) {
       <View  className='text'>
           <Text>老师</Text>
         </View>
-        <PersonList enter='teacher' showData={addressList.teacherList} />
+        <PersonList enter='teacher' showData={addressList.teacherList} onDel={handleDel} />
       </View>
       <View className='teacher-list'>
         <View  className='text'>
           <Text>家长</Text>
           
         </View>
-        <PersonList enter='teacher' showData={addressList.parentList} />
+        <PersonList enter='teacher' showData={addressList.parentList} onDel={handleDel} />
       </View>
     </View>
   )
 }
 export default connect((state) => ({
+  user: state.users.user,
   addressList: state.AddressList.addressList,
   teacherList: state.AddressList.teacherList,
   parentList: state.AddressList.parentList

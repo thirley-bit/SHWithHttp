@@ -13,9 +13,7 @@
 }
 
 .chatRoom {
-  border: 1px solid #dfefff;
   border-radius: 4px;
-  // background: rgba(239, 247, 260, 0.5);
 
   .chatContent {
     padding: 0 14px;
@@ -96,19 +94,16 @@ textarea {
 .chat-bottom {
   position: relative;
   width: 100%;
-  // height: 177rpx;
-  min-height: 177rpx;
   bottom: 0;
   background: #F4F5F7;
-  padding-bottom: 20rpx;
 
   .send-msg {
     // position: absolute;
     display: flex;
     // align-items: flex-end;
-    padding: 16rpx 30rpx;
+    padding: 16rpx 30rpx 0 30rpx;
     width: 100%;
-    min-height: 177rpx;
+    min-height: 114rpx;
     // position: fixed;
     // bottom: 0;
     background: #EDEDED;
@@ -132,21 +127,21 @@ textarea {
     }
   }
 
-  .send-btn {
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    // margin-bottom: 70rpx;
-    margin-left: 25rpx;
-    width: 128rpx;
-    height: 75rpx;
-    background: $sendBtnbgc;
-    border-radius: 8rpx;
-    font-size: 28rpx;
-    font-weight: 500;
-    color: #FFFFFF;
-    // line-height: 28rpx;
-  }
+  // .send-btn {
+  //   // display: flex;
+  //   // align-items: center;
+  //   // justify-content: center;
+  //   // margin-bottom: 70rpx;
+  //   margin-left: 25rpx;
+  //   width: 128rpx;
+  //   height: 75rpx;
+  //   background: $sendBtnbgc;
+  //   border-radius: 8rpx;
+  //   font-size: 28rpx;
+  //   font-weight: 500;
+  //   color: #FFFFFF;
+  //   // line-height: 28rpx;
+  // }
 }
 
 // }

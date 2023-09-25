@@ -8,7 +8,7 @@ import "./PersonList.scss";
 
 //人员列表组件
 function PersonList(props) {
-  const { dispatch, enter, showData,userId, user, userList, onEdit, onDel } = props;
+  const { dispatch, enter, showData,userId, user, userList, roomId, onEdit, onDel } = props;
   const [isOpened, setIsOpened] = useState(false);
   const [id, setId] = useState('');
   const [type, setType] = useState('') //判断是群聊页面还是其他页面
@@ -17,38 +17,36 @@ function PersonList(props) {
     dispatch({
       type: "users/getUserList",
     });
-    
   }, []);
-
   const handleNav = (val) => {
-    console.log(val,'value111111');
-    dispatch({
-      type:'AddressList/getUpdateChatList',
-      payload:{
-        id:'2',
-        inWindow:1
+    let MsgToId = ''
+    if(enter == 'teacher'){
+      MsgToId = val.id
+    }else{
+      MsgToId = val.toId
+    }
+    let payload = {
+      fromId: userId,
+      toId: MsgToId,
+      msgType:'0'
+    }
+    if(val.roomId){
+      payload = {
+        ...payload,
+        id:val.roomId
       }
-    })
+    }
     dispatch({
       type:'AddressList/getBeforeConnect',
-      payload:{
-        roomId:'6c535c2f22e049748943bf0ea91905c9',
-        fromId:userId,
-        toId:val.userId,
-        msgType:'0'
-      }
+      payload:payload
     }).then(res => {
-      console.log(res,'res')
       if (res.status == 200) {
         Taro.atMessage({
           message: res.message,
           type: "success",
         });
-        
         Taro.navigateTo({
-          // url: `/pages/addressList/message/MessageDetail/MessageDetail?roomId=${res.data}&toId=${val.userId}`,
-         
-          url: `/pages/addressList/message/MessageDetail/MessageDetail?roomId=6c535c2f22e049748943bf0ea91905c9&toId=${val.userId}`,
+          url: `/pages/addressList/message/MessageDetail/MessageDetail?roomId=${val.roomId ? val.roomId : res.data.roomId}&toId=${MsgToId}&id=${res.data.id}`,
         });
       } else {
         Taro.atMessage({
@@ -178,7 +176,8 @@ function PersonList(props) {
                             : "card-button_address"
                         }
                         onClick={() =>
-                          handleDel(item, enter == "group" ? 1 : 2)
+                          // handleDel(item, enter == "group" ? 1 : 2)
+                          handleDel(item)
                         }
                       >
                         <AtIcon value='trash' size='18' color='#f00' />
@@ -224,5 +223,6 @@ function PersonList(props) {
 export default connect((state) => ({
   user: state.users.user,
   userId: state.users.userId,
+  roomId: state.AddressList.roomId,
   userList: state.users.userList,
 }))(PersonList);
