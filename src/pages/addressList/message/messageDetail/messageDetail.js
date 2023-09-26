@@ -10,7 +10,7 @@ import "./MessageDetail.scss";
 
 function MessageDetail(props) {
   console.log(props, "propsdetail");
-  const { dispatch, messageList, userId, messageDetail } = props;
+  const { dispatch, messageList, user, bindStudent, userId, messageDetail } = props;
   const [socketOpen, setSocketOpen] = useState(false);
   const [socketMsgQueue, setSocketMsgQueue] = useState([]);
   // const showLeft = "own";
@@ -23,9 +23,17 @@ function MessageDetail(props) {
   });
   const [inputVal, setInputVal] = useState("");
   const router = useRouter();
+  //roomId
   const roomId = router.params.roomId;
+  //接收者id
   const toId = router.params.toId;
+  //该条数据id，用于退出窗口
   const id = router.params.id
+  //消息类型，0：单聊；1：群聊
+  const msgType = router.params.msgType
+  // //聊天室名称
+  // const name = router.params.name
+  // console.log(name,'name')
   useEffect(() => {
     if (socketMsgQueue.length > 0) {
       dispatch({
@@ -49,7 +57,7 @@ function MessageDetail(props) {
       header: {
         "content-type": "application/json", // 默认值
         token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTU2NDQ0MDQ5MTYsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.BuNYITYzp3qNP8-XiaT4yXFnxTHTaMHTj_jh7R-WLCc",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTU3MDgyNDM3NzgsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.EWdIoJvVkE-xTYcsMQ6tYg_0b-Mjr1gg9bvO7lt6PBE",
       },
     }).then((task) => {
       task.onOpen(function () {
@@ -68,18 +76,7 @@ function MessageDetail(props) {
           avatar:
             "https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2",
         },
-      ]);
-      // dispatch({
-      //   type: "AddressList/changeMessageList",
-      //   payload: messageList.concat([
-      //     {
-      //       sendMessage: res.data,
-      //       fromId: "c57dae13ea244eb292f9d5e441200cf2",
-      //       fromName: '用户123',
-      //       avatar: 'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
-      //     },
-      //   ]),
-      // });
+      ])
       console.log("收到服务器内容：" + res.data);
     });
 
@@ -121,59 +118,8 @@ function MessageDetail(props) {
           },
         ]),
       });
-      // setSocketMsgQueue(socketMsgQueue.push(msg))
     }
   };
-
-  // const scrollMsgBottom = () => {
-  //   //外层加延时函数是为了获取到节点的标准信息11
-  //   setTimeout(() => {
-  //     let query = Taro.createSelectorQuery();
-  //     //获取节点信息
-  //     query.select("#scrollview").boundingClientRect();
-  //     query.select("#chatlistview").boundingClientRect();
-  //     query.exec((res) => {
-  //       // console.log(res, "res>>>");
-  //       if (res[1].height > res[0].height) {
-  //         let newScrollTop = res[1].height - res[0].height;
-  //         // setScrollTop(newScrollTop);
-  //       }
-  //     });
-  //   }, 15);
-  // };
-  // const rpxTopx = (px) => {
-  //   let deviceWidth = Taro.getSystemInfoSync().windowWidth
-  //   let rpx = ( 750 / deviceWidth ) * Number(px)
-  //   console.log(rpx,'rpx>>>')
-  //   return Math.floor(rpx)
-  // }
-  // const handleKeyBoardHeight = () => {
-  //   console.log(1111);
-  //   Taro.onKeyboardHeightChange((res) => {
-  //     let newKeyboardHeight = res.height;
-  //     if (!newKeyboardHeight) {
-  //       setScrollHeight({
-  //         height: `100%`,
-  //       });
-  //       // setBottomHeight({ marginBottom: "0px" });
-  //       // setKeyboardHeight(0)
-  //     } else {
-  //       let newStyle = {
-  //         // height: `${
-  //         //   sys.safeArea.height - sys.statusBarHeight - newKeyboardHeight
-  //         // }px`,
-  //         height: `calc(100vh - ${newKeyboardHeight}rpx)`,
-  //       };
-  //       console.log(newStyle);
-  //       setScrollHeight(newStyle);
-  //       let newBottomHeight = { marginBottom: `${newKeyboardHeight}px` };
-  //       // setBottomHeight(newBottomHeight);
-  //       // setKeyboardHeight(newKeyboardHeight)
-  //     }
-  //   });
-  // };
-  // console.log(bottomHeight, "bottonheihght");
-  // console.log(scrollHeight, "scroheight");
 
   const handleInput = (e) => {
     // console.log(e);
@@ -183,24 +129,13 @@ function MessageDetail(props) {
   const handleSendMessage = (e) => {
     let msg = {
       roomId: roomId,
-      fromId:userId,
+      fromId:user == 0 ? bindStudent.id : userId,
       toId: toId,
-      msgType: 0,
+      msgType: msgType,
       sendMessage: inputVal,
     };
     console.log(msg,'msg')
     sendSocketMessage(msg);
-    // console.log(e);
-    // setInputVal("");
-    // Taro.chooseImage({
-    //   count: 1,
-    //   sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-    //   sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有，在H5浏览器端支持使用 `user` 和 `environment`分别指定为前后摄像头
-    //   success: function (res) {
-    //     // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-    //     var tempFilePaths = res.tempFilePaths
-    //   }
-    // })
   };
   const handleBack = () => {
     dispatch({
@@ -267,7 +202,7 @@ function MessageDetail(props) {
       <NavTab
         back
         handleBack={handleBack}
-        title='李老师'
+        // title={name}
       />
       </View>
       
@@ -312,8 +247,10 @@ function MessageDetail(props) {
   );
 }
 export default connect((state) => ({
+  user: state.users.user,
   userId: state.users.userId,
   roomId: state.AddressList.roomId,
+  bindStudent: state.users.bindStudent,
   showLeft: state.AddressList.showLeft,
   messageList: state.AddressList.messageList,
   messageDetail: state.AddressList.messageDetail,

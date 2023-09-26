@@ -65,6 +65,12 @@
           "pathName": "pages/addressList/addressList",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/addressList/message/message",
+          "pathName": "pages/addressList/message/message",
+          "query": "",
+          "scene": null
         }
       ]
     }

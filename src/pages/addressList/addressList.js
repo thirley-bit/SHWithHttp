@@ -5,10 +5,6 @@ import { View, Text } from "@tarojs/components";
 import { AtButton, AtSearchBar, AtTabBar } from "taro-ui";
 import PersonList from "@app/component/personList/personList";
 import NavTab from "@app/component/NavTab/NavTab";
-import SearchBar from "@app/component/SearchBar/SearchBar";
-
-// import search from '@app/component/SearchBar/wx_search-ma'
-import api from "@/api/api";
 import newAdd from "../../static/newadd.png";
 import group from "../../static/group.png";
 import msg from "../../static/add-message.png";
@@ -16,11 +12,8 @@ import addGroup from "../../static/add-group.png";
 import "./AddressList.scss";
 
 function AddressList(props) {
-  const { dispatch, user, teacherList, parentList, addressList } = props;
+  const { dispatch, user, pageSize, userId, addressList } = props;
   const [current, setCurrent] = useState(0);
-  const [searchValue, setSearchValue] = useState("");
-  const [showTeacherData, setShowTeacherData] = useState([]);
-  const [showParentData, setShowParentData] = useState([]);
   const tabList = [
     {
       title: "添加",
@@ -30,24 +23,22 @@ function AddressList(props) {
     {
       title: "群聊",
       image: group,
-      // iconType:'user',
       url: "/pages/addressList/groupChat/groupChat",
     },
     {
       title: "私信",
-      // iconType:'user',
       image: msg,
       url: "/pages/addressList/message/message",
     },
     {
       title: "审核",
-      // iconType:'user',
       image: addGroup,
       url: "/pages/addressList/Check/Check",
     },
   ];
 
   useEffect(() => {
+    //老师端必传，当前老师切换的班级id,家长端不传
     let classId = "";
     if (user == 1) {
       classId = 1;
@@ -60,54 +51,23 @@ function AddressList(props) {
       },
     });
     dispatch({
-      type: "AddressList/getTeacherList",
+      type: "users/getJoinReviewList",
+      payload:{
+        page:1,
+        pageSize:pageSize,
+        //是老师时为当前登录人id， 是家长时为当前切换的审核数据id
+        userId: userId,
+        status:[0,1,2,3]
+      }
     });
-    dispatch({
-      type: "AddressList/getParentList",
-    });
-    // teacherData()
-    // parentData()
   }, []);
 
-  // const teacherData = () => {
-  //   let url = "address/teacher/list"
-  //   let data = api[url].data
-  //   setShowTeacherData(data)
-  // }
-  // const parentData = () => {
-  //   let url = "address/parent/list"
-  //   let data = api[url].data
-  //   setShowParentData(data)
-  // }
 
   const handleClick = (e) => {
-    console.log(e);
     setCurrent(e);
     Taro.navigateTo({
       url: tabList[e].url,
     });
-  };
-  const searchInput = (e) => {
-    console.log(e, "param");
-    // setSearchValue(e)
-    console.log("searchInput >>> ");
-  };
-
-  const searchClear = () => {
-    console.log(searchValue, "searchClear");
-    // setSearchValue('')
-  };
-  const searchTab = (e) => {
-    console.log(e, "searchTab");
-    // let key = e.detail.key
-    // let value = e.detail.value
-    // if(key === 'search'){
-    //   console.log('searchTab >>> search')
-    //   console.log(e.detail,"e.detail")
-    // }else if(key === 'back'){
-    //   console.log('searchTab >>> back')
-    //   console.log(e.detail,"e.detail")
-    // }
   };
   const handleEdit = (record) => {
     Taro.makePhoneCall({
@@ -153,6 +113,8 @@ function AddressList(props) {
 }
 export default connect((state) => ({
   user: state.users.user,
+  userId: state.users.userId,
+  pageSize: state.users.pageSize,
   addressList: state.AddressList.addressList,
   teacherList: state.AddressList.teacherList,
   parentList: state.AddressList.parentList,

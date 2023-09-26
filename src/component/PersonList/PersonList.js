@@ -9,41 +9,39 @@ import "./PersonList.scss";
 //人员列表组件
 function PersonList(props) {
   console.log(props,'personprops')
-  const { dispatch, enter, showData,userId, user, userList, roomId, onEdit, onDel, bindStudent } = props;
+  const { dispatch, enter, showData,userId, user, pageSize, roomId, onEdit, onDel, bindStudent } = props;
   const [isOpened, setIsOpened] = useState(false);
   const [delId, setDelId] = useState(""); //选中需要删除的数据id
   useEffect(() => {
     dispatch({
       type: "users/getUserList",
     });
-    dispatch({
-      type: "users/getJoinReviewList",
-      payload:{
-        page:1,
-        pageSize:10,
-        userId:userId,
-        status:[0,1,2,3]
-      }
-    });
+    
   }, []);
   const handleNav = (val) => {
     console.log(val,'val>>>>')
+    //toId(接收方id),通讯录列表，群聊取该条数据的id，私信列表取该数据的toId
     let MsgToId = ''
+    //判断是群聊还是单聊，enter为group时是群聊，其他为单聊,私信列表取该条数据的msgType
+    let msgType = 0
     if(enter == 'message'){
-      //私信列表存在toId（接收方id)
+      //私信列表数据存在toId（接收方id)和msgType
       MsgToId = val.toId
-    }else if(enter == 'group'){
-      //不确定toId(接收方id),传该条数据id
-      MsgToId = val.id
+      msgType = val.msgType
     }else{
-      //不确定toId(接收方id),传该条数据id
+      //通讯录，群聊取该数据的id
       MsgToId = val.id
+    }
+    if(enter == 'group'){
+      msgType = 1
     }
     let payload = {
+      //fromId:教师端取登录人id，家长端取默认绑定学生数据的id，
       fromId: user == 0 ? bindStudent.id : userId,
       toId: MsgToId,
-      msgType:'0'
+      msgType:msgType
     }
+    console.log(payload,'payload')
     //如果roomId存在，则传，不存在id不传，后台自动生成roomId,在beforeConnct接口返回的数据获取roomId
     if(val.roomId){
       payload = {
@@ -51,28 +49,27 @@ function PersonList(props) {
         id:val.roomId
       }
     }
-    console.log(payload,'payload')
-    // dispatch({
-    //   type:'AddressList/getBeforeConnect',
-    //   payload:payload
-    // }).then(res => {
-    //   if (res.status == 200) {
-    //     Taro.atMessage({
-    //       message: res.message,
-    //       type: "success",
-    //     });
-    //     Taro.navigateTo({
-    //       //如果点击的当前数据存在roomId,则传该条数据的roomId,否则传接口返回的roomId
-    //       //id为除私信列表数据列表的数据id，用于退出聊天窗口的数据id
-    //       url: `/pages/addressList/message/MessageDetail/MessageDetail?roomId=${val.roomId ? val.roomId : res.data.roomId}&toId=${MsgToId}&id=${res.data.id}`,
-    //     });
-    //   } else {
-    //     Taro.atMessage({
-    //       message: res.message,
-    //       type: "error",
-    //     });
-    //   }
-    // })
+    dispatch({
+      type:'AddressList/getBeforeConnect',
+      payload:payload
+    }).then(res => {
+      if (res.status == 200) {
+        Taro.atMessage({
+          message: res.message,
+          type: "success",
+        });
+        Taro.navigateTo({
+          //如果点击的当前数据存在roomId,则传该条数据的roomId,否则传接口返回的roomId
+          //id为除私信列表数据列表的数据id，用于退出聊天窗口的数据id
+          url: `/pages/addressList/message/MessageDetail/MessageDetail?roomId=${val.roomId ? val.roomId : res.data.roomId}&toId=${MsgToId}&id=${res.data.id}&msgType=${msgType}`,
+        });
+      } else {
+        Taro.atMessage({
+          message: res.message,
+          type: "error",
+        });
+      }
+    })
   };
 
   const handleEdit = (record) => {
@@ -234,6 +231,6 @@ export default connect((state) => ({
   user: state.users.user,
   userId: state.users.userId,
   roomId: state.AddressList.roomId,
-  userList: state.users.userList,
+  pageSize: state.users.pageSize,
   bindStudent: state.users.bindStudent
 }))(PersonList);

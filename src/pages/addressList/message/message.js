@@ -9,7 +9,7 @@ import "./message.scss";
 
 //私信页面
 function Message(props){
-  const { dispatch, userId, pageSize, chatList } = props
+  const { dispatch, user, userId, pageSize, chatList, bindStudent } = props
   useEffect(() => {
     chatListData()
   },[])
@@ -20,7 +20,8 @@ function Message(props){
       payload:{
         page:1,
         pageSize:pageSize,
-        fromId:userId,
+        //是老师时为当前登录人id， 是家长时为当前切换的审核数据id
+        fromId: user == 0 ? bindStudent.id : userId,
         searchKey:''
       }
     })
@@ -60,8 +61,10 @@ function Message(props){
   );
 }
 export default connect((state) =>({
+  user: state.users.user,
   userId: state.users.userId,
   pageSize: state.users.pageSize,
   messageList: state.AddressList.messageList,
-  chatList: state.AddressList.chatList
+  chatList: state.AddressList.chatList,
+  bindStudent: state.users.bindStudent
 }))(Message);
