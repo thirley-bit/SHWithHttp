@@ -52,7 +52,10 @@ export async function getStudentById(params){
 export async function getUpdateStudent(params){
     return httpService.post(`/student/updateStudent`,params)
 }
-
+//上传头像
+export async function getUploadFile(params){
+    return httpService.post(`/file/uploadFile`,params)
+}
 
 export async function getIdentity(){
     // return 

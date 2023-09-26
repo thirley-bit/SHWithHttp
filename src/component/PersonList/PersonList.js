@@ -24,16 +24,20 @@ function PersonList(props) {
     let MsgToId = ''
     //判断是群聊还是单聊，enter为group时是群聊，其他为单聊,私信列表取该条数据的msgType
     let msgType = 0
+    let toName = ''
     if(enter == 'message'){
       //私信列表数据存在toId（接收方id)和msgType
       MsgToId = val.toId
       msgType = val.msgType
+      toName = val.toName
     }else{
       //通讯录，群聊取该数据的id
       MsgToId = val.id
+      toName = val.userName
     }
     if(enter == 'group'){
       msgType = 1
+      toName = val.groupName
     }
     let payload = {
       //fromId:教师端取登录人id，家长端取默认绑定学生数据的id，
@@ -61,7 +65,7 @@ function PersonList(props) {
         Taro.navigateTo({
           //如果点击的当前数据存在roomId,则传该条数据的roomId,否则传接口返回的roomId
           //id为除私信列表数据列表的数据id，用于退出聊天窗口的数据id
-          url: `/pages/addressList/message/MessageDetail/MessageDetail?roomId=${val.roomId ? val.roomId : res.data.roomId}&toId=${MsgToId}&id=${res.data.id}&msgType=${msgType}`,
+          url: `/pages/addressList/message/MessageDetail/MessageDetail?roomId=${val.roomId ? val.roomId : res.data.roomId}&toId=${MsgToId}&id=${res.data.id}&msgType=${msgType}&name=${toName}`,
         });
       } else {
         Taro.atMessage({

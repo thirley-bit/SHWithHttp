@@ -13,42 +13,6 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/component/publish/SendUserList/SendUserList",
-          "pathName": "pages/component/publish/SendUserList/SendUserList",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/addressList/Check/Check",
-          "pathName": "pages/addressList/Check/Check",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/class/class",
-          "pathName": "pages/class/class",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/component/publish/SendUserList/SendUserList",
-          "pathName": "pages/component/publish/SendUserList/SendUserList",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/component/publish/publish",
-          "pathName": "pages/component/publish/publish",
-          "query": "enter=homework&type=new",
-          "scene": null
-        },
-        {
-          "name": "pages/addressList/addressList",
-          "pathName": "pages/addressList/addressList",
-          "query": "",
-          "scene": null
-        },
-        {
           "name": "pages/addressList/message/message",
           "pathName": "pages/addressList/message/message",
           "query": "",
@@ -69,6 +33,12 @@
         {
           "name": "pages/addressList/message/message",
           "pathName": "pages/addressList/message/message",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/my/ChildMsg/ChildMsg",
+          "pathName": "pages/my/ChildMsg/ChildMsg",
           "query": "",
           "scene": null
         }

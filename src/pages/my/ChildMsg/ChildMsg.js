@@ -19,7 +19,7 @@ import GradientButton from "@app/component/GradientButton";
 import "./ChildMsg.scss";
 
 function ChildMsg(props) {
-  const { dispatch, studentId, studentDetail, settingList } = props;
+  const { dispatch, studentId, studentDetail } = props;
   const [showData, setShowData] = useState([]);
   const [isOpened, setIsOpened] = useState(false);
   const [classId, setClassId] = useState('')
@@ -121,7 +121,7 @@ function ChildMsg(props) {
             payload: studentId,
           }).then((response) => {
             if (response.status == 200) {
-              showDataList(res.data);
+              showDataList(response.data);
             }
           });
         }, 1000);
@@ -133,23 +133,59 @@ function ChildMsg(props) {
       }
     });
   };
- 
+  const handleUpload = (item) =>{
+    console.log(111)
+    Taro.chooseImage({
+      count: 1,
+      sizeType: ["original", "compressed"],
+      sourceType: ["album", "camera"],
+      success: (res) => {
+        // editorRef.current.insertImage({
+        //   src: res.tempFilePaths[0],
+        //   width: "60%",
+        //   success: () => {},
+        // });
+        console.log(res,'res')
+        var tempFilePaths = res.tempFilePaths
+        Taro.uploadFile({
+          url:'http://192.168.1.157:5002/file/uploadFile',
+          filePath: tempFilePaths[0],
+          name: 'file',
+          header: {
+            'token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjE1NjgwNTk1NzY3IiwidXNlclR5cGUiOjAsInVzZXJOYW1lIjoiIiwicmFuZG9tRGF0ZSI6MTY5NTcyNTA2MzU4NiwidXNlcklkIjoiYzU3ZGFlMTNlYTI0NGViMjkyZjlkNWU0NDEyMDBjZjIifQ.lB4g6jb5YCE1d5yylJNzRS2Lo_VtiE75hzZR7YCAVdY'
+          },
+          success: (res1) => {console.log(res1,'res1');},
+        })
+        console.log(tempFilePaths,'tempFile')
+        // item.record = tempFilePaths
+      },
+    });
+  }
+  const handleSubmit = (e) => {
+    // evt.preventDefault();
+    console.log(e,'eee')
+    console.log(showData,'showdata')
+  }
+  console.log(showData,'showdata')
   return (
     <View className='index'>
       <NavTab back title='孩子信息' />
       <View className='main'>
-        <AtForm>
+        <AtForm name='key' onSubmit={() => handleSubmit()}>
           {showData.map((item, index) => {
+            console.log(item,'irem')
             return (
+              <View key={index} onClick={item.url && (() => handleUpload(item))}>
               <AtInput
                 key={index}
                 name={item.key}
                 title={item.title}
                 type={item.type}
                 value={item.value}
+                placeholder={item.placeholder}
                 disabled={item.disabled}
                 onChange={(e) => handleChange(e, item)}
-              />
+              /></View>
             );
           })}
         </AtForm>
@@ -162,6 +198,9 @@ function ChildMsg(props) {
           </View>
         </View>
       </View>
+      {/* <View className='send-button'>
+        <Button formType='submit'>edit</Button>
+      </View> */}
       <GradientButton
         type='primary'
         className='send-button'

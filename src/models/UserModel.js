@@ -12,7 +12,7 @@ import {
   getStudentList,
   getStudentById,
   getUpdateStudent,
-
+  getUploadFile,
 
 
 
@@ -32,15 +32,19 @@ const model = {
     // userId:'a7f933b810f2419b8420c3095c8d88d5',
     // user:0,
     // studentId: "11",
-
-    user:1,
-    userId: "3ee83b8573b54f5c99288618039b7c84", //登录人id
-    identity:{telephone:'123'},
+    identity: { telephone: "15680595767" }, //登录信息
+    userId:'c57dae13ea244eb292f9d5e441200cf2',
+    user:0,
+    studentId: "22",
+    // user:1,
+    // userId: "3ee83b8573b54f5c99288618039b7c84", //登录人id
+    // identity:{telephone:'123'},
     enter: "",
     classList: [],
     pageSize: 10,
     checkedList: [], //审核列表
     bindStudent:{}, //家长默认绑定学生
+    uploadFile:{},
 
 
 
@@ -95,19 +99,23 @@ const model = {
         disabled: true,
       },
       {
-        key: "avatar",
-        title: "人脸照片",
-        type: "text",
-      },
-      {
         key: "birthday",
         title: "出生年月",
         type: "number",
+        placeholder:'请输入出生年月'
       },
       {
         key: "address",
         title: "家庭住址",
         type: "text",
+        placeholder:'请输入家庭住址'
+      },
+      {
+        key: "avatar",
+        title: "头像",
+        type: "text",
+        placeholder:'请上传头像',
+        url: "/pages/class/DisplayPublic/DisplayPublic",
       },
     ]
   },
@@ -215,6 +223,16 @@ const model = {
     },
     *getUpdateStudent({ payload }, { call, put }) {
       const response = yield call(getUpdateStudent, payload);
+      return response;
+    },
+    *getUploadFile({ payload }, { call, put }) {
+      const response = yield call(getUploadFile, payload);
+      if (response.status == 200) {
+        yield put({
+          type: "changeUploadFile",
+          payload: response.data,
+        });
+      }
       return response;
     },
 
@@ -356,6 +374,12 @@ const model = {
       return {
         ...state,
         studentList: payload,
+      };
+    },
+    changeUploadFile(state, { payload }) {
+      return {
+        ...state,
+        uploadFile: payload,
       };
     },
 

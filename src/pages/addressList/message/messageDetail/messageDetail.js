@@ -32,8 +32,8 @@ function MessageDetail(props) {
   //消息类型，0：单聊；1：群聊
   const msgType = router.params.msgType
   // //聊天室名称
-  // const name = router.params.name
-  // console.log(name,'name')
+  const name = router.params.name
+  console.log(name,'name')
   useEffect(() => {
     if (socketMsgQueue.length > 0) {
       dispatch({
@@ -53,11 +53,11 @@ function MessageDetail(props) {
     });
 
     Taro.connectSocket({
-      url: `ws://192.168.1.157:5002/websocket/${userId}/${roomId}`,
+      url: `ws://192.168.1.157:5002/websocket/${user == 0 ? bindStudent.id : userId}/${roomId}`,
       header: {
         "content-type": "application/json", // 默认值
         token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTU3MDgyNDM3NzgsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.EWdIoJvVkE-xTYcsMQ6tYg_0b-Mjr1gg9bvO7lt6PBE",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTU3MTkwNTM3MTgsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.wL-ReWq0mNr8xuNaMeKquZqW8uWs4Fojskqc4GJU1S8",
       },
     }).then((task) => {
       task.onOpen(function () {
@@ -68,14 +68,12 @@ function MessageDetail(props) {
       console.log("onSocketOpen连接已打开");
     });
     Taro.onSocketMessage(function (res) {
+      let receiveMsg = JSON.parse(res.data)
       setSocketMsgQueue([
         {
-          sendMessage: res.data,
-          fromId: "c57dae13ea244eb292f9d5e441200cf2",
-          fromName: "晓华爸爸",
-          avatar:
-            "https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2",
-        },
+          sendMessage: receiveMsg.message,
+          fromName: receiveMsg.userName,
+          avatar:receiveMsg.avatar},
       ])
       console.log("收到服务器内容：" + res.data);
     });
@@ -99,7 +97,6 @@ function MessageDetail(props) {
             {
               sendMessage: inputVal,
               fromId: userId,
-              fromName: '用户123',
               avatar: 'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
             },
           ]),
@@ -113,7 +110,6 @@ function MessageDetail(props) {
           {
             sendMessage: inputVal,
             fromId: userId,
-            fromName: '用户123',
             avatar: 'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
           },
         ]),
@@ -122,7 +118,6 @@ function MessageDetail(props) {
   };
 
   const handleInput = (e) => {
-    // console.log(e);
     setInputVal(e.detail.value);
   };
 
@@ -154,18 +149,6 @@ function MessageDetail(props) {
           <Image
             className='img'
             src={
-              // JSON.stringify(msgInfo.userAvatar) === "{}"
-              //   ? normal
-              //   : msgInfo.userAvatar
-
-              // normal
-              // (showLeft = 'own' ? JSON.stringify(msgInfo.userAvatar) != '{}' ? msgInfo.userAvatar : JSON.stringify(msgInfo.expertAvatar)  != '{}' ? msgInfo.expertAvatar ): normal
-              //   : JSON.stringify(msgInfo.expertAvatar)  === '{}'
-              // showLeft == "own" ? userAvatar : expertAvatar
-              // (showLeft == "own"
-              //   ? JSON.stringify(msgInfo.userAvatar) === '{}'
-              //   : JSON.stringify(msgInfo.expertAvatar)  === '{}')
-              //    ?? normal
               msgInfo.avatar || normal
             }
             alt=''
@@ -202,7 +185,7 @@ function MessageDetail(props) {
       <NavTab
         back
         handleBack={handleBack}
-        // title={name}
+        title={name}
       />
       </View>
       

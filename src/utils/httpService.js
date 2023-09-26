@@ -35,7 +35,7 @@ const request = async (method, url, params) => {
     header: {
       "content-type": "application/json",
       // "token":'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjE1MDgyMTc4OTg0IiwidXNlclR5cGUiOjAsInVzZXJOYW1lIjoiIiwicmFuZG9tRGF0ZSI6MTY5NTM0NDcyNTAxNiwidXNlcklkIjoiYTdmOTMzYjgxMGYyNDE5Yjg0MjBjMzA5NWM4ZDg4ZDUifQ.DQ_FlCPs7fbFdIHl6VihZcvMWctJ74PGRUiE3A4q8Uk'
-      "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTU3MDgyNDM3NzgsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.EWdIoJvVkE-xTYcsMQ6tYg_0b-Mjr1gg9bvO7lt6PBE"
+      "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjE1NjgwNTk1NzY3IiwidXNlclR5cGUiOjAsInVzZXJOYW1lIjoiIiwicmFuZG9tRGF0ZSI6MTY5NTcyNTA2MzU4NiwidXNlcklkIjoiYzU3ZGFlMTNlYTI0NGViMjkyZjlkNWU0NDEyMDBjZjIifQ.lB4g6jb5YCE1d5yylJNzRS2Lo_VtiE75hzZR7YCAVdY"
      },
     success(res) {
       Taro.hideLoading()
