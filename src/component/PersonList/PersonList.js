@@ -8,66 +8,78 @@ import "./PersonList.scss";
 
 //人员列表组件
 function PersonList(props) {
-  const { dispatch, enter, showData,userId, user, userList, roomId, onEdit, onDel } = props;
+  console.log(props,'personprops')
+  const { dispatch, enter, showData,userId, user, userList, roomId, onEdit, onDel, bindStudent } = props;
   const [isOpened, setIsOpened] = useState(false);
-  const [id, setId] = useState('');
-  const [type, setType] = useState('') //判断是群聊页面还是其他页面
-  const [groupId, setGroupId] = useState(""); //选中需要删除的数据id
+  const [delId, setDelId] = useState(""); //选中需要删除的数据id
   useEffect(() => {
     dispatch({
       type: "users/getUserList",
     });
+    dispatch({
+      type: "users/getJoinReviewList",
+      payload:{
+        page:1,
+        pageSize:10,
+        userId:userId,
+        status:[0,1,2,3]
+      }
+    });
   }, []);
   const handleNav = (val) => {
+    console.log(val,'val>>>>')
     let MsgToId = ''
-    if(enter == 'teacher'){
+    if(enter == 'message'){
+      //私信列表存在toId（接收方id)
+      MsgToId = val.toId
+    }else if(enter == 'group'){
+      //不确定toId(接收方id),传该条数据id
       MsgToId = val.id
     }else{
-      MsgToId = val.toId
+      //不确定toId(接收方id),传该条数据id
+      MsgToId = val.id
     }
     let payload = {
-      fromId: userId,
+      fromId: user == 0 ? bindStudent.id : userId,
       toId: MsgToId,
       msgType:'0'
     }
+    //如果roomId存在，则传，不存在id不传，后台自动生成roomId,在beforeConnct接口返回的数据获取roomId
     if(val.roomId){
       payload = {
         ...payload,
         id:val.roomId
       }
     }
-    dispatch({
-      type:'AddressList/getBeforeConnect',
-      payload:payload
-    }).then(res => {
-      if (res.status == 200) {
-        Taro.atMessage({
-          message: res.message,
-          type: "success",
-        });
-        Taro.navigateTo({
-          url: `/pages/addressList/message/MessageDetail/MessageDetail?roomId=${val.roomId ? val.roomId : res.data.roomId}&toId=${MsgToId}&id=${res.data.id}`,
-        });
-      } else {
-        Taro.atMessage({
-          message: res.message,
-          type: "error",
-        });
-      }
-    })
-    
+    console.log(payload,'payload')
+    // dispatch({
+    //   type:'AddressList/getBeforeConnect',
+    //   payload:payload
+    // }).then(res => {
+    //   if (res.status == 200) {
+    //     Taro.atMessage({
+    //       message: res.message,
+    //       type: "success",
+    //     });
+    //     Taro.navigateTo({
+    //       //如果点击的当前数据存在roomId,则传该条数据的roomId,否则传接口返回的roomId
+    //       //id为除私信列表数据列表的数据id，用于退出聊天窗口的数据id
+    //       url: `/pages/addressList/message/MessageDetail/MessageDetail?roomId=${val.roomId ? val.roomId : res.data.roomId}&toId=${MsgToId}&id=${res.data.id}`,
+    //     });
+    //   } else {
+    //     Taro.atMessage({
+    //       message: res.message,
+    //       type: "error",
+    //     });
+    //   }
+    // })
   };
 
-  const handleClick = (e) => {
-    let newId = e.message_id;
-    setId(e.message_id);
+  const handleEdit = (record) => {
+    onEdit(record);
   };
-  const handleEdit = (record, val) => {
-    onEdit(record,val);
-  };
-  const handleDel = (record, index) => {
-    setGroupId(record.id)
-    setType(index)
+  const handleDel = (record) => {
+    setDelId(record.id)
     setIsOpened(true);
   };
 
@@ -77,10 +89,10 @@ function PersonList(props) {
   const handleCancel = () => {
     setIsOpened(false);
   };
-
+console.log(delId,'dekid')
   const handleConfirm = () => {
     setIsOpened(false);
-    onDel(type,groupId)
+    onDel(delId)
   };
 
   return (
@@ -92,6 +104,7 @@ function PersonList(props) {
             let note = "";
             if (enter == "group") {
               title = item.groupName;
+              //拼接群组内的成员名称
               note = item.parentList.filter(i => i.userName != null).map((it) => it.userName).join("、");
             } else if(enter == 'message') {
               title = item.toName;
@@ -104,7 +117,6 @@ function PersonList(props) {
                 <AtCard
                   key={index}
                   className='card-item'
-                  onClick={() => handleClick(item)}
                 >
                   {/* 点击页面跳转至聊天界面 */}
                   <View
@@ -158,10 +170,11 @@ function PersonList(props) {
                           <View
                             className='icon-phone'
                             onClick={() =>
-                              handleEdit(item, enter == "teacher" ? 1 : 2)
+                              handleEdit(item)
                             }
                           >
                             <AtIcon
+                            //通讯录页面显示拨打电话功能，其他页面显示编辑功能
                               value={enter == "teacher" ? "phone" : "edit"}
                               size='18'
                               color='#000'
@@ -171,12 +184,12 @@ function PersonList(props) {
                       )}
                       <View
                         className={
+                          // 如果是消息页面，删除按钮换行显示
                           enter == "message"
                             ? "card-button"
                             : "card-button_address"
                         }
                         onClick={() =>
-                          // handleDel(item, enter == "group" ? 1 : 2)
                           handleDel(item)
                         }
                       >
@@ -184,9 +197,6 @@ function PersonList(props) {
                       </View>
                     </View>
                   )}
-                  {/* {item.teacher || item.groupName && ( */}
-
-                  {/* )} */}
                   {/* 仅在私信页面显示聊天时间 */}
                   {enter == "message" && (
                     <View className='card-right'>
@@ -225,4 +235,5 @@ export default connect((state) => ({
   userId: state.users.userId,
   roomId: state.AddressList.roomId,
   userList: state.users.userList,
+  bindStudent: state.users.bindStudent
 }))(PersonList);

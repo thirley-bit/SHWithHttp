@@ -34,12 +34,15 @@ const model = {
     // studentId: "11",
 
     user:1,
-    userId: "3ee83b8573b54f5c99288618039b7c84",
+    userId: "3ee83b8573b54f5c99288618039b7c84", //登录人id
     identity:{telephone:'123'},
     enter: "",
     classList: [],
     pageSize: 10,
     checkedList: [], //审核列表
+    bindStudent:{}, //家长默认绑定学生
+
+
 
     parentPassList: [], //家长端已加入班级列表
     parentCheckedList: [], //家长端待审核列表
@@ -164,10 +167,15 @@ const model = {
     *getJoinReviewList({ payload }, { call, put }) {
       const response = yield call(getJoinReviewList, payload);
       if (response.status == 200) {
-        yield put({
+        yield [put({
             type: "changeCheckedList",
             payload: response.data,
-          });
+          }),
+          put({
+            type: "changeBindStudent",
+            payload: response.data.filter((item) => item.defaultFlag == 1)[0],
+          })
+        ];
       }
       return response;
     },
@@ -330,6 +338,12 @@ const model = {
       return {
         ...state,
         checkedList: payload,
+      };
+    },
+    changeBindStudent(state, { payload }) {
+      return {
+        ...state,
+        bindStudent: payload,
       };
     },
     changeStudentId(state, { payload }) {

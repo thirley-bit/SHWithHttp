@@ -1,14 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect,  } from "react";
 import Taro from "@tarojs/taro";
 import { connect } from 'react-redux';
-import {
-  View,
-  Text,
-  Navigator,
-  Image,
-  Editor,
-} from "@tarojs/components";
-import { AtSearchBar, AtListItem, AtButton, AtIcon } from "taro-ui";
+import { View } from "@tarojs/components";
+import { AtSearchBar } from "taro-ui";
 import PersonList from '@app/component/personList/personList';
 import NavTab from '@app/component/NavTab/NavTab';
 import "./message.scss";
@@ -19,6 +13,7 @@ function Message(props){
   useEffect(() => {
     chatListData()
   },[])
+  //私信页面的聊天列表
   const chatListData = () => {
     dispatch({
       type:'AddressList/getChatList',
@@ -30,8 +25,8 @@ function Message(props){
       }
     })
   }
-  const handleDel = (type,id) => {
-    console.log(type,id,'type,id')
+  //删除聊天列表记录
+  const handleDel = (id) => {
     dispatch({
       type:'AddressList/getDeleteChatList',
       payload:id
@@ -61,43 +56,6 @@ function Message(props){
       <View>
           <PersonList enter='message' showData={chatList} onDel={handleDel} />
       </View>
-
-      {/* <View className='components-page'>
-        <View className='operate-box' onClick={() => addImage()}>
-          <Image className='img' src={img} />
-          <Text className='img-name'>点击插入图片</Text>
-        </View>
-        <View className='editor-box'>
-          <Editor
-            id='editor'
-            className='editor'
-            placeholder='please input...'
-            onReady={() => editorReady()}
-            onInput={(e) => handleInput(e)}
-          ></Editor>
-        </View>
-      </View>
-      <View className='choose-user'>
-        <Navigator url='/pages/class/notice/message/chooseUser/chooseUser'>
-        <View>
-          <AtList>
-              <AtListItem title='请选择指定用户' note='-标签：一年级一班' arrow='right' />
-            </AtList>
-        </View>
-        </Navigator>
-        <View className='bottom'>
-          <Navigator url='/pages/class/notice/message/history/history'>
-          <Text className='text'>历史记录</Text>
-          </Navigator>
-          <AtButton
-            type='primary'
-            className='send-button'
-            onClick={() => handleSend()}
-          >
-          发送
-        </AtButton>
-        </View>
-      </View> */}
     </View>
   );
 }

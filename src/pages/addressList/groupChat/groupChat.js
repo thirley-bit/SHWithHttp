@@ -260,7 +260,6 @@ function GroupChat(props) {
 
   //编辑群聊
   const handleEdit = (record) => {
-    console.log(record, "val");
     //搜索群聊内容清空
     setSearGroupValue("");
     //修改的群聊id
@@ -285,13 +284,12 @@ function GroupChat(props) {
   const handleNameInput = (e) => {
     setGroupName(e.detail.value);
   };
-  const handleDel = (type, id) => {
-    console.log(type, id, ">>>>>");
-    // if (type == 1) {
+  const handleDel = (id) => {
       dispatch({
         type: "AddressList/getDeleteGroup",
         payload: id,
-      }).then((res) => {
+      })
+      .then((res) => {
         if (res.status == 200) {
           Taro.atMessage({
             message: res.message,
