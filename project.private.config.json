@@ -13,12 +13,6 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/addressList/message/message",
-          "pathName": "pages/addressList/message/message",
-          "query": "",
-          "scene": null
-        },
-        {
           "name": "pages/addressList/message/MessageDetail/MessageDetail",
           "pathName": "pages/addressList/message/MessageDetail/MessageDetail",
           "query": "",
@@ -39,6 +33,12 @@
         {
           "name": "pages/my/ChildMsg/ChildMsg",
           "pathName": "pages/my/ChildMsg/ChildMsg",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/class/class",
+          "pathName": "pages/class/class",
           "query": "",
           "scene": null
         }

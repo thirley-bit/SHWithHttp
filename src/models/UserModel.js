@@ -32,13 +32,13 @@ const model = {
     // userId:'a7f933b810f2419b8420c3095c8d88d5',
     // user:0,
     // studentId: "11",
-    identity: { telephone: "15680595767" }, //登录信息
-    userId:'c57dae13ea244eb292f9d5e441200cf2',
-    user:0,
+    // identity: { telephone: "15680595767" }, //登录信息
+    // userId:'c57dae13ea244eb292f9d5e441200cf2',
+    // user:0,
     studentId: "22",
-    // user:1,
-    // userId: "3ee83b8573b54f5c99288618039b7c84", //登录人id
-    // identity:{telephone:'123'},
+    user:1,
+    userId: "3ee83b8573b54f5c99288618039b7c84", //登录人id
+    identity:{telephone:'123'},
     enter: "",
     classList: [],
     pageSize: 10,

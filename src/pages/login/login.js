@@ -11,11 +11,12 @@ import lock from "@static/lock-icon.png";
 import "./Login.scss";
 
 function Login(props) {
-  const { dispatch, users } = props
+  const { dispatch, users,  } = props
   const [numberVal, setNumberVal] = useState("");
-  const [loginUserType, setLoginUserType] = useState(0);
+  const [loginUserType, setLoginUserType] = useState(0);  
  
   useEffect(() => {
+    
     dispatch({
       type:'users/getUser'
     })

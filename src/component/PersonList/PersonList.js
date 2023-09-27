@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { View, Text } from "@tarojs/components";
 import { AtCard, AtAvatar, AtModal, AtIcon, AtBadge, AtMessage } from "taro-ui";
 import Modal from "@app/component/Modal";
+import normal from "@static/normal.png";
 import "./PersonList.scss";
 
 //人员列表组件
@@ -113,6 +114,7 @@ console.log(delId,'dekid')
             } else{
               title = item.userName
             }
+            console.log(item.unreadNum,'unredae')
             return (
               <View key={index} className='card'>
                 <AtCard
@@ -128,15 +130,16 @@ console.log(delId,'dekid')
                     {enter !== "group" && (
                       //不是群聊，则有头像
                       <View>
-                        {item.new == 1 ? (
+                        {item.new == 1 || item.unreadNum ? (
                           // 如果有新消息，则加徽标
                           <View className='left'>
-                            <AtBadge value={10}>
+                            {/* 此处的value需修改 */}
+                            <AtBadge value={item.unreadNum}>
                               <AtAvatar
                                 circle
                                 className='img'
                                 size='small'
-                                image={item?.avatar}
+                                image={item.avatar || normal}
                               />
                             </AtBadge>
                           </View>

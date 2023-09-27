@@ -33,7 +33,6 @@ function MessageDetail(props) {
   const msgType = router.params.msgType
   // //聊天室名称
   const name = router.params.name
-  console.log(name,'name')
   useEffect(() => {
     if (socketMsgQueue.length > 0) {
       dispatch({
@@ -52,21 +51,6 @@ function MessageDetail(props) {
       },
     });
 
-    Taro.connectSocket({
-      url: `ws://192.168.1.157:5002/websocket/${user == 0 ? bindStudent.id : userId}/${roomId}`,
-      header: {
-        "content-type": "application/json", // 默认值
-        token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTU3MTkwNTM3MTgsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.wL-ReWq0mNr8xuNaMeKquZqW8uWs4Fojskqc4GJU1S8",
-      },
-    }).then((task) => {
-      task.onOpen(function () {
-      });
-    });
-    Taro.onSocketOpen(function (socket) {
-      setSocketOpen(true);
-      console.log("onSocketOpen连接已打开");
-    });
     Taro.onSocketMessage(function (res) {
       let receiveMsg = JSON.parse(res.data)
       setSocketMsgQueue([
@@ -87,9 +71,6 @@ function MessageDetail(props) {
   }, []);
 
   const sendSocketMessage = (msg) => {
-    let a = messageList.filter((item) => item.fromId == userId)[0];
-    // let { fromName, avatar } = a;
-    if (socketOpen) {
       Taro.sendSocketMessage({ data: JSON.stringify(msg) }).then((res) => {
         dispatch({
           type: "AddressList/changeMessageList",
@@ -103,18 +84,6 @@ function MessageDetail(props) {
         });
       });
       setInputVal("");
-    } else {
-      dispatch({
-        type: "AddressList/changeMessageList",
-        payload: messageList.concat([
-          {
-            sendMessage: inputVal,
-            fromId: userId,
-            avatar: 'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
-          },
-        ]),
-      });
-    }
   };
 
   const handleInput = (e) => {
@@ -129,7 +98,6 @@ function MessageDetail(props) {
       msgType: msgType,
       sendMessage: inputVal,
     };
-    console.log(msg,'msg')
     sendSocketMessage(msg);
   };
   const handleBack = () => {

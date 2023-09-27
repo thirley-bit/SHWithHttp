@@ -152,7 +152,7 @@ function ChildMsg(props) {
           filePath: tempFilePaths[0],
           name: 'file',
           header: {
-            'token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjE1NjgwNTk1NzY3IiwidXNlclR5cGUiOjAsInVzZXJOYW1lIjoiIiwicmFuZG9tRGF0ZSI6MTY5NTcyNTA2MzU4NiwidXNlcklkIjoiYzU3ZGFlMTNlYTI0NGViMjkyZjlkNWU0NDEyMDBjZjIifQ.lB4g6jb5YCE1d5yylJNzRS2Lo_VtiE75hzZR7YCAVdY'
+            'token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTU3NzcwOTk0MDUsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.BEbKEX0nNN7-RuBIMT2Ck4qKz7D5CSlTabQpUPwKbdY'
           },
           success: (res1) => {console.log(res1,'res1');},
         })

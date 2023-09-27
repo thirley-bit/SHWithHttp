@@ -15,16 +15,19 @@ function Message(props){
   },[])
   //私信页面的聊天列表
   const chatListData = () => {
-    dispatch({
-      type:'AddressList/getChatList',
-      payload:{
-        page:1,
-        pageSize:pageSize,
-        //是老师时为当前登录人id， 是家长时为当前切换的审核数据id
-        fromId: user == 0 ? bindStudent.id : userId,
-        searchKey:''
-      }
-    })
+    // setInterval(() => {
+      dispatch({
+        type:'AddressList/getChatList',
+        payload:{
+          page:1,
+          pageSize:pageSize,
+          //是老师时为当前登录人id， 是家长时为当前切换的审核数据id
+          fromId: user == 0 ? bindStudent.id : userId,
+          searchKey:''
+        }
+      })
+    // },2000)
+    
   }
   //删除聊天列表记录
   const handleDel = (id) => {
