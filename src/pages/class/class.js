@@ -18,10 +18,10 @@ import "./class.scss";
 import "../../app.scss";
 
 function Index(props) {
-  const { dispatch, identity,user,  articleArr, bindStudent, bannerList, pageSize, userId, studentId } = props;
+  console.log(props,'props')
+  const { dispatch, user,  articleArr, bannerList, pageSize, userId, studentId } = props;
 
   const [current, setCurrent] = useState(0);
-  const [socketOpen, setSocketOpen] = useState(false);
   const tabList = [
     {
       title: "作业",
@@ -66,21 +66,23 @@ function Index(props) {
         userId: userId,
         status: [0,1,2,3],
       },
-    });
-    Taro.connectSocket({
-      url: `ws://192.168.1.157:5002/websocket/${user == 0 ? bindStudent.id : userId}`,
-      header: {
-        "content-type": "application/json", // 默认值
-        token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTU4MDU3OTQ4NjUsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.jTtE1u-zAfeNd2wq8FabJWiOk1ZbDpKSW5PVfv9gQbE",
-      },
-    }).then((task) => {
-      task.onOpen(function () {
+    }).then(res => {
+      let bindId = res.data.filter((item) => item.defaultFlag == 1)[0].id
+      Taro.connectSocket({
+        url: `ws://192.168.1.157:5002/websocket/${user == 0 ? bindId : userId}`,
+        header: {
+          "content-type": "application/json", // 默认值
+          token:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTU4MDU3OTQ4NjUsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.jTtE1u-zAfeNd2wq8FabJWiOk1ZbDpKSW5PVfv9gQbE",
+        },
+      }).then((task) => {
+        task.onOpen(function () {
+        });
       });
-    });
-    Taro.onSocketOpen(function (socket) {
-      console.log("onSocketOpen连接已打开");
-    });
+      Taro.onSocketOpen(function (socket) {
+        console.log("onSocketOpen连接已打开");
+      });
+    })
     //推荐文章
     dispatch({
       type: "Class/getArticleList",

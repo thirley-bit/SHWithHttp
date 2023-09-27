@@ -11,7 +11,6 @@ import "./MessageDetail.scss";
 function MessageDetail(props) {
   console.log(props, "propsdetail");
   const { dispatch, messageList, user, bindStudent, userId, messageDetail } = props;
-  const [socketOpen, setSocketOpen] = useState(false);
   const [socketMsgQueue, setSocketMsgQueue] = useState([]);
   // const showLeft = "own";
   // const sys = Taro.getSystemInfoSync();
@@ -53,13 +52,14 @@ function MessageDetail(props) {
 
     Taro.onSocketMessage(function (res) {
       let receiveMsg = JSON.parse(res.data)
+      console.log(receiveMsg,'recivemsg')
       setSocketMsgQueue([
         {
           sendMessage: receiveMsg.message,
           fromName: receiveMsg.userName,
           avatar:receiveMsg.avatar},
       ])
-      console.log("收到服务器内容：" + res.data);
+      console.log("收到服务器内容www：" + res.data);
     });
 
     Taro.onKeyboardHeightChange((res) => {
@@ -77,7 +77,7 @@ function MessageDetail(props) {
           payload: messageList.concat([
             {
               sendMessage: inputVal,
-              fromId: userId,
+              fromId: user == 0 ? bindStudent.id : userId,
               avatar: 'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
             },
           ]),
@@ -111,7 +111,7 @@ function MessageDetail(props) {
   }
 
   const _renderMessage = (msgInfo, index) => {
-    if (msgInfo?.fromId == userId) {
+    if (msgInfo?.fromId == (user == 0 ? bindStudent.id : userId)) {
       return (
         <View id={`scrollId${index + 1}`} className='chatRight' key={index}>
           <Image
