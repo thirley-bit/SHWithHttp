@@ -11,6 +11,7 @@ import {
   getMessageList,
   getBeforeConnect,
   getWebsocket,
+  getUploadFile,
 
   getTeacherList,
   getParentList,
@@ -114,6 +115,10 @@ const model = {
     },
     *getWebsocket({ payload }, { call, put }) {
       const response = yield call(getWebsocket, payload);
+      return response;
+    },
+    *getUploadFile({ payload }, { call, put }) {
+      const response = yield call(getUploadFile, payload);
       return response;
     },
 

@@ -49,6 +49,10 @@ export async function getBeforeConnect(params){
 export async function getWebsocket(params){
     return httpService.post(`websocket/${params.userId}/${params.roomId}`,params)
 }
+//文件上传
+export async function getUploadFile(params){
+    return httpService.uploadFile('/file/uploadFile',params)
+}
 
 export async function getTeacherList(){
     let url = 'address/teacher/list'

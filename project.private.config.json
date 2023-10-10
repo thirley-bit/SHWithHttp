@@ -41,6 +41,18 @@
           "pathName": "pages/class/class",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/addressList/message/MessageDetail/MessageDetail",
+          "pathName": "pages/addressList/message/MessageDetail/MessageDetail",
+          "query": "roomId=e34cbbac45954519b3a0142734484ea4&toId=365748f56c774192809458d7b28fe2e8&id=75756291dde64637ad579b14f54dbac1&msgType=1&name=%E6%96%B0%E5%BB%BA%E7%BE%A4%E8%81%8A",
+          "scene": null
+        },
+        {
+          "name": "pages/addressList/message/MessageDetail/MessageDetail",
+          "pathName": "pages/addressList/message/MessageDetail/MessageDetail",
+          "query": "roomId=87ffde29085946969d21fc03087f1051&toId=1&id=e4cb320313124c688a78f9428cdf0e8c&msgType=0&name=%E6%99%93%E5%8D%8E%E7%88%B8%E7%88%B8",
+          "scene": null
         }
       ]
     }

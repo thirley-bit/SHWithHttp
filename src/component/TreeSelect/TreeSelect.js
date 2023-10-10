@@ -47,10 +47,10 @@
 
 import { useState, useImperativeHandle, forwardRef } from "react";
 import { View, Checkbox, Label } from "@tarojs/components";
+import { AtIcon } from 'taro-ui';
 import classnames from "classnames";
 import cloneDeep from "lodash.clonedeep";
 import "./TreeSelect.scss"
-import { AtCheckbox, AtIcon } from 'taro-ui';
 
 
 function MyCheckbox({
@@ -183,6 +183,7 @@ function TreeSelect(props, ref) {
           value={item.value}
           label={item.label}
           option={item}
+          disabled={item.ifChoose == 1}
           checked={item.checked}
           onChange={onChangeHandler}
           dataIndex={dataIndex}

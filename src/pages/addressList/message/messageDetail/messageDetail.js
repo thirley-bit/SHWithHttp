@@ -4,13 +4,14 @@ import { connect } from "react-redux";
 // import { AtAvatar, AtButton, AtInput, AtTextarea } from "taro-ui";
 import { View, Image, Textarea, ScrollView, Button } from "@tarojs/components";
 import NavTab from "@app/component/NavTab/NavTab";
-import GradientButton from '@app/component/GradientButton';
+import GradientButton from "@app/component/GradientButton";
 import normal from "@static/normal.png";
 import "./MessageDetail.scss";
+import { AtIcon } from "taro-ui";
 
 function MessageDetail(props) {
-  console.log(props, "propsdetail");
-  const { dispatch, messageList, user, bindStudent, userId, messageDetail } = props;
+  const { dispatch, messageList, user, bindStudent, userId } =
+    props;
   const [socketMsgQueue, setSocketMsgQueue] = useState([]);
   // const showLeft = "own";
   // const sys = Taro.getSystemInfoSync();
@@ -27,19 +28,19 @@ function MessageDetail(props) {
   //接收者id
   const toId = router.params.toId;
   //该条数据id，用于退出窗口
-  const id = router.params.id
+  const id = router.params.id;
   //消息类型，0：单聊；1：群聊
-  const msgType = router.params.msgType
+  const msgType = router.params.msgType;
   // //聊天室名称
-  const name = router.params.name
+  const name = router.params.name;
   useEffect(() => {
     if (socketMsgQueue.length > 0) {
       dispatch({
         type: "AddressList/changeMessageList",
-        payload: messageList.concat(socketMsgQueue)
-      })
+        payload: messageList.concat(socketMsgQueue),
+      });
     }
-  },[socketMsgQueue])
+  }, [socketMsgQueue]);
   useEffect(() => {
     dispatch({
       type: "AddressList/getMessageList",
@@ -50,40 +51,51 @@ function MessageDetail(props) {
       },
     });
 
+    //监听接收的消息
     Taro.onSocketMessage(function (res) {
-      let receiveMsg = JSON.parse(res.data)
-      console.log(receiveMsg,'recivemsg')
+      let receiveMsg = JSON.parse(res.data);
+      //显示监听的消息
       setSocketMsgQueue([
         {
           sendMessage: receiveMsg.message,
           fromName: receiveMsg.userName,
-          avatar:receiveMsg.avatar},
-      ])
+          avatar: receiveMsg.avatar,
+        },
+      ]);
       console.log("收到服务器内容www：" + res.data);
     });
 
+    //键盘抬起时的滚动窗口
     Taro.onKeyboardHeightChange((res) => {
-      console.log(res, "keyboard height");
       const { height } = res;
       setScrollHeight({ height: `calc(100% - ${height}px + 20px )` });
     });
     return () => Taro.offKeyboardHeightChange();
   }, []);
 
-  const sendSocketMessage = (msg) => {
-      Taro.sendSocketMessage({ data: JSON.stringify(msg) }).then((res) => {
-        dispatch({
-          type: "AddressList/changeMessageList",
-          payload: messageList.concat([
-            {
-              sendMessage: inputVal,
-              fromId: user == 0 ? bindStudent.id : userId,
-              avatar: 'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2',
-            },
-          ]),
-        });
+  const sendSocketMessage = (msg, contentType, imgRes) => {
+    let sendMessage = "";
+    if (contentType == 0) {
+      sendMessage = inputVal;
+    } else {
+      sendMessage = imgRes[0][0]?.fileMappingPath;
+    }
+
+    Taro.sendSocketMessage({ data: JSON.stringify(msg) }).then((res) => {
+      dispatch({
+        type: "AddressList/changeMessageList",
+        payload: messageList.concat([
+          {
+            sendMessage: sendMessage,
+            contentType: contentType,
+            fromId: user == 0 ? bindStudent.id : userId,
+            avatar:
+              "https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2",
+          },
+        ]),
       });
-      setInputVal("");
+    });
+    setInputVal("");
   };
 
   const handleInput = (e) => {
@@ -93,41 +105,84 @@ function MessageDetail(props) {
   const handleSendMessage = (e) => {
     let msg = {
       roomId: roomId,
-      fromId:user == 0 ? bindStudent.id : userId,
+      fromId: user == 0 ? bindStudent.id : userId,
       toId: toId,
       msgType: msgType,
       sendMessage: inputVal,
+      contentType: 0,
     };
-    sendSocketMessage(msg);
+    sendSocketMessage(msg, 0);
+  };
+  const addImage = () => {
+    Taro.chooseImage({
+      count: 9,
+      sizeType: ["original", "compressed"],
+      sourceType: ["album", "camera"],
+      success: (res) => {
+        var tempFilePaths = res.tempFilePaths;
+        let filePathList = tempFilePaths.map((filePath) =>
+          dispatch({
+            type: "AddressList/getUploadFile",
+            payload: filePath,
+          }).then((resp) => {
+            return resp.data;
+          })
+        );
+        Promise.all(filePathList).then((resp) => {
+          resp.forEach((item) => {
+            item.forEach((jtem) => {
+              let msg = {
+                roomId: roomId,
+                fromId: user == 0 ? bindStudent.id : userId,
+                toId: toId,
+                msgType: msgType,
+                sendMessage: jtem.id,
+                contentType: 1,
+              };
+              sendSocketMessage(msg, 1, resp);
+            });
+          });
+        });
+      },
+    });
   };
   const handleBack = () => {
     dispatch({
-      type:'AddressList/getUpdateChatList',
-      payload:{
-        id:id,
-        inWindow:0
-      }
-    })
-  }
+      type: "AddressList/getUpdateChatList",
+      payload: {
+        id: id,
+        inWindow: 0,
+      },
+    });
+  };
+  const _typeMessage = (msgInfo) => {
+    if (msgInfo.contentType == 0) {
+      return (
+        <View className='text' style={{ backgroundColor: "#1BA5FF" }}>
+          {msgInfo?.sendMessage}
+        </View>
+      );
+    } else {
+      return (
+        <Image
+          className='text'
+          style={{ borderRadius: "10rpx", padding: "0" }}
+          src={msgInfo?.sendMessage}
+        />
+      );
+    }
+  };
 
   const _renderMessage = (msgInfo, index) => {
     if (msgInfo?.fromId == (user == 0 ? bindStudent.id : userId)) {
       return (
         <View id={`scrollId${index + 1}`} className='chatRight' key={index}>
-          <Image
-            className='img'
-            src={
-              msgInfo.avatar || normal
-            }
-            alt=''
-          />
+          <Image className='img' src={msgInfo.avatar || normal} alt='' />
           <View className='info'>
             <View className='name' style='text-align:right'>
               {msgInfo?.fromName}
             </View>
-            <View className='textCon'>
-              <View className='text'>{msgInfo?.sendMessage}</View>
-            </View>
+            <View className='textCon'>{_typeMessage(msgInfo)}</View>
           </View>
         </View>
       );
@@ -138,9 +193,7 @@ function MessageDetail(props) {
           <Image className='img' src={msgInfo.avatar || normal} alt='' />
           <View className='info'>
             <View className='name'>{msgInfo?.fromName}</View>
-            <View className='textCon'>
-              <View className='text'>{msgInfo?.sendMessage}</View>
-            </View>
+            <View className='textCon'>{_typeMessage(msgInfo)}</View>
           </View>
         </View>
       );
@@ -150,13 +203,9 @@ function MessageDetail(props) {
   return (
     <View className='index'>
       <View onClick={handleBack}>
-      <NavTab
-        back
-        handleBack={handleBack}
-        title={name}
-      />
+        <NavTab back handleBack={handleBack} title={name} />
       </View>
-      
+
       <View className='msg__wrapper' style={scrollHeight}>
         <ScrollView
           id='scrollview'
@@ -188,9 +237,16 @@ function MessageDetail(props) {
                 // onKeyboardHeightChange={() => handleKeyBoardHeight()}
               />
             </View>
-            <GradientButton class='send-btn' type='primary' onClick={() => handleSendMessage()} >
+            <GradientButton
+              class='send-btn'
+              type='primary'
+              onClick={() => handleSendMessage()}
+            >
               发送
             </GradientButton>
+            <View className='add-image' onClick={() => addImage()}>
+              <AtIcon value='add' size='30' color='#999'></AtIcon>
+            </View>
           </View>
         </View>
       </View>

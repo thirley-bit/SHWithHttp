@@ -17,28 +17,9 @@ const interceptor = function (chain) {
 };
 Taro.addInterceptor(interceptor);
 
-const request = async (method, url, params) => {
-  //由于post请求时习惯性query参数使用params，body参数使用data，而taro只有data参数，使用contentType作为区分，因此此处需要做一个判断
-  // let contentType = params ? 'application/json' : 'application/x-www-form-urlencoded';
-  // let contentType = "application/json";
-  // if (params) contentType = params?.headers?.contentType || contentType;
-
-  //接口返回前显示加载状态
-  Taro.showLoading({
-    title:'加载中',
-  })
-  const option = {
-    method,
-    isShowLoading: false,
-    url: apiConfig.baseUrl + url,
-    data: params,
-    header: {
-      "content-type": "application/json",
-      // "token":'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjE1MDgyMTc4OTg0IiwidXNlclR5cGUiOjAsInVzZXJOYW1lIjoiIiwicmFuZG9tRGF0ZSI6MTY5NTM0NDcyNTAxNiwidXNlcklkIjoiYTdmOTMzYjgxMGYyNDE5Yjg0MjBjMzA5NWM4ZDg4ZDUifQ.DQ_FlCPs7fbFdIHl6VihZcvMWctJ74PGRUiE3A4q8Uk'
-      "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTU4MDU3OTQ4NjUsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.jTtE1u-zAfeNd2wq8FabJWiOk1ZbDpKSW5PVfv9gQbE"
-     },
-    success(res) {
-      Taro.hideLoading()
+//接口结果反馈
+const responseTips = (res) => {
+  Taro.hideLoading()
       //如果返回错误，原因
       let title = res.data?.error;
       //返回码
@@ -71,14 +52,55 @@ const request = async (method, url, params) => {
         default:
           break;
       }
+}
+
+const request = async (method, url, params) => {
+  //由于post请求时习惯性query参数使用params，body参数使用data，而taro只有data参数，使用contentType作为区分，因此此处需要做一个判断
+  // let contentType = params ? 'application/json' : 'application/x-www-form-urlencoded';
+  // let contentType = "application/json";
+  // if (params) contentType = params?.headers?.contentType || contentType;
+
+  //接口返回前显示加载状态
+  Taro.showLoading({
+    title:'加载中',
+  })
+  const option = {
+    method,
+    isShowLoading: false,
+    url: apiConfig.baseUrl + url,
+    data: params,
+    header: {
+      "content-type": "application/json",
+      // "token":'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjE1MDgyMTc4OTg0IiwidXNlclR5cGUiOjAsInVzZXJOYW1lIjoiIiwicmFuZG9tRGF0ZSI6MTY5NTM0NDcyNTAxNiwidXNlcklkIjoiYTdmOTMzYjgxMGYyNDE5Yjg0MjBjMzA5NWM4ZDg4ZDUifQ.DQ_FlCPs7fbFdIHl6VihZcvMWctJ74PGRUiE3A4q8Uk'
+      "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTU4ODExNjU3OTUsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.eTEWj1F0W2ksJ4hjC7ueunsbb2aGaD9HA1WDAlm82cw"
+     },
+    success(res) {
+      responseTips(res)
     },
     error(e) {
       console.log("api", "请求接口出现问题", e);
     },
   };
-  const resp = await Taro.request(option,'option');
+  const resp = await Taro.request(option);
   return resp.data; //根据个人需要返回
 };
+const uploadFile = async function(url, filePath) {
+  const fileOption = {
+    url: apiConfig.baseUrl + url,
+    filePath: filePath,
+    name: 'file',
+    header: {
+      "content-type": "application/json",
+      'token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTU4ODExNjU3OTUsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.eTEWj1F0W2ksJ4hjC7ueunsbb2aGaD9HA1WDAlm82cw'
+    },
+    success: (res) => {
+      responseTips(res)
+    },
+  }
+  const response = await Taro.uploadFile(fileOption)
+  return JSON.parse(response.data);
+}
+
 
 export default {
   get: (url, config) => {
@@ -96,4 +118,7 @@ export default {
   patch: (url, config) => {
     return request("PATCH", url, config);
   },
+  uploadFile: (url, config) => {
+    return uploadFile(url, config);
+  }
 };
