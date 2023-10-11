@@ -1,9 +1,16 @@
 .img-picker{
     background-color: #fff;
 }
-.send-button{
-    position: fixed;
-    width: 98%;
-    bottom: 1%;
-    margin: 1%;
+.photos{
+    .at-modal__container{
+        width: auto;
+        border-radius: 45rpx;
+        top: 65%;
+        color: #000;
+        text-align: left;
+    }
+    .photos-modal{
+        width: 100vw;
+        height: 60vh;
+    }
 }

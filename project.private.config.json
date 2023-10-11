@@ -53,6 +53,24 @@
           "pathName": "pages/addressList/message/MessageDetail/MessageDetail",
           "query": "roomId=87ffde29085946969d21fc03087f1051&toId=1&id=e4cb320313124c688a78f9428cdf0e8c&msgType=0&name=%E6%99%93%E5%8D%8E%E7%88%B8%E7%88%B8",
           "scene": null
+        },
+        {
+          "name": "pages/class/Photos/Photos",
+          "pathName": "pages/class/Photos/Photos",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/class/Photos/NewPhotosAlbum/NewPhotosAlbum",
+          "pathName": "pages/class/Photos/NewPhotosAlbum/NewPhotosAlbum",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/class/Photos/PublishPhotos/PublishPhotos",
+          "pathName": "pages/class/Photos/PublishPhotos/PublishPhotos",
+          "query": "",
+          "scene": null
         }
       ]
     }

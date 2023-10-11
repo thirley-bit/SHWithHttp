@@ -1,23 +1,61 @@
 import { useState } from "react";
-import { View } from "@tarojs/components";
-import { AtImagePicker, AtList, AtListItem, AtButton } from "taro-ui";
+import { View, Button } from "@tarojs/components";
+import { AtImagePicker, AtList, AtListItem, AtModal, AtModalAction, AtModalContent } from "taro-ui";
 import Taro from "@tarojs/taro";
 import NavTab from '@app/component/NavTab/NavTab';
+import CardList from '@app/component/CardList/CardList';
 import GradientButton from '@app/component/GradientButton';
 import "./PublishPhotos.scss";
+import { connect } from 'react-redux';
 
 //上传照片页面
-function PublishPhotos() {
+function PublishPhotos(props) {
+  const { dispatch, albumList } = props
   const [folder, setFolder] = useState({})
+  const [isOpened, setIsOpened] = useState(false)
+
   const handleChoose = () => {
-    Taro.navigateTo({ url: "/pages/class/Photos/ChoosePhotosAlbum/ChoosePhotosAlbum" });
+    setIsOpened(true)
+    // Taro.navigateTo({ url: "/pages/class/Photos/ChoosePhotosAlbum/ChoosePhotosAlbum" });
   };
+
+  const handleClose = () => {
+    setIsOpened(false)
+  }
+  const handleChooseAlbum = (e) => {
+    console.log(e,'e11e1e')
+  }
+  const handleCancel = () => {
+    setIsOpened(false)
+  }
+  const handleConfirm = () => {
+    setIsOpened(false)
+  }
   const handleChange = (files) => {
     console.log(files);
-    setFolder({ files });
+    setFolder({files});
   };
   const handleSend = () => {
     console.log(folder)
+    let filePathList = folder.files.map((filePath) =>
+    // console.log(filePath,'file path')
+          dispatch({
+            type: "AddressList/getUploadFile",
+            payload: filePath.url,
+          }).then((resp) => {
+            return resp.data;
+          })
+        );
+        console.log(filePathList,'filepathlist')
+        Promise.all(filePathList).then((resp) => {
+          console.log(resp,'resp')
+          resp.forEach((item) => {
+            console.log(item,'item')
+            item.forEach((jtem) => {
+              console.log(jtem.id,'jtem')
+            });
+          });
+        });
   }
   return (
     <View className='main'>
@@ -30,6 +68,27 @@ function PublishPhotos() {
           onClick={handleChoose}
         />
       </AtList>
+      <View className='photos'>
+      <AtModal isOpened={isOpened} onClose={handleClose}>
+          <AtModalContent className='photos-modal'>
+              {/* {dataSource.length ? (
+                <TreeSelect
+                  ref={refTree}
+                  dataSource={dataSource}
+                  onChange={onChangeHandler}
+                />
+              ) : (
+                <View style={{ margin: "50% 40%" }}>暂无数据</View>
+              )} */}
+              <CardList enter='photos' showData={albumList} onClick={handleChooseAlbum} />
+          </AtModalContent>
+          <AtModalAction>
+            <Button style={{borderRight:'1rpx solid #dedede'}} onClick={handleCancel}>取消</Button>
+            <Button onClick={handleConfirm}>确定</Button>
+          </AtModalAction>
+        </AtModal>
+      </View>
+        
       <View className='img-picker'>
         <AtImagePicker files={folder.files} onChange={handleChange} />
       </View>
@@ -50,4 +109,6 @@ function PublishPhotos() {
     </View>
   );
 }
-export default PublishPhotos;
+export default connect((state) => ({
+  albumList: state.Photos.albumList
+}))(PublishPhotos);

@@ -11,24 +11,31 @@
         .at-row--wrap{
             position: relative;
         }
+        .card-name{
+            position: absolute;
+        }
+        .card-num{
+            position: absolute;
+            // bottom: 0;
+            line-height: 160rpx;
+            color: #999;
+        }
         .card-content{
-            width: 100%;
+            position: absolute;
+            // width: 100%;
             display:-webkit-box;
             -webkit-line-clamp:1;
             overflow:hidden;
             text-overflow:ellipsis;
             -webkit-box-orient:vertical;
             word-break:break-all;
-            margin-top: 4%;
-            color: #999;
-        }
-        .card-num{
-            position: absolute;
             bottom: 0;
             color: #999;
         }
+        
         .card-time{
-            margin-top: 38rpx;
+            position: absolute;
+            line-height: 160rpx;
             color: #999;
             font-size: 24rpx;
         }

@@ -7,13 +7,15 @@ import "./CardList.scss";
 
 //校园食谱页面
 function CardList(props) {
-  const { dispatch, enter, showData } = props;
+  console.log(props, "CardList");
+  const { dispatch, enter, showData, onClick } = props;
   const [isOpened, setIsOpened] = useState(false);
   // const [toastOpened, setToastOpened] = useState(false)
   const [id, setId] = useState("");
 
   const handleClick = (e) => {
-    console.log(e);
+    console.log(e,'eeeeeeeee');
+    onClick(e)
     if (e == 1) {
       Taro.navigateTo({
         url: "/pages/class/Photos/NewPhotosAlbum/NewPhotosAlbum",
@@ -21,12 +23,12 @@ function CardList(props) {
     }
   };
   const handleDownLoad = () => {
-    console.log(111)
-  }
+    console.log(111);
+  };
   const handleDel = (value) => {
-    setId(value)
-    setIsOpened(true)
-  }
+    setId(value);
+    setIsOpened(true);
+  };
 
   const handleClose = () => {
     setIsOpened(false);
@@ -37,14 +39,14 @@ function CardList(props) {
 
   const handleConfirm = () => {
     dispatch({
-      type:'Source/getDelete',
-      payload:id
-    }).then(res => {
+      type: "Source/getDelete",
+      payload: id,
+    }).then((res) => {
       Taro.atMessage({
-        'message':res.msg == 'success' ? '删除成功' : res.msg,
-        'type':res.msg  == 'success' ? res.msg : 'error',
-      })
-    })
+        message: res.msg == "success" ? "删除成功" : res.msg,
+        type: res.msg == "success" ? res.msg : "error",
+      });
+    });
     setIsOpened(false);
   };
   return (
@@ -79,6 +81,21 @@ function CardList(props) {
       )}
       <View>
         {showData.map((item, index) => {
+          let url = "";
+          let name = "";
+          let content = "";
+          let num = "";
+          if (enter == "photos") {
+            url = item.coverImage;
+            name = item.albumName;
+            content = item.describe;
+            num = 11;
+          } else {
+            url = item.url;
+            name = item.name;
+            content = item.loader;
+            num = item.load_time;
+          }
           return (
             <View key={index} className='my-card'>
               <AtCard
@@ -89,28 +106,29 @@ function CardList(props) {
                 <View className='at-row at-row--wrap'>
                   <View className='at-col at-col-3 at-col--wrap'>
                     <View className='card-img'>
-                      <Image className='img' src={item.url} />
+                      <Image className='img' src={url} />
                     </View>
                   </View>
                   <View className='at-col at-col-9'>
-                    <View className='card-name'>{item.name}</View>
-                    <View className='card-content'>{ enter == 'photos' ? item.detail : item.loader}</View>
-                    <View className='card-num'>{item.num}</View>
-                    <View className='card-num'>{item.load_time}</View>
+                    <View className='card-name'>{name}</View>
+                    <View className='card-num'>{num}</View>
+                    <View className='card-content'>{content}</View>
                   </View>
                   {enter == "source" && (
-                      <View className='card_address'>
-                        {
-                          item.type !== 'package' &&
-                          <View className='icon-message' onClick={handleDownLoad}>
+                    <View className='card_address'>
+                      {item.type !== "package" && (
+                        <View className='icon-message' onClick={handleDownLoad}>
                           <AtIcon value='download' size='18' />
                         </View>
-                        }
-                        <View className='icon-del' onClick={() => handleDel(item.source_id)}>
-                          <AtIcon value='trash' size='18' color='#f00' />
-                        </View>
+                      )}
+                      <View
+                        className='icon-del'
+                        onClick={() => handleDel(item.source_id)}
+                      >
+                        <AtIcon value='trash' size='18' color='#f00' />
                       </View>
-                    )}
+                    </View>
+                  )}
                 </View>
                 <AtModal
                   isOpened={isOpened}

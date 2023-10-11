@@ -38,7 +38,7 @@ const model = {
     studentId: "22",
     user:1,
     userId: "3ee83b8573b54f5c99288618039b7c84", //登录人id
-    identity:{telephone:'123'},
+    identity:{telephone:'123',classId:'1'},
     enter: "",
     classList: [],
     pageSize: 10,

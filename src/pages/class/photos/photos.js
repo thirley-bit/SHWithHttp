@@ -8,10 +8,11 @@ import "./Photos.scss";
 
 //相册页面
 function Photos(props) {
-  const { dispatch, user, photosArr, photoDetail } = props
+  const { dispatch, user, albumList, photoDetail } = props
   useEffect(() => {
     dispatch({
-      type:'users/getUser'
+      type:'Photos/getAlbumList',
+      payload:1
     })
     dispatch({
       type:'Photos/getPhotosList'
@@ -21,10 +22,10 @@ function Photos(props) {
     Taro.navigateTo({url:'/pages/class/Photos/NewPhotosAlbum/NewPhotosAlbum'})
   }
   const handleClick = (item) => {
-    console.log(item)
+    console.log(item,'item')
     dispatch({
-      type:"Photos/getPhotoCover",
-      payload:item.photo_id
+      type:"Photos/getAlbumImageList",
+      payload:item.id
     })
     Taro.navigateTo({url:`/pages/class/Photos/PhotosDetail/PhotosDetail`})
   }
@@ -41,7 +42,7 @@ function Photos(props) {
       </View>
       <View className='photo'>
         <AtGrid
-          data={photosArr}
+          data={albumList}
           onClick={handleClick}
         />
       </View>
@@ -67,6 +68,8 @@ function Photos(props) {
 }
 export default connect(state => ({
   user:state.users.user,
+  albumList: state.Photos.albumList,
+  albumImageList: state.Photos.albumImageList,
   photosArr: state.Photos.photosArr,
   photoDetail:state.Photos.photoDetail
 }))(Photos);

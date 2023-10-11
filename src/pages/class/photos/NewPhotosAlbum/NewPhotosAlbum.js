@@ -1,14 +1,16 @@
 import { View, Image, Input } from "@tarojs/components";
 import { useState } from "react";
 import Taro from '@tarojs/taro'
-import { AtDivider, AtButton, AtList, AtListItem, AtTextarea } from "taro-ui";
+import { AtDivider, AtButton, AtList, AtListItem, AtTextarea, AtMessage } from "taro-ui";
 import NavTab from '@app/component/NavTab/NavTab';
 import GradientButton from '@app/component/GradientButton';
 import "./NewPhotosAlbum.scss"
+import { connect } from 'react-redux';
 
 //新建相册页面
 function NewPhotosAlbum(props) {
-  const { dispatch } = props;
+  const { dispatch, identity } = props;
+  console.log(props,'props')
   const [inputValue, setInputValue] = useState("");
   const [areaValue, setAreaValue] = useState("")
   const [img,setImg] = useState('')
@@ -29,6 +31,32 @@ function NewPhotosAlbum(props) {
     })
   }
   const handleSend = () => {
+    dispatch({
+      type:'Photos/getInsertAlbum',
+      payload:{
+        albumName:inputValue,
+        describe: areaValue,
+        coverImage: img,
+        classId: identity.classId
+      }
+    }).then((res) => {
+      if (res.status == 200) {
+        Taro.atMessage({
+          message: res.message,
+          type: "success",
+        });
+        //新建成功，跳转至列表页面
+        setTimeout(() => {
+          Taro.navigateTo({ url: "/pages/class/Photos/Photos" });
+        }, 1000);
+      } else {
+        Taro.atMessage({
+          message: res.message,
+          type: "error",
+        });
+      }
+    });
+    console.log(inputValue,areaValue,img,'inputvalue')
     console.log('send')
   }
   
@@ -63,7 +91,12 @@ function NewPhotosAlbum(props) {
       >
         发送
       </GradientButton>
+      <AtMessage />
     </View>
   );
 }
-export default NewPhotosAlbum;
+export default connect((state) =>({
+  user: state.users.user,
+  userId: state.users.userId,
+  identity: state.users.identity
+})) (NewPhotosAlbum);
