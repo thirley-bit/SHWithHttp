@@ -36,6 +36,10 @@ const model = {
     // userId:'c57dae13ea244eb292f9d5e441200cf2',
     // user:0,
     studentId: "22",
+    // studentId:'',
+    // user:'',
+    // userId:'',
+    // identity:{},
     user:1,
     userId: "3ee83b8573b54f5c99288618039b7c84", //登录人id
     identity:{telephone:'123',classId:'1'},

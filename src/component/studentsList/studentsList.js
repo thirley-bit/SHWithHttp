@@ -131,7 +131,6 @@ function StudentsList(props) {
           showData ? 
          <View className='form-width'>
           {showData.map((item, index) => {
-            console.log(item,'item')
             const name = item?.studentName;
             let className = "sign-text";
             if (name?.length > 5) {

@@ -22,7 +22,6 @@ function Photos(props) {
     Taro.navigateTo({url:'/pages/class/Photos/NewPhotosAlbum/NewPhotosAlbum'})
   }
   const handleClick = (item) => {
-    console.log(item,'item')
     dispatch({
       type:"Photos/getAlbumImageList",
       payload:item.id

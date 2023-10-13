@@ -1,7 +1,6 @@
-import { useEffect } from "react";
 import Taro from '@tarojs/taro'
 import { View, Image, Text } from "@tarojs/components";
-import { AtAvatar, AtGrid } from "taro-ui";
+import { AtGrid, AtIcon } from "taro-ui";
 import NavTab from '@app/component/NavTab/NavTab';
 import { connect } from "react-redux";
 
@@ -11,6 +10,7 @@ import "./PhotosDetail.scss";
 function PhotosDetail(props) {
   const { dispatch, user, photoCover, photoDetail, albumImageList } = props;
 
+  console.log(albumImageList,'album ')
   const handleClick = (item) => {
     Taro.previewImage({
       current:item.image,
@@ -24,8 +24,9 @@ function PhotosDetail(props) {
         <View className='image'>
           <Image mode='aspectFill' className='img' src={albumImageList.coverImage} />
         </View>
-        <View className='text'>
-          <Text>{albumImageList.albumName}</Text>
+        <View className='title'>
+          <View className='name'>{albumImageList.albumName}</View>
+          <View className='num'><AtIcon value='image' size={16}></AtIcon><Text style={{marginLeft:'8rpx'}}>{11}个影像</Text></View>
         </View>
       </View>
       <View className='list'>

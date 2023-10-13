@@ -58,8 +58,8 @@ function MyCheckbox({
   label,
   onChange,
   option,
-  checked = false,
-  disabled = false,
+  checked,
+  disabled,
   dataIndex,
 }) {
   const onChangeHandler = (e) => {
@@ -123,9 +123,11 @@ function TreeSelect(props, ref) {
     let _index = 0;
     const childrenChecked = (data) => {
       const checked = data.checked;
+      const disabled = data.disabled || false;
       const deepMap = (_data) => {
         _data.forEach((item) => {
           item.checked = checked;
+          item.disabled = disabled
           if (item.children) {
             deepMap(item.children);
           }
@@ -146,6 +148,9 @@ function TreeSelect(props, ref) {
       }
       data[current].checked = !data[current].children.some(
         (item) => !item.checked
+      );
+      data[current].disabled = !data[current].children.some(
+        (item) => item.disabled
       );
     };
     const _option = childrenChecked(option);
@@ -183,7 +188,7 @@ function TreeSelect(props, ref) {
           value={item.value}
           label={item.label}
           option={item}
-          disabled={item.ifChoose == 1}
+          disabled={item.disabled}
           checked={item.checked}
           onChange={onChangeHandler}
           dataIndex={dataIndex}
@@ -202,6 +207,7 @@ function TreeSelect(props, ref) {
                 value={item.value}
                 label={item.label}
                 option={item}
+                disabled={item.disabled}
                 checked={item.checked}
                 onChange={onChangeHandler}
                 dataIndex={Object.freeze([index])}

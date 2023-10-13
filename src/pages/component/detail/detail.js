@@ -30,7 +30,6 @@ function WorkDetail(props) {
   const [toId, setToId] = useState(""); //教师端反馈给家长端时的家长id
   const [feedBackId, setFeedBackId] = useState(""); //反馈内容id
 
-  console.log(subjectDetail, "subjectDetail");
   const replyListData = () => {
     let payload = {
       page: 1,
@@ -130,8 +129,7 @@ function WorkDetail(props) {
     setInputValue(e.detail.value);
   };
   //发送回复内容，调用接口
-  const handleComfirm = (e) => {
-    console.log(e, "val");
+  const handleComfirm = () => {
     let payload = {
       fromId: userId,
       mainId: feedBackId,

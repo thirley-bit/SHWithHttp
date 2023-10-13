@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { View, Input, Text, Picker, Editor, Button } from "@tarojs/components";
 import Taro, { useRouter } from "@tarojs/taro";
 import {
-  AtButton,
-  AtList,
   AtIcon,
   AtMessage,
   AtModal,
@@ -16,7 +14,6 @@ import GradientButton from "@app/component/GradientButton";
 import TreeSelect from "@app/component/TreeSelect/TreeSelect";
 import Modal from "@app/component/Modal";
 import Divider from "@app/component/Divider";
-// import img from "../../../static/img.jpg";
 import "./publish.scss";
 
 function WorkDetail(props) {
@@ -25,13 +22,7 @@ function WorkDetail(props) {
     subjectType,
     classStudent,
     subjectDetail,
-    chooseIdList,
-    chooseName,
   } = props;
-  console.log(classStudent, "calss");
-  const sChooseNames = Object.values(chooseName).join(",");
-  // const idList = Object.keys(chooseName)
-  // const idList = ["11", "33", "44", "55", "66", "77", "88"];
   const router = useRouter();
   const enter = router.params.enter;
   const type = router.params.type;
@@ -56,7 +47,6 @@ function WorkDetail(props) {
     
     let payload = {
       workId:subjectDetail.id,
-      // workId:'4c5e2127a6134d64829bcc85b8df30a2',
       searchKey:''
     }
 
@@ -76,10 +66,6 @@ function WorkDetail(props) {
       payload:payload
     });
   }, []);
-  console.log(subjectType.map((item) => item.value),'value>>>')
-  console.log(subjectDetail.subjectType,'type')
-  console.log(subjectType.map((item) => item.value).indexOf(subjectDetail.subjectType),'12121212121')
-  console.log(subjectDetail,'subject')
 
   const sendData = (val) => {
     let url = "";
@@ -100,7 +86,6 @@ function WorkDetail(props) {
     } else {
       url = "HomeWork/getInsertHomework";
     }
-    console.log(payload,'payload')
     dispatch({
       type: url,
       payload: payload,
@@ -124,21 +109,14 @@ function WorkDetail(props) {
   };
   //输入框
   const handleInput = (e) => {
-    console.log(e, ">>>>");
     setMsg(e.detail.html);
   };
-  const editorReady = (e) => {
-    console.log(e, "eeee");
+  const editorReady = () => {
     Taro.createSelectorQuery()
       .select("#editor")
       .context((res) => {
         editorRef.current = res.context;
         editorRef.current.setContents({ html: subjectDetail.detailContent });
-        // newData.value = 12
-        // console.log(newData,'newData')
-        // newData.setContents({html:'<p>11</p>'})
-        // setEditor(newData);
-        // setEditor
       })
       .exec();
   };
@@ -168,26 +146,33 @@ function WorkDetail(props) {
   //处理传入treeSelect的数据结构
   const dataSource = classStudent.map((item) => {
     let label = item.className;
-    // eslint-disable-next-line no-shadow
     let value = item.id;
-    let checked = false;
+    //初始化时父元素选中，可选
+    let checked = true, disabled = false;
     let children = item.studentList.map((jt) => {
-      // eslint-disable-next-line no-shadow
-      let label = jt.studentName;
-      // eslint-disable-next-line no-shadow
-      let value = jt.id;
-      // eslint-disable-next-line no-shadow
-      let checked = false;
+      let _label = jt.studentName;
+      let _value = jt.id;
+      //判断子元素是否有ifChoose为1（布置作业已被选择），
+      const isChoosed = jt.ifChoose === 1;
+      //子元素中有ifChoose为1，父级选择框选中且不可选；否则父级选择框为选中且可选
+      if (isChoosed) {
+        disabled = true
+      } else {
+        //父级未选中
+        checked = false;
+      }
       return {
-        label,
-        value,
-        checked,
+        label:_label,
+        value:_value,
+        checked: isChoosed,
+        disabled: isChoosed,
       };
     });
     return {
       label,
       value,
       checked,
+      disabled,
       children,
     };
   });
@@ -213,8 +198,9 @@ function WorkDetail(props) {
 
   //发送按钮
   const handleSend = () => {
-    //判断输入是否为空
+    //判断输入是否为空，
     let inputVal = "";
+    //输入为空时的提示语
     let tips = "";
     if (title == "") {
       tips = "请输入标题";
@@ -223,8 +209,8 @@ function WorkDetail(props) {
       tips = "请输入正文内容";
       inputVal = false;
     } else if (selectedSubject == "") {
-      inputVal = false;
       tips = "请选择学科科目";
+      inputVal = false;
       //此处修改过
     } else if (choosePerson.length == 0) {
       tips = "请选择指定发送人";
@@ -233,6 +219,7 @@ function WorkDetail(props) {
       tips = "截至日期";
       inputVal = false;
     } else {
+      //当前页所有输入不为空时设置为true,为true时可以请求接口
       inputVal = true;
     }
 
@@ -279,7 +266,6 @@ function WorkDetail(props) {
             id='editor'
             className='editor'
             placeholder='请输入...'
-            // onReady={() => editorReady()}
             onReady={editorReady}
             onInput={(e) => handleInput(e)}
           ></Editor>

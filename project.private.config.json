@@ -71,6 +71,18 @@
           "pathName": "pages/class/Photos/PublishPhotos/PublishPhotos",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/login/login",
+          "pathName": "pages/login/login",
+          "query": "",
+          "scene": null,
+          "partialCompile": {
+            "enabled": false,
+            "pages": [
+              "pages/login/login"
+            ]
+          }
         }
       ]
     }
