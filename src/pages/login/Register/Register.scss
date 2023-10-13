@@ -1,91 +1,29 @@
-
-.index{
-    width: 100%;
-    height: 100vh;
-    background: linear-gradient(185deg,#80cdff 5%,#dbf6ff 50%, #ffffff 70%), 
+.index {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(185deg, #80cdff 5%, #dbf6ff 50%, #ffffff 70%);
 }
-.container{
-    width: 90%;
-    height: 100vh;
-    margin: 0 auto;
-    .at-form{
-        background-color: rgba(255,255,255,0);
-    }
+.container {
+  width: 90%;
+  height: 100vh;
+  margin: 0 auto;
+  .at-form {
+    background-color: rgba(255, 255, 255, 0);
+  }
 }
-.reset{
-    width: 100%;
-    padding-top: 100rpx;
-    font-size: 60rpx;
-    font-weight: 500;
-    color: #333;
-    
+.reset {
+  width: 100%;
+  padding: 100rpx 0 20rpx 0;
+  font-size: 60rpx;
+  font-weight: 500;
+  color: #333;
 }
-.head{
-    width: 100%;
-    height: 35vh;
-    line-height: 50vh;
-    text-align: center;
+.check-user {
+  width: 220rpx;
+  height: 50rpx;
+  display: inline-block;
+  background-color: red;
 }
-.login-input{
-    .error{
-        border: 1rpx solid red;
-    }
-    .error-tip{
-        height: 34rpx;
-        font-size: 24rpx;
-        color: #FF2E26;
-        line-height: 34rpx;
-    }    
-    .at-input{
-        margin: 32rpx 0;
-        border-radius: 16rpx;
-    }
-    .at-input__title{
-        width: 80rpx;
-        text-align: center;
-    }
+.radio-list__radio {
+  margin-right: 64rpx;
 }
-.check-user{
-    width: 220rpx;
-    height: 50rpx;
-    display: inline-block;
-background-color: red;
-}
-.radio-list__radio{
-    margin-right: 64rpx;
-}
-.forget{
-    height: 34rpx;
-    line-height: 34rpx;
-    font-size: 24rpx;
-    color: #1aa5ff;
-    margin-top: 16rpx;
-}
-// .submit{
-//     position: absolute;
-//     padding: 0;
-//     left: 0;
-//     top: 0;
-//     width: 100%;
-//     height: 100%;
-//     border: none;
-//     outline: none;
-//     background-color: transparent;
-//     opacity: 0;
-//     z-index: 1;
-//     border-radius: 5px;
-//     box-sizing: border-box;
-//     color: #000;
-//     cursor: pointer;
-//     display: block;
-//     font-size: 18px;
-//     line-height: 2.55555556;
-//     margin-left: auto;
-//     margin-right: auto;
-//     overflow: hidden;
-//     padding-left: 14px;
-//     padding-right: 14px;
-//     position: relative;
-//     text-align: center;
-//     text-decoration: none;
-// }

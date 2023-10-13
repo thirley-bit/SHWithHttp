@@ -12,44 +12,24 @@
         background-color: rgba(255,255,255,0);
     }
 }
-.head{
+.login-head{
     width: 100%;
-    height: 35vh;
-    line-height: 50vh;
+    height: 632rpx;
     text-align: center;
+    .avatar{
+        padding-top: 312rpx;
+    }
+    .mark{
+        width: 100%;
+        height: 38rpx;
+        line-height: 38rpx;
+        font-weight: 500;
+        color: #333;
+    }
 }
-.login-input{    
-    .forget{
-        height: 34rpx;
-        line-height: 34rpx;
-        font-size: 24rpx;
-        color: #1aa5ff;
-        text-align: right;
-    }
-    .error{
-        border: 1rpx solid red;
-    }
-    .error-tip{
-        height: 34rpx;
-        font-size: 24rpx;
-        color: #FF2E26;
-        line-height: 34rpx;
-    }   
-    .at-form{
-        background-color: none;
-    } 
-    .at-input{
-        margin: 32rpx 0;
-        border-radius: 16rpx;
-    }
-    .at-input__title{
-        width: 80rpx;
-        text-align: center;
-    }
-    
+.forget{
+    text-align: right;
 }
-
-.login-button{
-    height: 22vh;
-    margin-top: 64rpx;
+.register-button{
+    height: 88rpx;
 }

@@ -12,6 +12,7 @@ import {
 import NavTab from "@app/component/NavTab/NavTab";
 import GradientButton from "@app/component/GradientButton";
 import TreeSelect from "@app/component/TreeSelect/TreeSelect";
+import TreeFlat from '@app/component/TreeSelect/TreeFlat';
 import Modal from "@app/component/Modal";
 import Divider from "@app/component/Divider";
 import "./publish.scss";
@@ -66,6 +67,7 @@ function WorkDetail(props) {
       payload:payload
     });
   }, []);
+
 
   const sendData = (val) => {
     let url = "";
@@ -176,8 +178,14 @@ function WorkDetail(props) {
       children,
     };
   });
+  const aaa = useRef(null)
+ useEffect(() => {
+aaa.current
+ },[])
+ console.log(aaa,'aaaa')
   //获取树形选择器传出的值
   const onChangeHandler = useCallback((selectItems) => {
+    console.log(selectItems,'sekectitems')
     setChoosePerson(selectItems)
   }, []);
   const handlePersonClose = () => {
@@ -185,7 +193,6 @@ function WorkDetail(props) {
   }
   const handlePersonCancel = () => {
     setPersonModalOpened(false);
-    // setChoosePerson([])
   }
   const handlePersonConfirm = () => {
     setPersonModalOpened(false);

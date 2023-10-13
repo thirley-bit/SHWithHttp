@@ -35,14 +35,14 @@ const model = {
     // identity: { telephone: "15680595767" }, //登录信息
     // userId:'c57dae13ea244eb292f9d5e441200cf2',
     // user:0,
-    studentId: "22",
-    // studentId:'',
-    // user:'',
-    // userId:'',
-    // identity:{},
-    user:1,
-    userId: "3ee83b8573b54f5c99288618039b7c84", //登录人id
-    identity:{telephone:'123',classId:'1'},
+    // studentId: "22",
+    studentId:'',
+    user:'',
+    userId:'',
+    identity:{},
+    // user:1,
+    // userId: "3ee83b8573b54f5c99288618039b7c84", //登录人id
+    // identity:{telephone:'123',classId:'1'},
     enter: "",
     classList: [],
     pageSize: 10,
@@ -178,6 +178,7 @@ const model = {
     },
     *getJoinReviewList({ payload }, { call, put }) {
       const response = yield call(getJoinReviewList, payload);
+      let DefaultStudent = response.data.filter((item) => item.defaultFlag == 1)[0]
       if (response.status == 200) {
         yield [put({
             type: "changeCheckedList",
@@ -185,21 +186,13 @@ const model = {
           }),
           put({
             type: "changeBindStudent",
-            payload: response.data.filter((item) => item.defaultFlag == 1)[0],
-          })
-        ];
-      }
-      return response;
-    },
-    *getJoinReviewListAll({ payload }, { call, put }) {
-      const response = yield call(getJoinReviewList, payload);
-      if (response.status == 200) {
-        yield 
+            payload: DefaultStudent,
+          }),
           put({
             type: "changeStudentId",
-            payload: response.data.filter((item) => item.defaultFlag == 1)[0]
-              .studentId,
-          });
+            payload: DefaultStudent.studentId,
+          })
+        ];
       }
       return response;
     },

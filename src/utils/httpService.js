@@ -5,11 +5,11 @@ import apiConfig from "./apiConfig";
 const interceptor = function (chain) {
   const requestParams = chain.requestParams;
   const { method, data, url } = requestParams;
-  // let token = Taro.getStorageSync("token"); //拿到本地缓存中存的token
-  // let tokenParams = token ? {token} : {}
+  let token = Taro.getStorageSync("token"); //拿到本地缓存中存的token
+  let tokenParams = token ? {token} : {}
   requestParams.header = {
     ...requestParams.header,
-    // ...tokenParams, //将token添加到头部
+    ...tokenParams, //将token添加到头部
   };
   return chain.proceed(requestParams).then((res) => {
     return res;
@@ -72,7 +72,7 @@ const request = async (method, url, params) => {
     header: {
       "content-type": "application/json",
       // "token":'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjE1MDgyMTc4OTg0IiwidXNlclR5cGUiOjAsInVzZXJOYW1lIjoiIiwicmFuZG9tRGF0ZSI6MTY5NTM0NDcyNTAxNiwidXNlcklkIjoiYTdmOTMzYjgxMGYyNDE5Yjg0MjBjMzA5NWM4ZDg4ZDUifQ.DQ_FlCPs7fbFdIHl6VihZcvMWctJ74PGRUiE3A4q8Uk'
-      "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTcxMDIxNzc0NTgsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.vs3sWk23WLO2SoL2f5OkPfiSZOc9U5a7chpKGA2TAvU"
+      // "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTcxNTkzMDU1NDAsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.t3GCTmgbYDEfKbSSLwS8TYTHqCE-Kx8wOGJVbfrbb6Q"
      },
     success(res) {
       responseTips(res)
@@ -91,7 +91,7 @@ const uploadFile = async function(url, filePath) {
     name: 'file',
     header: {
       "content-type": "application/json",
-      'token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTcwNzI3OTI5MzUsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.VCFe-4fgryhAHwmkOQ4SApBNfBr7x63mefnxG-OW90o'
+      // 'token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTcwNzI3OTI5MzUsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.VCFe-4fgryhAHwmkOQ4SApBNfBr7x63mefnxG-OW90o'
     },
     success: (res) => {
       responseTips(res)

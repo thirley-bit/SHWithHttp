@@ -1,19 +1,18 @@
 import { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import Taro from "@tarojs/taro";
-import { View, Text, RadioGroup, Label, Radio, Input } from "@tarojs/components";
+import { View, Image, RadioGroup, Label, Radio, Input } from "@tarojs/components";
 import { AtButton, AtForm, AtIcon, AtInput, AtMessage } from "taro-ui";
 import GradientButton from "@app/component/GradientButton";
 import LoginInput from '@app/component/LoginInput';
+import sh from "@static/sh.png";
 import user from "@static/user-icon.png";
 import lock from "@static/lock-icon.png";
 
-import "./Login.scss";
+import "./login.scss";
 
 function Login(props) {
-  const { dispatch, users,  } = props
-  const [numberVal, setNumberVal] = useState("");
-  const [loginUserType, setLoginUserType] = useState(0);  
+  const { dispatch  } = props
  
   useEffect(() => {
     
@@ -51,15 +50,17 @@ function Login(props) {
   return (
     <View className='index'>
       <View className='container'>
-        <View className='head'>
-          <View className='avatar'></View>
-          <View>家校共育</View>
+        <View className='login-head'>
+          <View className='avatar'>
+            <Image style={{width:'200rpx',height:'200rpx'}} src={sh} />
+          </View>
+          <View className='mark'>欢迎来到家校共育</View>
         </View>
         <View className='login-input'>
           <View className='forget' onClick={() => handleSign(0)}>忘记密码？</View>
           <LoginInput loginType={0} loginUserType={3} classList='' formList={formList}  />
         </View>        
-        <View className='login-button'>
+        <View className='register-button'>
          <GradientButton
            type='primary'
            className='signin'

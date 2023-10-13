@@ -1,118 +1,10 @@
-// import cls from "classnames";
-// import { useState, useEffect, useRef } from "react";
-// import { connect } from "react-redux";
-// import { View, Text } from "@tarojs/components";
-// import Taro from "@tarojs/taro";
-// import { AtCheckbox, AtIcon, AtAccordion } from "taro-ui";
-// import NavTab from "@app/component/NavTab/NavTab";
-// import GradientButton from "@app/component/GradientButton";
-// import SearchBar from "@app/component/SearchBar/SearchBar";
-// import TreeItem from "@app/component/TreeSelect/TreeItem";
-// import Tree from '@app/component/TreeSelect/Tree';
-// // import TreeSelect from '@app/component/TreeSelect/TreeSelect';
-// import normal from "@static/normal.png";
-// // import img from "../../../static/img.jpg";
-// import "./TreeSelect.scss";
-
-// const clsPrefix = 'cp-tree'
-
-// function TreeSelect(props) {
-    
-//     const { dataSource, multiple, value, onChange, treeDefaultExpandAll, loadData } = props
-
-//   return (
-//     <View className={cls(clsPrefix, {
-//         [`${clsPrefix}-radio`]: !multiple,
-//         [`${clsPrefix}-multiple`]: multiple,
-//       })}
-//     >
-//         <Tree
-//           value={value}
-//           loadData={loadData}
-//           multiple={multiple}
-//           onChange={onChange}
-//           dataSource={dataSource} 
-//           treeDefaultExpandAll={treeDefaultExpandAll}
-//         />
-//       </View>
-//   );
-// }
-// export default connect((state) => ({
-//   subjectType: state.HomeWork.subjectType,
-//   classStudent: state.Class.classStudent,
-//   chooseIdList: state.Class.chooseIdList,
-//   chooseName: state.Class.chooseName,
-//   subjectDetail: state.HomeWork.subjectDetail,
-// }))(TreeSelect);
-
 import { useState, useImperativeHandle, forwardRef } from "react";
-import { View, Checkbox, Label } from "@tarojs/components";
-import { AtIcon } from 'taro-ui';
-import classnames from "classnames";
+import { View } from "@tarojs/components";
 import cloneDeep from "lodash.clonedeep";
+import TreeCheckbox from './TreeCheckBox';
+import Collaspe from './Collaspe';
+import TreeFlat from './TreeFlat';
 import "./TreeSelect.scss"
-
-
-function MyCheckbox({
-  value,
-  label,
-  onChange,
-  option,
-  checked,
-  disabled,
-  dataIndex,
-}) {
-  const onChangeHandler = (e) => {
-    e.stopPropagation();
-    const _option = { ...option, checked: !checked };
-    onChange && onChange({ value, option: _option, dataIndex });
-  };
-
-  return (
-    <Label onClick={onChangeHandler}>
-      <Checkbox value={value} checked={checked} disabled={disabled}>
-        {label}
-      </Checkbox>
-    </Label>
-  );
-}
-function treeFlat(dataSource) {
-  const result = [];
-  const arrayToTree = (data) => {
-    if (data.children) {
-      data.children.forEach((item) => {
-        arrayToTree(item);
-      });
-    }
-    const obj = { ...data };
-    Reflect.deleteProperty(obj, "children");
-    if (obj.checked) result.push(obj);
-  };
-  dataSource.forEach((item) => arrayToTree(item));
-  return result;
-}
-
-function Collaspe({ itemKey, header, children, onChangeKey, activeKeys}) {
-  const visible = activeKeys.includes(itemKey)
-  const icon = visible ? "chevron-down" : "chevron-up";
-  return (
-    <View className='tselect__wrapper'>
-      <View className='tselect-header'>
-        {header}
-        <View className='action-btn' onClick={() => onChangeKey(itemKey)}>
-        <AtIcon value={icon} size={20} color='#C7C7CC' />
-        </View>
-      </View>
-      <View
-        className={classnames("tselect-content", {
-          "is-open": visible,
-        })}
-      >
-        {children}
-      </View>
-    </View>
-  );
-}
 
 function TreeSelect(props, ref) {
   const { dataSource, onChange } = props;
@@ -156,7 +48,7 @@ function TreeSelect(props, ref) {
     const _option = childrenChecked(option);
     const nSource = cloneDeep(_dataSource);
     parentChecked(nSource);
-    onChange && onChange(treeFlat(nSource))
+    onChange && onChange(TreeFlat(nSource))
     setDataSource(nSource);
   };
 
@@ -172,7 +64,7 @@ function TreeSelect(props, ref) {
   };
 
   const selectedItems = () => {
-    return treeFlat(_dataSource);
+    return TreeFlat(_dataSource);
   };
 
   useImperativeHandle(ref, () => {
@@ -184,7 +76,7 @@ function TreeSelect(props, ref) {
   const renderItem = (item, dataIndex) => {
     return (
       <View key={dataIndex} className='tselect-content__item'>
-        <MyCheckbox
+        <TreeCheckbox
           value={item.value}
           label={item.label}
           option={item}
@@ -203,7 +95,7 @@ function TreeSelect(props, ref) {
           <Collaspe
             key={index}
             header={
-              <MyCheckbox
+              <TreeCheckbox
                 value={item.value}
                 label={item.label}
                 option={item}
