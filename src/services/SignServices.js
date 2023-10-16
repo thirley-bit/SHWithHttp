@@ -17,8 +17,3 @@ export async function getSchoolEndTimeInfo(params){
 export async function getUpdateSchoolEndTime(params){
     return httpService.post('/student/updateSchoolEndTime',params)
 }
-export async function getStudent(){
-    let url = 'sign/student'
-    let data = api[url]
-    return data
-}

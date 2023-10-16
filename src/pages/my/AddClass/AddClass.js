@@ -2,7 +2,7 @@ import { View, Button, Input } from "@tarojs/components";
 import { connect } from "react-redux";
 import Taro from "@tarojs/taro";
 import { useEffect, useState } from "react";
-import { AtForm, AtModal, AtModalAction, AtModalContent, AtSearchBar, AtInput, AtButton } from "taro-ui";
+import { AtForm, AtModal, AtModalAction, AtModalContent, AtSearchBar, AtInput, AtButton, AtMessage } from "taro-ui";
 import NavTab from "@app/component/NavTab/NavTab";
 import GradientButton from '@app/component/GradientButton';
 import Divider from '@app/component/Divider';
@@ -43,7 +43,6 @@ function AddClass(props) {
       setShowClassData(classList)
     }
   },[classList])
-  console.log(searchValue,'searchValue')
 
   //输入搜索内容
   const handleChangeValue = (val) => {
@@ -72,25 +71,37 @@ function AddClass(props) {
   const onSubmit = (evt) => {
     let userObj = Object.assign({classId:classId},evt[0].detail.value)
     console.log(userObj,'userobj')
-    dispatch({
-      type:'Class/getJoinClass',
-      payload:userObj
-    }).then((res) => {
-      if (res.status == 200) {
-        //关闭弹窗
-        setIsOpened(false)
-        //消息提示
-        Taro.atMessage({
-          message: '添加成功，待审核...',
-          type: "success",
-        });
-      } else {
-        Taro.atMessage({
-          message: res.message,
-          type: "error",
-        });
-      }
-    });
+    if(userObj.studentName == ''){
+      Taro.showToast({
+        title: '请输入学生姓名',
+        icon: "error",
+      });
+    }else if(userObj.studentNo == ''){
+      Taro.showToast({
+        title: '请输入学生学号',
+        icon: "error",
+      });
+    }else{
+      dispatch({
+        type:'Class/getJoinClass',
+        payload:userObj
+      }).then((res) => {
+        if (res.status == 200) {
+          //关闭弹窗
+          setIsOpened(false)
+          //消息提示
+          Taro.atMessage({
+            message: '添加成功，待审核...',
+            type: "success",
+          });
+        } else {
+          Taro.atMessage({
+            message: res.message,
+            type: "error",
+          });
+        }
+      });
+    }
   }
   const handleClose = () => {
     setIsOpened(false);
@@ -160,9 +171,9 @@ function AddClass(props) {
           <Button onClick={() => handleClose()}>取消</Button>
           <Button formType='submit'>确认</Button>
         </AtModalAction>
-        
         </AtForm>
       </AtModal>
+      <AtMessage />
     </View>
   );
 }

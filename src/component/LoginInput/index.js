@@ -9,22 +9,18 @@ import {
   Label,
   Picker,
 } from "@tarojs/components";
-import { AtForm, AtInput } from "taro-ui";
+import { AtCountdown, AtForm, AtInput } from "taro-ui";
 import GradientButton from "@app/component/GradientButton";
 import classIcon from "@static/class-icon.png";
 import "./index.scss";
 
 function LoginInput(props) {
   const { dispatch, loginType, loginUserType, classList, formList } = props;
-  // const { dispatch, formList} = props
   const [classTeacher, setClassTeacher] = useState(0);
-
-  const selector = Array.from(classList, ({ className }) => className);
   const [selectorChecked, setSelectorChecked] = useState("");
-  // const _className = useMemo(()=> {
-  //   if (className) return 'modal ' + className
-  //   return 'modal'
-  // }, [className])
+  const [countdown, setCountdown] = useState(false);
+  const selector = Array.from(classList, ({ className }) => className);
+
   const classTeacherList = [
     {
       value: "0",
@@ -61,6 +57,7 @@ function LoginInput(props) {
           message: "获取验证码成功",
           type: "success",
         });
+        setCountdown(true);
       } else {
         Taro.atMessage({
           message: res.message,
@@ -68,6 +65,10 @@ function LoginInput(props) {
         });
       }
     });
+  };
+  //验证码倒计时结束
+  const handleTimeUp = () => {
+    setCountdown(false);
   };
   //选择是否是班主任
   const handleClassTeacherChange = (e) => {
@@ -144,7 +145,7 @@ function LoginInput(props) {
     }
   };
   return (
-    <View>
+    <View className='login-input'>
       <AtForm name='registerForm'>
         {loginUserType == 0 ? (
           <Picker
@@ -187,11 +188,17 @@ function LoginInput(props) {
               onChange={(e) => handleChange(e, item)}
             >
               {item.text && (
-                <View
-                  style={{ borderLeft: "1rpx solid #999" }}
-                  onClick={() => handleVerifyCode()}
-                >
-                  {item.text}
+                <View style={{ borderLeft: "1rpx solid #999" }}>
+                  {countdown ? (
+                    <AtCountdown
+                      isShowHour={false}
+                      format={{ seconds: "" }}
+                      minutes={5}
+                      onTimeUp={handleTimeUp}
+                    />
+                  ) : (
+                    <View onClick={() => handleVerifyCode()}>{item.text}</View>
+                  )}
                 </View>
               )}
             </AtInput>
@@ -232,7 +239,7 @@ function LoginInput(props) {
         <View className='forget' onClick={() => handleNav()}>
           返回登录
         </View>
-       )} 
+      )}
       {/* 确定按钮 */}
       <GradientButton type='primary' className='login' onClick={handleLogin}>
         {loginType == 0 ? "登录" : "确定"}

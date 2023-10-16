@@ -6,32 +6,44 @@ import {
   AtAvatar,
   AtButton,
   AtCard,
+  AtDivider,
   AtForm,
   AtIcon,
   AtInput,
   AtMessage,
+  AtModal,
+  AtModalAction,
+  AtModalContent,
   AtTabsPane,
 } from "taro-ui";
 import NavTab from "@app/component/NavTab/NavTab";
 import MyTabs from "@app/component/MyTabs/MyTabs";
 import GradientButton from "@app/component/GradientButton";
+import Divider from "@app/component/Divider";
 import Modal from "@app/component/Modal";
 import normal from "@static/normal.png";
 
 import "./Check.scss";
 
 function Check(props) {
+  console.log(props, "props");
   const { dispatch, user, userId, pageSize, identity, checkedList } = props;
   const [current, setCurrent] = useState(0);
-  const [isOpened, setIsOpened] = useState(false);
-  const [choose, setChoose] = useState(""); //当前选择的数据
+  const [isOpened, setIsOpened] = useState(false); //审核状态弹窗
+  const [refuseOpened, setRefuseOpened] = useState(false);//审核不通过弹窗
+  const [refuseMsg, setRefuseMsg] = useState('审核通过');
+  const [modalContent, setModalContent] = useState("");
+  const [choose, setChoose] = useState(""); //切换绑定学生时,当前选择的数据
+  const [checkedId, setCheckedId] = useState(""); //审核id
+  const [status, setStatus] = useState('');//审核类型：1：通过；2：不通过；3：撤销；4：切换身份
+  //教师端显示已审核列表，家长端不显示
   let tabTitle = user == 0 ? "" : "已审核";
   const tabList = [
     {
       title: "待审核",
     },
     {
-      title: "已处理",
+      title: "已加入",
     },
     {
       title: tabTitle,
@@ -39,21 +51,20 @@ function Check(props) {
   ];
   useEffect(() => {
     reviewData(0);
-    
   }, []);
 
+  //查询各审核状态下的数据，状态:0-待审核 1-审核通过 2-审核驳回 3-撤销
   const reviewData = (e) => {
-    console.log(e,'eeeee')
-    let status = [];
+    let curStatus = [];
     switch (e) {
       case 0:
-        status = [0];
+        curStatus = [0];
         break;
       case 1:
-        status = [1, 2];
+        curStatus = [1, 2];
         break;
       case 2:
-        status = [3];
+        curStatus = [3];
         break;
       default:
         break;
@@ -64,34 +75,73 @@ function Check(props) {
         page: 1,
         pageSize: pageSize,
         userId: userId,
-        status: status,
+        status: curStatus,
       },
     });
   };
 
+  //切换tabsPane,根据不同的e查询不同状态下的审核数据
   const handleClick = (e) => {
     setCurrent(e);
     reviewData(e);
   };
 
-  const handleChangeUser = (e) => {
+  //切换默认绑定学生
+  const handleChangeUser = (e,i) => {
     setChoose(e);
+    setStatus(i)
     setIsOpened(true);
+    setModalContent(`确定切换成${e.userName}?`);
   };
-  //关闭一级弹窗
+  //关闭弹窗
   const handleClose = () => {
     setIsOpened(false);
+    setRefuseOpened(false)
   };
+  //关闭弹窗
   const handleCancel = () => {
     setIsOpened(false);
+    setRefuseOpened(false)
   };
+  //审核不通过输入框
+  const handleInput = (e) => {
+    setRefuseMsg(e)
+  };
+  //点击不同审核操作按钮，1：通过；2：不通过；3：撤销
+  const handleCheck = (value, i) => {
+    setCheckedId(value);
+    setStatus(i)
+    switch (i) {
+      case 1:
+        setIsOpened(true);
+        setModalContent("确定通过该条申请");
+        break;
+      case 2:
+        setRefuseOpened(true)
+        break;
+      case 3:
+        setIsOpened(true)
+        setModalContent('确定撤销该条申请')
+        break;
+      default:
+        break;
+    }
+  };
+  //调用审核接口，当status为4时为切换绑定学生，当status为1，2，3时为对应的审核操作
   const handleConfirm = () => {
     setIsOpened(false);
-    console.log(current);
-    dispatch({
-      type: "users/getUpdateDefaultFlag",
-      payload: choose.id,
-    }).then((res) => {
+    setRefuseOpened(false)
+    let actions = {}
+    if(status == 4){
+      //切换默认绑定学生
+      actions.type = 'users/getUpdateDefaultFlag'
+      actions.payload = choose.id
+    }else{
+      //审核操作
+      actions.type = "users/getUpdateJoinReview"
+      actions.payload = {id:checkedId,status:status,auditRemark:refuseMsg}
+    }
+    dispatch(actions).then((res) => {
       if (res.status == 200) {
         Taro.atMessage({
           message: res.message,
@@ -106,19 +156,8 @@ function Check(props) {
       }
     });
   };
-  const handleCheck = (value, status) => {
-    console.log(value, status, "recoed,id");
-    dispatch({
-      type: "users/getUpdateJoinReview",
-      payload: {
-        id: value,
-        status: status,
-        auditRemark: "审核意见",
-      },
-    });
-  };
   return (
-    <View className='index'>
+    <View className='check'>
       <NavTab iconTheme='black' back title='审核' />
       <MyTabs current={current} tabList={tabList} onClick={handleClick}>
         <AtTabsPane current={current} index={0}>
@@ -129,7 +168,6 @@ function Check(props) {
                   <View key={index} className='join-card'>
                     <AtCard
                       className={item.defaultFlag == 1 ? "item-active" : "item"}
-                      onClick={() => handleChangeUser(item)}
                     >
                       <View className='top'>
                         <View className='left'>
@@ -140,13 +178,13 @@ function Check(props) {
                             image={item.avatar ? item.avatar : normal}
                           />
                         </View>
-                        <View className='card-content clearfix'>
+                        <View
+                          className='card-content clearfix'
+                          onClick={() => handleChangeUser(item,4)}
+                        >
                           <View className='card-center'>
                             <View className='card-name'>{item.className}</View>
-                            <View className='card-msg'>
-                              {/* {item.studentName + "\xa0" + item.relative} */}
-                              {item.userName}
-                            </View>
+                            <View className='card-msg'>{item.userName}</View>
                           </View>
                         </View>
                         <View className='right'>
@@ -175,9 +213,9 @@ function Check(props) {
                       {user == 0 && (
                         <View
                           className='bottom'
-                          // onClick={() => handleBack(item.student_id)}
                           onClick={() => handleCheck(item.id, 3)}
                         >
+                          <Divider />
                           <AtIcon value='reload'></AtIcon>
                           <Text>撤销申请</Text>
                         </View>
@@ -201,7 +239,6 @@ function Check(props) {
                   title = item.className;
                   note = item.studentName + "\xa0" + item.relative;
                 } else {
-                  // title = item.studentName + item.relative + "申请加入";
                   title = item.userName + "申请加入";
                   note = "审核人：" + item.auditBy;
                 }
@@ -213,7 +250,7 @@ function Check(props) {
                           ? "item-active"
                           : "item"
                       }
-                      onClick={() => handleChangeUser(item)}
+                      onClick={() => handleChangeUser(item,4)}
                     >
                       <View className='top'>
                         <View className='left'>
@@ -230,7 +267,8 @@ function Check(props) {
                             <View className='card-msg'>{note}</View>
                           </View>
                         </View>
-                        <View className='right'>{item.auditRemark}</View>
+                        {/* 审核不通过时，右边字体显示红色 */}
+                        <View className='right' style={{color: item.status == 2 && '#FF2A15'}}>{item.auditRemark}</View>
                       </View>
                     </AtCard>
                   </View>
@@ -245,13 +283,13 @@ function Check(props) {
           {checkedList.length > 0 ? (
             <View>
               {checkedList.map((item, index) => {
+                console.log(item,'item')
                 let title = "";
                 let note = "";
                 if (user == 0) {
                   title = item.class_name;
                   note = item.studentName + "\xa0" + item.relative;
                 } else {
-                  // title = item.studentName + item.relative + "申请加入";
                   title = item.userName + "申请加入";
                   note = "审核人：" + item.auditBy;
                 }
@@ -263,7 +301,7 @@ function Check(props) {
                           ? "item-active"
                           : "item"
                       }
-                      onClick={() => handleChangeUser(item)}
+                      onClick={() => handleChangeUser(item,4)}
                     >
                       <View className='top'>
                         <View className='left'>
@@ -299,8 +337,22 @@ function Check(props) {
         onClose={handleClose}
         onCancel={handleCancel}
         onConfirm={handleConfirm}
-        content={`确定切换成${choose.studentName + choose.relative}?`}
+        content={modalContent}
       />
+      <AtModal
+        className='edit-modal'
+        isOpened={refuseOpened}
+        closeOnClickOverlay={false}
+      >
+        <AtModalContent className='modal-edit'>
+          请输入不通过原因
+          <AtInput type='text' value={refuseMsg} onChange={handleInput} />
+        </AtModalContent>
+        <AtModalAction>
+          <Button onClick={() => handleClose()}>取消</Button>
+          <Button onClick={() => handleConfirm()}>确认</Button>
+        </AtModalAction>
+      </AtModal>
       <AtMessage />
     </View>
   );

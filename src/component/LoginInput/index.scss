@@ -1,34 +1,36 @@
-.class-teacher{
-    display: inline-block;
-    font-size: 28rpx;
-    color: #999;
-    margin-right: 36rpx;
-}
-.at-input--disabled{
-    opacity: 1;
-}
-.error{
-    border: 1rpx solid red;
-}
-.error-tip{
-    height: 34rpx;
-    font-size: 24rpx;
-    color: #FF2E26;
-    line-height: 34rpx;
-}    
-.at-input{
-    margin: 32rpx 0;
-    border-radius: 16rpx;
-    box-shadow: 0 4rpx 28rpx 0 #BAE9FF;
-}
-.at-input__title{
-    width: 80rpx;
-    text-align: center;
-}
-.forget{
-    height: 34rpx;
-    line-height: 34rpx;
-    font-size: 24rpx;
-    color: #1aa5ff;
-    margin: 48rpx 0;
+.login-input{
+    .class-teacher{
+        display: inline-block;
+        font-size: 28rpx;
+        color: #999;
+        margin-right: 36rpx;
+    }
+    .at-input--disabled{
+        opacity: 1;
+    }
+    .error{
+        border: 1rpx solid red;
+    }
+    .error-tip{
+        height: 34rpx;
+        font-size: 24rpx;
+        color: #FF2E26;
+        line-height: 34rpx;
+    }    
+    .at-input{
+        margin: 32rpx 0;
+        border-radius: 16rpx;
+        box-shadow: 0 4rpx 28rpx 0 #BAE9FF;
+    }
+    .at-input__title{
+        width: 80rpx;
+        text-align: center;
+    }
+    .forget{
+        height: 34rpx;
+        line-height: 34rpx;
+        font-size: 24rpx;
+        color: #1aa5ff;
+        margin: 48rpx 0;
+    }
 }

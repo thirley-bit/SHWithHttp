@@ -178,7 +178,7 @@ const model = {
     },
     *getJoinReviewList({ payload }, { call, put }) {
       const response = yield call(getJoinReviewList, payload);
-      let DefaultStudent = response.data.filter((item) => item.defaultFlag == 1)[0]
+      let DefaultStudent = response.data?.filter((item) => item?.defaultFlag == 1)[0]
       if (response.status == 200) {
         yield [put({
             type: "changeCheckedList",
@@ -190,7 +190,7 @@ const model = {
           }),
           put({
             type: "changeStudentId",
-            payload: DefaultStudent.studentId,
+            payload: DefaultStudent?.studentId,
           })
         ];
       }

@@ -1,7 +1,9 @@
 .index {
   width: 100%;
   height: 100vh;
-  background: linear-gradient(185deg, #80cdff 5%, #dbf6ff 50%, #ffffff 70%);
+  // background: linear-gradient(185deg, #80cdff 5%, #dbf6ff 50%, #ffffff 70%);    
+  background: linear-gradient(185deg,rgba(128, 205, 255,0.5), rgba(219, 246, 255,0.5), rgba(255,255,255,0.5));
+
 }
 .container {
   width: 90%;

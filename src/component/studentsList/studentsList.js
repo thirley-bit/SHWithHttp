@@ -14,17 +14,15 @@ import normal from "@static/normal.png";
 import "./StudentsList.scss";
 
 function StudentsList(props) {
-  const { dispatch,userId, enter, showData, selectList, specialTime} = props;
+  const { dispatch, user, userId, enter, showData, selectList, specialTime} = props;
   const [isAllChecked, setIsAllChecked] = useState(false);
   const scrollTop = 0;
   const Threshold = 20;
+  //仅有教师端有全选功能
   const signRecordList = () => {
     dispatch({
       type:'Sign/getSignRecordList',
-      payload: {
-        userId: userId,
-        studentId:""
-      },
+      payload: {userId:userId},
     })
   }
 
@@ -213,6 +211,7 @@ function StudentsList(props) {
 }
 
 export default connect((state ) => ({
+  user: state.users.user,
   userId: state.users.userId,
   selectList:state.Sign.selectList,
   specialTime: state.Sign.specialTime
