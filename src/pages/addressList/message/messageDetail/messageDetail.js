@@ -2,16 +2,25 @@ import { useEffect, useState } from "react";
 import Taro, { useRouter } from "@tarojs/taro";
 import { connect } from "react-redux";
 // import { AtAvatar, AtButton, AtInput, AtTextarea } from "taro-ui";
-import { View, Image, Textarea, ScrollView, Button } from "@tarojs/components";
+import { AtIcon } from "taro-ui";
+import { View, Image, Textarea, ScrollView } from "@tarojs/components";
 import NavTab from "@app/component/NavTab/NavTab";
 import GradientButton from "@app/component/GradientButton";
 import normal from "@static/normal.png";
+import voice from "@static/voice.png";
+import emoji from "@static/emoji.png";
+import phone from "@static/phone.png";
+import img from "@static/img.png";
+import folder from "@static/folder.png";
+import pdf from "@static/pdf.png";
+import w from "@static/w.png";
+import x from "@static/x.png";
+import ppt from "@static/ppt.png";
+import zip from "@static/zip.png";
 import "./MessageDetail.scss";
-import { AtIcon } from "taro-ui";
 
 function MessageDetail(props) {
-  const { dispatch, messageList, user, bindStudent, userId } =
-    props;
+  const { dispatch, messageList, user, bindStudent, userId } = props;
   const [socketMsgQueue, setSocketMsgQueue] = useState([]);
   // const showLeft = "own";
   // const sys = Taro.getSystemInfoSync();
@@ -21,18 +30,65 @@ function MessageDetail(props) {
     // height: `${sys.safeArea.height - 177}px`,
     height: "100%",
   });
+  const [showEmoji, setEmoji] = useState(false)
+  Taro.connectSocket({
+    // url: `ws://192.168.1.157:5002/websocket/${user == 0 ? bindId : userId}`,
+    url: `ws://192.168.1.157:5002/websocket/3ee83b8573b54f5c99288618039b7c84`,
+    header: {
+      "content-type": "application/json", // 默认值
+      token: Taro.getStorageSync("token"),
+    },
+  }).then((task) => {
+    task.onOpen(function () {});
+  });
+  Taro.onSocketOpen(function (socket) {
+    console.log("onSocketOpen连接已打开");
+  });
+  const recorderManager = Taro.getRecorderManager();
   const [inputVal, setInputVal] = useState("");
+  const actionList = [
+    {
+      type: "emoji",
+      url: emoji,
+    },
+    {
+      type: "image",
+      url: img,
+    },
+    {
+      type: "file",
+      url: folder,
+    },
+    // {
+    //   type: "voice",
+    //   url: voice,
+    // },
+    {
+      type: "phone",
+      url: phone,
+    },
+  ];
+  const emojis =
+    "😀,😁,😂,😃,😄,😅,😆,😉,😊,😋,😎,😍,😘,😗,😙,😚,😇,😐,😑,😶,😏,😣,😥,😮,😯,😪,😫,😴,😌,😛,😜,😝,😒,😓,😔,😕,😲,😷,😖,😞,😟,😤,😢,😭,😦,😧,😨,😬,😰,😱,😳,😵,😡,😠,💘,❤,💓,💔,💕,💖,💗,💙,💚,💛,💜,💝,💞,💟,❣,💪,👈,👉,☝,👆,👇,✌,✋,👌,👍,👎,✊,👊,👋,👏,👐,✍,🍇,🍈,🍉,🍊,🍋,🍌,🍍,🍎,🍏,🍐,🍑,🍒,🍓,🍅,🍆,🌽,🍄,🌰,🍞,🍖,🍗,🍔,🍟,🍕,🍳,🍲,🍱,🍘,🍙,🍚,🍛,🍜,🍝,🍠,🍢,🍣,🍤,🍥,🍡,🍦,🍧,🍨,🍩,🍪,🎂,🍰,🍫,🍬,🍭,🍮,🍯,🍼,☕,🍵,🍶,🍷,🍸,🍹,🍺,🍻,🍴,🌹,🍀,🍎,💰,📱,🌙,🍁,🍂,🍃,🌷,💎,🔪,🔫,🏀,⚽,⚡,👄,👍,🔥,🙈,🙉,🙊,🐵,🐒,🐶,🐕,🐩,🐺,🐱,😺,😸,😹,😻,😼,😽,🙀,😿,😾,🐈,🐯,🐅,🐆,🐴,🐎,🐮,🐂,🐃,🐄,🐷,🐖,🐗,🐽,🐏,🐑,🐐,🐪,🐫,🐘,🐭,🐁,🐀,🐹,🐰,🐇,🐻,🐨,🐼,🐾,🐔,🐓,🐣,🐤,🐥,🐦,🐧,🐸,🐊,🐢,🐍,🐲,🐉,🐳,🐋,🐬,🐟,🐠,🐡,🐙,🐚,🐌,🐛,🐜,🐝,🐞,🦋,😈,👿,👹,👺,💀,☠,👻,👽,👾,💣";
+  const emojiList = emojis.split(",");
+
   const router = useRouter();
-  //roomId
-  const roomId = router.params.roomId;
-  //接收者id
-  const toId = router.params.toId;
-  //该条数据id，用于退出窗口
-  const id = router.params.id;
-  //消息类型，0：单聊；1：群聊
-  const msgType = router.params.msgType;
-  // //聊天室名称
-  const name = router.params.name;
+  // //roomId
+  // const roomId = router.params.roomId;
+  // //接收者id
+  // const toId = router.params.toId;
+  // //该条数据id，用于退出窗口
+  // const id = router.params.id; //87ffde29085946969d21fc03087f1051
+  // //消息类型，0：单聊；1：群聊
+  // const msgType = router.params.msgType;
+  // // //聊天室名称
+  // const name = router.params.name;
+  // contentType: 0
+  // fromId: "3ee83b8573b54f5c99288618039b7c84"
+  const msgType = "0";
+  const roomId = "87ffde29085946969d21fc03087f1051";
+  // sendMessage: "123"
+  const toId = "1";
   useEffect(() => {
     if (socketMsgQueue.length > 0) {
       dispatch({
@@ -74,12 +130,14 @@ function MessageDetail(props) {
   }, []);
 
   const sendSocketMessage = (msg, contentType, imgRes) => {
+    console.log(msg,)
     let sendMessage = "";
     if (contentType == 0) {
-      sendMessage = inputVal;
+      sendMessage = msg.sendMessage;
     } else {
       sendMessage = imgRes[0][0]?.fileMappingPath;
     }
+
 
     Taro.sendSocketMessage({ data: JSON.stringify(msg) }).then((res) => {
       dispatch({
@@ -88,7 +146,8 @@ function MessageDetail(props) {
           {
             sendMessage: sendMessage,
             contentType: contentType,
-            fromId: user == 0 ? bindStudent.id : userId,
+            // fromId: user == 0 ? bindStudent.id : userId,
+            fromId: "3ee83b8573b54f5c99288618039b7c84",
             avatar:
               "https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2",
           },
@@ -105,7 +164,8 @@ function MessageDetail(props) {
   const handleSendMessage = (e) => {
     let msg = {
       roomId: roomId,
-      fromId: user == 0 ? bindStudent.id : userId,
+      // fromId: user == 0 ? bindStudent.id : userId,
+      fromId: "3ee83b8573b54f5c99288618039b7c84",
       toId: toId,
       msgType: msgType,
       sendMessage: inputVal,
@@ -113,65 +173,175 @@ function MessageDetail(props) {
     };
     sendSocketMessage(msg, 0);
   };
-  const addImage = () => {
-    Taro.chooseImage({
-      count: 9,
-      sizeType: ["original", "compressed"],
-      sourceType: ["album", "camera"],
-      success: (res) => {
-        var tempFilePaths = res.tempFilePaths;
-        let filePathList = tempFilePaths.map((filePath) =>
-          dispatch({
-            type: "AddressList/getUploadFile",
-            payload: filePath,
-          }).then((resp) => {
-            return resp.data;
-          })
-        );
-        Promise.all(filePathList).then((resp) => {
-          resp.forEach((item) => {
-            item.forEach((jtem) => {
-              let msg = {
-                roomId: roomId,
-                fromId: user == 0 ? bindStudent.id : userId,
-                toId: toId,
-                msgType: msgType,
-                sendMessage: jtem.id,
-                contentType: 1,
-              };
-              sendSocketMessage(msg, 1, resp);
+  const addImage = (action) => {
+    console.log(action, "action");
+    switch (action.type) {
+      case "emoji":
+        setEmoji(true)
+        // let msg = {
+        //   roomId: roomId,
+        //   // fromId: user == 0 ? bindStudent.id : userId,
+        //   fromId: "3ee83b8573b54f5c99288618039b7c84",
+        //   toId: toId,
+        //   msgType: msgType,
+        //   sendMessage: "发送表情包",
+        //   contentType: 0,
+        // };
+        // sendSocketMessage(msg, 0);
+        break;
+      case "file":
+      case "image":
+        Taro.chooseMessageFile({
+          count: 1,
+          type: action.type,
+          success: function (res) {
+            console.log(res, "res");
+            var tempFilePaths = res.tempFiles;
+            let filePathList = tempFilePaths.map((file) =>
+              dispatch({
+                type: "AddressList/getUploadFile",
+                payload: file.path,
+              }).then((resp) => {
+                return resp.data;
+              })
+            );
+            Promise.all(filePathList).then((resp) => {
+              resp.forEach((item) => {
+                item.forEach((jtem) => {
+                  let msg1 = {
+                    roomId: roomId,
+                    // fromId: user == 0 ? bindStudent.id : userId,
+                    fromId: "3ee83b8573b54f5c99288618039b7c84",
+                    toId: toId,
+                    msgType: msgType,
+                    sendMessage: jtem.id,
+                    contentType: 1,
+                  };
+                  sendSocketMessage(msg1, 1, resp);
+                });
+              });
             });
-          });
+          },
+        });
+        break;
+      case 'phone':
+        Taro.makePhoneCall({
+          phoneNumber:'123'
+        })
+        break;
+      default:
+        break;
+    }
+  };
+  const handleChoose =(item) => {
+    console.log(item,'item')
+    let msg = {
+          roomId: roomId,
+          // fromId: user == 0 ? bindStudent.id : userId,
+          fromId: "3ee83b8573b54f5c99288618039b7c84",
+          toId: toId,
+          msgType: msgType,
+          sendMessage: item,
+          contentType: 0,
+        };
+        sendSocketMessage(msg, 0);
+  }
+
+  // const handleBack = () => {
+  //   dispatch({
+  //     type: "AddressList/getUpdateChatList",
+  //     payload: {
+  //       id: id,
+  //       inWindow: 0,
+  //     },
+  //   });
+  // };
+  const _typeMessage = (msgInfo) => {
+    console.log(msgInfo.sendMessage,'msginfo')
+    let a = msgInfo.sendMessage.substr(-3)
+    let size = 23.32
+    let msg = ''
+    switch (a) {
+      case 'doc':
+        msg = w
+        break;
+      case 'xls':
+        msg = x
+        break;
+      case 'ppt':
+        msg = ppt
+        break;
+      case 'pdf':
+        msg = pdf
+        break;
+      case 'zip':
+      case 'rar':
+      case 'iso':
+      case 'cab':
+      case '7z':
+        msg = zip
+        break;
+      default:
+        break
+    }
+    return (
+      <View>
+        {msgInfo.contentType == 0 && (
+          <View className='text' style={{ backgroundColor: "#1BA5FF" }}>
+            {msgInfo?.sendMessage}
+          </View>
+        )}
+        {msgInfo.contentType == 1 && (
+          <View onClick={() => handlePreviewImage(msgInfo)}>
+            <Image
+              className='text'
+              style={{ borderRadius: "10rpx", padding: "0" }}
+              src={msgInfo?.sendMessage}
+              mode='widthFix'
+            />
+          </View>
+        )}
+        {msgInfo.contentType == 2 && (
+          <View className='file' onClick={() => handlePreviewFile(msgInfo)}>
+            <Image
+              className='suffix'
+              style={{ float:'right', width:'96rpx',height:'96rpx', borderRadius: "10rpx", padding: "0" }}
+              src={msg}
+            />
+            <View className='name'>新建文件.{a}</View>
+            <View className='size'>{size}kb</View>
+            
+          </View>
+        )}
+      </View>
+    );
+  };
+  const handlePreviewImage = (e) => {
+    Taro.previewImage({
+      current: e.sendMessage,
+      urls: [e.sendMessage],
+    });
+  };
+  const handlePreviewFile = (e) => {
+    Taro.downloadFile({
+      url: e.sendMessage,
+      success: function (res) {
+        var filePath = res.tempFilePath;
+        Taro.openDocument({
+          filePath: filePath,
+          fileType: getFileType(e.sendMessage),
+          fileName:'新建文件',
         });
       },
     });
-  };
-  const handleBack = () => {
-    dispatch({
-      type: "AddressList/getUpdateChatList",
-      payload: {
-        id: id,
-        inWindow: 0,
-      },
-    });
-  };
-  const _typeMessage = (msgInfo) => {
-    if (msgInfo.contentType == 0) {
-      return (
-        <View className='text' style={{ backgroundColor: "#1BA5FF" }}>
-          {msgInfo?.sendMessage}
-        </View>
-      );
+  }
+  const getFileType = (url) =>{
+    if (url.lastIndexOf(".") > -1) {
+      return url.slice(url.lastIndexOf(".") + 1).toLowerCase();
     } else {
-      return (
-        <Image
-          className='text'
-          style={{ borderRadius: "10rpx", padding: "0" }}
-          src={msgInfo?.sendMessage}
-        />
-      );
+      return "";
     }
-  };
+  }
 
   const _renderMessage = (msgInfo, index) => {
     if (msgInfo?.fromId == (user == 0 ? bindStudent.id : userId)) {
@@ -202,9 +372,9 @@ function MessageDetail(props) {
 
   return (
     <View className='index'>
-      <View onClick={handleBack}>
+      {/* <View onClick={handleBack}>
         <NavTab back handleBack={handleBack} title={name} />
-      </View>
+      </View> */}
 
       <View className='msg__wrapper' style={scrollHeight}>
         <ScrollView
@@ -244,11 +414,28 @@ function MessageDetail(props) {
             >
               发送
             </GradientButton>
-            <View className='add-image' onClick={() => addImage()}>
-              <AtIcon value='add' size='30' color='#999'></AtIcon>
-            </View>
           </View>
         </View>
+        {actionList.map((action, index) => {
+          return (
+            <View
+              key={index}
+              className='action'
+              style={{ display: "inline-block" }}
+              onClick={() => addImage(action)}
+            >
+              <Image
+                className='action-img'
+                style={{ borderRadius: "10rpx", padding: "0" }}
+                src={action.url}
+              />
+            </View>
+          );
+        })}
+        {/* <View>{emojiList.map(emoji)}</View> */}
+        { showEmoji && <View >{emojiList.map((item,index) => {
+          return <View key={index} style={{display:'inline-block'}} onClick={() => handleChoose(item)}>{item}</View>
+        })}</View>}
       </View>
     </View>
   );

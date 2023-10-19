@@ -16,7 +16,7 @@
     nick_name:"家长01234"|"张风毅老师", //（家长端返回家长01234|老师端返回"张风毅"）
     relative:'爸爸'|'妈妈'|'爷爷'|'奶奶'|'外公'|'外婆',  //亲属关系（仅家长端返回某一个）
     avatar:"http://123.57.149.51/upload/upload_img/20230510/1d4b6d8097826b0c33576e68e88f84f5.png",
-    token:fdgdgvfrtgtgfdgf
+    token1:fdgdgvfrtgtgfdgf
 }
 ```
 * response body
@@ -37,7 +37,7 @@
             nick_name:"家长01234"|"张风毅老师", //（家长端返回家长01234|老师端返回"张风毅"）
             relative:'爸爸'|'妈妈'|'爷爷'|'奶奶'|'外公'|'外婆',  //亲属关系（仅家长端返回某一个）
             avatar:"http://123.57.149.51/upload/upload_img/20230510/1d4b6d8097826b0c33576e68e88f84f5.png",
-            token:fdgdgvfrtgtgfdgf
+            token1:fdgdgvfrtgtgfdgf
         }
     msg: "success"
 }
@@ -49,7 +49,7 @@
 {
     phone:11122233345,
     pwd:'qwertyui',
-    token:fdgdgvfrtgtgfdgf
+    token1:fdgdgvfrtgtgfdgf
 }
 ```
 * response body
@@ -70,7 +70,7 @@
             nick_name:"家长01323", //家人昵称
             relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
             avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
-            token: "fdgdgvfrtgtgfdgf",
+            token1: "fdgdgvfrtgtgfdgf",
         }
     msg: "success"
 }
@@ -104,7 +104,7 @@
             pass:1, //是否加入班级  0：待审核，1：通过，2：未通过，3：撤销
             relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
             avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
-            token: "fdgdgvfrtgtgfdgf",
+            token1: "fdgdgvfrtgtgfdgf",
         },
         {
             uuid: "45344534345",
@@ -120,7 +120,7 @@
             pass:1,
             relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
             avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
-            token: "fdgdgvfrtgtgfdgf",
+            token1: "fdgdgvfrtgtgfdgf",
         },
         ]
     msg: "success"
@@ -150,7 +150,7 @@
             relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
             avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
             pass:0,  //是否加入班级  0：待审核，1：通过，2：未通过，3：撤销
-            token: "fdgdgvfrtgtgfdgf",
+            token1: "fdgdgvfrtgtgfdgf",
         },
         {
             uuid: "45344534345",
@@ -163,7 +163,7 @@
             avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
             pass:2, //是否加入班级  0：待审核，1：通过，2：未通过，3：撤销
             reason:'资料不齐全', //不通过原因
-            token: "fdgdgvfrtgtgfdgf",
+            token1: "fdgdgvfrtgtgfdgf",
         },
         ],
     msg: "success"
@@ -196,7 +196,7 @@
             relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
             avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
             pass:1,
-            token: "fdgdgvfrtgtgfdgf",
+            token1: "fdgdgvfrtgtgfdgf",
         }
     msg: "success"
 }
@@ -229,7 +229,7 @@
             relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
             avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
             pass:0,
-            token: "fdgdgvfrtgtgfdgf",
+            token1: "fdgdgvfrtgtgfdgf",
         },
         {
             uuid: "45344534345",
@@ -246,7 +246,7 @@
             avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
             pass:2,
             reason:'不是本班级学生',
-            token: "fdgdgvfrtgtgfdgf",
+            token1: "fdgdgvfrtgtgfdgf",
         },
         ]
     msg: "success"
@@ -280,7 +280,7 @@
             relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
             avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
             pass:0,
-            token: "fdgdgvfrtgtgfdgf",
+            token1: "fdgdgvfrtgtgfdgf",
         },
         {
             uuid: "45344534345",
@@ -297,7 +297,7 @@
             avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
             pass:-1,
             reason:'不是本班学生',
-            token: "fdgdgvfrtgtgfdgf",
+            token1: "fdgdgvfrtgtgfdgf",
         },
         ]
     msg: "success"
@@ -331,7 +331,7 @@
             relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
             avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
             pass:1,
-            token: "fdgdgvfrtgtgfdgf",
+            token1: "fdgdgvfrtgtgfdgf",
         },
         {
             uuid: "45344534345",
@@ -348,7 +348,7 @@
             avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
             pass:2,
             reason:'不是本班学生',
-            token: "fdgdgvfrtgtgfdgf",
+            token1: "fdgdgvfrtgtgfdgf",
         },
         ],
     msg: "success"
@@ -382,7 +382,7 @@
             relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
             avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
             pass:0,
-            token: "fdgdgvfrtgtgfdgf",
+            token1: "fdgdgvfrtgtgfdgf",
         },
         {
             uuid: "45344534345",
@@ -398,7 +398,7 @@
             relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
             avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
             pass:0,
-            token: "fdgdgvfrtgtgfdgf",
+            token1: "fdgdgvfrtgtgfdgf",
         },
         ],
     msg: "success"
@@ -483,7 +483,7 @@
     type: 0|1|2|3,  //'':全部，0：教育，1：安全，2：智慧
     limit:10, //当前页条数
     pageNo:1, //当前页
-    token:fdgdgvfrtgtgfdgf
+    token1:fdgdgvfrtgtgfdgf
 }
 ```
 
@@ -516,7 +516,7 @@
 ```json
 {
     article_id:0,
-    token:fdgdgvfrtgtgfdgf
+    token1:fdgdgvfrtgtgfdgf
 }
 ```
 
@@ -685,7 +685,7 @@
 {
     // select_time:'' //时间选择 ''全部
     // subject_type:'', //科目选择范围  '': 全部，0：语文，1：数学，2：英语，3：物理，4：化学，5：生物
-    token:fdgdgvfrtgtgfdgf
+    token1:fdgdgvfrtgtgfdgf
 },
 ```
 
@@ -732,7 +732,7 @@
 ```json
 {
     work_id:0,
-    token:fdgdgvfrtgtgfdgf
+    token1:fdgdgvfrtgtgfdgf
 }
 ```
 
@@ -761,7 +761,7 @@
 {
     work_id:0,
     hasCompleted:1, //点击按钮，状态改为1，表示已完成
-    token:fdgdgvfrtgtgfdgf
+    token1:fdgdgvfrtgtgfdgf
 }
 ```
 
@@ -803,7 +803,7 @@
 ```json
 {
     work_id:0,
-    token:fdgdgvfrtgtgfdgf
+    token1:fdgdgvfrtgtgfdgf
 }
 ```
 
@@ -849,7 +849,7 @@
 ```json
 {
     work_id:0,
-    token:fdgdgvfrtgtgfdgf
+    token1:fdgdgvfrtgtgfdgf
 }
 ```
 
@@ -947,7 +947,7 @@
         content:ffgff
         },
     ]
-    token:fdgdgvfrtgtgfdgf
+    token1:fdgdgvfrtgtgfdgf
 }
 ``` -->
 <!-- 
@@ -993,7 +993,7 @@
     detail_content:"<p>正文内容</p>",   //HTML代码，完整页面内容
     time:2023-11-15  14:12:34,
     avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
-    token:fdgdgvfrtgtgfdgf
+    token1:fdgdgvfrtgtgfdgf
 }
 ```
 
@@ -1010,7 +1010,7 @@
             detail_content:"<p>正文内容</p>",   //HTML代码，完整页面内容
             time:2023-11-15  14:12:34,
             avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
-            token:fdgdgvfrtgtgfdgf
+            token1:fdgdgvfrtgtgfdgf
           }
     msg: "success"
 }
@@ -1023,7 +1023,7 @@
 {
     uuid:134554647687988765445398765,
     work_id:0,
-    token:fdgdgvfrtgtgfdgf
+    token1:fdgdgvfrtgtgfdgf
 }
 ```
 
@@ -1044,7 +1044,7 @@
 {
     work_id:0,
     hasCompleted:'', //查询是否提交作业学生名单 '':全部（包含已交和未交），0:未交，1：已交
-    token:fdgdgvfrtgtgfdgf
+    token1:fdgdgvfrtgtgfdgf
 }
 ```
 
@@ -1078,7 +1078,7 @@
 ```json
 {
     work_id:0,
-    token:fdgdgvfrtgtgfdgf
+    token1:fdgdgvfrtgtgfdgf
 }
 ```
 
@@ -1142,7 +1142,7 @@
 {
     title:安全通知,
     detail_content:"<p>地方大师傅的人反感的旅馆的法国v</p>"
-    token:fdgdgvfrtgtgfdgf，
+    token1:fdgdgvfrtgtgfdgf，
 }  
 ```
 * response body
@@ -1157,7 +1157,7 @@
             detail_content:"<p>地方大师傅的人反感的旅馆的法国v</p>" 
             time:2023-11-15  14:12:34,
             avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
-            token:fdgdgvfrtgtgfdgf，
+            token1:fdgdgvfrtgtgfdgf，
         }
     msg:"success"
 }
@@ -1199,7 +1199,7 @@
 ```json
 {
     notice_id:0,
-    token:fdgdgvfrtgtgfdgf
+    token1:fdgdgvfrtgtgfdgf
 }
 ```
 
@@ -1235,7 +1235,7 @@
     detail_content:"<p>正文内容</p>"   //HTML代码，完整页面内容
     time:2023-11-15  14:12:34,
     avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
-    token:fdgdgvfrtgtgfdgf
+    token1:fdgdgvfrtgtgfdgf
 }
 ```
 
@@ -1252,7 +1252,7 @@
             detail_content:"<p>正文内容</p>"   //HTML代码，完整页面内容
             time:2023-11-15  14:12:34,
             avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
-            token:fdgdgvfrtgtgfdgf
+            token1:fdgdgvfrtgtgfdgf
           }
     msg: "success"
 }
@@ -1265,7 +1265,7 @@
 {
     uuid:134554647687988765445398765,
     notice_id:0,
-    token:fdgdgvfrtgtgfdgf
+    token1:fdgdgvfrtgtgfdgf
 }
 ```
 
@@ -1286,7 +1286,7 @@
 {
     title:安全通知,
     detail_content:"<p>地方大师傅的人反感的旅馆的法国v</p>"
-    token:fdgdgvfrtgtgfdgf，
+    token1:fdgdgvfrtgtgfdgf，
 }  
 ```
 * response body
@@ -1301,7 +1301,7 @@
         detail_content:"<p>地方大师傅的人反感的旅馆的法国v</p>" 
         time:2023-11-15  14:12:34,
         avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
-        token:fdgdgvfrtgtgfdgf
+        token1:fdgdgvfrtgtgfdgf
     }
     msg:"success"
 }
@@ -1742,7 +1742,7 @@
 ```json
 {
     policy_id:0,
-    token:fdgdgvfrtgtgfdgf
+    token1:fdgdgvfrtgtgfdgf
 }
 ```
 
@@ -2312,7 +2312,7 @@
             message:大富大贵的鬼地方,
             time:2023-11-15  14:12:34, //可以返回时间戳
             avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
-            token:fdgdgvfrtgtgfdgf
+            token1:fdgdgvfrtgtgfdgf
         },
         {
             uuid:3434353454677,
@@ -2322,7 +2322,7 @@
             message:大富大贵的鬼地方,
             time:2023-11-15  14:12:34,
             avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
-            token:fdgdgvfrtgtgfdgf
+            token1:fdgdgvfrtgtgfdgf
         }
     ],
     msg:"success"
@@ -2335,7 +2335,7 @@
 ```json
 {
     message_id:0,
-    token:dfddddgvffbggf
+    token1:dfddddgvffbggf
 }
 ```
 * response body
@@ -2351,7 +2351,7 @@
             message:大富大贵的鬼地方,
             time:2023-11-15  14:12:34, //可以返回时间戳
             avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
-            token:fdgdgvfrtgtgfdgf
+            token1:fdgdgvfrtgtgfdgf
         },
         {
             uuid:3434353454677,
@@ -2361,7 +2361,7 @@
             message:大富大贵的鬼地方,
             time:2023-11-15  14:12:34,
             avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
-            token:fdgdgvfrtgtgfdgf
+            token1:fdgdgvfrtgtgfdgf
         }
     ],
     msg:"success"
@@ -2374,7 +2374,7 @@
 ```json
 {
     message_id:0,
-    token:dfddddgvffbggf
+    token1:dfddddgvffbggf
 }
 ```
 * response body
@@ -2390,7 +2390,7 @@
             message:大富大贵的鬼地方,
             time:2023-11-15  14:12:34, //可以返回时间戳
             avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
-            token:fdgdgvfrtgtgfdgf
+            token1:fdgdgvfrtgtgfdgf
         },
         {
             uuid:3434353454677,
@@ -2400,7 +2400,7 @@
             message:大富大贵的鬼地方,
             time:2023-11-15  14:12:34,
             avatar:"http://pay.cdjjbtm.com/upload/video_img/20200810/9a243c0a0793ce45671084bc1a225a13.png",
-            token:fdgdgvfrtgtgfdgf
+            token1:fdgdgvfrtgtgfdgf
         }
     ],
     msg:"success"
@@ -2413,7 +2413,7 @@
 ```json
 {
     message_id:0,
-    token:fdgdgvfrtgtgfdgf
+    token1:fdgdgvfrtgtgfdgf
 }
 ```
 * response body
@@ -2433,7 +2433,7 @@
             userAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'
             content:'今天张三表现很好', //消息内容
             time:'2023-11-15  14:12:34',
-            token:fdgdgvfrtgtgfdgf
+            token1:fdgdgvfrtgtgfdgf
         },
        {
             uuid:54657568,
@@ -2444,7 +2444,7 @@
             expertAvatar:'https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2'
             content:'今天张三表现很好', //消息内容
             time:'2023-11-15  14:12:34',
-            token:fdgdgvfrtgtgfdgf
+            token1:fdgdgvfrtgtgfdgf
         },
     ]
     msg:"success"
@@ -2477,7 +2477,7 @@
       address:'四川省甘孜藏族自治州嘉绒步行街38号',
       school:'四川省甘孜小学',
       class:'2023级2班',
-      token: "fdgdgvfrtgtgfdgf",
+      token1: "fdgdgvfrtgtgfdgf",
     },
     msg: "success",
   },

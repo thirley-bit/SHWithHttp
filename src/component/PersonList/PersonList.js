@@ -91,7 +91,6 @@ function PersonList(props) {
   const handleCancel = () => {
     setIsOpened(false);
   };
-console.log(delId,'dekid')
   const handleConfirm = () => {
     setIsOpened(false);
     onDel(delId)

@@ -31,7 +31,7 @@ function Check(props) {
   const [current, setCurrent] = useState(0);
   const [isOpened, setIsOpened] = useState(false); //审核状态弹窗
   const [refuseOpened, setRefuseOpened] = useState(false);//审核不通过弹窗
-  const [refuseMsg, setRefuseMsg] = useState('审核通过');
+  const [refuseMsg, setRefuseMsg] = useState('');
   const [modalContent, setModalContent] = useState("");
   const [choose, setChoose] = useState(""); //切换绑定学生时,当前选择的数据
   const [checkedId, setCheckedId] = useState(""); //审核id
@@ -40,10 +40,10 @@ function Check(props) {
   let tabTitle = user == 0 ? "" : "已审核";
   const tabList = [
     {
-      title: "待审核",
+      title: "待处理",
     },
     {
-      title: "已加入",
+      title: "已处理",
     },
     {
       title: tabTitle,
@@ -61,10 +61,10 @@ function Check(props) {
         curStatus = [0];
         break;
       case 1:
-        curStatus = [1, 2];
+        curStatus = [1,2];
         break;
       case 2:
-        curStatus = [3];
+        curStatus = [1,2];
         break;
       default:
         break;
@@ -90,8 +90,15 @@ function Check(props) {
   const handleChangeUser = (e,i) => {
     setChoose(e);
     setStatus(i)
-    setIsOpened(true);
-    setModalContent(`确定切换成${e.userName}?`);
+    if(e.status != 1){
+      Taro.atMessage({
+        message: '请选择审核通过的数据',
+        type: "error",
+      });
+    }else{
+      setIsOpened(true);
+      setModalContent(`确定切换成${e.userName}?`);
+    }
   };
   //关闭弹窗
   const handleClose = () => {
@@ -115,6 +122,7 @@ function Check(props) {
       case 1:
         setIsOpened(true);
         setModalContent("确定通过该条申请");
+        setRefuseMsg('审核通过')
         break;
       case 2:
         setRefuseOpened(true)
@@ -122,6 +130,7 @@ function Check(props) {
       case 3:
         setIsOpened(true)
         setModalContent('确定撤销该条申请')
+        setRefuseMsg('撤销申请')
         break;
       default:
         break;
@@ -141,6 +150,7 @@ function Check(props) {
       actions.type = "users/getUpdateJoinReview"
       actions.payload = {id:checkedId,status:status,auditRemark:refuseMsg}
     }
+    
     dispatch(actions).then((res) => {
       if (res.status == 200) {
         Taro.atMessage({
@@ -180,7 +190,7 @@ function Check(props) {
                         </View>
                         <View
                           className='card-content clearfix'
-                          onClick={() => handleChangeUser(item,4)}
+                          // onClick={() => handleChangeUser(item,4)}
                         >
                           <View className='card-center'>
                             <View className='card-name'>{item.className}</View>
@@ -232,7 +242,7 @@ function Check(props) {
         <AtTabsPane current={current} index={1}>
           {checkedList.length > 0 ? (
             <View>
-              {checkedList.map((item, index) => {
+              {checkedList.filter(it => user == 0 ? it.type == 0 : it.type == 1).map((item, index) => {
                 let title = "";
                 let note = "";
                 if (user == 0) {
@@ -250,6 +260,7 @@ function Check(props) {
                           ? "item-active"
                           : "item"
                       }
+                      // 只能切换成审核成功的数据
                       onClick={() => handleChangeUser(item,4)}
                     >
                       <View className='top'>
@@ -301,7 +312,7 @@ function Check(props) {
                           ? "item-active"
                           : "item"
                       }
-                      onClick={() => handleChangeUser(item,4)}
+                      // onClick={() => handleChangeUser(item,4)}
                     >
                       <View className='top'>
                         <View className='left'>
@@ -318,7 +329,7 @@ function Check(props) {
                             <View className='card-msg'>{note}</View>
                           </View>
                         </View>
-                        <View className='right'>{item.auditRemark}</View>
+                        <View className='right' style={{color: item.status == 2 && '#FF2A15'}}>{item.auditRemark}</View>
                       </View>
                     </AtCard>
                   </View>

@@ -41,7 +41,29 @@
         color: #fff;
       }
     }
-
+    .file {
+      width: 500rpx;
+      height: 160rpx;
+      background: #f4f4f4;
+      padding: 20rpx;
+      .suffix {
+        // position: absolute;
+        float: right;
+        width: 96rpx;
+        height: 96rpx;
+      }
+      .name{
+        font-size: 28rpx;
+        color: #333;
+        font-weight: 500;
+      }
+      .size{
+        position: absolute;
+        bottom: 20rpx;
+        font-size: 24rpx;
+        color: #999;
+      }
+    }
     .img {
       width: 77rpx;
       height: 77rpx;
@@ -63,21 +85,23 @@
 
         .text {
           position: relative;
-          display: inline-block;
-          max-width: 550rpx;
+          // display: inline-block;
+          max-width: 270rpx;
+          // height: auto;
           font-size: 28rpx;
           letter-spacing: 1rpx;
           line-height: 1.5;
           font-weight: 500;
           padding: 20rpx;
+          object-fit: contain;
         }
       }
     }
   }
 }
 
-$chatContentbgc: #C2DCFF;
-$sendBtnbgc: #4F7DF5;
+$chatContentbgc: #c2dcff;
+$sendBtnbgc: #4f7df5;
 
 view,
 button,
@@ -94,14 +118,14 @@ textarea {
   position: relative;
   width: 100%;
   bottom: 0;
-  background: #F4F5F7;
+  background: #f4f5f7;
 
   .send-msg {
     display: flex;
     padding: 16rpx 30rpx 0 30rpx;
     width: 100%;
     min-height: 114rpx;
-    background: #EDEDED;
+    background: #ededed;
   }
 
   .taro-textarea {
@@ -109,12 +133,20 @@ textarea {
       width: 537rpx;
       min-height: 75rpx;
       max-height: 500rpx;
-      background: #FFFFFF;
+      background: #ffffff;
       border-radius: 8rpx;
       font-size: 32rpx;
       color: #333333;
       line-height: 43rpx;
       padding: 0rpx 8rpx;
     }
+  }
+}
+.action {
+  width: 90rpx;
+  height: 90rpx;
+  .action-img {
+    width: 48rpx;
+    height: 48rpx;
   }
 }

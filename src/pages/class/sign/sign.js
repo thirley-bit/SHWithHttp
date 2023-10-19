@@ -113,7 +113,7 @@ function Sign(props) {
         // 家长端为单个学生
         <View className='parent'>
           <View className='parent-item'>
-            <View >放学时间：{schoolEndTimeInfo}</View>
+            <View style={{fontWeight:'500',color:'#333'}}>放学时间：{schoolEndTimeInfo}</View>
             {signRecordList.map((item, index) => {
               let status =
                 specialTime < 12 ? item.earlyStatus : item.lateStatus;

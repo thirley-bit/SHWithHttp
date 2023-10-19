@@ -16,7 +16,7 @@ export default {
       nick_name:"家长01323", //家人昵称（家长端返回字段）
       relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆（家长端返回字段）
       avatar: '',
-      token: "fdgdgvfrtgtgfdgf",
+      token1: "fdgdgvfrtgtgfdgf",
     },
     msg: "success",
   },
@@ -37,7 +37,7 @@ export default {
         pass:1, //是否加入班级  0：待审核，1：通过，2：未通过，3：撤销
         relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
         avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
-        token: "fdgdgvfrtgtgfdgf",
+        token1: "fdgdgvfrtgtgfdgf",
       },
       {
         uuid: "45344534345",
@@ -53,7 +53,7 @@ export default {
         pass:1,
         relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
         avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
-        token: "fdgdgvfrtgtgfdgf",
+        token1: "fdgdgvfrtgtgfdgf",
     },
     ],
     msg:'success'
@@ -71,7 +71,7 @@ export default {
           relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
           avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
           pass:0,  //是否加入班级  -1：未通过，0：待审核，1：通过
-          token: "fdgdgvfrtgtgfdgf",
+          token1: "fdgdgvfrtgtgfdgf",
       },
       {
           uuid: "45344534345",
@@ -84,7 +84,7 @@ export default {
           avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
           pass:-1, //是否加入班级  -1：未通过，0：待审核，1：通过
           reason:'资料不齐全', //不通过原因
-          token: "fdgdgvfrtgtgfdgf",
+          token1: "fdgdgvfrtgtgfdgf",
       },
       ],
   msg: "success"
@@ -104,7 +104,7 @@ export default {
       nick_name:"家长01323", //家人昵称
       relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
       avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
-      token: "fdgdgvfrtgtgfdgf",
+      token1: "fdgdgvfrtgtgfdgf",
     },
     msg: "success",
   },
@@ -127,7 +127,7 @@ export default {
             relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
             avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
             pass:0,
-            token: "fdgdgvfrtgtgfdgf",
+            token1: "fdgdgvfrtgtgfdgf",
         },
         ],
     msg: "success"
@@ -150,7 +150,7 @@ export default {
             relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
             avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
             pass:1,
-            token: "fdgdgvfrtgtgfdgf",
+            token1: "fdgdgvfrtgtgfdgf",
         },
         {
             uuid: "45344534345",
@@ -167,7 +167,7 @@ export default {
             avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
             pass:2,
             reason:'不是本班学生',
-            token: "fdgdgvfrtgtgfdgf",
+            token1: "fdgdgvfrtgtgfdgf",
         },
         {
           uuid: "45344534345",
@@ -184,7 +184,7 @@ export default {
           avatar: '',
           pass:2,
           reason:'不是本班学生',
-          token: "fdgdgvfrtgtgfdgf",
+          token1: "fdgdgvfrtgtgfdgf",
       },
         ],
     msg: "success"
@@ -207,7 +207,7 @@ export default {
             relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
             avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
             pass:0,
-            token: "fdgdgvfrtgtgfdgf",
+            token1: "fdgdgvfrtgtgfdgf",
         },
         {
             uuid: "45344534345",
@@ -223,7 +223,7 @@ export default {
             relative: "爸爸", //亲属关系  妈妈，爷爷，奶奶，外公，外婆
             avatar: 'http://123.57.149.51/upload/upload_img/20230518/7949e771acece58fcc3523fe30c9b489.jpg',
             pass:0,
-            token: "fdgdgvfrtgtgfdgf",
+            token1: "fdgdgvfrtgtgfdgf",
         },
         ],
     msg: "success"
@@ -1298,7 +1298,7 @@ export default {
       detail_content:"<p>正文内容</p>",   //HTML代码，完整页面内容
       time:'2023-11-15  14:12:34',
       avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
-      token:'fdgdgvfrtgtgfdgf'
+      token1:'fdgdgvfrtgtgfdgf'
     }
   },
 
@@ -2231,7 +2231,7 @@ export default {
         note:'大富大贵的鬼地方',
         time:'2023-11-15  14:12:34', //可以返回时间戳
         avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
-        token:'fdgdgvfrtgtgfdgf'
+        token1:'fdgdgvfrtgtgfdgf'
       },
       {
         uuid:'3434353454677',
@@ -2241,7 +2241,7 @@ export default {
         note:'大富大贵的鬼地方',
         time:'2023-11-15  14:12:34', //可以返回时间戳
         avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
-        token:'fdgdgvfrtgtgfdgf'
+        token1:'fdgdgvfrtgtgfdgf'
       },
       {
         uuid:'3434353454677',
@@ -2251,7 +2251,7 @@ export default {
         note:'大富大贵的鬼地方',
         time:'2023-11-15  14:12:34', //可以返回时间戳
         avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
-        token:'fdgdgvfrtgtgfdgf'
+        token1:'fdgdgvfrtgtgfdgf'
       },
       {
         uuid:'3434353454677',
@@ -2261,7 +2261,7 @@ export default {
         note:'大富大贵的鬼地方',
         time:'2023-11-15  14:12:34', //可以返回时间戳
         avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
-        token:'fdgdgvfrtgtgfdgf'
+        token1:'fdgdgvfrtgtgfdgf'
       },
       {
         uuid:'3434353454677',
@@ -2271,7 +2271,7 @@ export default {
         note:'大富大贵的鬼地方',
         time:'2023-11-15  14:12:34', //可以返回时间戳
         avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
-        token:'fdgdgvfrtgtgfdgf'
+        token1:'fdgdgvfrtgtgfdgf'
       },
       {
         uuid:'3434353454677',
@@ -2281,7 +2281,7 @@ export default {
         note:'大富大贵的鬼地方',
         time:'2023-11-15  14:12:34', //可以返回时间戳
         avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
-        token:'fdgdgvfrtgtgfdgf'
+        token1:'fdgdgvfrtgtgfdgf'
       },
     ],
     msg:"success"
@@ -2297,7 +2297,7 @@ export default {
         note:'大富大贵的鬼地方',
         time:'2023-11-15  14:12:34', //可以返回时间戳
         avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
-        token:'fdgdgvfrtgtgfdgf'
+        token1:'fdgdgvfrtgtgfdgf'
       },
       {
         uuid:'3434353454677',
@@ -2307,7 +2307,7 @@ export default {
         note:'大富大贵的鬼地方',
         time:'2023-11-15  14:12:34', //可以返回时间戳
         avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
-        token:'fdgdgvfrtgtgfdgf'
+        token1:'fdgdgvfrtgtgfdgf'
       },
       {
         uuid:'3434353454677',
@@ -2317,7 +2317,7 @@ export default {
         note:'大富大贵的鬼地方',
         time:'2023-11-15  14:12:34', //可以返回时间戳
         avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
-        token:'fdgdgvfrtgtgfdgf'
+        token1:'fdgdgvfrtgtgfdgf'
       },
       {
         uuid:'3434353454677',
@@ -2327,7 +2327,7 @@ export default {
         note:'大富大贵的鬼地方',
         time:'2023-11-15  14:12:34', //可以返回时间戳
         avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
-        token:'fdgdgvfrtgtgfdgf'
+        token1:'fdgdgvfrtgtgfdgf'
       },
       {
         uuid:'3434353454677',
@@ -2337,7 +2337,7 @@ export default {
         note:'大富大贵的鬼地方',
         time:'2023-11-15  14:12:34', //可以返回时间戳
         avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
-        token:'fdgdgvfrtgtgfdgf'
+        token1:'fdgdgvfrtgtgfdgf'
       },
       {
         uuid:'3434353454677',
@@ -2347,7 +2347,7 @@ export default {
         note:'大富大贵的鬼地方',
         time:'2023-11-15  14:12:34', //可以返回时间戳
         avatar:"http://123.57.149.51/upload/upload_img/20230517/4382dbf0860709e3b46b3bb9ffe94a13.jpg",
-        token:'fdgdgvfrtgtgfdgf'
+        token1:'fdgdgvfrtgtgfdgf'
       },
     ],
     msg:"success"
@@ -2478,7 +2478,7 @@ export default {
       address:'四川省甘孜藏族自治州嘉绒步行街38号',
       school:'四川省甘孜小学',
       class:'2023级2班',
-      token: "fdgdgvfrtgtgfdgf",
+      token1: "fdgdgvfrtgtgfdgf",
     },
     msg: "success",
   },

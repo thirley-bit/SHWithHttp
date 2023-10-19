@@ -70,6 +70,7 @@ function AddressList(props) {
     });
   };
   const handleEdit = (record) => {
+    console.log(record,'record')
     Taro.makePhoneCall({
       phoneNumber:record.telephone
     })

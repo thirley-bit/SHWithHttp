@@ -71,8 +71,6 @@ const request = async (method, url, params) => {
     data: params,
     header: {
       "content-type": "application/json",
-      // "token":'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjE1MDgyMTc4OTg0IiwidXNlclR5cGUiOjAsInVzZXJOYW1lIjoiIiwicmFuZG9tRGF0ZSI6MTY5NTM0NDcyNTAxNiwidXNlcklkIjoiYTdmOTMzYjgxMGYyNDE5Yjg0MjBjMzA5NWM4ZDg4ZDUifQ.DQ_FlCPs7fbFdIHl6VihZcvMWctJ74PGRUiE3A4q8Uk'
-      // "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTcxNTkzMDU1NDAsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.t3GCTmgbYDEfKbSSLwS8TYTHqCE-Kx8wOGJVbfrbb6Q"
      },
     success(res) {
       responseTips(res)
@@ -91,7 +89,7 @@ const uploadFile = async function(url, filePath) {
     name: 'file',
     header: {
       "content-type": "application/json",
-      // 'token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTcwNzI3OTI5MzUsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.VCFe-4fgryhAHwmkOQ4SApBNfBr7x63mefnxG-OW90o'
+      "token":Taro.getStorageSync("token")
     },
     success: (res) => {
       responseTips(res)
