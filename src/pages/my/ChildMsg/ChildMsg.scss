@@ -24,6 +24,12 @@
             padding-right: 41rpx;
         }
     }
+    // 上传头像的输入框禁用透明度为1
+    .upload-avatar{
+       .at-input--disabled{
+        opacity: 1;
+       }
+    }
 }
 .other{
     position: relative;

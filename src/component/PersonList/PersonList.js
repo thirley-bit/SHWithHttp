@@ -9,7 +9,6 @@ import "./PersonList.scss";
 
 //人员列表组件
 function PersonList(props) {
-  console.log(props,'personprops')
   const { dispatch, enter, showData,userId, user, pageSize, roomId, onEdit, onDel, bindStudent } = props;
   const [isOpened, setIsOpened] = useState(false);
   const [delId, setDelId] = useState(""); //选中需要删除的数据id
@@ -20,7 +19,6 @@ function PersonList(props) {
     
   }, []);
   const handleNav = (val) => {
-    console.log(val,'val>>>>')
     //toId(接收方id),通讯录列表，群聊取该条数据的id，私信列表取该数据的toId
     let MsgToId = ''
     //判断是群聊还是单聊，enter为group时是群聊，其他为单聊,私信列表取该条数据的msgType
@@ -46,7 +44,6 @@ function PersonList(props) {
       toId: MsgToId,
       msgType:msgType
     }
-    console.log(payload,'payload')
     //如果roomId存在，则传，不存在id不传，后台自动生成roomId,在beforeConnct接口返回的数据获取roomId
     if(val.roomId){
       payload = {
@@ -113,7 +110,6 @@ function PersonList(props) {
             } else{
               title = item.userName
             }
-            console.log(item.unreadNum,'unredae')
             return (
               <View key={index} className='card'>
                 <AtCard

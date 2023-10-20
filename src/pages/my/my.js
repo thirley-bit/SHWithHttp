@@ -55,9 +55,9 @@ function My(props) {
   ];
 
   useEffect(() => {
-    dispatch({
-      type: "users/getIdentity",
-    });
+    // dispatch({
+    //   type: "users/getIdentity",
+    // });
     
     // dispatch({
     //   type: "users/getUser",
@@ -65,6 +65,32 @@ function My(props) {
   }, []);
   const handleUpload = () => {
     console.log("upload");
+    Taro.chooseImage({
+      count: 1,
+      sizeType: ["original", "compressed"],
+      sourceType: ["album", "camera"],
+      success: (res) => {
+        // editorRef.current.insertImage({
+        //   src: res.tempFilePaths[0],
+        //   width: "60%",
+        //   success: () => {},
+        // });
+        console.log(res,'res')
+        // var tempFilePaths = res.tempFilePaths
+        let filePathList = res.tempFilePaths.map((file) =>
+        // console.log(file,'file')
+              dispatch({
+                type: "AddressList/getUploadFile",
+                payload: file,
+              }).then((resp) => {
+                console.log(resp,'reps')
+                // return resp.data;
+              })
+            );
+        console.log(filePathList,'tempFile')
+        // item.record = tempFilePaths
+      },
+    });
   };
   const handleNav = (value) => {
     if(value == 1){
@@ -90,8 +116,10 @@ function My(props) {
         </View>
         <View className='at-col at-col-6 head'>
           <View className='head-name'>
-            <Text className='name'>{identity.nick_name}</Text>
-            <Text className='stu-name'>{identity.student_name}</Text>
+            <Text className='name'>{identity.userName}</Text>
+            {/* <Text className='stu-name'>{identity.student_name}</Text> */}
+            <Text className='stu-name'>张三</Text>
+
           </View>
             
         </View>

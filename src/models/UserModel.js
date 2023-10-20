@@ -114,13 +114,13 @@ const model = {
         type: "text",
         placeholder:'请输入家庭住址'
       },
-      {
-        key: "avatar",
-        title: "头像",
-        type: "text",
-        placeholder:'请上传头像',
-        url: "/pages/class/DisplayPublic/DisplayPublic",
-      },
+      // {
+      //   key: "avatar",
+      //   title: "头像",
+      //   type: "text",
+      //   placeholder:'请上传头像',
+      //   url: "/pages/class/DisplayPublic/DisplayPublic",
+      // },
     ]
   },
 

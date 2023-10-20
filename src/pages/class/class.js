@@ -67,7 +67,7 @@ function Index(props) {
         status: [0,1,2,3],
       },
     }).then(res => {
-      let bindId = res.data.filter((item) => item.defaultFlag == 1)[0].id
+      // let bindId = res.data.filter((item) => item.defaultFlag == 1)[0].id
       // Taro.connectSocket({
       //   url: `ws://192.168.1.157:5002/websocket/${user == 0 ? bindId : userId}`,
       //   header: {

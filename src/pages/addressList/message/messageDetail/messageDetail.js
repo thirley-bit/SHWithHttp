@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import Taro, { useRouter } from "@tarojs/taro";
+import Taro, { useDidHide, useDidShow, useRouter } from "@tarojs/taro";
 import { connect } from "react-redux";
 // import { AtAvatar, AtButton, AtInput, AtTextarea } from "taro-ui";
 import { AtIcon } from "taro-ui";
-import { View, Image, Textarea, ScrollView } from "@tarojs/components";
+// import { Prompt } from "react-router";
+import { View, Image, Textarea, ScrollView, Video } from "@tarojs/components";
 import NavTab from "@app/component/NavTab/NavTab";
 import GradientButton from "@app/component/GradientButton";
 import normal from "@static/normal.png";
@@ -30,21 +31,7 @@ function MessageDetail(props) {
     // height: `${sys.safeArea.height - 177}px`,
     height: "100%",
   });
-  const [showEmoji, setEmoji] = useState(false)
-  Taro.connectSocket({
-    // url: `ws://192.168.1.157:5002/websocket/${user == 0 ? bindId : userId}`,
-    url: `ws://192.168.1.157:5002/websocket/3ee83b8573b54f5c99288618039b7c84`,
-    header: {
-      "content-type": "application/json", // 默认值
-      token: Taro.getStorageSync("token"),
-    },
-  }).then((task) => {
-    task.onOpen(function () {});
-  });
-  Taro.onSocketOpen(function (socket) {
-    console.log("onSocketOpen连接已打开");
-  });
-  const recorderManager = Taro.getRecorderManager();
+  const [showEmoji, setEmoji] = useState(false);
   const [inputVal, setInputVal] = useState("");
   const actionList = [
     {
@@ -73,22 +60,40 @@ function MessageDetail(props) {
   const emojiList = emojis.split(",");
 
   const router = useRouter();
-  // //roomId
-  // const roomId = router.params.roomId;
-  // //接收者id
-  // const toId = router.params.toId;
-  // //该条数据id，用于退出窗口
-  // const id = router.params.id; //87ffde29085946969d21fc03087f1051
-  // //消息类型，0：单聊；1：群聊
-  // const msgType = router.params.msgType;
-  // // //聊天室名称
-  // const name = router.params.name;
+  //roomId
+  const roomId = router.params.roomId;
+  //接收者id
+  const toId = router.params.toId;
+  //该条数据id，用于退出窗口
+  const id = router.params.id; //87ffde29085946969d21fc03087f1051
+  //消息类型，0：单聊；1：群聊
+  const msgType = router.params.msgType;
+  // //聊天室名称
+  const name = router.params.name;
   // contentType: 0
   // fromId: "3ee83b8573b54f5c99288618039b7c84"
-  const msgType = "0";
-  const roomId = "87ffde29085946969d21fc03087f1051";
-  // sendMessage: "123"
-  const toId = "1";
+  // const msgType = "0";
+  // const roomId = "87ffde29085946969d21fc03087f1051";
+  // // sendMessage: "123"
+  // const toId = "1";
+
+  useDidHide(() => {
+    console.log('hide')
+    quitChat()
+  })
+  const handleBack = () => {
+    quitChat()
+  };
+  const quitChat = () => {
+    console.log('退出')
+    dispatch({
+      type: "AddressList/getUpdateChatList",
+      payload: {
+        id: id,
+        inWindow: 0,
+      },
+    });
+  }
   useEffect(() => {
     if (socketMsgQueue.length > 0) {
       dispatch({
@@ -126,18 +131,21 @@ function MessageDetail(props) {
       const { height } = res;
       setScrollHeight({ height: `calc(100% - ${height}px + 20px )` });
     });
-    return () => Taro.offKeyboardHeightChange();
+    quitChat()
+    return () => {
+      console.log('退出页面')
+      Taro.offKeyboardHeightChange();
+      quitChat()
+    };
   }, []);
 
   const sendSocketMessage = (msg, contentType, imgRes) => {
-    console.log(msg,)
     let sendMessage = "";
     if (contentType == 0) {
       sendMessage = msg.sendMessage;
     } else {
       sendMessage = imgRes[0][0]?.fileMappingPath;
     }
-
 
     Taro.sendSocketMessage({ data: JSON.stringify(msg) }).then((res) => {
       dispatch({
@@ -157,6 +165,9 @@ function MessageDetail(props) {
     setInputVal("");
   };
 
+  // const handleShow = () => {
+  //   setEmoji(false)
+  // }
   const handleInput = (e) => {
     setInputVal(e.detail.value);
   };
@@ -174,28 +185,54 @@ function MessageDetail(props) {
     sendSocketMessage(msg, 0);
   };
   const addImage = (action) => {
-    console.log(action, "action");
     switch (action.type) {
+      //选择表情包
       case "emoji":
-        setEmoji(true)
-        // let msg = {
-        //   roomId: roomId,
-        //   // fromId: user == 0 ? bindStudent.id : userId,
-        //   fromId: "3ee83b8573b54f5c99288618039b7c84",
-        //   toId: toId,
-        //   msgType: msgType,
-        //   sendMessage: "发送表情包",
-        //   contentType: 0,
-        // };
-        // sendSocketMessage(msg, 0);
+        setEmoji(true);
+        setScrollHeight({ height: `calc(100% - ${295}px)` });
         break;
-      case "file":
+      //选择图片和视频
       case "image":
+        Taro.chooseMedia({
+          count: 9,
+          mediaType: ["image", "video"],
+          sourceType: ["album", "camera"],
+          maxDuration: 30,
+          camera: "back",
+          success: (res) => {
+            let filePathList = res.tempFiles.map((file) =>
+              dispatch({
+                type: "AddressList/getUploadFile",
+                payload: file.tempFilePath,
+              }).then((resp) => {
+                return resp.data;
+              })
+            );
+            Promise.all(filePathList).then((resp) => {
+              resp.forEach((item) => {
+                item.forEach((jtem) => {
+                  let msg1 = {
+                    roomId: roomId,
+                    // fromId: user == 0 ? bindStudent.id : userId,
+                    fromId: "3ee83b8573b54f5c99288618039b7c84",
+                    toId: toId,
+                    msgType: msgType,
+                    sendMessage: jtem.id,
+                    contentType: 1,
+                  };
+                  sendSocketMessage(msg1, 1, resp);
+                });
+              });
+            });
+          },
+        });
+        break;
+      //文件（doc文档、excel、ppt、pdf、mp4等)
+      case "file":
         Taro.chooseMessageFile({
           count: 1,
           type: action.type,
           success: function (res) {
-            console.log(res, "res");
             var tempFilePaths = res.tempFiles;
             let filePathList = tempFilePaths.map((file) =>
               dispatch({
@@ -224,74 +261,102 @@ function MessageDetail(props) {
           },
         });
         break;
-      case 'phone':
+
+      case "phone":
         Taro.makePhoneCall({
-          phoneNumber:'123'
-        })
+          phoneNumber: "123",
+        });
         break;
       default:
         break;
     }
   };
-  const handleChoose =(item) => {
-    console.log(item,'item')
+  const handleChoose = (item) => {
     let msg = {
-          roomId: roomId,
-          // fromId: user == 0 ? bindStudent.id : userId,
-          fromId: "3ee83b8573b54f5c99288618039b7c84",
-          toId: toId,
-          msgType: msgType,
-          sendMessage: item,
-          contentType: 0,
-        };
-        sendSocketMessage(msg, 0);
-  }
+      roomId: roomId,
+      // fromId: user == 0 ? bindStudent.id : userId,
+      fromId: "3ee83b8573b54f5c99288618039b7c84",
+      toId: toId,
+      msgType: msgType,
+      sendMessage: item,
+      contentType: 0,
+    };
+    sendSocketMessage(msg, 0);
+  };
 
-  // const handleBack = () => {
-  //   dispatch({
-  //     type: "AddressList/getUpdateChatList",
-  //     payload: {
-  //       id: id,
-  //       inWindow: 0,
-  //     },
-  //   });
-  // };
+ 
+  
+  // function beforeunload(e) {
+  //   let confirmationMessage = "你确定离开此页面吗?";
+  //   (e || window.event).returnValue = confirmationMessage;
+  //   return confirmationMessage;
+  // }
+  // useEffect(() => {
+  //   return () => {
+  //     window.removeEventListener("beforeunload", beforeunload);
+  //     console.log(1212);
+  //     dispatch({
+  //       type: "AddressList/getUpdateChatList",
+  //       payload: {
+  //         id: id,
+  //         inWindow: 0,
+  //       },
+  //     });
+  //   };
+  // }, []);
+  // useEffect(() => {
+  //   window.addEventListener("beforeunload", beforeunload);
+  // }, []);
+
   const _typeMessage = (msgInfo) => {
-    console.log(msgInfo.sendMessage,'msginfo')
-    let a = msgInfo.sendMessage.substr(-3)
-    let size = 23.32
-    let msg = ''
-    switch (a) {
-      case 'doc':
-        msg = w
+    let fileType = msgInfo.sendMessage.substr(-3);
+    let size = 23.32;
+    let msg = "";
+    switch (fileType) {
+      case "png":
+      case "jpg":
+      case "gif":
+      case "psd":
+      case "jpeg":
+      case "bmp":
+      case "tiff":
+      case "ai":
+      case "cdr":
+      case "eps":
+        msg = "img";
         break;
-      case 'xls':
-        msg = x
+      case "doc":
+        msg = w;
         break;
-      case 'ppt':
-        msg = ppt
+      case "xls":
+        msg = x;
         break;
-      case 'pdf':
-        msg = pdf
+      case "ppt":
+        msg = ppt;
         break;
-      case 'zip':
-      case 'rar':
-      case 'iso':
-      case 'cab':
-      case '7z':
-        msg = zip
+      case "pdf":
+        msg = pdf;
+        break;
+      case "zip":
+      case "rar":
+      case "iso":
+      case "cab":
+      case "7z":
+        msg = zip;
         break;
       default:
-        break
+        break;
     }
     return (
       <View>
+        {/* 显示文字和表情 */}
         {msgInfo.contentType == 0 && (
           <View className='text' style={{ backgroundColor: "#1BA5FF" }}>
             {msgInfo?.sendMessage}
           </View>
         )}
-        {msgInfo.contentType == 1 && (
+        {/* 显示图片 */}
+        {msgInfo.contentType == 1 && msg == "img" && (
           <View onClick={() => handlePreviewImage(msgInfo)}>
             <Image
               className='text'
@@ -301,16 +366,37 @@ function MessageDetail(props) {
             />
           </View>
         )}
+        {/* 显示视频 */}
+        {msgInfo.contentType == 1 && fileType == "mp4" && (
+          <Video
+            id='video'
+            src={msgInfo?.sendMessage}
+            poster=''
+            initialTime={0}
+            controls
+            showFullscreenBtn
+            direction={-90}
+            autoplay={false}
+            loop={false}
+            muted={false}
+          />
+        )}
+        {/* 显示文件 */}
         {msgInfo.contentType == 2 && (
           <View className='file' onClick={() => handlePreviewFile(msgInfo)}>
             <Image
               className='suffix'
-              style={{ float:'right', width:'96rpx',height:'96rpx', borderRadius: "10rpx", padding: "0" }}
+              style={{
+                float: "right",
+                width: "96rpx",
+                height: "96rpx",
+                borderRadius: "10rpx",
+                padding: "0",
+              }}
               src={msg}
             />
-            <View className='name'>新建文件.{a}</View>
+            <View className='name'>新建文件.{fileType}</View>
             <View className='size'>{size}kb</View>
-            
           </View>
         )}
       </View>
@@ -330,18 +416,18 @@ function MessageDetail(props) {
         Taro.openDocument({
           filePath: filePath,
           fileType: getFileType(e.sendMessage),
-          fileName:'新建文件',
+          fileName: "新建文件",
         });
       },
     });
-  }
-  const getFileType = (url) =>{
+  };
+  const getFileType = (url) => {
     if (url.lastIndexOf(".") > -1) {
       return url.slice(url.lastIndexOf(".") + 1).toLowerCase();
     } else {
       return "";
     }
-  }
+  };
 
   const _renderMessage = (msgInfo, index) => {
     if (msgInfo?.fromId == (user == 0 ? bindStudent.id : userId)) {
@@ -372,9 +458,9 @@ function MessageDetail(props) {
 
   return (
     <View className='index'>
-      {/* <View onClick={handleBack}>
+      <View onClick={handleBack}>
         <NavTab back handleBack={handleBack} title={name} />
-      </View> */}
+      </View>
 
       <View className='msg__wrapper' style={scrollHeight}>
         <ScrollView
@@ -432,11 +518,35 @@ function MessageDetail(props) {
             </View>
           );
         })}
-        {/* <View>{emojiList.map(emoji)}</View> */}
-        { showEmoji && <View >{emojiList.map((item,index) => {
-          return <View key={index} style={{display:'inline-block'}} onClick={() => handleChoose(item)}>{item}</View>
-        })}</View>}
       </View>
+      {showEmoji && (
+        <ScrollView
+          id='scrollview'
+          className='ScrollView scroll__view'
+          scrollY
+          scrollWithAnimation
+          // scrollIntoView={`scrollId${messageList.length}`}
+        >
+          <View className='emoji'>
+            {emojiList.map((item, index) => {
+              return (
+                <View
+                  key={index}
+                  style={{
+                    display: "inline-block",
+                    width: "80rpx",
+                    height: "100rpx",
+                  }}
+                  onClick={() => handleChoose(item)}
+                >
+                  {item}
+                </View>
+              );
+            })}
+          </View>
+        </ScrollView>
+      )}
+    
     </View>
   );
 }

@@ -1,7 +1,7 @@
-import { View, Text, Input, Button } from "@tarojs/components";
+import { View, Text, Image, Button } from "@tarojs/components";
 import { connect } from "react-redux";
 import Taro from "@tarojs/taro";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   AtForm,
   AtModal,
@@ -23,7 +23,7 @@ function ChildMsg(props) {
   const [showData, setShowData] = useState([]);
   const [isOpened, setIsOpened] = useState(false);
   const [classId, setClassId] = useState('')
-
+  const [avatarData, setAvatarData] = useState({})
   const title = [
     {
       title: "学生姓名:",
@@ -46,6 +46,7 @@ function ChildMsg(props) {
     dispatch({
       type: "users/getStudentById",
       payload: studentId,
+      // payload:'88'
     }).then((res) => {
       if (res.status == 200) {
         setClassId(res.data.classId)
@@ -55,6 +56,7 @@ function ChildMsg(props) {
   }, []);
 
   const showDataList = (val) => {
+    console.log(val,'val')
     const newShowData = studentDetail.map((item) => {
       let value = val[item.key];
       return {
@@ -63,6 +65,7 @@ function ChildMsg(props) {
       };
     });
     setShowData(newShowData);
+    setAvatarData({value:val.avatar})
   };
   const handleChange = (value, record) => {
     record.value = value;
@@ -97,14 +100,16 @@ function ChildMsg(props) {
     setIsOpened(false);
   };
   const handleSave = () => {
+    console.log(showData,'showdata')
     let obj = showData.reduce((item, index) => {
       item[index.key] = index.value;
       return item;
     });
-    let { address, birthday, avatar } = obj;
+    let { address, birthday } = obj;
     let sendObj = Object.assign(
       { id: studentId },
-      { address, birthday, avatar }
+      {avatar:avatarData.id || null},
+      { address, birthday }
     );
     dispatch({
       type: "users/getUpdateStudent",
@@ -133,31 +138,25 @@ function ChildMsg(props) {
       }
     });
   };
-  const handleUpload = (item) =>{
-    console.log(111)
+  const handleUpload = () =>{
     Taro.chooseImage({
       count: 1,
       sizeType: ["original", "compressed"],
       sourceType: ["album", "camera"],
       success: (res) => {
-        // editorRef.current.insertImage({
-        //   src: res.tempFilePaths[0],
-        //   width: "60%",
-        //   success: () => {},
-        // });
-        console.log(res,'res')
-        var tempFilePaths = res.tempFilePaths
-        Taro.uploadFile({
-          url:'http://192.168.1.157:5002/file/uploadFile',
-          filePath: tempFilePaths[0],
-          name: 'file',
-          header: {
-            'token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsTmFtZSI6IiIsInRlbGVwaG9uZSI6IjEyMyIsInVzZXJUeXBlIjoxLCJ1c2VyTmFtZSI6IueUqOaItzEyMyIsInJhbmRvbURhdGUiOjE2OTU4NjMwOTAzNDQsInVzZXJJZCI6IjNlZTgzYjg1NzNiNTRmNWM5OTI4ODYxODAzOWI3Yzg0In0.PL_uQN5FXedt28v8CRhpLjbQDhbe-3ty4qkfHQQtfNU'
-          },
-          success: (res1) => {console.log(res1,'res1');},
-        })
-        console.log(tempFilePaths,'tempFile')
-        // item.record = tempFilePaths
+        res.tempFilePaths.map((file) =>
+              dispatch({
+                type: "AddressList/getUploadFile",
+                payload: file,
+              }).then((resp) => {
+                let current = resp.data[0]
+                let newAvatarData = {
+                  id:current.id,
+                  value:current.fileMappingPath
+                }
+                setAvatarData(newAvatarData)
+              })
+            );
       },
     });
   }
@@ -166,16 +165,13 @@ function ChildMsg(props) {
     console.log(e,'eee')
     console.log(showData,'showdata')
   }
-  console.log(showData,'showdata')
   return (
     <View className='index'>
       <NavTab back title='孩子信息' />
       <View className='main'>
         <AtForm name='key' onSubmit={() => handleSubmit()}>
           {showData.map((item, index) => {
-            console.log(item,'irem')
             return (
-              <View key={index} onClick={item.url && (() => handleUpload(item))}>
               <AtInput
                 key={index}
                 name={item.key}
@@ -185,9 +181,20 @@ function ChildMsg(props) {
                 placeholder={item.placeholder}
                 disabled={item.disabled}
                 onChange={(e) => handleChange(e, item)}
-              /></View>
+              />
             );
           })}
+          <View className='upload-avatar' onClick={() => handleUpload()}>
+          <AtInput 
+            key='avatar'
+            name='avatar'
+            title='头像'
+            type='text'
+            value={<View className='note'>{111} <Image className='img' src={avatarData.value} /></View>}
+            disabled
+            placeholder='请上传头像'
+          />
+          </View>
         </AtForm>
       </View>
       <View className='other'>
@@ -198,9 +205,6 @@ function ChildMsg(props) {
           </View>
         </View>
       </View>
-      {/* <View className='send-button'>
-        <Button formType='submit'>edit</Button>
-      </View> */}
       <GradientButton
         type='primary'
         className='send-button'
