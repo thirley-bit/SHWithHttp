@@ -99,6 +99,18 @@ const uploadFile = async function(url, filePath) {
   return JSON.parse(response.data);
 }
 
+const websocketConnectRequest = async function(url) {
+  const websocketOption = {
+    url: apiConfig.baseUrlSocket + url,
+    header: {
+      "content-type": "application/json",
+      "token":Taro.getStorageSync("token")
+    },
+  }
+  const response = await Taro.connectSocket(websocketOption)
+  return response
+}
+
 
 export default {
   get: (url, config) => {
@@ -118,5 +130,8 @@ export default {
   },
   uploadFile: (url, config) => {
     return uploadFile(url, config);
+  },
+  websocket: (url) => {
+    return websocketConnectRequest(url)
   }
 };

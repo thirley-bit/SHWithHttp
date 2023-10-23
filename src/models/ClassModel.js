@@ -1,13 +1,9 @@
 import {
+  getWebsocket,
   getJoinClass,
   getClassStudent,
   getArticleList,
   getArticleById,
-
-
-
-  getNews,
-  getAAA,
 } from "../services/ClassServices";
 
 const model = {
@@ -18,10 +14,6 @@ const model = {
     articleDetail: {}, //文章详情
     chooseIdList: [], //选择的人员id
     chooseName: '', //选择的人员名称
-
-
-    news: [],
-    AAA: [],
     bannerList: [
       {
         id: 1,
@@ -74,6 +66,10 @@ const model = {
   },
 
   effects: {
+    *getWebsocket({ payload }, { call }) {
+      const responese = yield call(getWebsocket, payload);
+      return responese;
+    },
     *getJoinClass({ payload }, { call }) {
       const responese = yield call(getJoinClass, payload);
       return responese;
@@ -109,33 +105,6 @@ const model = {
       }
       return response;
     },
-
-
-
-
-
-    *getAAA({ payload }, { call, put }) {
-      const response = yield call(getAAA, payload);
-      console.log(response, "responese111");
-      // if (response.statusCode == 200) {
-      yield put({
-        type: "changeAAA",
-        payload: response,
-      });
-      // }
-      return response;
-    },
-    *getNews({ payload }, { call, put }) {
-      const response = yield call(getNews, payload);
-      console.log(response, "responese");
-      if (response.statusCode == 200) {
-        yield put({
-          type: "changeNews",
-          payload: response.data,
-        });
-      }
-      return response;
-    },
     
   },
 
@@ -162,19 +131,6 @@ const model = {
       return {
         ...state,
         articleDetail: payload,
-      };
-    },
-
-    changeAAA(state, { payload }) {
-      return {
-        ...state,
-        AAA: payload,
-      };
-    },
-    changeNews(state, { payload }) {
-      return {
-        ...state,
-        news: payload,
       };
     },
     changeArticleArr(state, { payload }) {

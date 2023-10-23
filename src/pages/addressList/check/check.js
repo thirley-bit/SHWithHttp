@@ -19,7 +19,7 @@ import {
 import NavTab from "@app/component/NavTab/NavTab";
 import MyTabs from "@app/component/MyTabs/MyTabs";
 import GradientButton from "@app/component/GradientButton";
-import Divider from "@app/component/Divider";
+import Divider from "@app/component/Divider/Divider";
 import Modal from "@app/component/Modal";
 import normal from "@static/normal.png";
 

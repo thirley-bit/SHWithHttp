@@ -14,7 +14,7 @@ import GradientButton from "@app/component/GradientButton";
 import TreeSelect from "@app/component/TreeSelect/TreeSelect";
 import TreeFlat from '@app/component/TreeSelect/TreeFlat';
 import Modal from "@app/component/Modal";
-import Divider from "@app/component/Divider";
+import Divider from "@app/component/Divider/Divider";
 import "./publish.scss";
 
 function WorkDetail(props) {

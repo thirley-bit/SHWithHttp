@@ -154,8 +154,8 @@ function MessageDetail(props) {
           {
             sendMessage: sendMessage,
             contentType: contentType,
-            // fromId: user == 0 ? bindStudent.id : userId,
-            fromId: "3ee83b8573b54f5c99288618039b7c84",
+            fromId: user == 0 ? bindStudent.id : userId,
+            // fromId: "3ee83b8573b54f5c99288618039b7c84",
             avatar:
               "https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2",
           },
@@ -175,8 +175,8 @@ function MessageDetail(props) {
   const handleSendMessage = (e) => {
     let msg = {
       roomId: roomId,
-      // fromId: user == 0 ? bindStudent.id : userId,
-      fromId: "3ee83b8573b54f5c99288618039b7c84",
+      fromId: user == 0 ? bindStudent.id : userId,
+      // fromId: "3ee83b8573b54f5c99288618039b7c84",
       toId: toId,
       msgType: msgType,
       sendMessage: inputVal,
@@ -213,8 +213,8 @@ function MessageDetail(props) {
                 item.forEach((jtem) => {
                   let msg1 = {
                     roomId: roomId,
-                    // fromId: user == 0 ? bindStudent.id : userId,
-                    fromId: "3ee83b8573b54f5c99288618039b7c84",
+                    fromId: user == 0 ? bindStudent.id : userId,
+                    // fromId: "3ee83b8573b54f5c99288618039b7c84",
                     toId: toId,
                     msgType: msgType,
                     sendMessage: jtem.id,
@@ -247,8 +247,8 @@ function MessageDetail(props) {
                 item.forEach((jtem) => {
                   let msg1 = {
                     roomId: roomId,
-                    // fromId: user == 0 ? bindStudent.id : userId,
-                    fromId: "3ee83b8573b54f5c99288618039b7c84",
+                    fromId: user == 0 ? bindStudent.id : userId,
+                    // fromId: "3ee83b8573b54f5c99288618039b7c84",
                     toId: toId,
                     msgType: msgType,
                     sendMessage: jtem.id,
@@ -274,8 +274,8 @@ function MessageDetail(props) {
   const handleChoose = (item) => {
     let msg = {
       roomId: roomId,
-      // fromId: user == 0 ? bindStudent.id : userId,
-      fromId: "3ee83b8573b54f5c99288618039b7c84",
+      fromId: user == 0 ? bindStudent.id : userId,
+      // fromId: "3ee83b8573b54f5c99288618039b7c84",
       toId: toId,
       msgType: msgType,
       sendMessage: item,

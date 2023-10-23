@@ -1,12 +1,19 @@
 import { useState, useEffect } from "react";
 import Taro, { getCurrentPages } from "@tarojs/taro";
 import { View, Swiper, SwiperItem, Image, Navigator } from "@tarojs/components";
-import { AtList, AtListItem, AtTabBar, AtNavBar, AtTag, AtButton } from "taro-ui";
+import {
+  AtList,
+  AtListItem,
+  AtTabBar,
+  AtNavBar,
+  AtTag,
+  AtButton,
+} from "taro-ui";
 import { connect } from "react-redux";
 import ArticleList from "@app/component/articleList/articleList";
 // import Tabs from "@app/component/tabs/tabs";
-import MyTabs from '@app/component/MyTabs/MyTabs';
-import NavTab from '@app/component/NavTab/NavTab';
+import MyTabs from "@app/component/MyTabs/MyTabs";
+import NavTab from "@app/component/NavTab/NavTab";
 
 import homework from "@static/homework.png";
 import notice from "@static/notice.png";
@@ -18,10 +25,18 @@ import "./class.scss";
 import "../../app.scss";
 
 function Index(props) {
-  console.log(props,'props')
-  const { dispatch, user,  articleArr, bannerList, pageSize, userId, studentId } = props;
+  console.log(props, "props");
+  const {
+    dispatch,
+    user,
+    articleArr,
+    bannerList,
+    pageSize,
+    userId,
+    studentId,
+  } = props;
 
-  const [current, setCurrent] = useState('');
+  const [current, setCurrent] = useState("");
   const tabList = [
     {
       title: "作业",
@@ -35,28 +50,25 @@ function Index(props) {
     },
     {
       title: "安全确认",
-      // iconType:'user',
       image: sign,
       url: "/pages/class/Sign/Sign",
     },
     {
       title: "私信",
-      // iconType:'user',
       image: message,
       url: "/pages/addressList/message/message",
     },
     {
       title: "更多",
-      // iconType:'user',
       image: more,
       url: "/pages/class/MoreModules/MoreModules",
     },
   ];
-  
+
   useEffect(() => {
     dispatch({
-      type:'users/getClassAll'
-    })
+      type: "users/getClassAll",
+    });
     //加载当前绑定的学生
     dispatch({
       type: "users/getJoinReviewList",
@@ -64,36 +76,34 @@ function Index(props) {
         page: 1,
         pageSize: pageSize,
         userId: userId,
-        status: [0,1,2,3],
+        status: [0, 1, 2, 3],
       },
-    }).then(res => {
-      // let bindId = res.data.filter((item) => item.defaultFlag == 1)[0].id
-      // Taro.connectSocket({
-      //   url: `ws://192.168.1.157:5002/websocket/${user == 0 ? bindId : userId}`,
-      //   header: {
-      //     "content-type": "application/json", // 默认值
-      //     token:Taro.getStorageSync("token")},
-      // }).then((task) => {
-      //   task.onOpen(function () {
-      //   });
-      // });
-      // Taro.onSocketOpen(function (socket) {
-      //   console.log("onSocketOpen连接已打开");
-      // });
-    })
+    }).then((res) => {
+      let bindId = res.data.filter((item) => item.defaultFlag == 1)[0].id;
+      let requestId = user == 0 ? bindId : userId;
+      dispatch({
+        type: "Class/getWebsocket",
+        payload: requestId,
+      }).then((task) => {
+        task.onOpen(function () {});
+      });
+      Taro.onSocketOpen(function () {
+        console.log("onSocketOpen连接已打开");
+      });
+    });
     //推荐文章
     dispatch({
       type: "Class/getArticleList",
-      payload:{
+      payload: {
         page: 1,
         pageSize: pageSize,
-        type: null
-      }
+        type: null,
+      },
     });
   }, []);
   const handleNav = () => {
-    Taro.navigateTo({url:'/pages/my/WaitTodo/WaitTodo'})
-  }
+    Taro.navigateTo({ url: "/pages/my/WaitTodo/WaitTodo" });
+  };
   const handleTabClick = (e) => {
     setCurrent(e);
     Taro.navigateTo({
@@ -104,18 +114,14 @@ function Index(props) {
     console.log("more");
   };
 
-
   return (
     <View className='index'>
-      	<NavTab
-        home
-        title='诚道吉'
-      	/>
+      <NavTab home title='诚道吉' />
       <View className='new' onClick={handleNav}>
         <AtTag circle className='new-tag'>
           我的待办
-            <View className='new-num'>10</View> 
-            {"\xa0\xa0\xa0\xa0"}
+          <View className='new-num'>10</View>
+          {"\xa0\xa0\xa0\xa0"}
         </AtTag>
       </View>
       <View className='banner'>
@@ -131,7 +137,10 @@ function Index(props) {
             return (
               <SwiperItem key={index}>
                 <View>
-                  <Image style={{width:'100%',height:'320rpx'}} src={item.url} />
+                  <Image
+                    style={{ width: "100%", height: "320rpx" }}
+                    src={item.url}
+                  />
                 </View>
               </SwiperItem>
             );

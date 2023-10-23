@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { AtForm, AtModal, AtModalAction, AtModalContent, AtSearchBar, AtInput, AtButton, AtMessage } from "taro-ui";
 import NavTab from "@app/component/NavTab/NavTab";
 import GradientButton from '@app/component/GradientButton';
-import Divider from '@app/component/Divider';
+import Divider from "@app/component/Divider/Divider";
 import normal from "@static/normal.png";
 import "./AddClass.scss";
 
