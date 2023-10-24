@@ -21,7 +21,7 @@ function GrowthFile() {
       id: 1,
       name: "综合评价",
       img: 'http://123.57.149.51/upload/upload_img/20231024/293af0a6ab82a77b32e014e2ed09871a.png',
-      url: "/pages/GrowthFile/History/History",
+      url: "/pages/GrowthFile/Comment/Comment",
     },
   ];
   const handleNav = (item) => {

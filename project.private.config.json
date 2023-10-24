@@ -77,6 +77,12 @@
           "pathName": "pages/class/MoreModules/MoreModules",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/my/Setting/ChangePassword/ChangePassword",
+          "pathName": "pages/my/Setting/ChangePassword/ChangePassword",
+          "query": "",
+          "scene": null
         }
       ]
     }

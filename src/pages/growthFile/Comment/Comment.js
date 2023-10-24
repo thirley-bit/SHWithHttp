@@ -15,7 +15,7 @@ import hw from "@static/hw.png";
 import displayshow from "@static/displayshow.png";
 import checkIn from "@static/checkIn.png";
 import labour from "@static/labour.png";
-import "./History.scss";
+import "./Comment.scss";
 
 function History() {
   const historyList = [

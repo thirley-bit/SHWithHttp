@@ -46,7 +46,6 @@ function ChildMsg(props) {
     dispatch({
       type: "users/getStudentById",
       payload: studentId,
-      // payload:'88'
     }).then((res) => {
       if (res.status == 200) {
         setClassId(res.data.classId)
@@ -56,7 +55,6 @@ function ChildMsg(props) {
   }, []);
 
   const showDataList = (val) => {
-    console.log(val,'val')
     const newShowData = studentDetail.map((item) => {
       let value = val[item.key];
       return {

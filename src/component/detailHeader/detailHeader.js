@@ -67,7 +67,7 @@ function DetailHeader(props) {
     })
   };
   const handleEdit = () => {
-    Taro.navigateTo({ url: `/pages/component/publish/publish?enter=${enter}&type=edit`});
+    Taro.navigateTo({ url: `/pages/comp/publish/publish?enter=${enter}&type=edit`});
   };
   const handleDel = (e) => {
     setIsOpened(true);

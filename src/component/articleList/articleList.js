@@ -17,7 +17,7 @@ function ArticleList(props) {
       {articleList.map((item, index) => {
         return (
           <View key={index} className='card'>
-            <Navigator url='/pages/component/Article/Article'>
+            <Navigator url='/pages/comp/Article/Article'>
               <AtCard
                 key={index}
                 className='card-item'

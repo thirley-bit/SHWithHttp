@@ -1,84 +1,45 @@
 import { useState, useEffect } from "react";
 import Taro from "@tarojs/taro";
-import { View, Image, Text } from "@tarojs/components";
-import { AtDivider, AtForm, AtInput } from "taro-ui";
+import { View } from "@tarojs/components";
+import { AtForm, AtInput } from "taro-ui";
 import NavTab from "@app/component/NavTab/NavTab";
 import { connect } from "react-redux";
 import "./Info.scss";
 
 function Info(props) {
-  const { dispatch, user, studentInfo } = props;
+  const { dispatch, studentId, studentDetail } = props;
   const [showData, setShowData] = useState([]);
+
   useEffect(() => {
-    // dispatch({
-    //   type: "users/getIdentity",
-    // });
-    // dispatch({
-    //   type: "users/getUser",
-    // });
+    //请求学生详情信息
     dispatch({
-      type: "users/getStudentInfo",
-    });
-  }, []);
-  useEffect(() => {
-    if (studentInfo) {
-      const titleList = [
-        {
-          key: "student_name",
-          title: "姓名",
-          type: "text",
-        },
-        {
-          key: "sex",
-          title: "性别",
-          type: "text",
-        },
-        {
-          key: "birthday",
-          title: "出生年月",
-          type: "number",
-        },
-        {
-          key: "birthplace",
-          title: "出生地",
-          type: "text",
-        },
-        {
-          key: "address",
-          title: "家庭住址",
-          type: "text",
-        },
-        {
-          key: "school",
-          title: "所在学校",
-          type: "text",
-        },
-        {
-          key: "class",
-          title: "所在班级",
-          type: "text",
-        },
-        {
+      type: "users/getStudentById",
+      payload: studentId,
+    }).then((res) => {
+      if (res.status == 200) {
+        let data = res.data;
+        //添加爱好与特长页面
+        let hobby = {
           key: "hobby",
           title: "爱好与特长",
           type: "text",
           url: "/pages/class/DisplayPublic/DisplayPublic",
-        },
-      ];
-      const newShowData = titleList.map((item) => {
-        let value = studentInfo[item.key];
-        if (value == undefined) {
-          value = ">";
-        }
-        return {
-          ...item,
-          value,
         };
-      });
-      setShowData(newShowData);
-    }
-  }, [studentInfo]);
-  console.log(showData);
+        const newShowData = studentDetail.concat(hobby).map((item) => {
+          let value = data[item.key];
+          if (value == undefined) {
+            value = ">";
+          }
+          return {
+            ...item,
+            value,
+          };
+        });
+        setShowData(newShowData);
+      }
+    });
+  }, []);
+  //点击进入爱好与特长页面
   const handleChange = (item) => {
     if (item.url) {
       Taro.navigateTo({ url: item.url });
@@ -110,6 +71,6 @@ function Info(props) {
 }
 export default connect((state) => ({
   user: state.users.user,
-  identity: state.users.identity,
-  studentInfo: state.users.studentInfo,
+  studentId: state.users.studentId,
+  studentDetail: state.users.studentDetail,
 }))(Info);

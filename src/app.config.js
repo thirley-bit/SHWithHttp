@@ -33,12 +33,11 @@ export default defineAppConfig({
     //成长档案
     'pages/GrowthFile/GrowthFile', //成长档案
     'pages/GrowthFile/Info/Info', //个人信息页面
-    'pages/GrowthFile/History/History', //个人成长史页面
-    'pages/GrowthFile/History/Rewards/Rewards', //个人成长史——奖励页面
-    'pages/GrowthFile/History/CheckIn/CheckIn', //个人成长史——考勤页面
-    'pages/GrowthFile/History/CheckIn/Request/Request', //个人成长史——考勤页面——补卡申请页面
-    'pages/GrowthFile/Quality/Quality', //综合素质评价页面
-    'pages/GrowthFile/Quality/Sport/Sport', //综合素质评价页面
+    'pages/GrowthFile/Comment/Comment', //个人成长史页面
+    'pages/GrowthFile/Comment/Rewards/Rewards', //个人成长史——奖励页面
+    'pages/GrowthFile/Comment/CheckIn/CheckIn', //个人成长史——考勤页面
+    'pages/GrowthFile/Comment/CheckIn/Request/Request', //个人成长史——考勤页面——补卡申请页面
+    'pages/GrowthFile/Comment/Sport/Sport', //综合素质评价页面
 
     //通讯录
     'pages/addressList/addressList', //通讯录
@@ -63,11 +62,10 @@ export default defineAppConfig({
     
 
     //公共页面
-    'pages/component/Article/Article',  //文章详情
-    'pages/component/detail/detail', //通知或作业详情
-    'pages/component/publish/publish', //发布页面
-    'pages/component/publish/SendUserList/SendUserList', //选择的发送班级人员列表
-    'pages/component/JoinedClass/JoinedClass', //切换班级/加入变更审核页面
+    'pages/comp/Article/Article',  //文章详情
+    'pages/comp/detail/detail', //通知或作业详情
+    'pages/comp/publish/publish', //发布页面
+    'pages/comp/JoinedClass/JoinedClass', //切换班级/加入变更审核页面
   ],
   'permission':{
     'scope.userLocation':{

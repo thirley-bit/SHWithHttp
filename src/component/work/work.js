@@ -114,13 +114,13 @@ function Work(props) {
       Taro.navigateTo({ url: `/pages/class/Score/PublishScore/PublishScore` });
     } else {
       Taro.navigateTo({
-        url: `/pages/component/detail/detail?enter=${enter}`,
+        url: `/pages/comp/detail/detail?enter=${enter}`,
       });
     }
   };
   const handleClick = () => {
     Taro.navigateTo({
-      url: `/pages/component/publish/publish?enter=${enter}&type=new`,
+      url: `/pages/comp/publish/publish?enter=${enter}&type=new`,
     });
   };
   const handlePublish = (e) => {
