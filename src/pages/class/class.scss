@@ -3,42 +3,43 @@
     height: 100vh;
     padding: 10rpx 32rpx;
     background: linear-gradient(170deg,#0194FF, #02E2FF 13%,  #F8F9FF 30%),
-                // linear-gradient(0deg,rgba(255,255,255,0.2), #F8F9FF 20%, rgba(255,255,255,0.2) 50%);
-
 }
 .at-nav-bar{
     background-color: rgba(255,255,255,0,);
     height: 142rpx;
     position: static;
 }
+// 新消息提示样式
 .new{
     color: #f00;
     width: 100%;
     text-align: center;
     font-size: 24rpx;
-    .new-tag{
+    &-tag{
         color: #f00;
         position: relative;
         overflow: visible;
-        .new-num{
-            position: absolute;
-            top: 12rpx;
-            right: 16rpx;
-            width: 34rpx;
-            height: 34rpx;
-            font-size: 22rpx;
-            border-radius: 50%;
-            border: 1rpx solid #f00;
-            line-height: 1.6;
-        }
+    }
+    &-num{
+        position: absolute;
+        top: 12rpx;
+        right: 16rpx;
+        width: 34rpx;
+        height: 34rpx;
+        font-size: 22rpx;
+        border-radius: 50%;
+        border: 1rpx solid #f00;
+        line-height: 1.6;
     }
 }
+// banner样式
 .banner{
     height: 320rpx;
     background-color: #fff;
     border-radius: 50rpx;
     margin: 30rpx 0;
 }
+// 修改组件tab样式
 .at-tab-bar{
     background-color: rgba(255,255,255,0,);
     border-radius: 26rpx;
@@ -47,13 +48,14 @@
 .at-tab-bar__inner-img{
     width: 85rpx;
 }
+// 推荐文章样式
 .more{
     position: relative;
     border-radius: 32rpx;
     margin-top: 30rpx;
     background-color: #fff;
     box-shadow: #d3d8e2 0px 0px 30px 5px;
-    .more-list{
+    &-list{
         border-radius: 32rpx;
         border: none;
         .item-content__info-title{
@@ -63,51 +65,14 @@
             font-size: 26rpx;
         }
     }
-    .img-down{
+    &-right{
         position: absolute;
         width: 64rpx;
         height: 16rpx;
         top: 62rpx;
         left: 22rpx;
     }
-    
-}
-.more-article{
-    position: absolute;
-}
-.card{
-    padding: 3% 0;
-    .card-item{
-        position: relative;
-        border: none;
-        border-bottom: 1PX rgb(230,230,230,0.8) solid;
-        .at-card__header{
-            display: none;
-        }
-        .card-content{
-            display: inline-block;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-box-orient:vertical;
-            -webkit-line-clamp: 2;
-        }
-        .card-time{
-            position: absolute;
-            bottom: 34rpx;
-            color: #999;
-            font-size: 24rpx;
-        }
-        .card-img{
-            display: inline-block;
-            padding: 0 30%;
-            .img{
-                display: inline-block;
-                width: 150rpx;
-                height: 150rpx;
-                border-radius: 10rpx;
-            }
-        }
+    &-article{
+        position: absolute;
     }
 }
-

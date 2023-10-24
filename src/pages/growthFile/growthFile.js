@@ -14,21 +14,15 @@ function GrowthFile() {
     {
       id: 0,
       name: "个人信息",
-      img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/85342d8c828a604c29428623671f380c.png',
+      img: 'http://123.57.149.51/upload/upload_img/20231024/c229044c0802cd406716ad973a3b2e58.png',
       url: "/pages/GrowthFile/Info/Info",
     },
     {
       id: 1,
-      name: "个人成长史+综合素质评价",
-      img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/2dab3409e62e4d8504148f43dae2b6ac.png',
+      name: "综合评价",
+      img: 'http://123.57.149.51/upload/upload_img/20231024/293af0a6ab82a77b32e014e2ed09871a.png',
       url: "/pages/GrowthFile/History/History",
     },
-    // {
-    //   id: 2,
-    //   name: "综合素质评价",
-    //   img: 'http:\/\/123.57.149.51\/upload\/upload_img\/20230815\/9cc9a7a188dde3a09e1c9811abc22d84.png',
-    //   url: "/pages/GrowthFile/Quality/Quality",
-    // },
   ];
   const handleNav = (item) => {
     console.log(item);
@@ -40,18 +34,18 @@ function GrowthFile() {
   return (
     <View className='index'>
       <NavTab needBackIcon={false} mainTitle='诚道吉' />
-      <View className='growth-content'>
+      <View className='growth'>
         {settingList.map((item, index) => {
           return (
             <View
               key={index}
-              className='growth'
+              className='growth-content'
               onClick={() => handleNav(item)}
             >
               <View className='growth-msg'>
                 <View className='growth-name'>{item.name}</View>
               </View>
-              <Image src={item.img} style='width:100%;height:100%;' />
+              <Image src={item.img} style='width:548rpx;height:338rpx;' />
             </View>
           );
         })}

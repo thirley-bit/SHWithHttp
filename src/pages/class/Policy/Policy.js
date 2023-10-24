@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { View,} from '@tarojs/components'
-import ArticleList from '@app/component/articleList/articleList'
+import ArticleList from '@app/component/ArticleList/ArticleList'
 import NavTab from '@app/component/NavTab/NavTab';
 import { connect } from 'react-redux'
 import { AtSearchBar } from 'taro-ui'

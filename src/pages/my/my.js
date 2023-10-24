@@ -16,8 +16,8 @@ import normal from "@static/normal.png"
 import "./my.scss";
 
 function My(props) {
-  
   const { dispatch, user, identity } = props;
+  console.log(props,'props');
   let settingList = [
     {
       id: 0,
@@ -53,16 +53,6 @@ function My(props) {
       url:'/pages/my/Setting/Setting'
     },
   ];
-
-  useEffect(() => {
-    // dispatch({
-    //   type: "users/getIdentity",
-    // });
-    
-    // dispatch({
-    //   type: "users/getUser",
-    // });
-  }, []);
   const handleUpload = () => {
     console.log("upload");
     Taro.chooseImage({

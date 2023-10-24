@@ -59,6 +59,24 @@
           "pathName": "pages/my/ChildMsg/ChildMsg",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/GrowthFile/GrowthFile",
+          "pathName": "pages/GrowthFile/GrowthFile",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/GrowthFile/History/History",
+          "pathName": "pages/GrowthFile/History/History",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/class/MoreModules/MoreModules",
+          "pathName": "pages/class/MoreModules/MoreModules",
+          "query": "",
+          "scene": null
         }
       ]
     }

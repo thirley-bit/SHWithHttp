@@ -1,18 +1,9 @@
 import { useState, useEffect } from "react";
-import Taro, { getCurrentPages } from "@tarojs/taro";
+import Taro from "@tarojs/taro";
 import { View, Swiper, SwiperItem, Image, Navigator } from "@tarojs/components";
-import {
-  AtList,
-  AtListItem,
-  AtTabBar,
-  AtNavBar,
-  AtTag,
-  AtButton,
-} from "taro-ui";
+import { AtList, AtListItem, AtTabBar, AtTag } from "taro-ui";
 import { connect } from "react-redux";
-import ArticleList from "@app/component/articleList/articleList";
-// import Tabs from "@app/component/tabs/tabs";
-import MyTabs from "@app/component/MyTabs/MyTabs";
+import ArticleList from "@app/component/ArticleList/ArticleList";
 import NavTab from "@app/component/NavTab/NavTab";
 
 import homework from "@static/homework.png";
@@ -26,17 +17,8 @@ import "../../app.scss";
 
 function Index(props) {
   console.log(props, "props");
-  const {
-    dispatch,
-    user,
-    articleArr,
-    bannerList,
-    pageSize,
-    userId,
-    studentId,
-  } = props;
-
-  const [current, setCurrent] = useState("");
+  const { dispatch, user, bannerList, pageSize, userId } = props;
+  const [article, setArticle] = useState([]); //首页推荐文章
   const tabList = [
     {
       title: "作业",
@@ -99,13 +81,14 @@ function Index(props) {
         pageSize: pageSize,
         type: null,
       },
+    }).then((res) => {
+      setArticle(res.data);
     });
   }, []);
   const handleNav = () => {
     Taro.navigateTo({ url: "/pages/my/WaitTodo/WaitTodo" });
   };
   const handleTabClick = (e) => {
-    setCurrent(e);
     Taro.navigateTo({
       url: tabList[e].url,
     });
@@ -117,6 +100,7 @@ function Index(props) {
   return (
     <View className='index'>
       <NavTab home title='诚道吉' />
+      {/* 是否有新消息提示 */}
       <View className='new' onClick={handleNav}>
         <AtTag circle className='new-tag'>
           我的待办
@@ -124,6 +108,7 @@ function Index(props) {
           {"\xa0\xa0\xa0\xa0"}
         </AtTag>
       </View>
+      {/* banner */}
       <View className='banner'>
         <Swiper
           indicatorColor='#999'
@@ -147,7 +132,9 @@ function Index(props) {
           })}
         </Swiper>
       </View>
-      <AtTabBar tabList={tabList} onClick={handleTabClick} current={current} />
+      {/* tabbar */}
+      <AtTabBar tabList={tabList} onClick={handleTabClick} current='' />
+      {/* 推荐文章 */}
       <View className='more'>
         <AtList className='more-list'>
           <Navigator url='/pages/class/MoreArticle/MoreArticle'>
@@ -159,12 +146,12 @@ function Index(props) {
             />
           </Navigator>
         </AtList>
-        <Image className='img-down' src={down} />
+        <Image className='more-right' src={down} />
         <View>
           <ArticleList
             className='more-article'
-            articleList={articleArr}
-          ></ArticleList>
+            articleList={article}
+          />
         </View>
       </View>
     </View>

@@ -1,5 +1,5 @@
 
-interface articleProps {
+interface ArticleProps {
     tabList: Array<{           //要传入的值是数组,必须要尖括号包裹起来
     title: string,
     active?: boolean
@@ -8,4 +8,4 @@ interface articleProps {
     current: number,     //没问号的意思是必传,后面的number是变量的类型
     onClick: any,
 }
-export default function ArticleList(props: articleProps): JSX.Element;
+export default function ArticleList(props: ArticleProps): JSX.Element;

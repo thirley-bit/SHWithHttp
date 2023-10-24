@@ -2,6 +2,7 @@ import Taro from "@tarojs/taro";
 import { useState } from "react";
 import { View, Navigator, Image, Text } from "@tarojs/components";
 import NavTab from '@app/component/NavTab/NavTab';
+import ModulesDisplay from '@app/component/ModulesDisplay/ModulesDisplay';
 
 import homework from "@static/homework.png";
 import notice from "@static/notice.png";
@@ -17,7 +18,7 @@ import display from "@static/display.png"
 import "./MoreModules.scss";
 
 //更多应用页面
-function Notice(props) {
+function Notice() {
   const safetyList = [
     {
       id: 0,
@@ -94,7 +95,10 @@ function Notice(props) {
   return (
     <View className='index'>
     <NavTab back title='更多' />
-      <View className='head'>
+    <ModulesDisplay title='家校安全' list={safetyList}  />
+    <ModulesDisplay title='家校共建' list={constructionList}  />
+    <ModulesDisplay title='家校共享' list={shareList}  />
+      {/* <View className='head'>
         <Text className='text'>家校安全</Text>
         <View>
           {safetyList.map((item, index) => {
@@ -110,8 +114,8 @@ function Notice(props) {
             );
           })}
         </View>
-      </View>
-      <View className='head'>
+      </View> */}
+      {/* <View className='head'>
         <Text className='text'>家校共建</Text>
         <View>
           {constructionList.map((item, index) => {
@@ -144,7 +148,7 @@ function Notice(props) {
             );
           })}
         </View>
-      </View>
+      </View> */}
     </View>
   );
 }

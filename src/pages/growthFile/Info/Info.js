@@ -10,12 +10,12 @@ function Info(props) {
   const { dispatch, user, studentInfo } = props;
   const [showData, setShowData] = useState([]);
   useEffect(() => {
-    dispatch({
-      type: "users/getIdentity",
-    });
-    dispatch({
-      type: "users/getUser",
-    });
+    // dispatch({
+    //   type: "users/getIdentity",
+    // });
+    // dispatch({
+    //   type: "users/getUser",
+    // });
     dispatch({
       type: "users/getStudentInfo",
     });
