@@ -24,7 +24,7 @@ function ChangePassword(props) {
       setNewPassword(value);
     }
   };
-  //新密码第二次输入
+  //新密码第二次输入，校验是否和第一次输入相同
   const handlePassAgainInput = (e) => {
     let value = e.detail.value;
     if (value.length > 0 && value == newPassword) {

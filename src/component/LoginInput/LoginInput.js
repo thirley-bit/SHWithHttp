@@ -9,10 +9,10 @@ import {
   Label,
   Picker,
 } from "@tarojs/components";
-import { AtCountdown, AtForm, AtInput } from "taro-ui";
+import { AtCountdown, AtForm, AtInput, AtMessage } from "taro-ui";
 import GradientButton from "@app/component/GradientButton";
 import classIcon from "@static/class-icon.png";
-import "./index.scss";
+import "./LoginInput.scss";
 
 function LoginInput(props) {
   const { dispatch, loginType, loginUserType, classList, formList } = props;
@@ -25,12 +25,12 @@ function LoginInput(props) {
     {
       value: "0",
       text: "否",
-      checked: false,
+      checked: true,
     },
     {
       value: "1",
       text: "是",
-      checked: true,
+      checked: false,
     },
   ];
   const handleChange = (e, record) => {
@@ -75,8 +75,17 @@ function LoginInput(props) {
     setClassTeacher(parseInt(e.detail.value));
   };
   //返回登录页面
-  const handleNav = () => {
-    Taro.navigateTo({ url: "/pages/login/login" });
+  const handleNav = (val) => {
+    switch (val) {
+      case 0:
+        Taro.navigateTo({ url: "/pages/login/login" });
+        break;
+      case 3:
+        Taro.navigateTo({ url: "/pages/login/Register/Register" });
+        break;
+      default:
+        break;
+    }
   };
   //登录
   const handleLogin = () => {
@@ -85,34 +94,40 @@ function LoginInput(props) {
       const { key } = n;
       return Object.assign(p, { [key]: n.value });
     }, {});
-    //合并输入内容和身份
-    let userType = { userType: loginUserType };
-    console.log(userType, "usertype");
-    const sendList = Object.assign(formObj, {
-      userType: loginUserType,
-      ifClassTeacher: classTeacher,
-      classId: selectorChecked.id,
-    });
-    //如果是家长，则所有必填，如果是老师，手机号，密码，验证码和身份必填});
-    // const sendList = Object.assign(formObj)
-    // console.log(sendList, "sendList");
     //判断输入是否为空
     const nullObj = formList.find((item) => item.value == "");
+    //输入为空，弹窗提示
     if (nullObj) {
       Taro.showToast({
         title: `${nullObj.placeholder}`,
         icon: "error",
       });
+      //弹窗不为空
     } else {
+      //请求的接口路径
       let url = "";
+      //form表单的输入值
+      let sendObj = { ...formObj };
       switch (loginType) {
+        //登录页面和切换账号页面，请求登录接口
         case 0:
+        case 3:
           url = "/getLogin";
           break;
+        //注册页面，请求注册接口
         case 1:
+          sendObj = Object.assign(
+            { ...sendObj, userType: loginUserType },
+            loginUserType == 0
+              ? //家长身份，班级必填、学生学号必填（输入框form中已存在）
+                { classId: selectorChecked.id }
+              : //教师身份，是否是班主任必填
+                { ifClassTeacher: classTeacher }
+          );
           url = "/getRegister";
           break;
         case 2:
+          //忘记密码页面，请求忘记密码接口
           url = "/getForgetPass";
           break;
         default:
@@ -120,7 +135,7 @@ function LoginInput(props) {
       }
       dispatch({
         type: `users${url}`,
-        payload: sendList,
+        payload: sendObj,
       }).then((res) => {
         if (res.status == 200) {
           Taro.atMessage({
@@ -132,6 +147,8 @@ function LoginInput(props) {
           //跳转页面(loginType为0时为登录页面，跳转至主页，loginType为1时为注册、忘记密码、修改密码等页面，跳转至登录页面)
           if (loginType == 0) {
             Taro.switchTab({ url: "/pages/class/class" });
+          } else if (loginType == 3) {
+            Taro.navigateTo({ url: "/pages/my/Setting/ChangeUser/ChangeUser" });
           } else {
             Taro.navigateTo({ url: "/pages/login/login" });
           }
@@ -144,10 +161,12 @@ function LoginInput(props) {
       });
     }
   };
+  console.log(loginType,'loginType')
   return (
     <View className='login-input'>
       <AtForm name='registerForm'>
-        {loginUserType == 0 ? (
+        {/* 家长端必填班级 */}
+        {loginUserType == 0 && (
           <Picker
             name='classNo'
             mode='selector'
@@ -167,9 +186,8 @@ function LoginInput(props) {
               value={selectorChecked.className}
             />
           </Picker>
-        ) : (
-          ""
         )}
+        {/* form表单输入内容 */}
         {formList.map((item, index) => {
           return (
             <AtInput
@@ -205,8 +223,8 @@ function LoginInput(props) {
           );
         })}
       </AtForm>
-      {/* 选择是否是班主任 */}
-      {loginUserType == 1 ? (
+      {/* 教师端必填班主任 */}
+      {loginUserType == 1 && (
         <View>
           <View className='class-teacher'>班主任</View>
           <RadioGroup
@@ -217,7 +235,6 @@ function LoginInput(props) {
               return (
                 <Label key={index}>
                   <Radio
-                    // className='radio-list__radio'
                     style={{ marginRight: "64rpx" }}
                     value={item.value}
                     checked={item.checked}
@@ -229,23 +246,27 @@ function LoginInput(props) {
             })}
           </RadioGroup>
         </View>
-      ) : (
-        ""
       )}
-      {/* 注册和忘记密码时显示，登录时该文本在父页面 */}
-      {loginType == 0 ? (
-        ""
-      ) : (
-        <View className='forget' onClick={() => handleNav()}>
+      {/* 注册和忘记密码 */}
+      {(loginType == 1 || loginType == 2) && (
+        <View className='forget' onClick={() => handleNav(0)}>
           返回登录
+        </View>
+      )}
+      {loginType == 3 && (
+        <View className='forget' onClick={() => handleNav(3)}>
+          立即注册
         </View>
       )}
       {/* 确定按钮 */}
       <GradientButton type='primary' className='login' onClick={handleLogin}>
         {loginType == 0 ? "登录" : "确定"}
       </GradientButton>
+      <AtMessage />
     </View>
   );
 }
 
-export default connect((state) => {})(LoginInput);
+export default connect((state) => ({
+  classList: state.users.classList,
+}))(LoginInput);

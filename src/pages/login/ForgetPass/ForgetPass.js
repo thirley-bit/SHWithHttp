@@ -3,7 +3,7 @@ import {
   View,
 } from "@tarojs/components";
 import {  AtMessage } from "taro-ui";
-import LoginInput from "@app/component/LoginInput";
+import LoginInput from "@app/component/LoginInput/LoginInput";
 
 import user from "@static/user-icon.png";
 import lock from "@static/lock-icon.png";
@@ -47,9 +47,7 @@ function ForgetPass(props) {
         <View className='reset'>忘记密码</View>
         <View className='login-input'>
           <LoginInput
-            loginType={1}
-            loginUserType='2'
-            classList=''
+            loginType={2}
             formList={formList}
           />
         </View>

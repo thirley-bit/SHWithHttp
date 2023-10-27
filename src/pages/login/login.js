@@ -4,7 +4,7 @@ import Taro from "@tarojs/taro";
 import { View, Image, RadioGroup, Label, Radio, Input } from "@tarojs/components";
 import { AtButton, AtForm, AtIcon, AtInput, AtMessage } from "taro-ui";
 import GradientButton from "@app/component/GradientButton";
-import LoginInput from '@app/component/LoginInput';
+import LoginInput from '@app/component/LoginInput/LoginInput';
 import sh from "@static/sh.png";
 import user from "@static/user-icon.png";
 import lock from "@static/lock-icon.png";
@@ -58,7 +58,7 @@ function Login(props) {
         </View>
         <View className='login-input'>
           <View className='forget' onClick={() => handleSign(0)}>忘记密码？</View>
-          <LoginInput loginType={0} loginUserType={3} classList='' formList={formList}  />
+          <LoginInput loginType={0}  formList={formList}  />
         </View>        
         <View className='register-button'>
          <GradientButton

@@ -31,56 +31,8 @@
           }
         },
         {
-          "name": "pages/class/Sign/Sign",
-          "pathName": "pages/class/Sign/Sign",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/addressList/Check/Check",
-          "pathName": "pages/addressList/Check/Check",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/addressList/message/MessageDetail/MessageDetail",
-          "pathName": "pages/addressList/message/MessageDetail/MessageDetail",
-          "query": "roomId=87ffde29085946969d21fc03087f1051&toId=1&id=26b4820d976144f6acd66f8f165dbe88&msgType=0&name=%E6%99%93%E5%8D%8E%E7%88%B8%E7%88%B8",
-          "scene": null
-        },
-        {
           "name": "pages/my/my",
           "pathName": "pages/my/my",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/my/ChildMsg/ChildMsg",
-          "pathName": "pages/my/ChildMsg/ChildMsg",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/GrowthFile/GrowthFile",
-          "pathName": "pages/GrowthFile/GrowthFile",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/GrowthFile/History/History",
-          "pathName": "pages/GrowthFile/History/History",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/class/MoreModules/MoreModules",
-          "pathName": "pages/class/MoreModules/MoreModules",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/my/Setting/ChangePassword/ChangePassword",
-          "pathName": "pages/my/Setting/ChangePassword/ChangePassword",
           "query": "",
           "scene": null
         }

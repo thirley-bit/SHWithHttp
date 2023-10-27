@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Taro, { useRouter } from "@tarojs/taro";
 import { View, RadioGroup, Label, Radio } from "@tarojs/components";
 import { AtMessage } from "taro-ui";
-import LoginInput from "@app/component/LoginInput";
+import LoginInput from "@app/component/LoginInput/LoginInput";
 import user from "@static/user-icon.png";
 import lock from "@static/lock-icon.png";
 import student from "@static/student-icon.png";
@@ -11,7 +11,7 @@ import relative from "@static/relative-icon.png";
 import "./Register.scss";
 
 function Register(props) {
-  const { dispatch, classList } = props;
+  const { dispatch } = props;
   const [loginUserType, setLoginUserType] = useState(0);
 
   useEffect(() => {
@@ -122,7 +122,6 @@ function Register(props) {
           <LoginInput
             loginType={1}
             loginUserType={loginUserType}
-            classList={classList}
             formList={loginUserType == 0 ? parentList : teacherList}
           />
         </View>
@@ -132,6 +131,5 @@ function Register(props) {
     </View>
   );
 }
-export default connect((state) => ({
-  classList: state.users.classList,
+export default connect(() => ({
 }))(Register);

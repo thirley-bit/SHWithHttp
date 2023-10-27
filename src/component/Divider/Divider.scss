@@ -1,9 +1,15 @@
 .divider {
+  position: absolute;
     height: 26rpx;
     opacity: 0.8;
     width: 98%;
     .at-divider__line {
       background-color: #e6e6e6;
+    }
+    &.divider80{
+      width: 80%;
+      height: 24rpx;
+      right: 3%;
     }
 }
   

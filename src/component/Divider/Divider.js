@@ -1,9 +1,14 @@
 import {  AtDivider } from 'taro-ui';
-import "./index.scss";
+import { useMemo } from 'react';
+import "./Divider.scss";
 
-function Divider() {
+function Divider({className, ...props}) {
+  const _className = useMemo(() => {
+    if(className) return 'divider ' + className;
+    return 'divider'
+  },[className])
   return (
-      <AtDivider className='divider' />
+      <AtDivider {...props} className={_className} />
   );
 }
 
