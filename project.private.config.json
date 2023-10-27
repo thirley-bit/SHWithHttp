@@ -35,6 +35,12 @@
           "pathName": "pages/my/my",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/addressList/message/MessageDetail/MessageDetail",
+          "pathName": "pages/addressList/message/MessageDetail/MessageDetail",
+          "query": "roomId=62c03293404643efa19b7e81d1ab5927&toId=ebba73eb18fc41a090dfa9af63ab741a&id=6e4837a1900640fbba42ed6464c24fb3&msgType=0&name=%E5%BC%A0%E4%B8%89%E5%A6%88%E5%A6%88",
+          "scene": null
         }
       ]
     }

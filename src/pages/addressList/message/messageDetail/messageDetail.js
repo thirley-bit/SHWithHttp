@@ -78,14 +78,14 @@ function MessageDetail(props) {
   // const toId = "1";
 
   useDidHide(() => {
-    console.log('hide')
-    quitChat()
-  })
+    console.log("hide");
+    quitChat();
+  });
   const handleBack = () => {
-    quitChat()
+    quitChat();
   };
   const quitChat = () => {
-    console.log('退出')
+    console.log("退出");
     dispatch({
       type: "AddressList/getUpdateChatList",
       payload: {
@@ -93,7 +93,7 @@ function MessageDetail(props) {
         inWindow: 0,
       },
     });
-  }
+  };
   useEffect(() => {
     if (socketMsgQueue.length > 0) {
       dispatch({
@@ -131,11 +131,11 @@ function MessageDetail(props) {
       const { height } = res;
       setScrollHeight({ height: `calc(100% - ${height}px + 20px )` });
     });
-    quitChat()
+    quitChat();
     return () => {
-      console.log('退出页面')
+      console.log("退出页面");
       Taro.offKeyboardHeightChange();
-      quitChat()
+      quitChat();
     };
   }, []);
 
@@ -284,8 +284,6 @@ function MessageDetail(props) {
     sendSocketMessage(msg, 0);
   };
 
- 
-  
   // function beforeunload(e) {
   //   let confirmationMessage = "你确定离开此页面吗?";
   //   (e || window.event).returnValue = confirmationMessage;
@@ -351,15 +349,16 @@ function MessageDetail(props) {
       <View>
         {/* 显示文字和表情 */}
         {msgInfo.contentType == 0 && (
-          <View className='text' style={{ backgroundColor: "#1BA5FF" }}>
-            {msgInfo?.sendMessage}
-          </View>
+          <View className='text-con-text'>{msgInfo?.sendMessage}</View>
         )}
         {/* 显示图片 */}
         {msgInfo.contentType == 1 && msg == "img" && (
-          <View onClick={() => handlePreviewImage(msgInfo)}>
+          <View
+            onClick={() => handlePreviewImage(msgInfo)}
+            style={{ backgroundColor: "#fff" }}
+          >
             <Image
-              className='text'
+              className='text-con-img'
               style={{ borderRadius: "10rpx", padding: "0" }}
               src={msgInfo?.sendMessage}
               mode='widthFix'
@@ -368,22 +367,27 @@ function MessageDetail(props) {
         )}
         {/* 显示视频 */}
         {msgInfo.contentType == 1 && fileType == "mp4" && (
-          <Video
-            id='video'
-            src={msgInfo?.sendMessage}
-            poster=''
-            initialTime={0}
-            controls
-            showFullscreenBtn
-            direction={-90}
-            autoplay={false}
-            loop={false}
-            muted={false}
-          />
+          <View className='text-con-video'>
+            <Video
+              id='video'
+              src={msgInfo?.sendMessage}
+              poster=''
+              initialTime={0}
+              controls
+              showFullscreenBtn
+              direction={-90}
+              autoplay={false}
+              loop={false}
+              muted={false}
+            />
+          </View>
         )}
         {/* 显示文件 */}
         {msgInfo.contentType == 2 && (
-          <View className='file' onClick={() => handlePreviewFile(msgInfo)}>
+          <View
+            className='text-con-file'
+            onClick={() => handlePreviewFile(msgInfo)}
+          >
             <Image
               className='suffix'
               style={{
@@ -432,24 +436,42 @@ function MessageDetail(props) {
   const _renderMessage = (msgInfo, index) => {
     if (msgInfo?.fromId == (user == 0 ? bindStudent.id : userId)) {
       return (
-        <View id={`scrollId${index + 1}`} className='chatRight' key={index}>
+        <View
+          id={`scrollId${index + 1}`}
+          className='chat-content-right'
+          key={index}
+        >
           <Image className='img' src={msgInfo.avatar || normal} alt='' />
           <View className='info'>
             <View className='name' style='text-align:right'>
               {msgInfo?.fromName}
             </View>
-            <View className='textCon'>{_typeMessage(msgInfo)}</View>
+            <View
+              className='text-con'
+              // style={{ backgroundColor: "#1BA5FF", color: "#fff" }}
+            >
+              {_typeMessage(msgInfo)}
+            </View>
           </View>
         </View>
       );
     } else {
       //左侧聊天框
       return (
-        <View id={`scrollId${index + 1}`} className='chatLeft' key={index}>
+        <View
+          id={`scrollId${index + 1}`}
+          className='chat-content-left'
+          key={index}
+        >
           <Image className='img' src={msgInfo.avatar || normal} alt='' />
           <View className='info'>
             <View className='name'>{msgInfo?.fromName}</View>
-            <View className='textCon'>{_typeMessage(msgInfo)}</View>
+            <View
+              className='text-con'
+              style={{ backgroundColor: "#ebebeb", color: "#4c4c4c" }}
+            >
+              {_typeMessage(msgInfo)}
+            </View>
           </View>
         </View>
       );
@@ -472,15 +494,15 @@ function MessageDetail(props) {
           // scrollTop={scrollTop}
           // style={scrollHeight}
         >
-          <View id='chatlistview' className='chatRoom'>
-            <View className='chatContent'>
+          <View id='chatlistview' className='chat'>
+            <View className='chat-content'>
               {messageList?.map(_renderMessage)}
             </View>
           </View>
         </ScrollView>
         <View class='chat-bottom'>
           <View class='send-msg'>
-            <View class='taro-textarea'>
+            <View class='chat-text-area'>
               <Textarea
                 className='text-area'
                 value={inputVal}
@@ -520,14 +542,13 @@ function MessageDetail(props) {
         })}
       </View>
       {showEmoji && (
-        <ScrollView
-          id='scrollview'
-          className='ScrollView scroll__view'
-          scrollY
-          scrollWithAnimation
-          // scrollIntoView={`scrollId${messageList.length}`}
-        >
-          <View className='emoji'>
+        <View className='emoji'>
+          <ScrollView
+            id='scrollview'
+            className='ScrollView scroll__view'
+            scrollY
+            scrollWithAnimation
+          >
             {emojiList.map((item, index) => {
               return (
                 <View
@@ -543,10 +564,9 @@ function MessageDetail(props) {
                 </View>
               );
             })}
-          </View>
-        </ScrollView>
+          </ScrollView>
+        </View>
       )}
-    
     </View>
   );
 }
