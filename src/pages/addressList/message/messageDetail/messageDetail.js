@@ -211,7 +211,7 @@ function MessageDetail(props) {
             Promise.all(filePathList).then((resp) => {
               resp.forEach((item) => {
                 item.forEach((jtem) => {
-                  let msg1 = {
+                  let msg = {
                     roomId: roomId,
                     fromId: user == 0 ? bindStudent.id : userId,
                     // fromId: "3ee83b8573b54f5c99288618039b7c84",
@@ -220,7 +220,7 @@ function MessageDetail(props) {
                     sendMessage: jtem.id,
                     contentType: 1,
                   };
-                  sendSocketMessage(msg1, 1, resp);
+                  sendSocketMessage(msg, 1, resp);
                 });
               });
             });
@@ -245,7 +245,7 @@ function MessageDetail(props) {
             Promise.all(filePathList).then((resp) => {
               resp.forEach((item) => {
                 item.forEach((jtem) => {
-                  let msg1 = {
+                  let msg = {
                     roomId: roomId,
                     fromId: user == 0 ? bindStudent.id : userId,
                     // fromId: "3ee83b8573b54f5c99288618039b7c84",
@@ -254,7 +254,7 @@ function MessageDetail(props) {
                     sendMessage: jtem.id,
                     contentType: 1,
                   };
-                  sendSocketMessage(msg1, 1, resp);
+                  sendSocketMessage(msg, 1, resp);
                 });
               });
             });
@@ -264,6 +264,7 @@ function MessageDetail(props) {
 
       case "phone":
         Taro.makePhoneCall({
+          //写死，需接口返回
           phoneNumber: "123",
         });
         break;
@@ -284,30 +285,10 @@ function MessageDetail(props) {
     sendSocketMessage(msg, 0);
   };
 
-  // function beforeunload(e) {
-  //   let confirmationMessage = "你确定离开此页面吗?";
-  //   (e || window.event).returnValue = confirmationMessage;
-  //   return confirmationMessage;
-  // }
-  // useEffect(() => {
-  //   return () => {
-  //     window.removeEventListener("beforeunload", beforeunload);
-  //     console.log(1212);
-  //     dispatch({
-  //       type: "AddressList/getUpdateChatList",
-  //       payload: {
-  //         id: id,
-  //         inWindow: 0,
-  //       },
-  //     });
-  //   };
-  // }, []);
-  // useEffect(() => {
-  //   window.addEventListener("beforeunload", beforeunload);
-  // }, []);
-
+  //聊天内容类型渲染（文字、图片、视频、文件）
   const _typeMessage = (msgInfo) => {
     let fileType = msgInfo.sendMessage.substr(-3);
+    //大小写死，需接口返回
     let size = 23.32;
     let msg = "";
     switch (fileType) {
@@ -354,33 +335,28 @@ function MessageDetail(props) {
         {/* 显示图片 */}
         {msgInfo.contentType == 1 && msg == "img" && (
           <View
+            className='text-con-img'
             onClick={() => handlePreviewImage(msgInfo)}
-            style={{ backgroundColor: "#fff" }}
           >
-            <Image
-              className='text-con-img'
-              style={{ borderRadius: "10rpx", padding: "0" }}
-              src={msgInfo?.sendMessage}
-              mode='widthFix'
-            />
+            <Image style={{width:'300rpx'}} src={msgInfo?.sendMessage} mode='widthFix' />
           </View>
         )}
         {/* 显示视频 */}
         {msgInfo.contentType == 1 && fileType == "mp4" && (
-          <View className='text-con-video'>
-            <Video
-              id='video'
-              src={msgInfo?.sendMessage}
-              poster=''
-              initialTime={0}
-              controls
-              showFullscreenBtn
-              direction={-90}
-              autoplay={false}
-              loop={false}
-              muted={false}
-            />
-          </View>
+          <Video
+            id='video'
+            className='text-con-video'
+            // src={msgInfo?.sendMessage}
+            src='http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400'
+            poster=''
+            initialTime={0}
+            controls
+            showFullscreenBtn
+            direction={-90}
+            autoplay={false}
+            loop={false}
+            muted={false}
+          />
         )}
         {/* 显示文件 */}
         {msgInfo.contentType == 2 && (
@@ -390,13 +366,6 @@ function MessageDetail(props) {
           >
             <Image
               className='suffix'
-              style={{
-                float: "right",
-                width: "96rpx",
-                height: "96rpx",
-                borderRadius: "10rpx",
-                padding: "0",
-              }}
               src={msg}
             />
             <View className='name'>新建文件.{fileType}</View>
@@ -433,6 +402,7 @@ function MessageDetail(props) {
     }
   };
 
+  //聊天内容左右渲染（左侧为对方发送内容、右侧为自己发送内容）
   const _renderMessage = (msgInfo, index) => {
     if (msgInfo?.fromId == (user == 0 ? bindStudent.id : userId)) {
       return (
@@ -446,12 +416,7 @@ function MessageDetail(props) {
             <View className='name' style='text-align:right'>
               {msgInfo?.fromName}
             </View>
-            <View
-              className='text-con'
-              // style={{ backgroundColor: "#1BA5FF", color: "#fff" }}
-            >
-              {_typeMessage(msgInfo)}
-            </View>
+            <View className='text-con'>{_typeMessage(msgInfo)}</View>
           </View>
         </View>
       );
@@ -478,12 +443,13 @@ function MessageDetail(props) {
     }
   };
 
+  //页面渲染
   return (
     <View className='index'>
       <View onClick={handleBack}>
         <NavTab back handleBack={handleBack} title={name} />
       </View>
-
+      {/* 聊天内容显示滚动框 */}
       <View className='msg__wrapper' style={scrollHeight}>
         <ScrollView
           id='scrollview'
@@ -494,12 +460,14 @@ function MessageDetail(props) {
           // scrollTop={scrollTop}
           // style={scrollHeight}
         >
+          {/* 聊天内容 */}
           <View id='chatlistview' className='chat'>
             <View className='chat-content'>
               {messageList?.map(_renderMessage)}
             </View>
           </View>
         </ScrollView>
+        {/* 底部操作框（输入框、发送按钮、表情包、图片、视频、文件发送） */}
         <View class='chat-bottom'>
           <View class='send-msg'>
             <View class='chat-text-area'>
@@ -511,8 +479,6 @@ function MessageDetail(props) {
                 showConfirmBar={false}
                 adjustPosition={false}
                 onInput={handleInput}
-                // holdKeyboard
-                // onKeyboardHeightChange={() => handleKeyBoardHeight()}
               />
             </View>
             <GradientButton
@@ -541,6 +507,7 @@ function MessageDetail(props) {
           );
         })}
       </View>
+      {/* 表情包显示区 */}
       {showEmoji && (
         <View className='emoji'>
           <ScrollView

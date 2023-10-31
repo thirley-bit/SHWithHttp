@@ -67,16 +67,24 @@ textarea {
         border-radius: 23rpx;
         &-text {
           position: relative;
-          max-width: 71vw;
+          max-width: 500rpx;
           font-size: 28rpx;
           letter-spacing: 1rpx;
           line-height: 1.5;
           font-weight: 500;
           padding: 20rpx;
+          border-radius: 16rpx;
           object-fit: contain;
         }
         &-img{
-
+          max-width: 300rpx;
+          background-color: #fff;
+          padding: 0;
+          border-radius: 16rpx;
+        }
+        &-video{
+          max-width: 500rpx;
+          border-radius: 16rpx;
         }
         &-file{
           width: 500rpx;
@@ -87,6 +95,8 @@ textarea {
             float: right;
             width: 96rpx;
             height: 96rpx;
+            border-radius: 16rpx;
+            padding: 0;
           }
           .name {
             font-size: 28rpx;
