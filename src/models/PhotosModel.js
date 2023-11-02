@@ -32,7 +32,6 @@ const model = {
     },
     *getAlbumList({ payload }, { call, put }) {
         const response = yield call(getAlbumList, payload);
-        console.log(response,'response');
         if (response.status == 200) {
             let resData = response.data.map(item=>{
                 let value = item.albumName
@@ -66,7 +65,6 @@ const model = {
 
     *getPhotosList({ payload }, { call, put }) {
       const response = yield call(getPhotosList, payload);
-      console.log(response);
       
       if (response.code == 1) {
         let data = response.data.map((item) => {

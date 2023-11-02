@@ -225,7 +225,7 @@ function Check(props) {
                           className='bottom'
                           onClick={() => handleCheck(item.id, 3)}
                         >
-                          <Divider />
+                          <Divider className='divider' />
                           <AtIcon value='reload'></AtIcon>
                           <Text>撤销申请</Text>
                         </View>

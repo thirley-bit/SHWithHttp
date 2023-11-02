@@ -57,7 +57,6 @@ const model = {
   effects: {
     *getScoreList({ payload }, { call, put }) {
       const response = yield call(getScoreList, payload);
-      console.log(response);
       if (response.code == 1) {
         yield put({
           type: "changeScore",
@@ -105,7 +104,6 @@ const model = {
       };
     },
     changeSelectTitle(state,{payload}){
-        console.log(payload)
         return{
             ...state,
             selectTitle:payload

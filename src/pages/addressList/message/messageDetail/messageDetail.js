@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import Taro, { useDidHide, useDidShow, useRouter } from "@tarojs/taro";
+import Taro, {
+  useDidHide,
+  useDidShow,
+  usePullDownRefresh,
+  useRouter,
+} from "@tarojs/taro";
 import { connect } from "react-redux";
 // import { AtAvatar, AtButton, AtInput, AtTextarea } from "taro-ui";
 import { AtIcon } from "taro-ui";
@@ -21,16 +26,19 @@ import zip from "@static/zip.png";
 import "./MessageDetail.scss";
 
 function MessageDetail(props) {
+  console.log(props, "props");
   const { dispatch, messageList, user, bindStudent, userId } = props;
   const [socketMsgQueue, setSocketMsgQueue] = useState([]);
+  const [pageNo, setPageNo] = useState(1);
+
   // const showLeft = "own";
   // const sys = Taro.getSystemInfoSync();
   // const [keyboardHeight, setKeyboardHeight] = useState(0)
   const [scrollHeight, setScrollHeight] = useState({
-    // height: `${sys.screenHeight - sys.statusBarHeight - 165}px`,
-    // height: `${sys.safeArea.height - 177}px`,
     height: "100%",
   });
+  const [scrollToMsg, setScrollToMsg] = useState([])
+  console.log(scrollToMsg,'scrollToMsg')
   const [showEmoji, setEmoji] = useState(false);
   const [inputVal, setInputVal] = useState("");
   const actionList = [
@@ -61,29 +69,32 @@ function MessageDetail(props) {
 
   const router = useRouter();
   //roomId
-  const roomId = router.params.roomId;
+  // const roomId = router.params.roomId;
   //接收者id
-  const toId = router.params.toId;
+  // const toId = router.params.toId;
   //该条数据id，用于退出窗口
   const id = router.params.id; //87ffde29085946969d21fc03087f1051
   //消息类型，0：单聊；1：群聊
-  const msgType = router.params.msgType;
+  // const msgType = router.params.msgType;
   // //聊天室名称
   const name = router.params.name;
   // contentType: 0
   // fromId: "3ee83b8573b54f5c99288618039b7c84"
-  // const msgType = "0";
-  // const roomId = "87ffde29085946969d21fc03087f1051";
+  const msgType = "0";
+  const roomId = "62c03293404643efa19b7e81d1ab5927";
   // // sendMessage: "123"
-  // const toId = "1";
+  const toId = "1";
 
+  //右滑或手机自带返回键返回页面
   useDidHide(() => {
     console.log("hide");
     quitChat();
   });
+  // 左上角退出按钮
   const handleBack = () => {
     quitChat();
   };
+  // 退出页面调用接口
   const quitChat = () => {
     console.log("退出");
     dispatch({
@@ -94,24 +105,55 @@ function MessageDetail(props) {
       },
     });
   };
+
+  const handleToUpper = () => {
+    console.log("触顶");
+
+    setPageNo(pageNo + 1);
+    getMessageData();
+  };
+  const getMessageData = () => {
+    dispatch({
+      type: "AddressList/getMessageList",
+      payload: {
+        page: pageNo,
+        pageSize: 10,
+        roomId: roomId,
+      },
+    }).then((res) => {
+      if (res.status == 200) {
+        let newData = res.data
+        setScrollToMsg(newData)
+        let newMsg = newData.concat(messageList);
+        console.log(newMsg,'newMsg')
+        dispatch({
+          type: "AddressList/changeMessageList",
+          payload: newMsg,
+        });
+      }
+    });
+  };
+
   useEffect(() => {
+    // 消息列表数据
+    getMessageData();
+
+    // 发送消息本地拼接
     if (socketMsgQueue.length > 0) {
       dispatch({
         type: "AddressList/changeMessageList",
         payload: messageList.concat(socketMsgQueue),
       });
     }
-  }, [socketMsgQueue]);
-  useEffect(() => {
     dispatch({
-      type: "AddressList/getMessageList",
-      payload: {
-        page: 1,
-        pageSize: 10,
-        roomId: roomId,
-      },
+      type: "Class/getWebsocket",
+      payload: "3ee83b8573b54f5c99288618039b7c84",
+    }).then((task) => {
+      task.onOpen(function () {});
     });
-
+    Taro.onSocketOpen(function () {
+      console.log("onSocketOpen连接已打开");
+    });
     //监听接收的消息
     Taro.onSocketMessage(function (res) {
       let receiveMsg = JSON.parse(res.data);
@@ -131,13 +173,13 @@ function MessageDetail(props) {
       const { height } = res;
       setScrollHeight({ height: `calc(100% - ${height}px + 20px )` });
     });
+    // 退出应用
     quitChat();
     return () => {
-      console.log("退出页面");
       Taro.offKeyboardHeightChange();
       quitChat();
     };
-  }, []);
+  }, [socketMsgQueue]);
 
   const sendSocketMessage = (msg, contentType, imgRes) => {
     let sendMessage = "";
@@ -154,8 +196,8 @@ function MessageDetail(props) {
           {
             sendMessage: sendMessage,
             contentType: contentType,
-            fromId: user == 0 ? bindStudent.id : userId,
-            // fromId: "3ee83b8573b54f5c99288618039b7c84",
+            // fromId: user == 0 ? bindStudent.id : userId,
+            fromId: "3ee83b8573b54f5c99288618039b7c84",
             avatar:
               "https://ts1.cn.mm.bing.net/th?id=OIP-C.Rmu2HNfPTot9nN9kWt0dbgHaNK&w=187&h=333&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2",
           },
@@ -175,8 +217,8 @@ function MessageDetail(props) {
   const handleSendMessage = (e) => {
     let msg = {
       roomId: roomId,
-      fromId: user == 0 ? bindStudent.id : userId,
-      // fromId: "3ee83b8573b54f5c99288618039b7c84",
+      // fromId: user == 0 ? bindStudent.id : userId,
+      fromId: "3ee83b8573b54f5c99288618039b7c84",
       toId: toId,
       msgType: msgType,
       sendMessage: inputVal,
@@ -213,8 +255,8 @@ function MessageDetail(props) {
                 item.forEach((jtem) => {
                   let msg = {
                     roomId: roomId,
-                    fromId: user == 0 ? bindStudent.id : userId,
-                    // fromId: "3ee83b8573b54f5c99288618039b7c84",
+                    // fromId: user == 0 ? bindStudent.id : userId,
+                    fromId: "3ee83b8573b54f5c99288618039b7c84",
                     toId: toId,
                     msgType: msgType,
                     sendMessage: jtem.id,
@@ -247,8 +289,8 @@ function MessageDetail(props) {
                 item.forEach((jtem) => {
                   let msg = {
                     roomId: roomId,
-                    fromId: user == 0 ? bindStudent.id : userId,
-                    // fromId: "3ee83b8573b54f5c99288618039b7c84",
+                    // fromId: user == 0 ? bindStudent.id : userId,
+                    fromId: "3ee83b8573b54f5c99288618039b7c84",
                     toId: toId,
                     msgType: msgType,
                     sendMessage: jtem.id,
@@ -275,8 +317,8 @@ function MessageDetail(props) {
   const handleChoose = (item) => {
     let msg = {
       roomId: roomId,
-      fromId: user == 0 ? bindStudent.id : userId,
-      // fromId: "3ee83b8573b54f5c99288618039b7c84",
+      // fromId: user == 0 ? bindStudent.id : userId,
+      fromId: "3ee83b8573b54f5c99288618039b7c84",
       toId: toId,
       msgType: msgType,
       sendMessage: item,
@@ -338,7 +380,11 @@ function MessageDetail(props) {
             className='text-con-img'
             onClick={() => handlePreviewImage(msgInfo)}
           >
-            <Image style={{width:'300rpx'}} src={msgInfo?.sendMessage} mode='widthFix' />
+            <Image
+              style={{ width: "300rpx" }}
+              src={msgInfo?.sendMessage}
+              mode='widthFix'
+            />
           </View>
         )}
         {/* 显示视频 */}
@@ -364,10 +410,7 @@ function MessageDetail(props) {
             className='text-con-file'
             onClick={() => handlePreviewFile(msgInfo)}
           >
-            <Image
-              className='suffix'
-              src={msg}
-            />
+            <Image className='suffix' src={msg} />
             <View className='name'>新建文件.{fileType}</View>
             <View className='size'>{size}kb</View>
           </View>
@@ -456,13 +499,15 @@ function MessageDetail(props) {
           className='ScrollView scroll__view'
           scrollY
           scrollWithAnimation
-          scrollIntoView={`scrollId${messageList.length}`}
+          scrollIntoView={`scrollId${(messageList.length) - (scrollToMsg.length)}`}
+          // scrollIntoView={`scrollId0`}
+          onScrollToUpper={handleToUpper}
           // scrollTop={scrollTop}
           // style={scrollHeight}
         >
           {/* 聊天内容 */}
           <View id='chatlistview' className='chat'>
-            <View className='chat-content'>
+            <View className='chat-content' style={{position:'relative'}}>
               {messageList?.map(_renderMessage)}
             </View>
           </View>

@@ -10,6 +10,7 @@ import normal from "@static/normal.png"
 // import api from "@/api/api";
 // import edit from "@static/edit.png";
 import "./DetailHeader.scss";
+import Divider from '@app/component/Divider/Divider';
 
 function DetailHeader(props) {
   const { dispatch, enter, pageSize, user, studentId, subjectDetail, scoreDetail, noticeDetail } = props;
@@ -124,7 +125,8 @@ function DetailHeader(props) {
         ) : (
           // 存在于教师端的作业和通知部分
           <View className='content-edit'>
-            <AtDivider className='divider' />
+            <Divider className='divider' />
+            {/* <AtDivider className='divider' /> */}
             <View className='edit'>
               <View className='img' onClick={() => handleEdit()}>
                 {/* <Image className='edit-img' src={edit} /> */}

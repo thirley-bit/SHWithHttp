@@ -76,7 +76,6 @@ function My(props) {
             type: "AddressList/getUploadFile",
             payload: file,
           }).then((resp) => {
-            console.log(resp, "reps");
             // return resp.data;
           })
         );

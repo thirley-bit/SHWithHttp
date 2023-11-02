@@ -267,7 +267,7 @@ aaa.current
           value={title}
           onInput={handleTitleInput}
         />
-        <Divider />
+        <Divider className='divider' />
         <View className='editor-box'>
           <Editor
             id='editor'
@@ -281,7 +281,7 @@ aaa.current
           <AtIcon value='camera' size='30' color='#999'></AtIcon>
           <View>添加图片</View>
         </View>
-        <Divider />
+        <Divider className='divider' />
         <Picker
           mode='selector'
           range={subjectType.map((item) => item.name)}
@@ -303,7 +303,7 @@ aaa.current
             </View>
           </View>
         </Picker>
-        <Divider />
+        <Divider className='divider' />
         <View className='choose' onClick={() => onPersonChange()}>
           <View className='at-row'>
             <View className='at-col at-col-8'>
@@ -326,7 +326,7 @@ aaa.current
             </View>
           </View>
         </View>
-        <Divider />
+        <Divider className='divider' />
         <Picker mode='date' onChange={onTimeChange}>
           <View className='choose'>
             <View className='at-row'>

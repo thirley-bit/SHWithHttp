@@ -99,8 +99,6 @@ const model = {
     },
     *getMessageList({ payload }, { call, put }) {
       const response = yield call(getMessageList, payload);
-      console.log(response.data,'respeondse')
-
       if (response.status == 200) {
         yield put({
           type: "changeMessageList",
@@ -209,7 +207,6 @@ const model = {
       };
     },
     changeMessageList(state, { payload }) {
-      console.log(payload,'payload')
       return {
         ...state,
         messageList: payload,
