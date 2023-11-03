@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Taro, {
   useDidHide,
   useDidShow,
@@ -30,17 +30,15 @@ function MessageDetail(props) {
   const { dispatch, messageList, user, bindStudent, userId } = props;
   const [socketMsgQueue, setSocketMsgQueue] = useState([]);
   const [pageNo, setPageNo] = useState(1);
-
-  // const showLeft = "own";
-  // const sys = Taro.getSystemInfoSync();
-  // const [keyboardHeight, setKeyboardHeight] = useState(0)
   const [scrollHeight, setScrollHeight] = useState({
-    height: "100%",
+    height: `calc(100% - 25px)`,
   });
-  const [scrollToMsg, setScrollToMsg] = useState([])
-  console.log(scrollToMsg,'scrollToMsg')
+  const [scrollToMsg, setScrollToMsg] = useState([]);
+  console.log(scrollToMsg, "scrollToMsg");
   const [showEmoji, setEmoji] = useState(false);
   const [inputVal, setInputVal] = useState("");
+
+  const content = useRef()
   const actionList = [
     {
       type: "emoji",
@@ -85,6 +83,11 @@ function MessageDetail(props) {
   // // sendMessage: "123"
   const toId = "1";
 
+  const handleHideEmoji = () => {
+    console.log("handlehide");
+    setScrollHeight({ height: `calc(100% - 25px)`})
+    setEmoji(false);
+  };
   //右滑或手机自带返回键返回页面
   useDidHide(() => {
     console.log("hide");
@@ -122,22 +125,28 @@ function MessageDetail(props) {
       },
     }).then((res) => {
       if (res.status == 200) {
-        let newData = res.data
-        setScrollToMsg(newData)
+        let newData = res.data;
+        setScrollToMsg(newData);
         let newMsg = newData.concat(messageList);
-        console.log(newMsg,'newMsg')
+        console.log(newMsg, "newMsg");
         dispatch({
           type: "AddressList/changeMessageList",
           payload: newMsg,
         });
+        Taro.nextTick(() => {
+            Taro.createSelectorQuery().select('#scrollview').boundingClientRect(rect => {
+            console.log(rect,'res')
+            Taro.pageScrollTo({ scrollTop: rect.top,duration:0})
+          }).exec()
+        })
       }
     });
   };
+  // console.log(content,'content')
 
   useEffect(() => {
     // 消息列表数据
     getMessageData();
-
     // 发送消息本地拼接
     if (socketMsgQueue.length > 0) {
       dispatch({
@@ -171,7 +180,7 @@ function MessageDetail(props) {
     //键盘抬起时的滚动窗口
     Taro.onKeyboardHeightChange((res) => {
       const { height } = res;
-      setScrollHeight({ height: `calc(100% - ${height}px + 20px )` });
+      setScrollHeight({ height: `calc(100% - ${height}px - 25px )` });
     });
     // 退出应用
     quitChat();
@@ -180,7 +189,6 @@ function MessageDetail(props) {
       quitChat();
     };
   }, [socketMsgQueue]);
-
   const sendSocketMessage = (msg, contentType, imgRes) => {
     let sendMessage = "";
     if (contentType == 0) {
@@ -207,9 +215,6 @@ function MessageDetail(props) {
     setInputVal("");
   };
 
-  // const handleShow = () => {
-  //   setEmoji(false)
-  // }
   const handleInput = (e) => {
     setInputVal(e.detail.value);
   };
@@ -231,7 +236,7 @@ function MessageDetail(props) {
       //选择表情包
       case "emoji":
         setEmoji(true);
-        setScrollHeight({ height: `calc(100% - ${295}px)` });
+        setScrollHeight({ height: `calc(100% - 350rpx)` });
         break;
       //选择图片和视频
       case "image":
@@ -478,8 +483,7 @@ function MessageDetail(props) {
               className='text-con'
               style={{ backgroundColor: "#ebebeb", color: "#4c4c4c" }}
             >
-              {_typeMessage(msgInfo)}
-            </View>
+              {_typeMessage(msgInfo)}</View>
           </View>
         </View>
       );
@@ -488,26 +492,24 @@ function MessageDetail(props) {
 
   //页面渲染
   return (
-    <View className='index'>
+    <View className='index' onClick={() => handleHideEmoji()}>
       <View onClick={handleBack}>
         <NavTab back handleBack={handleBack} title={name} />
       </View>
       {/* 聊天内容显示滚动框 */}
       <View className='msg__wrapper' style={scrollHeight}>
         <ScrollView
+          // ref={content}
           id='scrollview'
           className='ScrollView scroll__view'
           scrollY
           scrollWithAnimation
-          scrollIntoView={`scrollId${(messageList.length) - (scrollToMsg.length)}`}
-          // scrollIntoView={`scrollId0`}
+          scrollIntoView={`scrollId${(scrollToMsg.length)}`}
           onScrollToUpper={handleToUpper}
-          // scrollTop={scrollTop}
-          // style={scrollHeight}
         >
           {/* 聊天内容 */}
-          <View id='chatlistview' className='chat'>
-            <View className='chat-content' style={{position:'relative'}}>
+          <View id='chatlistview'   className='chat'>
+            <View className='chat-content' style={{ position: "relative" }}>
               {messageList?.map(_renderMessage)}
             </View>
           </View>
@@ -541,7 +543,12 @@ function MessageDetail(props) {
               key={index}
               className='action'
               style={{ display: "inline-block" }}
-              onClick={() => addImage(action)}
+              onClick={(e) => {
+                if (action.type === "emoji") {
+                  e.stopPropagation();
+                }
+                addImage(action);
+              }}
             >
               <Image
                 className='action-img'
@@ -551,34 +558,33 @@ function MessageDetail(props) {
             </View>
           );
         })}
+        {/* 表情包显示区 */}
+        {showEmoji && (
+          <View className='emoji'>
+            <ScrollView
+              className='scroll-emoji'
+              scrollY
+              scrollWithAnimation
+            >
+              {emojiList.map((item, index) => {
+                return (
+                  <View
+                    key={index}
+                    style={{
+                      display: "inline-block",
+                      width: "80rpx",
+                      height: "100rpx",
+                    }}
+                    onClick={() => handleChoose(item)}
+                  >
+                    {item}
+                  </View>
+                );
+              })}
+            </ScrollView>
+          </View>
+        )}
       </View>
-      {/* 表情包显示区 */}
-      {showEmoji && (
-        <View className='emoji'>
-          <ScrollView
-            id='scrollview'
-            className='ScrollView scroll__view'
-            scrollY
-            scrollWithAnimation
-          >
-            {emojiList.map((item, index) => {
-              return (
-                <View
-                  key={index}
-                  style={{
-                    display: "inline-block",
-                    width: "80rpx",
-                    height: "100rpx",
-                  }}
-                  onClick={() => handleChoose(item)}
-                >
-                  {item}
-                </View>
-              );
-            })}
-          </ScrollView>
-        </View>
-      )}
     </View>
   );
 }

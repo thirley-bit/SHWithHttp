@@ -33,11 +33,6 @@ textarea {
     &-left {
       display: flex;
       margin-bottom: 20px;
-      // .text {
-      //   border-radius: 23rpx;
-      //   background: #ebebeb;
-      //   color: #4c4c4c;
-      // }
     }
     &-right {
       display: flex;
@@ -150,4 +145,13 @@ textarea {
     width: 48rpx;
     height: 48rpx;
   }
+}
+
+.emoji{
+    height: 100%;
+    background: rgba(239, 247, 260, 0.5);
+    position: relative;
+    .scroll-emoji {
+      height: 350rpx;
+    }
 }
