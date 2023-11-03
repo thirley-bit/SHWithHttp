@@ -16,9 +16,7 @@ import normal from "@static/normal.png";
 import "./my.scss";
 
 function My(props) {
-  const { dispatch, identity, bindStudent } = props;
-  let user = 1;
-  console.log(props, "props");
+  const { dispatch, user, identity, bindStudent } = props;
   let settingList = [
     {
       id: 0,
@@ -97,67 +95,85 @@ function My(props) {
       Taro.navigateTo({ url: value });
     }
   };
-  const _headAvatar = () => {
-    return (
-      <View>
-        <View onClick={handleUpload} className='my-head-avatar'>
-          <AtAvatar
-            circle
-            size='large'
-            image={identity.avatar || normal}
-          ></AtAvatar>
+  // 顶部头像等样式
+  const _headAvatar = (e) => {
+    // 家长端左右布局
+    if (user == 0) {
+      return (
+        <View className='at-row at-row__align--center my-head'>
+          <View className='at-col at-col-3 '>
+            {/* 用户头像 */}
+            <View onClick={handleUpload} className='my-head-avatar'>
+              <AtAvatar
+                circle
+                size='large'
+                image={identity.avatar || normal}
+              ></AtAvatar>
+            </View>
+            {/* 跳转至审核页面 */}
+            <View className='my-head-icon' onClick={() => handleNav(1)}>
+              <Image className='image' src={Change} />
+            </View>
+          </View>
+          <View className='at-col at-col-6 my-head-center'>
+            {/* 用户信息 */}
+            <View className='my-head-name'>
+              {/* 用户名 */}
+              <Text className='name'>{identity && identity.userName}</Text>
+              <Text className='stu-name'>
+                {bindStudent && bindStudent.userName}
+              </Text>
+              {/* 家长绑定的学生名 */}
+            </View>
+          </View>
+          {/* 家长端跳转至孩子详情信息 */}
+          {user == 0 && (
+            <View className='at-col at-col-2'>
+              <View onClick={() => handleNav(2)} className='my-head-right'>
+                孩子信息
+                <AtIcon value='chevron-right' size='15'></AtIcon>
+              </View>
+            </View>
+          )}
         </View>
-        {/* 跳转至审核页面 */}
-        <View className='my-head-icon' onClick={() => handleNav(1)}>
-          <Image className='image' src={Change} />
+      );
+    } else {
+      // 家长端上下居中对齐
+      return (
+        <View className='teacher-head'>
+          {/* 用户头像 */}
+          <View onClick={handleUpload} className='teacher-head-avatar'>
+            <AtAvatar
+              circle
+              size='large'
+              image={identity.avatar || normal}
+            ></AtAvatar>
+          </View>
+          {/* 跳转至审核页面 */}
+          <View className='teacher-head-icon' onClick={() => handleNav(1)}>
+            <Image className='image' src={Change} />
+          </View>
+          <View className='teacher-head-name'>
+            {/* 用户名 */}
+            <View className='name'>{identity && identity.userName}</View>
+            {/* 老师特殊身份(班主任,任课老师等) */}
+            <View className='special'>
+              {/* 是班主任 */}
+              {identity && identity.ifClassTeacher === 1 && <View className='isClassTeacher'>班主任</View>}
+              {/* 是否是任课老师 */}
+              {identity && identity.Teacher && <View className='isTeacher'>{identity.teacher}</View>}
+            </View>
+          </View>
         </View>
-      </View>
-    );
+      );
+    }
   };
   return (
     <View className='index'>
       <NavTab needBackIcon={false} mainTitle='' />
-      <View className='at-row at-row__align--center my-head'>
-        <View className='at-col at-col-3 '>
-          {/* 用户头像 */}
-          <View onClick={handleUpload} className='my-head-avatar'>
-          <AtAvatar
-            circle
-            size='large'
-            image={identity.avatar || normal}
-          ></AtAvatar>
-        </View>
-        {/* 跳转至审核页面 */}
-        <View className='my-head-icon' onClick={() => handleNav(1)}>
-          <Image className='image' src={Change} />
-        </View>
-        </View>
-        <View className='at-col at-col-6 my-head-center'>
-          {/* 用户信息 */}
-          <View className='my-head-name'>
-            {/* 用户名 */}
-            <Text className='name'>{identity && identity.userName}</Text>
-            {user == 0 ? (
-              <Text className='stu-name'>
-                {bindStudent && bindStudent.userName}
-              </Text>
-            ) : (
-              <View>111</View>
-            )}
-            {/* 家长绑定的学生名 */}
-          </View>
-        </View>
-        {/* 家长端跳转至孩子详情信息 */}
-        {user == 0 && (
-          <View className='at-col at-col-2'>
-            <View onClick={() => handleNav(2)} className='my-head-right'>
-              孩子信息
-              <AtIcon value='chevron-right' size='15'></AtIcon>
-            </View>
-          </View>
-        )}
-      </View>
-      {/* 列表 */}
+      {/* 顶部头像等样式 */}
+      <View className='my'>{_headAvatar()}</View>
+      {/* 设置列表 */}
       <View className='my-content'>
         {(user == 0
           ? settingList.filter((item) => item?.type)

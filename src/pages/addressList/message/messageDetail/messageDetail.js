@@ -489,6 +489,7 @@ function MessageDetail(props) {
       );
     }
   };
+  console.log(_renderMessage,'renderMessage');
 
   //页面渲染
   return (
