@@ -1,21 +1,19 @@
-import { View, Button, Input } from "@tarojs/components";
+import { View, Button, Picker } from "@tarojs/components";
 import { connect } from "react-redux";
 import Taro from "@tarojs/taro";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   AtForm,
   AtModal,
   AtModalAction,
   AtModalContent,
-  AtSearchBar,
   AtInput,
-  AtButton,
   AtMessage,
 } from "taro-ui";
 import NavTab from "@app/component/NavTab/NavTab";
 import GradientButton from "@app/component/GradientButton";
 import Divider from "@app/component/Divider/Divider";
-import normal from "@static/normal.png";
+import SearchBar from '@app/component/SearchBar/SearchBar';
 import "./AddClass.scss";
 
 function AddClass(props) {
@@ -24,6 +22,10 @@ function AddClass(props) {
   const [isOpened, setIsOpened] = useState(false);
   const [classId, setClassId] = useState("");
   const [searchValue, setSearchValue] = useState(""); //搜索朋友页面的人员
+  const [selectorChecked, setSelectorChecked] = useState("");
+  const handleClassChange = (e) => {
+    setSelectorChecked(e.detail.value);
+  };
   const title = [
     {
       title: "学生姓名:",
@@ -56,12 +58,12 @@ function AddClass(props) {
   //输入搜索内容
   const handleChangeValue = (val) => {
     setSearchValue(val);
-    if (val.length == 0) return setShowClassData(classList);
-  };
-  //搜索
-  const handleSearch = () => {
-    let data = classList.filter((item) => item.className == searchValue);
+    if(val){
+      let data = classList.filter((item) => item.className == searchValue);
     setShowClassData(data);
+    }else{
+      setShowClassData(classList)
+    }
   };
 
   //清空搜索内容
@@ -117,26 +119,23 @@ function AddClass(props) {
   };
 
   return (
-    <View className="index">
-      <NavTab back title="加入新班级" />
-      <View className="new-class">
-        <View className="search">
-          <AtSearchBar
-            value={searchValue}
-            onChange={handleChangeValue}
-            onClear={handleClear}
-            onActionClick={handleSearch}
-          />
-        </View>
-        <View className="team">
+    <View className='index'>
+      <NavTab back title='加入新班级' />
+      <View className='new-class'>
+        <SearchBar 
+          value={searchValue}
+          onChange={handleChangeValue}
+          onClear={handleClear}
+        />
+        <View className='team'>
           {showClassData.map((item) => {
             return (
               <View key={item.id}>
-                <View className="chat">
-                  <View className="left">
-                    <View className="content">
-                      <View className="class">{item.className}</View>
-                      <View className="people">
+                <View className='chat'>
+                  <View className='left'>
+                    <View className='content'>
+                      <View className='class'>{item.className}</View>
+                      <View className='people'>
                         <View>
                           {item.grade}级{item.classNum}班
                         </View>
@@ -144,32 +143,32 @@ function AddClass(props) {
                           {item.status}
                         </View>
                       </View>
-                      <View className="study">{item.slogan}</View>
+                      <View className='study'>{item.slogan}</View>
                     </View>
                   </View>
-                  <View className="button">
+                  <View className='button'>
                     <GradientButton
-                      size="small"
-                      type="primary"
+                      size='small'
+                      type='primary'
                       onClick={() => handleEnter(item)}
                     >
                       加入
                     </GradientButton>
                   </View>
                 </View>
-                <Divider className="divider" />
+                <Divider className='divider' />
               </View>
             );
           })}
         </View>
       </View>
       <AtModal
-        className="edit-modal"
+        className='edit-modal'
         isOpened={isOpened}
         closeOnClickOverlay={false}
       >
-        <AtForm name="modalname" onSubmit={onSubmit}>
-          <AtModalContent className="modal-edit">
+        <AtForm name='modal-name' onSubmit={onSubmit}>
+          <AtModalContent>
             {title.map((item, index) => {
               return (
                 <AtInput
@@ -186,7 +185,7 @@ function AddClass(props) {
           </AtModalContent>
           <AtModalAction>
             <Button onClick={() => handleClose()}>取消</Button>
-            <Button formType="submit">确认</Button>
+            <Button formType='submit'>确认</Button>
           </AtModalAction>
         </AtForm>
       </AtModal>

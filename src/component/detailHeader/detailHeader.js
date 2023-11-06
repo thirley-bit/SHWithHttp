@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react";
 import Taro from '@tarojs/taro';
 import { connect } from "react-redux";
-import { View, Text, Image } from "@tarojs/components";
-import { AtAvatar, AtButton, AtDivider, AtIcon, AtModal } from "taro-ui";
-// import GradientButton from '@app/component/GradientButton';
-
+import { View, Text } from "@tarojs/components";
+import { AtAvatar, AtDivider, AtIcon, AtModal } from "taro-ui";
 import GradientButton from "@app/component/GradientButton";
-import normal from "@static/normal.png"
-// import api from "@/api/api";
-// import edit from "@static/edit.png";
-import "./DetailHeader.scss";
 import Divider from '@app/component/Divider/Divider';
+import normal from "@static/normal.png"
+import "./DetailHeader.scss";
 
 function DetailHeader(props) {
   const { dispatch, enter, pageSize, user, studentId, subjectDetail, scoreDetail, noticeDetail } = props;
@@ -28,7 +24,6 @@ function DetailHeader(props) {
   }, [subjectDetail]);
 
   const handleCompleted = () => {
-    console.log(111)
     dispatch({
       type:"HomeWork/getCompleteWork",
       payload:{
@@ -70,7 +65,7 @@ function DetailHeader(props) {
   const handleEdit = () => {
     Taro.navigateTo({ url: `/pages/comp/publish/publish?enter=${enter}&type=edit`});
   };
-  const handleDel = (e) => {
+  const handleDel = () => {
     setIsOpened(true);
   };
 
@@ -82,7 +77,6 @@ function DetailHeader(props) {
   };
 
   const handleConfirm = () => {
-    // console.log(id); //删除接口
     setIsOpened(false);
   };
   return (
@@ -126,10 +120,8 @@ function DetailHeader(props) {
           // 存在于教师端的作业和通知部分
           <View className='content-edit'>
             <Divider className='divider' />
-            {/* <AtDivider className='divider' /> */}
             <View className='edit'>
               <View className='img' onClick={() => handleEdit()}>
-                {/* <Image className='edit-img' src={edit} /> */}
                 <AtIcon
                   className='icon'
                   value='edit'

@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
 import { View } from "@tarojs/components";
 import { AtTabsPane } from "taro-ui";
-
 import StudentsList from "@app/component/StudentsList/StudentsList";
 import Table from "@app/component/Table/Table";
 import FeedBack from "@app/component/FeedBack";
 import MyTabs from "@app/component/MyTabs/MyTabs";
-import GradientButton from "@app/component/GradientButton";
-import normal from "@static/normal.png";
 import { connect } from "react-redux";
 
 import "./DetailContent.scss";
@@ -15,21 +12,14 @@ import "./DetailContent.scss";
 function DetailContent(props) {
   const {
     dispatch,
-    userId,
-    studentId,
     enter,
     user,
     id,
-    pageSize,
-    replyList,
-
 
 
     scoreTitle,
     scoreDetailArr,
-    feedBack,
     feedBackList,
-    studentsList,
   } = props;
   const [studentsData, setStudentsData] = useState([]);
   const [allSubmittedList, setAllSubmittedList] = useState([]);
@@ -37,7 +27,6 @@ function DetailContent(props) {
   const [notSubmittedList, setNotSubmittedList] = useState([]);
   const [current, setCurrent] = useState(0);
   const [tabList, setTabList] = useState([]);
-  const [isEdit, setIsEdit] = useState(false); //是否修改反馈 true：修改反馈 false：提交反馈
 
   useEffect(() => {
     dispatch({
@@ -103,17 +92,6 @@ function DetailContent(props) {
       setStudentsData(feedBackList);
     }
   };
-  // const handleSend = () => {
-  //   if (isEdit) {
-  //     //处于修改反馈状态
-  //     setIsEdit(false);
-  //     dispatch({
-  //       type: "HomeWork/getEditFeedBack",
-  //     });
-  //   } else {
-  //     setIsEdit(true);
-  //   }
-  // };
 
   return (
     <View className='main'>

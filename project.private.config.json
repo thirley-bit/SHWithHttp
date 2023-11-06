@@ -47,6 +47,12 @@
           "pathName": "pages/my/ChildMsg/ChildMsg",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/my/AddClass/AddClass",
+          "pathName": "pages/my/AddClass/AddClass",
+          "query": "",
+          "scene": null
         }
       ]
     }

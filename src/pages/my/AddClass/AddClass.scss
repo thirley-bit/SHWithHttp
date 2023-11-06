@@ -22,21 +22,6 @@
         background-color: #ffffff;
         color: #3D3D3D;
       }
-  
-      .search {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 14rpx;
-        z-index: 999;
-      }
-  
-      .close {
-        position: absolute;
-        transform: translateY(-50%);
-        top: 50%;
-        right: 10rpx;
-      }
     }
   
     .team {
@@ -85,22 +70,4 @@
     .at-input__input{
         text-align: left;
     }
-}
-.search {
-  width: 95%;
-  padding: 1%;
-  margin: 3% auto;
-  background-color: #fff;
-  border-radius: 16rpx;
-  border: 2rpx solid #1ba6ff;
-}
-.at-search-bar {
-  height: 65rpx;
-  background-color: #fff;
-  border-radius: 16rpx;
-  padding: 0 18rpx 0 0;
-  background: rgba(255, 255, 255, 0.6);
-}
-.at-search-bar__action {
-  border-radius: 8rpx;
 }

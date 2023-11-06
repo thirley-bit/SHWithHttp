@@ -1,141 +1,75 @@
-.all-check{
-  position: absolute;
-  top: 280rpx;
-  right: 45rpx;
-  .all-check-input{
-    width: 36rpx;
-    height: 36rpx;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 12rpx;
+  //全选按钮
+  .all-check{
+    position: absolute;
+    top: 280rpx;
+    right: 45rpx;
+    .all-check-input{
+      width: 36rpx;
+      height: 36rpx;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 12rpx;
+    }
+    .at-icon .at-icon-check{
+      margin: 0 0 5rpx 10rpx;
+    }
+    .all-check-button{
+      display: inline-block;
+    }
   }
-  .at-icon .at-icon-check{
-    margin: 0 0 5rpx 10rpx;
-  }
-  .all-check-button{
-    display: inline-block;
-  }
-  
-}
 .scroll {
-  height: 370rpx;
+    height: 370rpx;
 }
+
 .form-width {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   margin: 32rpx 30rpx;
 }
-.form {
+.sign {
   width: 20%;
   float: left;
   line-height: 1.2;
   padding: 0 10rpx;
   box-sizing: border-box;
   font-size: 23rpx;
-  .sign-content{
+  &-content{
     position: relative;
     margin-bottom: 48rpx;
-    .sign-label{
-      position: absolute;
-      width: 32rpx;
-      height: 32rpx;
-      z-index: 100;
-      left: 62%;
-    }
-    .sign-img{
-      position: relative;
-      display: flex;
-      display: block;
-      margin: 0 auto;
-      width: 86rpx;
-      height: 86rpx;
-    }
-    .sign-text{
-      position: relative;
-      margin: 7rpx auto;
-      text-align: center;
-      width: 115rpx;
-      height: 73rpx;
-      line-height: 37rpx;
-      color: #333333;
-    }
-    .sign-text.text2{
-      text-align: start;
-    }
-    .sign-button{
-      width: 90rpx;
-      height: 56rpx;
-      font-weight: 500;
-    }
+    
+  }
+  &-label{
+    position: absolute;
+    width: 32rpx;
+    height: 32rpx;
+    z-index: 100;
+    left: 62%;
+  }
+  &-img{
+    position: relative;
+    display: flex;
+    display: block;
+    margin: 0 auto;
+    width: 86rpx;
+    height: 86rpx;
+  }
+  &-text{
+    position: relative;
+    margin: 7rpx auto;
+    text-align: center;
+    width: 115rpx;
+    height: 73rpx;
+    line-height: 37rpx;
+    color: #333333;
+  }
+  &-text.text2{
+    text-align: start;
   }
   &.check-button{
     margin-bottom: 32rpx;
   }
-  
-  // .sign-button {
-  //   background-color: #aac5f7;
-  //   border: 1rpx solid #729ff3;
-    // &:before{
-    //     content: '';
-    //     position: absolute;
-    //     top: 0;
-    //     right: 0;
-    //     border: 15rpx solid #4380f1;
-    //     border-left-color: transparent;
-    //     border-bottom-color: transparent;
-    // }
-    // &:after{
-    //     content: '';
-    //     width: 5rpx;
-    //     height: 10rpx;
-    //     position: absolute;
-    //     top: 2rpx;
-    //     right: 4rpx;
-    //     border: 1rpx solid #fff;
-    //     border-top-color: transparent;
-    //     border-left-color: transparent;
-    //     transform: rotate(45deg);
-    // }
-  // }
-  // .completed-button_completed{
-  //   background-color: #aac5f7;
-  //   border: 1rpx solid #729ff3;
-  //   &:before{
-  //       content: '';
-  //       position: absolute;
-  //       top: 0;
-  //       right: 0;
-  //       border: 15rpx solid #4380f1;
-  //       border-left-color: transparent;
-  //       border-bottom-color: transparent;
-  //   }
-  //   &:after{
-  //       content: '';
-  //       width: 5rpx;
-  //       height: 10rpx;
-  //       position: absolute;
-  //       top: 2rpx;
-  //       right: 4rpx;
-  //       border: 1rpx solid #fff;
-  //       border-top-color: transparent;
-  //       border-left-color: transparent;
-  //       transform: rotate(45deg);
-  //   }
-  // }
 }
-
-// .form.form50 {
-//   width: 50%;
-// }
-
-// .form.form75 {
-//   width: 75%;
-// }
-
-// .form.form100 {
-//   width: 100%;
-// }
 
 .parent {
   position: relative;

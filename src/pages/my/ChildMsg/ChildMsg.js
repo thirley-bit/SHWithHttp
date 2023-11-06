@@ -41,8 +41,7 @@ function ChildMsg(props) {
   useEffect(() => {
     dispatch({
       type: "users/getStudentById",
-      // payload: studentId,
-      payload: 11,
+      payload: studentId,
     }).then((res) => {
       if (res.status == 200) {
         // 获取当前学生所在班级
