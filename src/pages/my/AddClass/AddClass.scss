@@ -6,42 +6,22 @@
 }
 .new-class {
     width: 90%;
-    margin: 0 auto;
-  
-    .head {
-      width: 100%;
-      position: relative;
-      margin-top:30rpx;
-      input {
-        border: 2rpx solid #1BA6FF;
-        height: 65rpx;
-        border-radius: 15rpx;
-        padding-left: 56rpx;
-        font-size: 23rpx;
-        font-weight: 400;
-        background-color: #ffffff;
-        color: #3D3D3D;
-      }
-    }
-  
+    margin: 0 auto;  
     .team {
-      .chat {
+      .class {
         margin-top: 46rpx;
         display: flex;
         justify-content: space-between;
         .left {
-          display: flex;
-  
-          .content {
+          display: flex;  
+          .content {  
             margin-left: 30rpx;
-  
-            .class {
+            .name {
               font-size: 31rpx;
               font-weight: 500;
               color: #323232;
-            }
-  
-            .people {
+            }  
+            .grade {
               display: flex;
               margin-top: 12rpx;
   
@@ -70,4 +50,7 @@
     .at-input__input{
         text-align: left;
     }
+    .at-input--disabled{
+      opacity: 1;
+  }
 }

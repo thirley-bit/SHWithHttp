@@ -1,7 +1,7 @@
 import { View, Button, Picker } from "@tarojs/components";
 import { connect } from "react-redux";
 import Taro from "@tarojs/taro";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AtForm,
   AtModal,
@@ -13,34 +13,34 @@ import {
 import NavTab from "@app/component/NavTab/NavTab";
 import GradientButton from "@app/component/GradientButton";
 import Divider from "@app/component/Divider/Divider";
-import SearchBar from '@app/component/SearchBar/SearchBar';
+import SearchBar from "@app/component/SearchBar/SearchBar";
 import "./AddClass.scss";
 
 function AddClass(props) {
   const { dispatch, classList } = props;
-  const [showClassData, setShowClassData] = useState([]);
-  const [isOpened, setIsOpened] = useState(false);
-  const [classId, setClassId] = useState("");
+  const [showClassData, setShowClassData] = useState([]); //班级列表
+  const [isOpened, setIsOpened] = useState(false); //加入班级弹窗
+  const [classId, setClassId] = useState(""); //选择的班级号
   const [searchValue, setSearchValue] = useState(""); //搜索朋友页面的人员
-  const [selectorChecked, setSelectorChecked] = useState("");
+  const [selectorChecked, setSelectorChecked] = useState(""); //选择的亲属关系
+  const selector = ["爸爸", "妈妈", "爷爷", "奶奶", "外公", "外婆"];
   const handleClassChange = (e) => {
-    setSelectorChecked(e.detail.value);
+    // 选中的序列号
+    let index = e.detail.value;
+    setSelectorChecked(selector[index]);
   };
   const title = [
-    {
-      title: "学生姓名:",
-      type: "text",
-      name: "studentName",
-    },
     {
       title: "学生学号:",
       type: "text",
       name: "studentNo",
+      placeholder: "请输入学号",
     },
     {
-      title: "亲属关系:",
+      title: "学生姓名:",
       type: "text",
-      name: "relative",
+      name: "studentName",
+      placeholder: "请输入姓名",
     },
   ];
 
@@ -58,11 +58,11 @@ function AddClass(props) {
   //输入搜索内容
   const handleChangeValue = (val) => {
     setSearchValue(val);
-    if(val){
+    if (val) {
       let data = classList.filter((item) => item.className == searchValue);
-    setShowClassData(data);
-    }else{
-      setShowClassData(classList)
+      setShowClassData(data);
+    } else {
+      setShowClassData(classList);
     }
   };
 
@@ -71,25 +71,27 @@ function AddClass(props) {
     setSearchValue("");
     setShowClassData(classList);
   };
-
+  // 加入班级弹窗按钮
   const handleEnter = (e) => {
     setIsOpened(true);
     setClassId(e.id);
   };
+  // 输入框
   const handleChange = (value, record) => {
     record.value = value;
   };
   const onSubmit = (evt) => {
+    //亲属关系的值由索引赋为具体值
+    evt[0].detail.value.relative = selectorChecked;
     let userObj = Object.assign({ classId: classId }, evt[0].detail.value);
-    console.log(userObj, "userobj");
-    if (userObj.studentName == "") {
+    // 校验所有输入不为空
+    if (
+      userObj.relative == "" ||
+      userObj.studentNo == "" ||
+      userObj.studentName == ""
+    ) {
       Taro.showToast({
-        title: "请输入学生姓名",
-        icon: "error",
-      });
-    } else if (userObj.studentNo == "") {
-      Taro.showToast({
-        title: "请输入学生学号",
+        title: "输入不能为空",
         icon: "error",
       });
     } else {
@@ -116,36 +118,37 @@ function AddClass(props) {
   };
   const handleClose = () => {
     setIsOpened(false);
+    // 清空所选亲属关系
+    setSelectorChecked("");
   };
 
   return (
     <View className='index'>
       <NavTab back title='加入新班级' />
       <View className='new-class'>
-        <SearchBar 
+        {/* 搜索框 */}
+        <SearchBar
           value={searchValue}
           onChange={handleChangeValue}
           onClear={handleClear}
         />
+        {/* 班级列表 */}
         <View className='team'>
           {showClassData.map((item) => {
             return (
               <View key={item.id}>
-                <View className='chat'>
+                <View className='class'>
                   <View className='left'>
                     <View className='content'>
-                      <View className='class'>{item.className}</View>
-                      <View className='people'>
+                      <View className='name'>{item.className}</View>
+                      <View className='grade'>
                         <View>
                           {item.grade}级{item.classNum}班
                         </View>
-                        <View style={{ marginLeft: "23rpx", color: "#999" }}>
-                          {item.status}
-                        </View>
                       </View>
-                      <View className='study'>{item.slogan}</View>
                     </View>
                   </View>
+                  {/* 加入班级弹窗按钮 */}
                   <View className='button'>
                     <GradientButton
                       size='small'
@@ -162,6 +165,7 @@ function AddClass(props) {
           })}
         </View>
       </View>
+      {/* 加入班级弹窗 */}
       <AtModal
         className='edit-modal'
         isOpened={isOpened}
@@ -169,6 +173,19 @@ function AddClass(props) {
       >
         <AtForm name='modal-name' onSubmit={onSubmit}>
           <AtModalContent>
+            <Picker
+              name='relative'
+              mode='selector'
+              range={selector}
+              onChange={handleClassChange}
+            >
+              <AtInput
+                placeholder='请选择关系'
+                disabled
+                title='亲属关系'
+                value={selectorChecked}
+              />
+            </Picker>
             {title.map((item, index) => {
               return (
                 <AtInput
@@ -178,6 +195,7 @@ function AddClass(props) {
                   type={item.type}
                   value={item.value}
                   disabled={item.disabled}
+                  placeholder={item.placeholder}
                   onChange={(e) => handleChange(e, item)}
                 />
               );
@@ -189,6 +207,7 @@ function AddClass(props) {
           </AtModalAction>
         </AtForm>
       </AtModal>
+      {/* 消息提示组件 */}
       <AtMessage />
     </View>
   );
