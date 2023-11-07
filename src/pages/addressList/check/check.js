@@ -1,13 +1,10 @@
-import { View, Text, Form, Input, Button } from "@tarojs/components";
+import { View, Text, Button } from "@tarojs/components";
 import { connect } from "react-redux";
 import Taro from "@tarojs/taro";
 import { useEffect, useState } from "react";
 import {
   AtAvatar,
-  AtButton,
   AtCard,
-  AtDivider,
-  AtForm,
   AtIcon,
   AtInput,
   AtMessage,
@@ -22,12 +19,10 @@ import GradientButton from "@app/component/GradientButton";
 import Divider from "@app/component/Divider/Divider";
 import Modal from "@app/component/Modal";
 import normal from "@static/normal.png";
-
 import "./Check.scss";
 
 function Check(props) {
-  console.log(props, "props");
-  const { dispatch, user, userId, pageSize, identity, checkedList } = props;
+  const { dispatch, user, userId, pageSize, checkedList } = props;
   const [current, setCurrent] = useState(0);
   const [isOpened, setIsOpened] = useState(false); //审核状态弹窗
   const [refuseOpened, setRefuseOpened] = useState(false);//审核不通过弹窗
@@ -170,6 +165,7 @@ function Check(props) {
     <View className='check'>
       <NavTab iconTheme='black' back title='审核' />
       <MyTabs current={current} tabList={tabList} onClick={handleClick}>
+        {/* 待审核数据 */}
         <AtTabsPane current={current} index={0}>
           {checkedList.length > 0 ? (
             <View>
@@ -190,7 +186,6 @@ function Check(props) {
                         </View>
                         <View
                           className='card-content clearfix'
-                          // onClick={() => handleChangeUser(item,4)}
                         >
                           <View className='card-center'>
                             <View className='card-name'>{item.className}</View>
@@ -239,6 +234,7 @@ function Check(props) {
             <View style={{ margin: "50% 40%" }}>暂无数据</View>
           )}
         </AtTabsPane>
+        {/* 已审核数据 */}
         <AtTabsPane current={current} index={1}>
           {checkedList.length > 0 ? (
             <View>
@@ -290,11 +286,11 @@ function Check(props) {
             <View style={{ margin: "50% 40%" }}>暂无内容</View>
           )}
         </AtTabsPane>
+        {/* 教师端已处理家长申请数据 */}
         <AtTabsPane current={current} index={2}>
           {checkedList.length > 0 ? (
             <View>
               {checkedList.map((item, index) => {
-                console.log(item,'item')
                 let title = "";
                 let note = "";
                 if (user == 0) {
@@ -312,7 +308,6 @@ function Check(props) {
                           ? "item-active"
                           : "item"
                       }
-                      // onClick={() => handleChangeUser(item,4)}
                     >
                       <View className='top'>
                         <View className='left'>
@@ -341,6 +336,7 @@ function Check(props) {
           )}
         </AtTabsPane>
       </MyTabs>
+      {/* 教师端拒绝通过原因弹窗 */}
       <Modal
         isOpened={isOpened}
         cancelText='取消'

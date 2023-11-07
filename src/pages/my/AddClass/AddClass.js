@@ -133,37 +133,41 @@ function AddClass(props) {
           onClear={handleClear}
         />
         {/* 班级列表 */}
-        <View className='team'>
-          {showClassData.map((item) => {
-            return (
-              <View key={item.id}>
-                <View className='class'>
-                  <View className='left'>
-                    <View className='content'>
-                      <View className='name'>{item.className}</View>
-                      <View className='grade'>
-                        <View>
-                          {item.grade}级{item.classNum}班
+        {showClassData.length > 0 ? (
+          <View className='team'>
+            {showClassData.map((item) => {
+              return (
+                <View key={item.id}>
+                  <View className='class'>
+                    <View className='left'>
+                      <View className='content'>
+                        <View className='name'>{item.className}</View>
+                        <View className='grade'>
+                          <View>
+                            {item.grade}级{item.classNum}班
+                          </View>
                         </View>
                       </View>
                     </View>
+                    {/* 加入班级弹窗按钮 */}
+                    <View className='button'>
+                      <GradientButton
+                        size='small'
+                        type='primary'
+                        onClick={() => handleEnter(item)}
+                      >
+                        加入
+                      </GradientButton>
+                    </View>
                   </View>
-                  {/* 加入班级弹窗按钮 */}
-                  <View className='button'>
-                    <GradientButton
-                      size='small'
-                      type='primary'
-                      onClick={() => handleEnter(item)}
-                    >
-                      加入
-                    </GradientButton>
-                  </View>
+                  <Divider className='divider' />
                 </View>
-                <Divider className='divider' />
-              </View>
-            );
-          })}
-        </View>
+              );
+            })}
+          </View>
+        ) : (
+          <View style={{ margin: "50% 40%" }}>暂无数据</View>
+        )}
       </View>
       {/* 加入班级弹窗 */}
       <AtModal
