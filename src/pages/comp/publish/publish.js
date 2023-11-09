@@ -12,18 +12,13 @@ import {
 import NavTab from "@app/component/NavTab/NavTab";
 import GradientButton from "@app/component/GradientButton";
 import TreeSelect from "@app/component/TreeSelect/TreeSelect";
-import TreeFlat from '@app/component/TreeSelect/TreeFlat';
+import TreeFlat from "@app/component/TreeSelect/TreeFlat";
 import Modal from "@app/component/Modal";
 import Divider from "@app/component/Divider/Divider";
 import "./publish.scss";
 
 function WorkDetail(props) {
-  const {
-    dispatch,
-    subjectType,
-    classStudent,
-    subjectDetail,
-  } = props;
+  const { dispatch, subjectType, classStudent, subjectDetail } = props;
   const router = useRouter();
   const enter = router.params.enter;
   const type = router.params.type;
@@ -33,9 +28,9 @@ function WorkDetail(props) {
   const [time, setTime] = useState(""); //选中日期
   const [isOpened, setIsOpened] = useState(false); //打卡弹窗
   const [personModalOpened, setPersonModalOpened] = useState(false); //人员选择弹窗
-  const [choosePerson, setChoosePerson] = useState([]) //选择的学生列表人员
+  const [choosePerson, setChoosePerson] = useState([]); //选择的学生列表人员
+  console.log(props, "prospss");
   const refTree = useRef();
-
   const editorRef = useRef();
   const handleTitleInput = (e) => {
     setTitle(e.detail.value);
@@ -45,16 +40,14 @@ function WorkDetail(props) {
       type: "HomeWork/getListByType",
       payload: 1,
     });
-    
     let payload = {
-      workId:subjectDetail.id,
-      searchKey:''
-    }
-
+      workId: "",
+      searchKey: "",
+    };
     if (enter == "homework" && type == "edit") {
+      payload.workId = subjectDetail.id;
       setTitle(subjectDetail.title);
-      setMsg(subjectDetail.detailContent)
-      // setEditor(subjectDetail.detailEditor);
+      setMsg(subjectDetail.detailContent);
       editorRef.current &&
         editorRef.current.setContents({ html: subjectDetail.detailContent });
       setSelectedSubject(
@@ -64,10 +57,9 @@ function WorkDetail(props) {
     }
     dispatch({
       type: "Class/getClassStudent",
-      payload:payload
+      payload: payload,
     });
-  }, []);
-
+  }, [enter, type]);
 
   const sendData = (val) => {
     let url = "";
@@ -75,7 +67,7 @@ function WorkDetail(props) {
       title: title,
       detailContent: msg,
       subjectType: subjectType[selectedSubject]?.value,
-      studentIdList: choosePerson?.map(item => item.value),
+      studentIdList: choosePerson?.map((item) => item.value),
       endTime: time,
     };
     if (type == "edit") {
@@ -118,7 +110,10 @@ function WorkDetail(props) {
       .select("#editor")
       .context((res) => {
         editorRef.current = res.context;
-        editorRef.current.setContents({ html: subjectDetail.detailContent });
+        if (type == "edit")
+          return editorRef.current.setContents({
+            html: subjectDetail.detailContent,
+          });
       })
       .exec();
   };
@@ -146,11 +141,12 @@ function WorkDetail(props) {
     setPersonModalOpened(true);
   };
   //处理传入treeSelect的数据结构
-  const dataSource = classStudent.map((item) => {
+  const dataSource = classStudent?.map((item) => {
     let label = item.className;
     let value = item.id;
     //初始化时父元素选中，可选
-    let checked = true, disabled = false;
+    let checked = true,
+      disabled = false;
     let children = item.studentList.map((jt) => {
       let _label = jt.studentName;
       let _value = jt.id;
@@ -158,16 +154,17 @@ function WorkDetail(props) {
       const isChoosed = jt.ifChoose === 1;
       //子元素中有ifChoose为1，父级选择框选中且不可选；否则父级选择框为选中且可选
       if (isChoosed) {
-        disabled = true
+        disabled = true;
       } else {
         //父级未选中
         checked = false;
       }
       return {
-        label:_label,
-        value:_value,
+        label: _label,
+        value: _value,
         checked: isChoosed,
         disabled: isChoosed,
+        isChoosed: isChoosed,
       };
     });
     return {
@@ -178,25 +175,21 @@ function WorkDetail(props) {
       children,
     };
   });
-  const aaa = useRef(null)
- useEffect(() => {
-aaa.current
- },[])
- console.log(aaa,'aaaa')
   //获取树形选择器传出的值
   const onChangeHandler = useCallback((selectItems) => {
-    console.log(selectItems,'sekectitems')
-    setChoosePerson(selectItems)
+    console.log(selectItems, "sekectitems");
+    setChoosePerson(selectItems);
   }, []);
+  console.log(choosePerson, "choosequery");
   const handlePersonClose = () => {
-    setPersonModalOpened(false)
-  }
+    setPersonModalOpened(false);
+  };
   const handlePersonCancel = () => {
     setPersonModalOpened(false);
-  }
+  };
   const handlePersonConfirm = () => {
     setPersonModalOpened(false);
-  }
+  };
 
   //选择截至日期
   const onTimeChange = (e) => {
@@ -307,9 +300,7 @@ aaa.current
         <View className='choose' onClick={() => onPersonChange()}>
           <View className='at-row'>
             <View className='at-col at-col-8'>
-              <Text className='content-name'>
-                选择发送人
-              </Text>
+              <Text className='content-name'>选择发送人</Text>
             </View>
             <View
               className='at-col-3'
@@ -319,7 +310,11 @@ aaa.current
                 textOverflow: "ellipsis",
               }}
             >
-              {choosePerson.length  ? Object.values(choosePerson.map(item => item.label)).join(',') : ''}
+              {choosePerson.length
+                ? Object.values(choosePerson.map((item) => item.label)).join(
+                    ","
+                  )
+                : ""}
             </View>
             <View className='at-col-0'>
               <AtIcon value='chevron-right' color='#999'></AtIcon>
@@ -362,18 +357,24 @@ aaa.current
       <View className='person'>
         <AtModal isOpened={personModalOpened} onClose={handlePersonClose}>
           <AtModalContent className='person-modal'>
-              {dataSource.length ? (
-                <TreeSelect
-                  ref={refTree}
-                  dataSource={dataSource}
-                  onChange={onChangeHandler}
-                />
-              ) : (
-                <View style={{ margin: "50% 40%" }}>暂无数据</View>
-              )}
+            {dataSource?.length ? (
+              <TreeSelect
+                ref={refTree}
+                type={type}
+                dataSource={dataSource}
+                onChange={onChangeHandler}
+              />
+            ) : (
+              <View style={{ margin: "50% 40%" }}>暂无数据</View>
+            )}
           </AtModalContent>
           <AtModalAction>
-            <Button style={{borderRight:'1rpx solid #dedede'}} onClick={handlePersonCancel}>取消</Button>
+            <Button
+              style={{ borderRight: "1rpx solid #dedede" }}
+              onClick={handlePersonCancel}
+            >
+              取消
+            </Button>
             <Button onClick={handlePersonConfirm}>确定</Button>
           </AtModalAction>
         </AtModal>

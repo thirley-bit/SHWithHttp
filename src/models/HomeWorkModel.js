@@ -41,26 +41,26 @@ const model = {
   effects: {
     *getListByType({ payload }, { call, put }) {
       const response = yield call(getListByType, payload);
-      let all = {
+      let all = [{
         id:0,
         name:'全部',
-        value:'',
-      }
-      let data = response.data.unshift(all)
+        value:'1000',
+      }]
+      let data = all.concat(response.data)
       if(response.status == 200){
         yield put({
           type: "changeSubjectType",
-          payload: response.data,
+          payload: data,
         });
       }
       return response;
     },
     
-    *getInsertHomework({ payload }, { call, put }) {
+    *getInsertHomework({ payload }, { call }) {
       const response = yield call(getInsertHomework, payload);
       return response;
     },
-    *getUpdateHomework({ payload }, { call, put }) {
+    *getUpdateHomework({ payload }, { call }) {
       const response = yield call(getUpdateHomework, payload);
       return response;
     },
@@ -74,7 +74,7 @@ const model = {
       }
       return response;
     },
-    *getViewHomework({ payload }, { call, put }) {
+    *getViewHomework({ payload }, { call }) {
       const response = yield call(getViewHomework, payload);
       return response;
     },
@@ -88,11 +88,11 @@ const model = {
       }
       return response;
     },
-    *getCompleteWork({ payload }, { call, put }) {
+    *getCompleteWork({ payload }, { call }) {
       const response = yield call(getCompleteWork, payload);
       return response;
     }, 
-    *getCompleteSituationList({ payload }, { call, put }) {
+    *getCompleteSituationList({ payload }, { call }) {
       const response = yield call(getCompleteSituationList, payload);
       return response;
     },
@@ -106,11 +106,11 @@ const model = {
       }
       return response;
     },
-    *getFeedbackFirst({ payload }, { call, put }) {
+    *getFeedbackFirst({ payload }, { call }) {
       const response = yield call(getFeedbackFirst, payload);
       return response;
     },
-    *getFeedbackReply({ payload }, { call, put }) {
+    *getFeedbackReply({ payload }, { call }) {
       const response = yield call(getFeedbackReply, payload);
       return response;
     },
@@ -130,7 +130,7 @@ const model = {
       return response;
     },
     
-    *getSubjectDetail({ payload }, { call, put }) {
+    *getSubjectDetail({ payload }, { call }) {
       const response = yield call(getSubjectDetail, payload);
       if (response.code == 1) {
         // yield put({

@@ -1,8 +1,8 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import Taro from "@tarojs/taro";
 import { connect } from "react-redux";
 import { View, Text } from "@tarojs/components";
-import { AtButton, AtSearchBar, AtTabBar } from "taro-ui";
+import { AtSearchBar, AtTabBar } from "taro-ui";
 import PersonList from "@app/component/personList/personList";
 import NavTab from "@app/component/NavTab/NavTab";
 import newAdd from "../../static/newadd.png";
@@ -12,7 +12,7 @@ import addGroup from "../../static/add-group.png";
 import "./AddressList.scss";
 
 function AddressList(props) {
-  const { dispatch, user, pageSize, userId, addressList } = props;
+  const { dispatch, user, pageSize, userId, identity, addressList } = props;
   const [current, setCurrent] = useState(0);
   const tabList = [
     {
@@ -41,7 +41,7 @@ function AddressList(props) {
     //老师端必传，当前老师切换的班级id,家长端不传
     let classId = "";
     if (user == 1) {
-      classId = 1;
+      classId = identity.classId;
     }
     dispatch({
       type: "AddressList/getAddressBookList",
@@ -115,8 +115,7 @@ function AddressList(props) {
 export default connect((state) => ({
   user: state.users.user,
   userId: state.users.userId,
+  identity: state.users.identity,
   pageSize: state.users.pageSize,
   addressList: state.AddressList.addressList,
-  teacherList: state.AddressList.teacherList,
-  parentList: state.AddressList.parentList,
 }))(AddressList);

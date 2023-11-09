@@ -53,6 +53,18 @@
           "pathName": "pages/my/AddClass/AddClass",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/comp/publish/publish",
+          "pathName": "pages/comp/publish/publish",
+          "query": "enter=homework&type=edit",
+          "scene": null
+        },
+        {
+          "name": "pages/my/Setting/Setting",
+          "pathName": "pages/my/Setting/Setting",
+          "query": "",
+          "scene": null
         }
       ]
     }

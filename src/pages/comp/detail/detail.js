@@ -18,7 +18,6 @@ function WorkDetail(props) {
     userId,
     pageSize,
     subjectDetail,
-    replyList,
   } = props;
   const router = useRouter();
   const enter = router.params.enter;

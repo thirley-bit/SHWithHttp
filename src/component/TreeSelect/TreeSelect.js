@@ -1,17 +1,27 @@
-import { useState, useImperativeHandle, forwardRef } from "react";
+import { useState, useImperativeHandle, forwardRef, useEffect } from "react";
 import { View } from "@tarojs/components";
 import cloneDeep from "lodash.clonedeep";
-import TreeCheckbox from './TreeCheckBox';
-import Collaspe from './Collaspe';
-import TreeFlat from './TreeFlat';
-import "./TreeSelect.scss"
+import TreeCheckbox from "./TreeCheckBox";
+import Collaspe from "./Collaspe";
+import TreeFlat from "./TreeFlat";
+import "./TreeSelect.scss";
 
 function TreeSelect(props, ref) {
-  const { dataSource, onChange } = props;
-  const [_dataSource, setDataSource] = useState(() => dataSource);
+  const { dataSource, type, onChange } = props;
+  console.log(props,'props')
+  // const [_dataSource, setDataSource] = useState(() => dataSource);
+  const [_dataSource, setDataSource] = useState([]);
   const [activedKey, setActiveKey] = useState([]);
 
-  const onChangeHandler = ({ value, option, dataIndex }) => {
+  useEffect(() => {
+    if (dataSource) {
+      setDataSource(dataSource);
+      if(type === 'edit') return onChange && onChange(TreeFlat(dataSource));
+    }
+  }, []);
+  console.log(_dataSource,'dataSource')
+
+  const onChangeHandler = ({ option, dataIndex }) => {
     let _index = 0;
     const childrenChecked = (data) => {
       const checked = data.checked;
@@ -19,7 +29,7 @@ function TreeSelect(props, ref) {
       const deepMap = (_data) => {
         _data.forEach((item) => {
           item.checked = checked;
-          item.disabled = disabled
+          item.disabled = disabled;
           if (item.children) {
             deepMap(item.children);
           }
@@ -38,17 +48,19 @@ function TreeSelect(props, ref) {
       } else {
         return (data[current] = _option);
       }
+      // 判断子元素是否被全选，被全选则父元素选中，否则未选中
       data[current].checked = !data[current].children.some(
         (item) => !item.checked
       );
-      data[current].disabled = !data[current].children.some(
-        (item) => item.disabled
-      );
+      // 判断该子元素是否已被选中，有则父元素不能能选择
+      if (data[current].children.find((it) => it.isChoosed == true)) {
+        data[current].disabled = true;
+      }
     };
     const _option = childrenChecked(option);
     const nSource = cloneDeep(_dataSource);
     parentChecked(nSource);
-    onChange && onChange(TreeFlat(nSource))
+    onChange && onChange(TreeFlat(nSource));
     setDataSource(nSource);
   };
 
@@ -59,7 +71,6 @@ function TreeSelect(props, ref) {
     } else {
       _activedKey.push(index);
     }
-
     setActiveKey(_activedKey);
   };
 

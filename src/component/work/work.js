@@ -69,8 +69,8 @@ function Work(props) {
         id: e.id,
       };
       let payloadView = {
-        workId:e.id
-      }
+        workId: e.id,
+      };
       if (user == 0) {
         //家长端必传studentId，教师端不传
         payload = {
@@ -78,9 +78,9 @@ function Work(props) {
           studentId: studentId,
         };
         payloadView = {
-        ...payloadView,
-          studentId: studentId
-        }
+          ...payloadView,
+          studentId: studentId,
+        };
       }
       dispatch({
         type: "HomeWork/getWorkById",
@@ -88,7 +88,7 @@ function Work(props) {
       });
       dispatch({
         type: "HomeWork/getViewHomework",
-        payload: payloadView
+        payload: payloadView,
       }).then((res) => {
         if (res.status == 200) {
           //更新数据
@@ -111,15 +111,15 @@ function Work(props) {
     // }
     //如果是未发布的成绩，进入创建成绩页面，其他进入详情页面
     if (e.publish == 0) {
-      Taro.navigateTo({ url: `/pages/class/Score/PublishScore/PublishScore` });
+      Taro.redirectTo({ url: `/pages/class/Score/PublishScore/PublishScore` });
     } else {
-      Taro.navigateTo({
+      Taro.redirectTo({
         url: `/pages/comp/detail/detail?enter=${enter}`,
       });
     }
   };
   const handleClick = () => {
-    Taro.navigateTo({
+    Taro.redirectTo({
       url: `/pages/comp/publish/publish?enter=${enter}&type=new`,
     });
   };
@@ -130,7 +130,7 @@ function Work(props) {
     <View className='main'>
       <View className='content'>
         <View className='work'>
-          {workList &&
+          {workList.length > 0 ? (
             workList.map((item, index) => {
               // 判断数据列表中是否有work_id,如果没有就表示从通知页面进入，则传notice_id
               // let newId =
@@ -155,7 +155,6 @@ function Work(props) {
                     extra='>'
                     title={item.title}
                     thumb={item.avatar || normal}
-                    // thumb={normal}
                     onClick={() => handleNav(item)}
                   >
                     <View
@@ -201,7 +200,10 @@ function Work(props) {
                   </View>
                 </View>
               );
-            })}
+            })
+          ) : (
+            <View style={{ margin: "50% 40%" }}>暂无数据</View>
+          )}
         </View>
       </View>
       {/* 发布按钮存在于教师端 */}
